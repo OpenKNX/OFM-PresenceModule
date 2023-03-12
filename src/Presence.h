@@ -1,4 +1,5 @@
 #pragma once
+#include "OpenKNX.h"
 #include "PresenceChannel.h"
 #include "knxprod.h"
 #include "hardware.h"
@@ -17,7 +18,7 @@ struct sKoMap
     uint8_t koIndex; // channel index (within channel) which uses this internal KO
 };
 
-class Presence
+class Presence : public OpenKNX::Module
 {
 public:
   enum LedCaller
@@ -52,6 +53,7 @@ public:
 
   void addKoMap(uint16_t iKoNumber, uint8_t iChannelId, uint8_t iKoIndex);
   bool mapKO(uint16_t iKoNumber, sKoMap **iKoMap);
+  const std::string name() override;
 
 private:
   static const uint16_t cCountKoMap = PM_ChannelCount * 6;
