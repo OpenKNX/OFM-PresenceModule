@@ -498,3 +498,8 @@ void Presence::setup()
         startSensors();
     }
 }
+
+const std::string Presence::name()
+{
+    return "Presence";
+}
