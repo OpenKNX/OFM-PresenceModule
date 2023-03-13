@@ -9,7 +9,7 @@ uint8_t PresenceChannel::sDayPhaseParameterSize = 0;
 
 PresenceChannel::PresenceChannel(uint8_t iChannelNumber)
 {
-    mChannelId = iChannelNumber; // Zero based
+    _channelIndex = iChannelNumber; // Zero based
     pCurrentState = 0;
     pCurrentValue = 0;
 }
@@ -32,12 +32,12 @@ void PresenceChannel::setDayPhaseParameterSize(uint8_t iSize)
 uint32_t PresenceChannel::calcParamIndex(uint16_t iParamIndex, bool iWithPhase)
 {
     uint16_t lParamIndex = iParamIndex + (iWithPhase ? sDayPhaseParameterSize * mCurrentDayPhase : 0);
-    uint32_t lResult = lParamIndex + mChannelId * PM_ParamBlockSize + PM_ParamBlockOffset;
+    uint32_t lResult = lParamIndex + channelIndex() * PM_ParamBlockSize + PM_ParamBlockOffset;
     return lResult;
 }
 
 uint16_t PresenceChannel::calcKoNumber(uint8_t iKoIndex) {
-    uint16_t lResult = iKoIndex + mChannelId * PM_KoBlockSize + PM_KoOffset;
+    uint16_t lResult = iKoIndex + channelIndex() * PM_KoBlockSize + PM_KoOffset;
     return lResult;
 }
 
@@ -46,7 +46,7 @@ int8_t PresenceChannel::calcKoIndex(uint16_t iKoNumber)
 {
     int16_t lResult = (iKoNumber - PM_KoOffset);
     // check if channel is valid
-    if ((int8_t)(lResult / PM_KoBlockSize) == mChannelId)
+    if ((int8_t)(lResult / PM_KoBlockSize) == channelIndex())
         lResult = lResult % PM_KoBlockSize;
     else
         lResult = -1;
@@ -173,7 +173,7 @@ bool PresenceChannel::processDiagnoseCommand(char *iBuffer)
             // we present leave room mode
             iBuffer[lIndex++] = 'L';
             iBuffer[lIndex++] = ' ';
-            uint8_t lLeaveRoomMode = paramByte(PM_pLeaveRoomModeAll, PM_pLeaveRoomModeAllMask, PM_pLeaveRoomModeAllShift);
+            uint8_t lLeaveRoomMode = ParamPM_pLeaveRoomModeAll;
             for (uint8_t lCount = 0; lCount < 3; lCount++)
                 iBuffer[lIndex++] = lModes[(lLeaveRoomMode * 3 + lCount)];
             iBuffer[lIndex++] = ' ';
@@ -277,14 +277,14 @@ void PresenceChannel::processInputKo(GroupObject &iKo, int8_t iKoIndex)
                 break;
             case PM_KoKOpPresence1:
                 // which kind of presence information do we get
-                lIsTrigger = paramBit(PM_pPresenceType, PM_pPresenceTypeMask);
-                lIsKeepAlive = paramBit(PM_pPresenceKeepAlive, PM_pPresenceKeepAliveMask);
+                lIsTrigger = ParamPM_pPresenceType;
+                lIsKeepAlive = ParamPM_pPresenceKeepAlive;
                 startPresence(lIsTrigger, lIsKeepAlive, iKo);
                 break;
             case PM_KoKOpPresence2:
                 // change of presence information
-                lIsTrigger = paramBit(PM_pMoveType, PM_pMoveTypeMask);
-                lIsKeepAlive = paramBit(PM_pMoveKeepAlive, PM_pMoveKeepAliveMask);
+                lIsTrigger = ParamPM_pMoveType;
+                lIsKeepAlive = ParamPM_pMoveKeepAlive;
                 startPresence(lIsTrigger, lIsKeepAlive, iKo);
                 break;
             case PM_KoKOpSetAuto:
@@ -293,7 +293,7 @@ void PresenceChannel::processInputKo(GroupObject &iKo, int8_t iKoIndex)
                 break;
             case PM_KoKOpSetManual:
                 // check for two button mode
-                if (paramBit(PM_pManualModeKeyCount, PM_pManualModeKeyCountMask))
+                if (ParamPM_pManualModeKeyCount)
                     startManual(lValue, false);
                 else // use single button mode
                     if (lValue)
@@ -427,12 +427,12 @@ void PresenceChannel::startStartup()
 
 void PresenceChannel::processStartup()
 {
-    if (delayCheck(pOnDelay, paramTimeDelay(PM_pChannelDelayBase)))
+    if (delayCheck(pOnDelay, ParamPM_pChannelDelayTimeMS))
     {
         // we waited enough, remove State marker
         pCurrentState &= ~STATE_STARTUP;
         // set running state if the channel is active
-        if (paramByte(PM_pChannelActive, PM_pChannelActiveMask, PM_pChannelActiveShift) == PM_VAL_ActiveYes)
+        if (ParamPM_pChannelActive == PM_VAL_ActiveYes)
         {
             pCurrentState |= STATE_RUNNING;
             afterStartupDelay();
@@ -451,31 +451,31 @@ void PresenceChannel::processReadRequests()
         switch (pReadRequestCounter)
         {
             case 1:
-                if (paramBit(PM_pStartReadLux, PM_pStartReadLuxMask))
+                if (ParamPM_pStartReadLux)
                     getKo(PM_KoKOpLux)->requestObjectRead();
                 break;
             case 2:
-                if (paramBit(PM_pStartReadPresence1, PM_pStartReadPresence1Mask))
+                if (ParamPM_pStartReadPresence1)
                     getKo(PM_KoKOpPresence1)->requestObjectRead();
                 break;
             case 3:
-                if (paramBit(PM_pStartReadPresence2, PM_pStartReadPresence2Mask))
+                if (ParamPM_pStartReadPresence2)
                     getKo(PM_KoKOpPresence2)->requestObjectRead();
                 break;
             case 4:
-                if (paramBit(PM_pStartReadAktorState, PM_pStartReadAktorStateMask))
+                if (ParamPM_pStartReadAktorState)
                     getKo(PM_KoKOpAktorState)->requestObjectRead();
                 break;
             case 5:
-                if (paramBit(PM_pStartReadLock, PM_pStartReadLockMask))
+                if (ParamPM_pStartReadLock)
                     getKo(PM_KoKOpLock)->requestObjectRead();
                 break;
             case 6:
-                if (paramBit(PM_pStartReadDayPhase, PM_pStartReadDayPhaseMask))
+                if (ParamPM_pStartReadDayPhase)
                     getKo(PM_KoKOpDayPhase)->requestObjectRead();
                 break;
             case 7:
-                if (paramBit(PM_pStartReadScene, PM_pStartReadSceneMask))
+                if (ParamPM_pStartReadScene)
                     getKo(PM_KoKOpScene)->requestObjectRead();
                 break;
 
@@ -489,8 +489,8 @@ void PresenceChannel::processReadRequests()
 int8_t PresenceChannel::getDayPhaseFromKO()
 {
     // derive day phase from scene number
-    int8_t lPhaseCount = paramByte(PM_pPhaseCount, PM_pPhaseCountMask, PM_pPhaseCountShift);
-    if (lPhaseCount == 1 && paramBit(PM_pPhaseBool, PM_pPhaseBoolMask)) // PhaseCount is zero based (0 = 1 Phase)
+    int8_t lPhaseCount = ParamPM_pPhaseCount;
+    if (lPhaseCount == 1 && ParamPM_pPhaseBool) // PhaseCount is zero based (0 = 1 Phase)
     {
         lPhaseCount = (uint8_t)getKo(PM_KoKOpDayPhase)->value(getDPT(VAL_DPT_1));
     }
@@ -513,14 +513,14 @@ void PresenceChannel::startDayPhase(uint8_t iPhase /* = 255 */, bool iForce /* =
         mNextDayPhase = iPhase;
 
     // get the number of Phases defined
-    int8_t lPhaseCount = paramByte(PM_pPhaseCount, PM_pPhaseCountMask, PM_pPhaseCountShift);
+    int8_t lPhaseCount = ParamPM_pPhaseCount;
 
     // first check, if day phase is valid and if it really changed
     if (mNextDayPhase < 0 || mCurrentDayPhase == mNextDayPhase || mNextDayPhase > lPhaseCount)
         return;
 
     // check if delayed day phase execution is requested
-    if (iForce || paramBit(PM_pPhaseChange, PM_pPhaseChangeMask)) 
+    if (iForce || ParamPM_pPhaseChange)
     {
         // we change immediately
         onDayPhase(mNextDayPhase);
@@ -587,7 +587,7 @@ bool PresenceChannel::getRawPresence(bool iJustMove /* false */)
     // iJustMove is ignored, if there is only presence available
     bool lJustMove = false;
     // are external inputs offering presence and move?
-    if (paramByte(PM_pPresenceInputs, PM_pPresenceInputsMask, PM_pPresenceInputsShift) == VAL_PM_PI_PresenceMove)
+    if (ParamPM_pPresenceInputs == VAL_PM_PI_PresenceMove)
         lJustMove = iJustMove;
     bool lPresence = getKo(PM_KoKOpPresence2)->value(getDPT(VAL_DPT_1));
     if (!lPresence && !lJustMove)
@@ -601,7 +601,7 @@ bool PresenceChannel::getRawPresence(bool iJustMove /* false */)
 float PresenceChannel::getRawBrightness()
 {
     float lResult = NO_NUM;
-    if (paramBit(PM_pBrightnessIntern, PM_pBrightnessInternMask))
+    if (ParamPM_pBrightnessIntern)
         lResult = sPresence->getHardwareBrightness();
     else
         lResult = getKo(PM_KoKOpLux)->value(getDPT(VAL_DPT_9));
@@ -612,9 +612,9 @@ bool PresenceChannel::getHardwarePresence(bool iJustMove /* false */)
 {
     // if hardware presence sensor is available, we evaluate its value
     bool lPresence = false;
-    if (paramByte(PM_pPresenceUsage, PM_pPresenceUsageMask, PM_pPresenceUsageShift) == VAL_PM_PresenceUsageMove)
+    if (ParamPM_pPresenceUsage == VAL_PM_PresenceUsageMove)
         lPresence = sPresence->getHardwareMove();
-    if (!iJustMove && !lPresence && paramByte(PM_pPresenceUsage, PM_pPresenceUsageMask, PM_pPresenceUsageShift) == VAL_PM_PresenceUsagePresence)
+    if (!iJustMove && !lPresence && ParamPM_pPresenceUsage == VAL_PM_PresenceUsagePresence)
         lPresence = sPresence->getHardwarePresence();
     return lPresence;
 }
@@ -633,7 +633,7 @@ void PresenceChannel::startHardwarePresence()
     // we have to eval Hardware move if required
     bool lValue = false;
     bool lTrigger = false;
-    if (paramByte(PM_pPresenceUsage, PM_pPresenceUsageMask, PM_pPresenceUsageShift) == VAL_PM_PresenceUsageMove)
+    if (ParamPM_pPresenceUsage == VAL_PM_PresenceUsageMove)
     {
         lValue = sPresence->getHardwareMove();
         if (mHardwareMove != lValue)
@@ -643,7 +643,7 @@ void PresenceChannel::startHardwarePresence()
         }
     }
     // and we eval hardware presence if required
-    if (!lValue && paramByte(PM_pPresenceUsage, PM_pPresenceUsageMask, PM_pPresenceUsageShift) == VAL_PM_PresenceUsagePresence)
+    if (!lValue && ParamPM_pPresenceUsage == VAL_PM_PresenceUsagePresence)
     {
         lValue = sPresence->getHardwarePresence();
         if (mHardwarePresence != lValue)
@@ -660,7 +660,7 @@ void PresenceChannel::startHardwarePresence()
 void PresenceChannel::startHardwareBrightness() 
 {
     // if hardware brightness is handled, no external brightness is available
-    if (paramByte(PM_HWLux, PM_HWLuxMask, PM_HWLuxShift) > 0 && !paramBit(PM_pBrightnessIndependent, PM_pBrightnessIndependentMask))
+    if (ParamPM_HWLux > 0 && !ParamPM_pBrightnessIndependent)
     {
         // we have to poll here
         if (delayCheck(mBrightnessPollDelay, 1500))
@@ -812,7 +812,7 @@ void PresenceChannel::onPresenceBrightnessChange(bool iOn)
         return;
 
     // calculate output dependent on brightness and auto mode
-    if (iOn && !paramBit(PM_pBrightnessIndependent, PM_pBrightnessIndependentMask)) 
+    if (iOn && !ParamPM_pBrightnessIndependent)
     {
         // check brightness in case of turning on
         if ((uint32_t)getRawBrightness() < (uint32_t)getKo(PM_KoKOpLuxOn)->value(getDPT(VAL_DPT_9)))
@@ -844,7 +844,7 @@ void PresenceChannel::onPresenceChange(bool iOn)
 
 void PresenceChannel::startLeaveRoom(bool iSuppressOutput)
 {
-    pLeaveRoomMode = paramByte(PM_pLeaveRoomModeAll, PM_pLeaveRoomModeAllMask, PM_pLeaveRoomModeAllShift);
+    pLeaveRoomMode = ParamPM_pLeaveRoomModeAll;
     bool lOn = pCurrentValue & PM_BIT_OUTPUT_SET;
     // we have to send an OFF signal if requested or current output value is on
     bool lSend = !iSuppressOutput || lOn;
@@ -904,7 +904,7 @@ void PresenceChannel::processLeaveRoom()
         case VAL_PM_LRM_DowntimeReset:
             {
             // we send a reset to external PM and go to normal mode
-            uint8_t lResetTrigger = paramByte(PM_pExternalSupportsReset, PM_pExternalSupportsResetMask, PM_pExternalSupportsResetShift);
+            uint8_t lResetTrigger = ParamPM_pExternalSupportsReset;
             if (lResetTrigger)
                 getKo(PM_KoKOpResetExternalPM)->value((lResetTrigger == 1), getDPT(VAL_DPT_1));
             // TODO: reset internal PIR, as soon as implemented
@@ -967,9 +967,9 @@ void PresenceChannel::startAuto(bool iOn, bool iSuppressOutput)
     // ensure auto mode
     onManualChange(false);
     // check if we have to go to leave room
-    bool lAutoOffIsLeave = paramBit(PM_pAutoOffIsLeave, PM_pAutoOffIsLeaveMask);
+    bool lAutoOffIsLeave = ParamPM_pAutoOffIsLeave;
     // here we have to use a local variable, not pLeaveRoomMode!
-    uint8_t lLeaveRoomMode = paramByte(PM_pLeaveRoomModeAll, PM_pLeaveRoomModeAllMask, PM_pLeaveRoomModeAllShift);
+    uint8_t lLeaveRoomMode = ParamPM_pLeaveRoomModeAll;
     if (!iOn && lAutoOffIsLeave && lLeaveRoomMode > VAL_PM_LRM_None)
         startLeaveRoom(iSuppressOutput);
     else
@@ -1054,7 +1054,7 @@ void PresenceChannel::onManualChange(bool iOn)
 void PresenceChannel::startLock()
 {
     // check lock mode (simple lock or priority control)
-    uint8_t lLockType = paramByte(PM_pLockType, PM_pLockTypeMask, PM_pLockTypeShift);
+    uint8_t lLockType = ParamPM_pLockType;
     if (lLockType == VAL_PM_LockTypePriority) {
         uint8_t lPriority = getKo(PM_KoKOpLock)->value(getDPT(VAL_DPT_5));
         bool lValue = (lPriority & 2);
@@ -1063,11 +1063,11 @@ void PresenceChannel::startLock()
     } else if (lLockType == VAL_PM_LockTypeLock) {
         // simple lock
         bool lValue = getKo(PM_KoKOpLock)->value(getDPT(VAL_DPT_1));
-        bool lInvert = paramBit(PM_pLockActive, PM_pLockActiveMask);
+        bool lInvert = ParamPM_pLockActive;
         if (lInvert) 
             lValue = !lValue;
-        uint8_t lLockOnSend = paramByte(PM_pLockOn, PM_pLockOnMask, PM_pLockOnShift);
-        uint8_t lLockOffSend = paramByte(PM_pLockOff, PM_pLockOffMask, PM_pLockOffShift);
+        uint8_t lLockOnSend = ParamPM_pLockOn;
+        uint8_t lLockOffSend = ParamPM_pLockOff;
         onLock(lValue, lLockOnSend, lLockOffSend);
     }
 }
@@ -1075,11 +1075,11 @@ void PresenceChannel::startLock()
 void PresenceChannel::processLock()
 {
     // check if there is a time given to reset lock
-    if ((pCurrentState & STATE_LOCK) && paramBit(PM_pLockFallback, PM_pLockFallbackMask)) {
-        if (pLockDelayTime > 0 && delayCheck(pLockDelayTime, paramTimeDelay(PM_pLockFallbackBase))) {
+    if ((pCurrentState & STATE_LOCK) && ParamPM_pLockFallback) {
+        if (pLockDelayTime > 0 && delayCheck(pLockDelayTime, ParamPM_pLockFallbackTimeMS)) {
             // end lock
             pLockDelayTime = 0;
-            uint8_t lLockType = paramByte(PM_pLockType, PM_pLockTypeMask, PM_pLockTypeShift);
+            uint8_t lLockType = ParamPM_pLockType;
             if (lLockType == VAL_PM_LockTypePriority)
             {
                 // priority
@@ -1088,7 +1088,7 @@ void PresenceChannel::processLock()
             else if (lLockType == VAL_PM_LockTypeLock)
             {
                 // simple lock
-                uint8_t lLockOffSend = paramByte(PM_pLockOff, PM_pLockOffMask, PM_pLockOffShift);
+                uint8_t lLockOffSend = ParamPM_pLockOff;
                 onLock(false, lLockOffSend, lLockOffSend);
             }
         }
@@ -1139,7 +1139,7 @@ void PresenceChannel::onLock(bool iLockOn, uint8_t iLockOnSend, uint8_t iLockOff
         }
     }
     // we have to sync KO according to lock state
-    uint8_t lLockType = paramByte(PM_pLockType, PM_pLockTypeMask, PM_pLockTypeShift);
+    uint8_t lLockType = ParamPM_pLockType;
     uint8_t lLockValue = (iLockOn << 1);
     uint8_t lLockSend = lLockValue ? iLockOnSend : iLockOffSend;
     uint8_t lDpt = 255;
@@ -1248,7 +1248,7 @@ void PresenceChannel::startBrightness()
     // should we suppress brightness evaluation?
     bool lEvalBrightness = !(pCurrentValue & PM_BIT_DISABLE_BRIGHTNESS);
     // or are we working brightness independent?
-    lEvalBrightness = lEvalBrightness && (!paramBit(PM_pBrightnessIndependent, PM_pBrightnessIndependentMask));
+    lEvalBrightness = lEvalBrightness && (!ParamPM_pBrightnessIndependent);
     // or are we in manual mode?
     lEvalBrightness = lEvalBrightness && ((pCurrentState & (STATE_MANUAL | STATE_LOCK)) == 0);
     if (lEvalBrightness) 
@@ -1296,7 +1296,7 @@ void PresenceChannel::processBrightness()
 void PresenceChannel::disableBrightness(bool iOn)
 {
     // are we brightness dependant
-    if (!paramBit(PM_pBrightnessIndependent, PM_pBrightnessIndependentMask))
+    if (!ParamPM_pBrightnessIndependent)
     {
         // get current brightness
         uint32_t lBrightness = getRawBrightness();
@@ -1393,12 +1393,6 @@ void PresenceChannel::processOutput()
 {
     uint8_t lOutput = 0;
     if (!(pCurrentState & STATE_LOCK)) {
-        // // check for cyclic send of output 1
-        // if (paramBit(PM_pOutput1Cyclic, PM_pOutput1CyclicMask) && delayCheck(pOutput1CyclicTime, paramTimeDelay(PM_pOutput1CyclicBase)))
-        //     lOutput = 1;
-        // // check for cyclic send of output 2
-        // if (paramBit(PM_pOutput2Cyclic, PM_pOutput2CyclicMask) && delayCheck(pOutput2CyclicTime, paramTimeDelay(PM_pOutput2CyclicBase)))
-        //     lOutput |= 2;
         // check for send because of output state change
         uint8_t lValue = pCurrentValue & (PM_BIT_OUTPUT_SET | PM_BIT_OUTPUT_WRITTEN);
         if (lValue > 0 && lValue < (PM_BIT_OUTPUT_SET | PM_BIT_OUTPUT_WRITTEN))
@@ -1430,10 +1424,10 @@ void PresenceChannel::onOutput(bool iOutputIndex, bool iOn)
 
     // first check, if output is active
     // get output DPT
-    uint8_t lType = iOutputIndex ? paramByte(PM_pOutput2Type, PM_pOutput2TypeMask, PM_pOutput2TypeShift) : paramByte(PM_pOutput1Type, PM_pOutput1TypeMask, PM_pOutput1TypeShift);
+    uint8_t lType = iOutputIndex ? ParamPM_pOutput2Type : ParamPM_pOutput1Type;
     if (lType == 0)
         return;
-    uint8_t lFilter = iOutputIndex ? paramByte(PM_pAOutput2Filter, PM_pAOutput2FilterMask, PM_pAOutput2FilterShift, true) : paramByte(PM_pAOutput1Filter, PM_pAOutput1FilterMask, PM_pAOutput1FilterShift, true);
+    uint8_t lFilter = iOutputIndex ? ParamPM_pAOutput2Filter : ParamPM_pAOutput1Filter;
     // get correct value to send
     uint8_t lValue;
     if (iOn && (lFilter & 1)) {
@@ -1456,7 +1450,7 @@ void PresenceChannel::loop()
     if (!knx.configured())
         return;
 
-    if (paramByte(PM_pChannelActive, PM_pChannelActiveMask, PM_pChannelActiveShift) != PM_VAL_ActiveYes)
+    if (ParamPM_pChannelActive != PM_VAL_ActiveYes)
         return;
 
     // here we do the things after setup, but only once in the loop()
@@ -1515,7 +1509,7 @@ void PresenceChannel::prepareInternalKo()
         if (lInternalKo & 0x8000) 
         {
             uint8_t lKoIndex = (lIndex < PM_pNumScene) ? (lIndex - PM_pNumLux) / 2 + PM_KoKOpLux : PM_KoKOpScene;
-            sPresence->addKoMap(lInternalKo & 0x7FFF, mChannelId, lKoIndex);
+            sPresence->addKoMap(lInternalKo & 0x7FFF, channelIndex(), lKoIndex);
         }
     }
 }
@@ -1537,7 +1531,7 @@ void PresenceChannel::afterStartupDelay()
     // init auto state
     getKo(PM_KoKOpIsManual)->value(false, getDPT(VAL_DPT_1));
     // init lock state
-    switch (paramByte(PM_pLockType, PM_pLockTypeMask, PM_pLockTypeShift))
+    switch (ParamPM_pLockType)
     {
         case VAL_PM_LockTypePriority:
             getKo(PM_KoKOpLock)->value((uint8_t)0, getDPT(VAL_DPT_2));

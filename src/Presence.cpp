@@ -1,9 +1,5 @@
 #include "Helper.h"
-
-// #include "IncludeManager.h"
-
 #include "PresenceChannel.h"
-// #include "Logic.h"
 #include "KnxHelper.h"
 #include "Presence.h"
 #include "Sensor.h"
@@ -49,20 +45,10 @@ bool Presence::mapKO(uint16_t iKoNumber, sKoMap **iKoMap)
     return false;
 }
 
-void Presence::processReadRequests()
+void Presence::processAfterStartupDelay()
 {
-    // this method is called after startup delay and executes read requests, which should just happen once after startup
-    static bool sCalledProcessReadRequests = false;
-    if (!sCalledProcessReadRequests)
-    {
-        // we go through all IO devices defined as outputs and check for initial read requests
-        // if (knx.paramByte(PM_ReadLed) & PM_ReadLedMask)
-        // {
-        //     if ((knx.paramByte(PM_LEDPresence) & PM_LEDPresenceMask) >> PM_LEDPresenceShift == VAL_PM_LedKnx)
-        //         knx.getGroupObject(PM_KoLEDPresence).requestObjectRead();
-        //     if ((knx.paramByte(PM_LEDMove) & PM_LEDMoveMask) >> PM_LEDMoveShift == VAL_PM_LedKnx)
-        //         knx.getGroupObject(PM_KoLEDMove).requestObjectRead();
-        // }
+    logInfo("afterStartupDelay");
+
         if (ParamPM_ReadLed)
         {
             if (ParamPM_LEDPresence == VAL_PM_LedKnx)
@@ -70,8 +56,6 @@ void Presence::processReadRequests()
             if (ParamPM_LEDMove == VAL_PM_LedKnx)
                 KoPM_LEDMove.requestObjectRead();
         }
-        sCalledProcessReadRequests = true;
-    }
 }
 
 bool Presence::processDiagnoseCommand(char *iBuffer)
@@ -415,10 +399,10 @@ void Presence::processHardwareLux()
             bool lSend = false;
             mLux = lValue;
             KoPM_LuxOut.valueNoSend(getHardwareBrightness(), getDPT(VAL_DPT_9));
-            uint32_t lTimeDelta = getDelayPattern(PM_LuxSendCycleDelayBase);
+            uint32_t lTimeDelta = ParamPM_LuxSendCycleDelayTimeMS;
             bool lDeltaAbsRel = ParamPM_LuxSendDeltaAbsRel;
             lSend = lTimeDelta > 0 && delayCheck(mBrightnessDelay, lTimeDelta);
-            uint16_t lDelta = knx.paramWord(PM_LuxSendDelta) & 0x7FFF; // just 15 bits
+            uint16_t lDelta = ParamPM_LuxSendDelta;
             if (lDelta > 0)
             {
                 if (lDeltaAbsRel)
@@ -434,7 +418,7 @@ void Presence::processHardwareLux()
             {
                 mLuxLast = mLux;
                 mBrightnessDelay = delayTimerInit();
-                knx.getGroupObject(PM_KoLuxOut).objectWritten();
+                KoPM_LuxOut.objectWritten();
             }
         }
     }
@@ -442,14 +426,11 @@ void Presence::processHardwareLux()
 
 float Presence::getHardwareBrightness()
 {
-    return mLux + knx.paramByte(PM_LuxOffsetPM);
+    return mLux + ParamPM_LuxOffsetPM;
 }
 
 void Presence::loop()
 {
-    if (!knx.configured())
-        return;
-
     if (mDoPresenceHardwareCycle)
     {
         processHardwarePresence();
@@ -458,15 +439,23 @@ void Presence::loop()
         Sensor::sensorLoop();
     }
 
-    // we loop on all channels and execute state logic
-    for (uint8_t lIndex = 0; lIndex < mNumChannels; lIndex++)
+    // we iterate through all channels and execute state logic
+    uint8_t lChannelsProcessed = 0;
+    // for (uint8_t lIndex = 0; lIndex < mNumChannels; lIndex++)
+    while (lChannelsProcessed < mNumChannels && openknx.freeLoopTime())
     {
-        PresenceChannel *lChannel = mChannel[lIndex];
+        PresenceChannel *lChannel = mChannel[mChannelIterator++];
         lChannel->loop();
-        // loopSubmodules();
+        lChannelsProcessed++;
+        // the following operations are done only once after iteration of all channels
+        if (mChannelIterator >= mNumChannels)
+        {
+            mChannelIterator = 0;
+            // here we do actions which happen after all channels are iterated
+            PresenceTrigger = false;
+            MoveTrigger = false;
+        }
     }
-    PresenceTrigger = false;
-    MoveTrigger = false;
 }
 
 void Presence::setup()
@@ -477,12 +466,6 @@ void Presence::setup()
         // setup channels, not possible in constructor, because knx is not configured there
         // get number of channels from knxprod
         mNumChannels = PM_ChannelCount; // knx.paramByte(PM_PMChannels);
-        if (PM_ChannelCount < mNumChannels)
-        {
-            char lErrorText[80];
-            sprintf(lErrorText, "FATAL: Firmware compiled for %d PresenceChannels, but knxprod needs %d!\n", PM_ChannelCount, mNumChannels);
-            fatalError(FATAL_LOG_WRONG_CHANNEL_COUNT, lErrorText);
-        }
         // set back reference
         PresenceChannel::setPresence(this);
         // calculate parameter block size for day phase parameters
@@ -492,7 +475,7 @@ void Presence::setup()
             mChannel[lIndex] = new PresenceChannel(lIndex);
             mChannel[lIndex]->setup();
         }
-        mDoPresenceHardwareCycle = ((knx.paramByte(PM_HWPresence) & PM_HWPresenceMask) > 0) || ((knx.paramByte(PM_HWLux) & PM_HWLuxMask) > 0);
+        mDoPresenceHardwareCycle = (ParamPM_HWPresence > 0) || (ParamPM_HWLux > 0);
         if (mDoPresenceHardwareCycle) 
             startPowercycleHfSensor();
         startSensors();

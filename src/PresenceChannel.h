@@ -1,5 +1,5 @@
 #pragma once
-#include "knx.h"
+#include "OpenKNX.h"
 #include "HardwareDevices.h"
 
 // State marker (BITFIELD !!!)
@@ -131,10 +131,9 @@
 // forward declaration
 class Presence;
 
-class PresenceChannel
+class PresenceChannel : public OpenKNX::Channel
 {
   private:
-    uint8_t mChannelId = 0; // zero based
     uint8_t mCurrentDayPhase = 0; // zero based
     uint8_t mNextDayPhase = 0;    // zero based
     bool mHardwarePresence = false;
