@@ -58,32 +58,48 @@ void Presence::processAfterStartupDelay()
         }
 }
 
-bool Presence::processDiagnoseCommand(char *iBuffer)
+bool Presence::processDiagnoseCommand(const char *iInput, char *eOutput, uint8_t iLine)
 {
-    bool lOutput = false;
-    if (iBuffer[0] == 'p')
+    bool lResult = false;
+
+    if (iLine > 0) 
+        return lResult;
+
+    switch (iInput[0])
     {
-        uint8_t lIndex = (iBuffer[1] - '0') * 10 + iBuffer[2] - '0' - 1;
-        if (lIndex >= 0 && lIndex < mNumChannels) 
+        case 'v': 
         {
-            // this is a channel request
-            lOutput = mChannel[lIndex]->processDiagnoseCommand(iBuffer);
+            snprintf(eOutput, 15, "Presence  %s", version().c_str());
+            lResult = true;            
+            break;
         }
-        else if (iBuffer[1] == 'l')
+        case 'p':
         {
-            // output hardware move/presence state
-            sprintf(iBuffer, "Move %d, Pres %d", mMove, mPresence);
-            lOutput = true;
-        }
-        else
-        {
-            // Command start with p are presence diagnose commands
-            // there are no
-            sprintf(iBuffer, "p: bad args");
-            lOutput = true;
-        }
+            uint8_t lIndex = (iInput[1] - '0') * 10 + iInput[2] - '0' - 1;
+            if (lIndex >= 0 && lIndex < mNumChannels) 
+            {
+                // this is a channel request
+                lResult = mChannel[lIndex]->processDiagnoseCommand(iInput, eOutput, iLine);
+            }
+            else if (iInput[1] == 'l')
+            {
+                // output hardware move/presence state
+                sprintf(eOutput, "Move %d, Pres %d", mMove, mPresence);
+                lResult = true;
+            }
+            else
+            {
+                // Command start with p are presence diagnose commands
+                // there are no
+                sprintf(eOutput, "p: bad args");
+                lResult = true;
+            }
+            break;
+        }    
+        default:
+            break;
     }
-    return lOutput;
+    return lResult;
 }
 
 void Presence::processInputKo(GroupObject &iKo)
@@ -485,4 +501,9 @@ void Presence::setup()
 const std::string Presence::name()
 {
     return "Presence";
+}
+
+const std::string Presence::version()
+{
+    return "1.4";
 }

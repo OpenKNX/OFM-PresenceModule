@@ -116,11 +116,15 @@ uint32_t PresenceChannel::paramTimeDelay(uint16_t iParamIndex, bool iWithPhase /
     return getDelayPattern(calcParamIndex(iParamIndex, iWithPhase), iAsSeconds);
 }
 
-bool PresenceChannel::processDiagnoseCommand(char *iBuffer)
+bool PresenceChannel::processDiagnoseCommand(const char *iInput, char *eOutput, uint8_t iLine)
 {
     bool lResult = false;
+
+    if (iLine > 0) 
+        return lResult;
+
     // at this point we know, that the we have p<nn> in buffer, so we look at the next letter
-    if (iBuffer[3] == 't')
+    if (iInput[3] == 't' || (iInput[3] == 0 && iLine == 0))
     {
         // output remaining presence time
         int16_t lPresence = 0;
@@ -133,7 +137,7 @@ bool PresenceChannel::processDiagnoseCommand(char *iBuffer)
                 lPresence = lPresence - (uint16_t)((millis() - pPresenceDelayTime) / 1000);
             }
             // Long presence output is "L mm:ss "
-            snprintf(iBuffer, 14, "L %02d:%02d ", (lPresence / 60) % 60, lPresence % 60);
+            snprintf(eOutput, 14, "L %02d:%02d ", (lPresence / 60) % 60, lPresence % 60);
             if (pCurrentState & STATE_PRESENCE_SHORT)
             {
                 lPresence = paramTimeDelay(PM_pAPresenceShortDurationBase, true, true);
@@ -141,26 +145,26 @@ bool PresenceChannel::processDiagnoseCommand(char *iBuffer)
                 if (lPresence >= 0)
                 {
                     // Short presence duration output is "L mm:ss S m:ss"
-                    snprintf(iBuffer + 8, 7, "S %1d:%02d", (lPresence / 60) % 10, lPresence % 60);
+                    snprintf(eOutput + 8, 7, "S %1d:%02d", (lPresence / 60) % 10, lPresence % 60);
                 }
                 else
                 {
                     // Short presence evaluation output is "L mm:ss D m:ss"
-                    snprintf(iBuffer + 8, 7, "D %1d:%02d", (-lPresence / 60) % 10, -lPresence % 60);
+                    snprintf(eOutput + 8, 7, "D %1d:%02d", (-lPresence / 60) % 10, -lPresence % 60);
                 }
             }
         }
         else if (pCurrentState & STATE_RUNNING)
         {
-            sprintf(iBuffer, "no presence");
+            sprintf(eOutput, "no presence");
         }
         else
         {
-            sprintf(iBuffer, "inactive");
+            sprintf(eOutput, "inactive");
         }
         lResult = true;
     }
-    else if (iBuffer[3] == 'l')
+    else if (iInput[3] == 'l' || (iInput[3] == 0 && iLine == 1))
     {
         // output leave room modes
         // p<nn>l
@@ -171,48 +175,48 @@ bool PresenceChannel::processDiagnoseCommand(char *iBuffer)
             int16_t lTime = 0;
             const char *lModes = "OFFTOTT+RB+TBTR";
             // we present leave room mode
-            iBuffer[lIndex++] = 'L';
-            iBuffer[lIndex++] = ' ';
+            eOutput[lIndex++] = 'L';
+            eOutput[lIndex++] = ' ';
             uint8_t lLeaveRoomMode = ParamPM_pLeaveRoomModeAll;
             for (uint8_t lCount = 0; lCount < 3; lCount++)
-                iBuffer[lIndex++] = lModes[(lLeaveRoomMode * 3 + lCount)];
-            iBuffer[lIndex++] = ' ';
-            iBuffer[lIndex] = 0; // do not increment lIndex here
+                eOutput[lIndex++] = lModes[(lLeaveRoomMode * 3 + lCount)];
+            eOutput[lIndex++] = ' ';
+            eOutput[lIndex] = 0; // do not increment lIndex here
             if (pDowntimeDelayTime > 0)
             {
                 lTime = paramTimeDelay(PM_pDowntimeOffBase, false, true);
                 lTime = lTime - (uint16_t)((millis() - pDowntimeDelayTime) / 1000);
                 // Downtime output is "T mm:ss "
                 if (lTime >= 0)
-                    snprintf(iBuffer + lIndex, 8, "T %02d:%02d", (lTime / 60) % 60, lTime % 60);
+                    snprintf(eOutput + lIndex, 8, "T %02d:%02d", (lTime / 60) % 60, lTime % 60);
                 else
-                    snprintf(iBuffer + lIndex, 8, "T-%02d:%02d", (-lTime / 60) % 60, -lTime % 60);
+                    snprintf(eOutput + lIndex, 8, "T-%02d:%02d", (-lTime / 60) % 60, -lTime % 60);
             }
         }
         else if (pCurrentState & STATE_RUNNING)
         {
-            sprintf(iBuffer, "no leave room");
+            sprintf(eOutput, "no leave room");
         }
         else
         {
-            sprintf(iBuffer, "inactive");
+            sprintf(eOutput, "inactive");
         }
         lResult = true;
     }
-    else if (iBuffer[3] == 's')
+    else if (iInput[3] == 's' || (iInput[3] == 0 && iLine == 2))
     {
-        if (iBuffer[4] == '1')
+        if (iInput[4] == '1')
         {
             // long version
             // "aut0 day13 lck"
             if (pCurrentState & STATE_MANUAL)
-                sprintf(iBuffer, "man");
+                sprintf(eOutput, "man");
             else if (pCurrentState & STATE_AUTO)
-                sprintf(iBuffer, "aut");
+                sprintf(eOutput, "aut");
             else
-                sprintf(iBuffer, "nor");
-            iBuffer[3] = (pCurrentValue & PM_BIT_OUTPUT_SET) ? '1' : '0';
-            iBuffer[4] = ' ';
+                sprintf(eOutput, "nor");
+            eOutput[3] = (pCurrentValue & PM_BIT_OUTPUT_SET) ? '1' : '0';
+            eOutput[4] = ' ';
         }
         else
         {
@@ -230,25 +234,25 @@ bool PresenceChannel::processDiagnoseCommand(char *iBuffer)
             // T=in totzeit, -=normal
             uint8_t lIndex = 0;
             if (pCurrentState & STATE_MANUAL)
-                iBuffer[lIndex++] = 'M';
+                eOutput[lIndex++] = 'M';
             else if (pCurrentState & STATE_AUTO)
-                iBuffer[lIndex++] = 'A';
+                eOutput[lIndex++] = 'A';
             else
-                iBuffer[lIndex++] = 'N';
+                eOutput[lIndex++] = 'N';
 
-            iBuffer[lIndex++] = (pCurrentValue & PM_BIT_OUTPUT_SET) ? '1' : '0';
-            iBuffer[lIndex++] = ' ';
-            iBuffer[lIndex++] = 'D';
-            iBuffer[lIndex++] = ((mCurrentDayPhase >= 0) ? mCurrentDayPhase : 0) + 49;
-            iBuffer[lIndex++] = ((mNextDayPhase >= 0) ? mNextDayPhase : 0) + 49;
-            iBuffer[lIndex++] = ' ';
-            iBuffer[lIndex++] = (pCurrentState & STATE_LOCK) ? 'L' : '-';
-            iBuffer[lIndex++] = (pCurrentState & STATE_ADAPTIVE) ? 'H' : '-';
-            iBuffer[lIndex++] = (pCurrentValue & PM_BIT_DISABLE_BRIGHTNESS) ? 'X' : '-';
-            iBuffer[lIndex++] = (pCurrentState & STATE_LEAVE_ROOM) ? 'R' : '-';
-            iBuffer[lIndex++] = (pCurrentState & STATE_DOWNTIME) ? 'T' : '-';
+            eOutput[lIndex++] = (pCurrentValue & PM_BIT_OUTPUT_SET) ? '1' : '0';
+            eOutput[lIndex++] = ' ';
+            eOutput[lIndex++] = 'D';
+            eOutput[lIndex++] = ((mCurrentDayPhase >= 0) ? mCurrentDayPhase : 0) + 49;
+            eOutput[lIndex++] = ((mNextDayPhase >= 0) ? mNextDayPhase : 0) + 49;
+            eOutput[lIndex++] = ' ';
+            eOutput[lIndex++] = (pCurrentState & STATE_LOCK) ? 'L' : '-';
+            eOutput[lIndex++] = (pCurrentState & STATE_ADAPTIVE) ? 'H' : '-';
+            eOutput[lIndex++] = (pCurrentValue & PM_BIT_DISABLE_BRIGHTNESS) ? 'X' : '-';
+            eOutput[lIndex++] = (pCurrentState & STATE_LEAVE_ROOM) ? 'R' : '-';
+            eOutput[lIndex++] = (pCurrentState & STATE_DOWNTIME) ? 'T' : '-';
             // 3 char free
-            iBuffer[lIndex++] = 0;
+            eOutput[lIndex++] = 0;
             lResult = true;
         }
     }
@@ -441,6 +445,13 @@ void PresenceChannel::processStartup()
     }
 }
 
+void PresenceChannel::sendReadRequest(uint8_t iKoIndex)
+{
+    GroupObject* lKo = getKo(iKoIndex);
+    if (lKo->commFlag() == ComFlag::Uninitialized)
+        lKo->requestObjectRead();
+}
+
 void PresenceChannel::processReadRequests()
 {
     // this method is called after startup delay and executes read requests, which should just happen once after startup
@@ -452,31 +463,31 @@ void PresenceChannel::processReadRequests()
         {
             case 1:
                 if (ParamPM_pStartReadLux)
-                    getKo(PM_KoKOpLux)->requestObjectRead();
+                    sendReadRequest(PM_KoKOpLux);
                 break;
             case 2:
                 if (ParamPM_pStartReadPresence1)
-                    getKo(PM_KoKOpPresence1)->requestObjectRead();
+                    sendReadRequest(PM_KoKOpPresence1);
                 break;
             case 3:
                 if (ParamPM_pStartReadPresence2)
-                    getKo(PM_KoKOpPresence2)->requestObjectRead();
+                    sendReadRequest(PM_KoKOpPresence2);
                 break;
             case 4:
                 if (ParamPM_pStartReadAktorState)
-                    getKo(PM_KoKOpAktorState)->requestObjectRead();
+                    sendReadRequest(PM_KoKOpAktorState);
                 break;
             case 5:
                 if (ParamPM_pStartReadLock)
-                    getKo(PM_KoKOpLock)->requestObjectRead();
+                    sendReadRequest(PM_KoKOpLock);
                 break;
             case 6:
                 if (ParamPM_pStartReadDayPhase)
-                    getKo(PM_KoKOpDayPhase)->requestObjectRead();
+                    sendReadRequest(PM_KoKOpDayPhase);
                 break;
             case 7:
                 if (ParamPM_pStartReadScene)
-                    getKo(PM_KoKOpScene)->requestObjectRead();
+                    sendReadRequest(PM_KoKOpScene);
                 break;
 
             default:

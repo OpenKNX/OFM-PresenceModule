@@ -46,7 +46,7 @@ public:
   void processLED(bool iOn, LedCaller iCaller);
   void processReadRequests();
   void processInputKo(GroupObject &iKo);
-  bool processDiagnoseCommand(char *iBuffer);
+  bool processDiagnoseCommand(const char *iInput, char *eOutput, uint8_t iLine) override;
   void debug();
   void setup();
   void loop();
@@ -54,6 +54,7 @@ public:
   void addKoMap(uint16_t iKoNumber, uint8_t iChannelId, uint8_t iKoIndex);
   bool mapKO(uint16_t iKoNumber, sKoMap **iKoMap);
   const std::string name() override;
+  const std::string version() override;
 
 private:
   static const uint16_t cCountKoMap = PM_ChannelCount * 6;
