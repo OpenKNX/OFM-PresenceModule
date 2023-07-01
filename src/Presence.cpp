@@ -1,4 +1,4 @@
-#include "Helper.h"
+#include "OpenKNX.h"
 #include "PresenceChannel.h"
 #include "KnxHelper.h"
 #include "Presence.h"
@@ -47,7 +47,7 @@ bool Presence::mapKO(uint16_t iKoNumber, sKoMap **iKoMap)
 
 void Presence::processAfterStartupDelay()
 {
-    logInfo("afterStartupDelay");
+    logInfoP("afterStartupDelay");
 
         if (ParamPM_ReadLed)
         {
@@ -58,46 +58,47 @@ void Presence::processAfterStartupDelay()
         }
 }
 
-bool Presence::processDiagnoseCommand(const char *iInput, char *eOutput, uint8_t iLine)
+void Presence::showHelp()
+{
+    openknx.console.printHelpLine("vpm hw", "print hardware move and presence signal");
+    PresenceChannel::showHelp();
+}
+
+bool Presence::processCommand(const std::string iCmd, bool iDebugKo) 
 {
     bool lResult = false;
-
-    if (iLine > 0) 
+    if (iCmd.substr(0, 3) != "vpm" || iCmd.length() < 5)
         return lResult;
 
-    switch (iInput[0])
+    if (iCmd.substr(4, 2) == "ch")
     {
-        case 'v': 
-        {
-            snprintf(eOutput, 15, "Presence  %s", version().c_str());
-            lResult = true;            
-            break;
+        // Command ch<nn>: 
+        // find channel and dispatch
+        uint16_t lIndex = std::stoi(iCmd.substr(6, 2)) - 1;
+        if (lIndex < mNumChannels) {
+            // this is a channel request
+            lResult = mChannel[lIndex]->processCommand(iCmd, iDebugKo);
         }
-        case 'p':
+    } 
+    else if (iCmd.substr(4, 2) == "hw")
+    {
+        // output hardware move/presence state
+        logInfoP("Move %d, Presence %d", mMove, mPresence);
+        if (iDebugKo) 
         {
-            uint8_t lIndex = (iInput[1] - '0') * 10 + iInput[2] - '0' - 1;
-            if (lIndex >= 0 && lIndex < mNumChannels) 
-            {
-                // this is a channel request
-                lResult = mChannel[lIndex]->processDiagnoseCommand(iInput, eOutput, iLine);
-            }
-            else if (iInput[1] == 'l')
-            {
-                // output hardware move/presence state
-                sprintf(eOutput, "Move %d, Pres %d", mMove, mPresence);
-                lResult = true;
-            }
-            else
-            {
-                // Command start with p are presence diagnose commands
-                // there are no
-                sprintf(eOutput, "p: bad args");
-                lResult = true;
-            }
-            break;
-        }    
-        default:
-            break;
+            openknx.console.writeDiagenoseKo("Move %d, Pres %d", mMove, mPresence);
+        }
+        lResult = true;
+    }
+    else
+    {
+        // Commands starting with vpm are presence diagnose commands
+        logInfoP("VPM command with bad args");
+        if (iDebugKo) 
+        {
+            openknx.console.writeDiagenoseKo("VPM: bad args");
+        }
+        lResult = true;
     }
     return lResult;
 }

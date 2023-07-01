@@ -1,6 +1,6 @@
 #pragma once
 #include "OpenKNX.h"
-#include "HardwareDevices.h"
+// #include "HardwareDevices.h"
 
 // State marker (BITFIELD !!!)
 #define STATE_STARTUP 1            // startup delay for each channel
@@ -244,7 +244,8 @@ class PresenceChannel : public OpenKNX::Channel
     static void setDayPhaseParameterSize(uint8_t iSize);
 
     void processInputKo(GroupObject &iKo, int8_t iKoIndex = -1);
-    bool processDiagnoseCommand(const char *iInput, char *eOutput, uint8_t iLine) override;
+    static void showHelp();
+    bool processCommand(const std::string iCmd, bool iDebugKo); 
     void setup();
     void loop();
 };

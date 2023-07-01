@@ -46,7 +46,8 @@ public:
   void processLED(bool iOn, LedCaller iCaller);
   void processReadRequests();
   void processInputKo(GroupObject &iKo);
-  bool processDiagnoseCommand(const char *iInput, char *eOutput, uint8_t iLine) override;
+  void showHelp() override;
+  bool processCommand(const std::string iCmd, bool iDebugKo) override; 
   void debug();
   void setup();
   void loop();

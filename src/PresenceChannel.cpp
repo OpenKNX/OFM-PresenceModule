@@ -1,6 +1,6 @@
 #include "PresenceChannel.h"
 #include "Presence.h"
-#include "Helper.h"
+// #include "OpenKNX/Helper.h"
 #include "KnxHelper.h"
 // #include "IncludeManager.h"
 
@@ -116,55 +116,75 @@ uint32_t PresenceChannel::paramTimeDelay(uint16_t iParamIndex, bool iWithPhase /
     return getDelayPattern(calcParamIndex(iParamIndex, iWithPhase), iAsSeconds);
 }
 
-bool PresenceChannel::processDiagnoseCommand(const char *iInput, char *eOutput, uint8_t iLine)
+// static
+void PresenceChannel::showHelp()
+{
+    openknx.console.printHelpLine("vpm chNN pres", "return presence time info for channel NN");
+    openknx.console.printHelpLine("vpm chNN leave", "return leave room info for channel NN");
+    openknx.console.printHelpLine("vpm chNN state", "return state flags for channel NN");
+    openknx.console.printHelpLine("vpm chNN all", "exec all channel commands for channel NN");
+}
+
+bool PresenceChannel::processCommand(const std::string iCmd, bool iDebugKo) 
 {
     bool lResult = false;
-
-    if (iLine > 0) 
+    if (iCmd.substr(0, 6) != "vpm ch" || iCmd.length() < 8)
         return lResult;
 
-    // at this point we know, that the we have p<nn> in buffer, so we look at the next letter
-    if (iInput[3] == 't' || (iInput[3] == 0 && iLine == 0))
+    if (iCmd.substr(9, 4) == "pres" || iCmd.substr(9, 3) == "all")
     {
         // output remaining presence time
         int16_t lPresence = 0;
+        int16_t lPresenceShort = 0;
         if (pCurrentState & STATE_PRESENCE)
         {
             // we present both, long and short presence
             lPresence = getKo(PM_KoKOpPresenceDelay)->value(getDPT(VAL_DPT_7));
             if (pPresenceDelayTime > 0)
-            {
                 lPresence = lPresence - (uint16_t)((millis() - pPresenceDelayTime) / 1000);
-            }
-            // Long presence output is "L mm:ss "
-            snprintf(eOutput, 14, "L %02d:%02d ", (lPresence / 60) % 60, lPresence % 60);
+
             if (pCurrentState & STATE_PRESENCE_SHORT)
             {
-                lPresence = paramTimeDelay(PM_pAPresenceShortDurationBase, true, true);
-                lPresence = lPresence - (uint16_t)((millis() - pPresenceShortDelayTime) / 1000);
-                if (lPresence >= 0)
+                lPresenceShort = paramTimeDelay(PM_pAPresenceShortDurationBase, true, true);
+                lPresenceShort = lPresenceShort - (uint16_t)((millis() - pPresenceShortDelayTime) / 1000);
+                if (lPresenceShort >= 0)
                 {
                     // Short presence duration output is "L mm:ss S m:ss"
-                    snprintf(eOutput + 8, 7, "S %1d:%02d", (lPresence / 60) % 10, lPresence % 60);
+                    logInfoP("Long %02d:%02d, Short %1d:%02d", (lPresence / 60) % 60, lPresence % 60, (lPresenceShort / 60) % 10, lPresenceShort % 60);
+                    if (iDebugKo) 
+                        openknx.console.writeDiagenoseKo("L %02d:%02d S %1d:%02d", (lPresence / 60) % 60, lPresence % 60, (lPresenceShort / 60) % 10, lPresenceShort % 60);
                 }
                 else
                 {
                     // Short presence evaluation output is "L mm:ss D m:ss"
-                    snprintf(eOutput + 8, 7, "D %1d:%02d", (-lPresence / 60) % 10, -lPresence % 60);
+                    logInfoP("Long %02d:%02d, Delay %1d:%02d", (lPresence / 60) % 60, lPresence % 60, (-lPresenceShort / 60) % 10, -lPresenceShort % 60);
+                    if (iDebugKo) 
+                        openknx.console.writeDiagenoseKo("L %02d:%02d D %1d:%02d", (lPresence / 60) % 60, lPresence % 60, (-lPresenceShort / 60) % 10, -lPresenceShort % 60);
                 }
+            }
+            else
+            {
+                // Long presence output is "L mm:ss "
+                logInfoP("Long %02d:%02d ", (lPresence / 60) % 60, lPresence % 60);
+                if (iDebugKo) 
+                    openknx.console.writeDiagenoseKo("L %02d:%02d ", (lPresence / 60) % 60, lPresence % 60);
             }
         }
         else if (pCurrentState & STATE_RUNNING)
         {
-            sprintf(eOutput, "no presence");
+            logInfoP("there is no presence");
+            if (iDebugKo) 
+                openknx.console.writeDiagenoseKo("no presence");
         }
         else
         {
-            sprintf(eOutput, "inactive");
+            logInfoP("this channel is inactive");
+            if (iDebugKo) 
+                openknx.console.writeDiagenoseKo("inactive");
         }
         lResult = true;
     }
-    else if (iInput[3] == 'l' || (iInput[3] == 0 && iLine == 1))
+    else if (iCmd.substr(9, 5) == "leave" || iCmd.substr(9, 3) == "all")
     {
         // output leave room modes
         // p<nn>l
@@ -174,87 +194,83 @@ bool PresenceChannel::processDiagnoseCommand(const char *iInput, char *eOutput, 
             uint8_t lIndex = 0;
             int16_t lTime = 0;
             const char *lModes = "OFFTOTT+RB+TBTR";
+            char lOutput[15] = {0};
             // we present leave room mode
-            eOutput[lIndex++] = 'L';
-            eOutput[lIndex++] = ' ';
+            lOutput[lIndex++] = 'L';
+            lOutput[lIndex++] = ' ';
             uint8_t lLeaveRoomMode = ParamPM_pLeaveRoomModeAll;
             for (uint8_t lCount = 0; lCount < 3; lCount++)
-                eOutput[lIndex++] = lModes[(lLeaveRoomMode * 3 + lCount)];
-            eOutput[lIndex++] = ' ';
-            eOutput[lIndex] = 0; // do not increment lIndex here
+                lOutput[lIndex++] = lModes[(lLeaveRoomMode * 3 + lCount)];
+            lOutput[lIndex++] = ' ';
+            lOutput[lIndex] = 0; // do not increment lIndex here
             if (pDowntimeDelayTime > 0)
             {
                 lTime = paramTimeDelay(PM_pDowntimeOffBase, false, true);
                 lTime = lTime - (uint16_t)((millis() - pDowntimeDelayTime) / 1000);
                 // Downtime output is "T mm:ss "
                 if (lTime >= 0)
-                    snprintf(eOutput + lIndex, 8, "T %02d:%02d", (lTime / 60) % 60, lTime % 60);
+                    snprintf(lOutput + lIndex, 8, "T %02d:%02d", (lTime / 60) % 60, lTime % 60);
                 else
-                    snprintf(eOutput + lIndex, 8, "T-%02d:%02d", (-lTime / 60) % 60, -lTime % 60);
+                    snprintf(lOutput + lIndex, 8, "T-%02d:%02d", (-lTime / 60) % 60, -lTime % 60);
             }
+            logInfoP(lOutput);
+            if (iDebugKo) 
+                openknx.console.writeDiagenoseKo(lOutput);
         }
         else if (pCurrentState & STATE_RUNNING)
         {
-            sprintf(eOutput, "no leave room");
+            logInfoP("leave room is off");
+            if (iDebugKo) 
+                openknx.console.writeDiagenoseKo("no leave room");
         }
         else
         {
-            sprintf(eOutput, "inactive");
+            logInfoP("inactive");
+            if (iDebugKo) 
+                openknx.console.writeDiagenoseKo("inactive");
         }
         lResult = true;
     }
-    else if (iInput[3] == 's' || (iInput[3] == 0 && iLine == 2))
+    else if (iCmd.substr(9, 5) == "state" || iCmd.substr(9, 3) == "all")
     {
-        if (iInput[4] == '1')
-        {
-            // long version
-            // "aut0 day13 lck"
-            if (pCurrentState & STATE_MANUAL)
-                sprintf(eOutput, "man");
-            else if (pCurrentState & STATE_AUTO)
-                sprintf(eOutput, "aut");
-            else
-                sprintf(eOutput, "nor");
-            eOutput[3] = (pCurrentValue & PM_BIT_OUTPUT_SET) ? '1' : '0';
-            eOutput[4] = ' ';
-        }
+        // short version
+        // "[NAM][01] D[1-4][1-4] [L-][H-][X-][R-][T-]"
+        // N=normal, A=auto, M=manual
+        // 0=off, 1=on
+        // D=day phase
+        // 1-4=current phase
+        // 1-4=next phase
+        // L=is lock, -=unlock
+        // H=in helligkeitsberechnung, -=normal
+        // X=disable brightness handling, -=normal
+        // R=leave Room is active, -=not active
+        // T=in totzeit, -=normal
+        uint8_t lIndex = 0;
+        char lOutput[15] = {0};
+        if (pCurrentState & STATE_MANUAL)
+            lOutput[lIndex++] = 'M';
+        else if (pCurrentState & STATE_AUTO)
+            lOutput[lIndex++] = 'A';
         else
-        {
-            // short version
-            // "[NAM][01] D[1-4][1-4] [L-][H-][X-][R-][T-]"
-            // N=normal, A=auto, M=manual
-            // 0=off, 1=on
-            // D=day phase
-            // 1-4=current phase
-            // 1-4=next phase
-            // L=is lock, -=unlock
-            // H=in helligkeitsberechnung, -=normal
-            // X=disable brightness handling, -=normal
-            // R=leave Room is active, -=not active
-            // T=in totzeit, -=normal
-            uint8_t lIndex = 0;
-            if (pCurrentState & STATE_MANUAL)
-                eOutput[lIndex++] = 'M';
-            else if (pCurrentState & STATE_AUTO)
-                eOutput[lIndex++] = 'A';
-            else
-                eOutput[lIndex++] = 'N';
+            lOutput[lIndex++] = 'N';
 
-            eOutput[lIndex++] = (pCurrentValue & PM_BIT_OUTPUT_SET) ? '1' : '0';
-            eOutput[lIndex++] = ' ';
-            eOutput[lIndex++] = 'D';
-            eOutput[lIndex++] = ((mCurrentDayPhase >= 0) ? mCurrentDayPhase : 0) + 49;
-            eOutput[lIndex++] = ((mNextDayPhase >= 0) ? mNextDayPhase : 0) + 49;
-            eOutput[lIndex++] = ' ';
-            eOutput[lIndex++] = (pCurrentState & STATE_LOCK) ? 'L' : '-';
-            eOutput[lIndex++] = (pCurrentState & STATE_ADAPTIVE) ? 'H' : '-';
-            eOutput[lIndex++] = (pCurrentValue & PM_BIT_DISABLE_BRIGHTNESS) ? 'X' : '-';
-            eOutput[lIndex++] = (pCurrentState & STATE_LEAVE_ROOM) ? 'R' : '-';
-            eOutput[lIndex++] = (pCurrentState & STATE_DOWNTIME) ? 'T' : '-';
-            // 3 char free
-            eOutput[lIndex++] = 0;
-            lResult = true;
-        }
+        lOutput[lIndex++] = (pCurrentValue & PM_BIT_OUTPUT_SET) ? '1' : '0';
+        lOutput[lIndex++] = ' ';
+        lOutput[lIndex++] = 'D';
+        lOutput[lIndex++] = ((mCurrentDayPhase >= 0) ? mCurrentDayPhase : 0) + 49;
+        lOutput[lIndex++] = ((mNextDayPhase >= 0) ? mNextDayPhase : 0) + 49;
+        lOutput[lIndex++] = ' ';
+        lOutput[lIndex++] = (pCurrentState & STATE_LOCK) ? 'L' : '-';
+        lOutput[lIndex++] = (pCurrentState & STATE_ADAPTIVE) ? 'H' : '-';
+        lOutput[lIndex++] = (pCurrentValue & PM_BIT_DISABLE_BRIGHTNESS) ? 'X' : '-';
+        lOutput[lIndex++] = (pCurrentState & STATE_LEAVE_ROOM) ? 'R' : '-';
+        lOutput[lIndex++] = (pCurrentState & STATE_DOWNTIME) ? 'T' : '-';
+        // 3 char free
+        lOutput[lIndex++] = 0;
+        logInfoP(lOutput);
+        if (iDebugKo) 
+            openknx.console.writeDiagenoseKo(lOutput);
+        lResult = true;
     }
     return lResult;
 }
