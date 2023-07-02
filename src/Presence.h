@@ -61,7 +61,6 @@ private:
   static const uint16_t cCountKoMap = PM_ChannelCount * 6;
   sKoMap mKoMap[cCountKoMap];  // in average 6 internal KO per Channel (4*6*30=720 Byte)
   uint8_t mNumKoMap = 0;
-  uint8_t mChannelIterator = 0;
   
   // support presence hardware
   float mPresenceCombined = 0;
@@ -91,6 +90,7 @@ private:
   // channel handling
   PresenceChannel *mChannel[PM_ChannelCount];
   uint8_t mNumChannels;
+  uint8_t mChannelIterator = 0;
   PresenceChannel *getChannel(uint8_t iChannelId);
   uint8_t getChannelId(PresenceChannel *iChannel);
 
