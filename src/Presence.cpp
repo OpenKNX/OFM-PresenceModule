@@ -6,6 +6,7 @@
 #include "SensorMR24xxB1.h"
 #include "SensorOPT300x.h"
 #include "SensorVEML7700.h"
+#include "SmartMF.h"
 
 Presence::Presence()
 {
@@ -205,7 +206,7 @@ void Presence::startSensors()
 void Presence::switchHfSensor(bool iOn)
 {
 #ifdef HF_POWER_PIN
-    if (smartMF.hardwareRevision() == 1) {
+    if (smartmf.hardwareRevision() == 1) {
         iOn = !iOn;
     }
     else
