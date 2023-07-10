@@ -453,6 +453,8 @@ float Presence::getHardwareBrightness()
     return mLux + ParamPM_LuxOffsetPM;
 }
 
+#define NUM_CHANNELS_TO_PROCESS 1
+
 void Presence::loop()
 {
     if(!openknx.afterStartupDelay())
@@ -465,11 +467,10 @@ void Presence::loop()
         processPowercycleHfSensor();
         Sensor::sensorLoop();
     }
-
     // we iterate through all channels and execute state logic
     uint8_t lChannelsProcessed = 0;
     // for (uint8_t lIndex = 0; lIndex < mNumChannels; lIndex++)
-    while (lChannelsProcessed < mNumChannels && openknx.freeLoopTime())
+    while (lChannelsProcessed < mChannelsToProcess && openknx.freeLoopTime())
     {
         PresenceChannel *lChannel = mChannel[mChannelIterator++];
         lChannel->loop();
@@ -483,10 +484,10 @@ void Presence::loop()
             MoveTrigger = false;
         }
     }
-    if (lChannelsProcessed < mNumChannels)
-        logInfoP("PM did not process all channels during loop, just %i channels\n", lChannelsProcessed);
-    if (millis()-lLoopTime > 1)
-        logInfoP("PM LoopTime: %i\n", millis()-lLoopTime);
+    if (lChannelsProcessed < mChannelsToProcess)
+        logInfoP("PM did not process %i channels during loop as expected, just %i channels", mChannelsToProcess, lChannelsProcessed);
+    if (millis()-lLoopTime > 3)
+        logInfoP("PM LoopTime: %i", millis()-lLoopTime);
 }
 
 void Presence::setup() 
@@ -497,6 +498,7 @@ void Presence::setup()
         // setup channels, not possible in constructor, because knx is not configured there
         // get number of channels from knxprod
         mNumChannels = PM_ChannelCount; // knx.paramByte(PM_PMChannels);
+        mChannelsToProcess = MIN(mNumChannels, NUM_CHANNELS_TO_PROCESS);
         // set back reference
         PresenceChannel::setPresence(this);
         // calculate parameter block size for day phase parameters

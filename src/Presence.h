@@ -90,6 +90,7 @@ private:
   // channel handling
   PresenceChannel *mChannel[PM_ChannelCount];
   uint8_t mNumChannels;
+  uint8_t mChannelsToProcess = 0;
   uint8_t mChannelIterator = 0;
   PresenceChannel *getChannel(uint8_t iChannelId);
   uint8_t getChannelId(PresenceChannel *iChannel);

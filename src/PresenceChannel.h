@@ -242,11 +242,14 @@ class PresenceChannel : public OpenKNX::Channel
     void onOutput(bool iOutputIndex, bool iOn);
 
     void prepareInternalKo();
+    const std::string name() override;
 
   protected:
+    // static
     static Presence *sPresence;
     static uint8_t sDayPhaseParameterSize; // memory block size of day phase parameters, calculated in setup
 
+    // instance
     uint32_t pCurrentState = 0;
     uint32_t pCurrentValue = 0;
     uint32_t pOnDelay = 0;

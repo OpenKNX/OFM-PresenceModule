@@ -131,7 +131,7 @@ bool PresenceChannel::processCommand(const std::string iCmd, bool iDebugKo)
     if (iCmd.substr(0, 6) != "vpm ch" || iCmd.length() < 8)
         return lResult;
 
-    if (iCmd.substr(9, 4) == "pres" || iCmd.substr(9, 3) == "all")
+    if (iCmd.substr(9, 1) == "p" || iCmd.substr(9, 1) == "a") // pres or all
     {
         // output remaining presence time
         int16_t lPresence = 0;
@@ -184,8 +184,8 @@ bool PresenceChannel::processCommand(const std::string iCmd, bool iDebugKo)
         }
         lResult = true;
     }
-    else if (iCmd.substr(9, 5) == "leave" || iCmd.substr(9, 3) == "all")
-    {
+    if (iCmd.substr(9, 1) == "l" || iCmd.substr(9, 1) == "a")  // leave or all
+      {
         // output leave room modes
         // p<nn>l
         // L (OFF|TOT|T+R|B+T|BTR) T mm:ss
@@ -231,7 +231,7 @@ bool PresenceChannel::processCommand(const std::string iCmd, bool iDebugKo)
         }
         lResult = true;
     }
-    else if (iCmd.substr(9, 5) == "state" || iCmd.substr(9, 3) == "all")
+    if (iCmd.substr(9, 1) == "s" || iCmd.substr(9, 1) == "a")  // state or all
     {
         // short version
         // "[NAM][01] D[1-4][1-4] [L-][H-][X-][R-][T-]"
@@ -1703,4 +1703,9 @@ void PresenceChannel::afterStartupDelay()
             // do nothing
             break;
     }
+}
+
+const std::string PresenceChannel::name()
+{
+    return "VPM";
 }
