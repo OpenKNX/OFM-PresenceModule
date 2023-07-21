@@ -3,18 +3,18 @@
 // #include "HardwareDevices.h"
 
 // State marker (BITFIELD !!!)
-#define STATE_STARTUP 0x00000001            // startup delay for each channel
-#define STATE_RUNNING 0x00000002            // this channel is running
-#define STATE_MANUAL 0x00000004             // manual mode on
-#define STATE_AUTO 0x00000008               // manual mode on
-#define STATE_PRESENCE 0x00000010          // there is presence
-#define STATE_PRESENCE_SHORT 0x00000020    // short presence evaluation
-#define STATE_LOCK 0x00000040              // lock state
+#define STATE_STARTUP 0x00000001          // startup delay for each channel
+#define STATE_RUNNING 0x00000002          // this channel is running
+#define STATE_MANUAL 0x00000004           // manual mode on
+#define STATE_AUTO 0x00000008             // manual mode on
+#define STATE_PRESENCE 0x00000010         // there is presence
+#define STATE_PRESENCE_SHORT 0x00000020   // short presence evaluation
+#define STATE_LOCK 0x00000040             // lock state
 #define STATE_DAY_PHASE_CHANGE 0x00000080 // change day phase at desired point of time
 #define STATE_DOWNTIME 0x00000100         // Downtime after leave room
 #define STATE_ADAPTIVE 0x00000200         // adaptive brightness calculation
-#define STATE_ADAPTIVE_READ 0x00000400   // adaptive brightness calculation
-#define STATE_LEAVE_ROOM 0x00000800      // During leave room we ignore any presence signal
+#define STATE_ADAPTIVE_READ 0x00000400    // adaptive brightness calculation
+#define STATE_LEAVE_ROOM 0x00000800       // During leave room we ignore any presence signal
 #define STATE_KO_LUX_ON 0x00001000
 #define STATE_KO_LUX 0x00002000
 #define STATE_KO_PRESENCE1 0x00004000
@@ -28,12 +28,11 @@
 #define STATE_KO_SCENE 0x00400000
 #define STATE_KO_CHANGE_STATE 0x00800000
 
-
 // Value marker (BITFIELD)
-#define PM_BIT_OUTPUT_SET 1             // output value to send
-#define PM_BIT_OUTPUT_WRITTEN 2         // output value sent
-#define PM_BIT_OUTPUT_FORCE 4           // output value sent
-#define PM_BIT_DISABLE_BRIGHTNESS 8     // Brightness off temporarily disabled
+#define PM_BIT_OUTPUT_SET 1         // output value to send
+#define PM_BIT_OUTPUT_WRITTEN 2     // output value sent
+#define PM_BIT_OUTPUT_FORCE 4       // output value sent
+#define PM_BIT_DISABLE_BRIGHTNESS 8 // Brightness off temporarily disabled
 
 #define PM_VAL_OUTPUT_MASK (PM_BIT_OUTPUT_SET | PM_BIT_OUTPUT_WRITTEN)
 
@@ -212,7 +211,7 @@ class PresenceChannel : public OpenKNX::Channel
     void startReset();
     void processReset();
     void onReset();
-    
+
     void startActorState();
     void processActorState();
 
@@ -255,18 +254,18 @@ class PresenceChannel : public OpenKNX::Channel
     uint32_t pOnDelay = 0;
     uint32_t pReadRequestDelay = 0;
     uint8_t pReadRequestCounter = 0;
-    uint32_t pPresenceDelayTime = 0;  // Nachlaufzeit
+    uint32_t pPresenceDelayTime = 0;      // Nachlaufzeit
     uint32_t pPresenceShortDelayTime = 0; // Kurze Anwesenheit Nachlaufzeit
-    uint32_t pManualFallbackTime = 0; // Rückfallzeit aus Manuell-Modus
-    uint32_t pOutput1CyclicTime = 0;  // Zyklisch senden Ausgang 1
-    uint32_t pOutput2CyclicTime = 0;  // Zyklisch senden Ausgang 2
-    uint32_t pLockDelayTime = 0;      // Rückfallzeit Sperre/Zwangsführung
-    uint32_t pDowntimeDelayTime = 0;  // Totzeit
-    uint32_t pAdaptiveDelayTime = 0;  // adaptive brightness calculation delay
-    uint32_t pBrightnessOffDelayTime = 0;  // brightness off delay
-    uint8_t pLeaveRoomMode = 0; // used for leave room SM
-    uint8_t pLastLockState = 255; // ensures sending just changed Lock states
-     
+    uint32_t pManualFallbackTime = 0;     // Rückfallzeit aus Manuell-Modus
+    uint32_t pOutput1CyclicTime = 0;      // Zyklisch senden Ausgang 1
+    uint32_t pOutput2CyclicTime = 0;      // Zyklisch senden Ausgang 2
+    uint32_t pLockDelayTime = 0;          // Rückfallzeit Sperre/Zwangsführung
+    uint32_t pDowntimeDelayTime = 0;      // Totzeit
+    uint32_t pAdaptiveDelayTime = 0;      // adaptive brightness calculation delay
+    uint32_t pBrightnessOffDelayTime = 0; // brightness off delay
+    uint8_t pLeaveRoomMode = 0;           // used for leave room SM
+    uint8_t pLastLockState = 255;         // ensures sending just changed Lock states
+
   public:
     PresenceChannel(uint8_t iChannelNumber);
     ~PresenceChannel();
@@ -276,7 +275,7 @@ class PresenceChannel : public OpenKNX::Channel
 
     void processInputKo(GroupObject &iKo, int8_t iKoIndex = -1);
     static void showHelp();
-    bool processCommand(const std::string iCmd, bool iDebugKo); 
+    bool processCommand(const std::string iCmd, bool iDebugKo);
     void setup();
     void loop();
 };
