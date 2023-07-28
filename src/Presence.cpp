@@ -10,6 +10,9 @@
 
 Presence::Presence()
 {
+    // init KoLookup (robustness)
+    addKoMap(0, 0, 0);
+    mNumKoMap = 0;
 }
 
 Presence::~Presence()
@@ -31,11 +34,12 @@ void Presence::addKoMap(uint16_t iKoNumber, uint8_t iChannelId, uint8_t iKoIndex
 bool Presence::mapKO(uint16_t iKoNumber, sKoMap **iKoMap)
 {
     sKoMap *lIterator = *iKoMap;
+    uint16_t lIterationCount = 0;
     if (*iKoMap == 0)
         lIterator = &mKoMap[0];
     else
         lIterator++;
-    while (lIterator->koNumber > 0)
+    while (lIterator->koNumber > 0 && lIterationCount < mNumKoMap)
     {
         if (lIterator->koNumber == iKoNumber)
         {
