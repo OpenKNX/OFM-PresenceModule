@@ -642,7 +642,13 @@ float PresenceChannel::getRawBrightness()
     if (ParamPM_pBrightnessIntern)
         lResult = sPresence->getHardwareBrightness();
     else
-        lResult = getKo(PM_KoKOpLux)->value(getDPT(VAL_DPT_9));
+    {
+        GroupObject *lKo = getKo(PM_KoKOpLux);
+        ComFlag lComFlag = lKo->commFlag();
+        if (lComFlag != ComFlag::Uninitialized && lComFlag != ComFlag::Transmitting)
+            lResult = lKo->value(getDPT(VAL_DPT_9));
+    }
+    // returns NO_NUM if brightness-ko was never set
     return lResult;
 }
 
@@ -887,9 +893,13 @@ void PresenceChannel::onPresenceBrightnessChange(bool iOn)
     // calculate output dependent on brightness and auto mode
     if (iOn && !ParamPM_pBrightnessIndependent)
     {
-        // check brightness in case of turning on
-        if ((uint32_t)getRawBrightness() < (uint32_t)getKo(PM_KoKOpLuxOn)->value(getDPT(VAL_DPT_9)))
-            onPresenceChange(iOn);
+        float lBrightness = getRawBrightness();
+        if (lBrightness != NO_NUM)
+        {
+            // check brightness in case of turning on
+            if ((uint32_t)lBrightness < (uint32_t)getKo(PM_KoKOpLuxOn)->value(getDPT(VAL_DPT_9)))
+                onPresenceChange(iOn);
+        }
     }
     else // turn off if brightness independent
         onPresenceChange(iOn);
@@ -1402,12 +1412,12 @@ void PresenceChannel::startBrightness()
     lEvalBrightness = lEvalBrightness && (!ParamPM_pBrightnessIndependent);
     // or are we in manual mode?
     lEvalBrightness = lEvalBrightness && ((pCurrentState & (STATE_MANUAL | STATE_LOCK)) == 0);
-    if (lEvalBrightness)
+    // first check for upper value, if higher, then switch off
+    float lBrightness = getRawBrightness();
+    if (lEvalBrightness && lBrightness != NO_NUM)
     {
-        // first check for upper value, if higher, then switch off
-        uint32_t lBrightness = getRawBrightness();
         // but only, if we are not calculating a new off value
-        if (!(pCurrentState & STATE_ADAPTIVE) && lBrightness > (uint32_t)getKo(PM_KoKOpLuxOff)->value(getDPT(VAL_DPT_9)))
+        if (!(pCurrentState & STATE_ADAPTIVE) && lBrightness > (float)getKo(PM_KoKOpLuxOff)->value(getDPT(VAL_DPT_9)))
         {
             // we start timer off delay
             if (pBrightnessOffDelayTime == 0 && paramByte(PM_pABrightnessAuto, PM_pABrightnessAutoMask, PM_pABrightnessAutoShift, true) > 0)
@@ -1419,7 +1429,7 @@ void PresenceChannel::startBrightness()
             pBrightnessOffDelayTime = 0;
         }
         // now check lower value, if below, turn light on
-        if (lBrightness < (uint32_t)getKo(PM_KoKOpLuxOn)->value(getDPT(VAL_DPT_9)))
+        if ((float)lBrightness < (float)getKo(PM_KoKOpLuxOn)->value(getDPT(VAL_DPT_9)))
         {
             // its getting dark, if we are in presence state, we turn light on
             // except we are in auto state (technically here it is Auto-Off), we should not turn on
@@ -1450,16 +1460,19 @@ void PresenceChannel::disableBrightness(bool iOn)
     if (!ParamPM_pBrightnessIndependent)
     {
         // get current brightness
-        uint32_t lBrightness = getRawBrightness();
-        // we disable brightness handling according to current brightness and current output state
-        // turn on even though there is enough light
-        bool lDisable1 = iOn && (lBrightness > (uint32_t)getKo(PM_KoKOpLuxOff)->value(getDPT(VAL_DPT_9)));
-        // turn off even though it is too dark
-        bool lDisable2 = !iOn && (lBrightness < (uint32_t)getKo(PM_KoKOpLuxOff)->value(getDPT(VAL_DPT_9)));
-        if (lDisable1 || lDisable2)
-            pCurrentValue |= PM_BIT_DISABLE_BRIGHTNESS;
-        else
-            pCurrentValue &= ~PM_BIT_DISABLE_BRIGHTNESS;
+        float lBrightness = getRawBrightness();
+        if (lBrightness != NO_NUM)
+        {
+            // we disable brightness handling according to current brightness and current output state
+            // turn on even though there is enough light
+            bool lDisable1 = iOn && (lBrightness > (float)getKo(PM_KoKOpLuxOff)->value(getDPT(VAL_DPT_9)));
+            // turn off even though it is too dark
+            bool lDisable2 = !iOn && (lBrightness < (float)getKo(PM_KoKOpLuxOff)->value(getDPT(VAL_DPT_9)));
+            if (lDisable1 || lDisable2)
+                pCurrentValue |= PM_BIT_DISABLE_BRIGHTNESS;
+            else
+                pCurrentValue &= ~PM_BIT_DISABLE_BRIGHTNESS;
+        }
     }
 }
 

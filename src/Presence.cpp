@@ -10,7 +10,7 @@
 
 Presence::Presence()
 {
-    // init KoLookup (robustness)
+    // init KoMap (robustness)
     addKoMap(0, 0, 0);
     mNumKoMap = 0;
 }
