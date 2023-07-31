@@ -459,8 +459,16 @@ void PresenceChannel::processStartup()
 void PresenceChannel::sendReadRequest(uint8_t iKoIndex)
 {
     GroupObject *lKo = getKo(iKoIndex);
+    // we handle input KO and we send only read requests, if KO is uninitialized
+    // in case the KO is transmitting (as in input), we know that an read request was already sent by someone else
     if (lKo->commFlag() == ComFlag::Uninitialized)
         lKo->requestObjectRead();
+    else if (lKo->commFlag() != ComFlag::Transmitting)
+    {
+        // if we suppress a read request because the input value already exists, we nevertheless have
+        // to react on this value as if a telegram would be received (because we are in a startup phase and we have to init correctly)
+        processInputKo(*lKo, iKoIndex);
+    }
 }
 
 void PresenceChannel::processReadRequests()
@@ -473,28 +481,28 @@ void PresenceChannel::processReadRequests()
         switch (pReadRequestCounter)
         {
             case 1:
+                if (ParamPM_pStartReadDayPhase)
+                    sendReadRequest(PM_KoKOpDayPhase);
+                break;
+            case 2:
                 if (ParamPM_pStartReadLux)
                     sendReadRequest(PM_KoKOpLux);
                 break;
-            case 2:
+            case 3:
                 if (ParamPM_pStartReadPresence1)
                     sendReadRequest(PM_KoKOpPresence1);
                 break;
-            case 3:
+            case 4:
                 if (ParamPM_pStartReadPresence2)
                     sendReadRequest(PM_KoKOpPresence2);
                 break;
-            case 4:
+            case 5:
                 if (ParamPM_pStartReadAktorState)
                     sendReadRequest(PM_KoKOpAktorState);
                 break;
-            case 5:
+            case 6:
                 if (ParamPM_pStartReadLock)
                     sendReadRequest(PM_KoKOpLock);
-                break;
-            case 6:
-                if (ParamPM_pStartReadDayPhase)
-                    sendReadRequest(PM_KoKOpDayPhase);
                 break;
             case 7:
                 if (ParamPM_pStartReadScene)
