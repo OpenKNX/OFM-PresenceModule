@@ -15,18 +15,19 @@
 #define STATE_ADAPTIVE 0x00000200         // adaptive brightness calculation
 #define STATE_ADAPTIVE_READ 0x00000400    // adaptive brightness calculation
 #define STATE_LEAVE_ROOM 0x00000800       // During leave room we ignore any presence signal
-#define STATE_KO_LUX_ON 0x00001000
-#define STATE_KO_LUX 0x00002000
-#define STATE_KO_PRESENCE1 0x00004000
-#define STATE_KO_PRESENCE2 0x00008000
-#define STATE_KO_SET_AUTO 0x00010000
-#define STATE_KO_SET_MANUAL 0x00020000
-#define STATE_KO_SET_ACTOR_STATE 0x00040000
-#define STATE_KO_LOCK 0x00080000
-#define STATE_KO_RESET 0x00100000
-#define STATE_KO_DAY_PHASE 0x00200000
-#define STATE_KO_SCENE 0x00400000
-#define STATE_KO_CHANGE_STATE 0x00800000
+#define STATE_READ_REQUESTS 0x00001000    // After startup delay, we first have to process all read requests
+#define STATE_KO_LUX_ON 0x00010000
+#define STATE_KO_LUX 0x00020000
+#define STATE_KO_PRESENCE1 0x00040000
+#define STATE_KO_PRESENCE2 0x00080000
+#define STATE_KO_SET_AUTO 0x00100000
+#define STATE_KO_SET_MANUAL 0x00200000
+#define STATE_KO_SET_ACTOR_STATE 0x00400000
+#define STATE_KO_LOCK 0x00800000
+#define STATE_KO_RESET 0x01000000
+#define STATE_KO_DAY_PHASE 0x02000000
+#define STATE_KO_SCENE 0x04000000
+#define STATE_KO_CHANGE_STATE 0x08000000
 
 // Value marker (BITFIELD)
 #define PM_BIT_OUTPUT_SET 1         // output value to send
@@ -165,11 +166,12 @@ class PresenceChannel : public OpenKNX::Channel
 
     uint32_t paramTimeDelay(uint16_t iParamIndex, bool iWithPhase = false, bool iAsSeconds = false);
 
-    void startStartup();
-    void processStartup();
-    void afterStartupDelay();
+    void startStartupDelay();
+    void processStartupDelay();
+    void startReadRequests();
     void processReadRequests();
     void sendReadRequest(uint8_t iKoIndex);
+    void startRunning();
 
     bool getRawPresence(bool iJustMove = false);
     bool getHardwarePresence(bool iJustMove = false);
@@ -253,6 +255,7 @@ class PresenceChannel : public OpenKNX::Channel
     uint32_t pCurrentValue = 0;
     uint32_t pOnDelay = 0;
     uint32_t pReadRequestDelay = 0;
+    uint16_t pReadRequestPause = 200;
     uint8_t pReadRequestCounter = 0;
     uint32_t pPresenceDelayTime = 0;      // Nachlaufzeit
     uint32_t pPresenceShortDelayTime = 0; // Kurze Anwesenheit Nachlaufzeit

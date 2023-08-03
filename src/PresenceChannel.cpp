@@ -434,13 +434,13 @@ void PresenceChannel::processSceneCommand()
 }
 
 // channel startup delay
-void PresenceChannel::startStartup()
+void PresenceChannel::startStartupDelay()
 {
     pOnDelay = delayTimerInit();
     pCurrentState |= STATE_STARTUP;
 }
 
-void PresenceChannel::processStartup()
+void PresenceChannel::processStartupDelay()
 {
     if (delayCheck(pOnDelay, ParamPM_pChannelDelayTimeMS))
     {
@@ -448,10 +448,7 @@ void PresenceChannel::processStartup()
         pCurrentState &= ~STATE_STARTUP;
         // set running state if the channel is active
         if (ParamPM_pChannelActive == PM_VAL_ActiveYes)
-        {
-            pCurrentState |= STATE_RUNNING;
-            afterStartupDelay();
-        }
+            startReadRequests();
         pOnDelay = 0;
     }
 }
@@ -471,10 +468,43 @@ void PresenceChannel::sendReadRequest(uint8_t iKoIndex)
     }
 }
 
+// send states after channel startup time, do this only once
+void PresenceChannel::startReadRequests()
+{
+    // current idea: We initialize all KO which are used during read
+    // in this phase there will be no output processing
+    pCurrentState |= STATE_READ_REQUESTS;
+    // at the beginning we are on day phase 1
+    onDayPhase(0, true);
+    // external brightness is 0 (dark, pm works also in fallback mode)
+    getKo(PM_KoKOpLux)->value(5000.0f, getDPT(VAL_DPT_9));
+    // presence and move are false
+    getKo(PM_KoKOpPresence1)->value(false, getDPT(VAL_DPT_1));
+    getKo(PM_KoKOpPresence2)->value(false, getDPT(VAL_DPT_1));
+    // actor state is false and init auto state
+    getKo(PM_KoKOpAktorState)->value(false, getDPT(VAL_DPT_1));
+    getKo(PM_KoKOpIsManual)->value(false, getDPT(VAL_DPT_1));
+    // init lock state
+    switch (ParamPM_pLockType)
+    {
+        case VAL_PM_LockTypePriority:
+            getKo(PM_KoKOpLock)->value((uint8_t)0, getDPT(VAL_DPT_2));
+            break;
+        case VAL_PM_LockTypeLock:
+            getKo(PM_KoKOpLock)->value((uint8_t)0, getDPT(VAL_DPT_1));
+            break;
+        default:
+            // do nothing
+            break;
+    }
+    // scene KO must not be initialized
+}
+
 void PresenceChannel::processReadRequests()
 {
     // this method is called after startup delay and executes read requests, which should just happen once after startup
-    if (pReadRequestCounter < 255 && delayCheck(pReadRequestDelay, 500))
+
+    if (pReadRequestCounter < 255 && delayCheck(pReadRequestDelay, pReadRequestPause))
     {
         pReadRequestCounter += 1;
         pReadRequestDelay = delayTimerInit();
@@ -508,12 +538,20 @@ void PresenceChannel::processReadRequests()
                 if (ParamPM_pStartReadScene)
                     sendReadRequest(PM_KoKOpScene);
                 break;
-
+            case 8:
+                pReadRequestPause = 1500;
             default:
                 pReadRequestCounter = 255; // all read requests processed
+                startRunning();
                 break;
         }
     }
+}
+
+void PresenceChannel::startRunning()
+{
+    pCurrentState &= ~STATE_READ_REQUESTS;
+    pCurrentState |= STATE_RUNNING;
 }
 
 int8_t PresenceChannel::getDayPhaseFromKO()
@@ -1633,20 +1671,19 @@ void PresenceChannel::loop()
         return;
 
     // here we do the things after setup, but only once in the loop()
-    if ((pCurrentState & (STATE_STARTUP | STATE_RUNNING)) == 0)
+    if ((pCurrentState & (STATE_STARTUP | STATE_RUNNING | STATE_READ_REQUESTS)) == 0)
     {
         // currently nothing else to do
         // last but not least...
-        startStartup();
+        startStartupDelay();
     }
 
     if (pCurrentState & STATE_STARTUP)
-        processStartup();
+        processStartupDelay();
 
     // do no further processing until channel passed its startup time
-    if (pCurrentState & STATE_RUNNING)
+    if (pCurrentState & (STATE_RUNNING | STATE_READ_REQUESTS))
     {
-        // handle read requests
         processReadRequests();
         // handle presence hardware
         startHardwarePresence();
@@ -1698,7 +1735,9 @@ void PresenceChannel::loop()
             processDayPhasePrepare();
         if (pCurrentState & (STATE_KO_SCENE))
             processSceneCommand();
-
+    }
+    if (pCurrentState & STATE_RUNNING)
+    {
         // brightness is always evaluated
         processBrightness();
         // output is always evaluated
@@ -1727,28 +1766,6 @@ void PresenceChannel::setup()
     startOutput(false);
     forceOutput(false);
     syncOutput();
-}
-
-// send states after channel startup time, do this only once
-void PresenceChannel::afterStartupDelay()
-{
-    // at the beginning we are on day phase 1
-    onDayPhase(0, true);
-    // init auto state
-    getKo(PM_KoKOpIsManual)->value(false, getDPT(VAL_DPT_1));
-    // init lock state
-    switch (ParamPM_pLockType)
-    {
-        case VAL_PM_LockTypePriority:
-            getKo(PM_KoKOpLock)->value((uint8_t)0, getDPT(VAL_DPT_2));
-            break;
-        case VAL_PM_LockTypeLock:
-            getKo(PM_KoKOpLock)->value((uint8_t)0, getDPT(VAL_DPT_1));
-            break;
-        default:
-            // do nothing
-            break;
-    }
 }
 
 const std::string PresenceChannel::name()
