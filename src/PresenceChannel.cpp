@@ -460,44 +460,30 @@ void PresenceChannel::sendReadRequest(uint8_t iKoIndex)
     // in case the KO is transmitting (as in input), we know that an read request was already sent by someone else
     if (lKo->commFlag() == ComFlag::Uninitialized)
         lKo->requestObjectRead();
-    else if (lKo->commFlag() != ComFlag::Transmitting)
-    {
-        // if we suppress a read request because the input value already exists, we nevertheless have
-        // to react on this value as if a telegram would be received (because we are in a startup phase and we have to init correctly)
-        processInputKo(*lKo, iKoIndex);
-    }
+    // else if (lKo->commFlag() != ComFlag::Transmitting)
+    // {
+    //     // if we suppress a read request because the input value already exists, we nevertheless have
+    //     // to react on this value as if a telegram would be received (because we are in a startup phase and we have to init correctly)
+    //     processInputKo(*lKo, iKoIndex);
+    // }
+}
+
+bool PresenceChannel::checkInitReadRequest(uint8_t iKoIndex, bool isInput)
+{
+    bool lResult = false;
+    GroupObject *lKo = getKo(iKoIndex);
+    // in case KO is uninitialized, we init it here
+    lResult = lKo->commFlag() == ComFlag::Uninitialized;
+    if (!lResult && isInput)
+        lResult = lKo->commFlag() == ComFlag::Transmitting;
+    return lResult;
 }
 
 // send states after channel startup time, do this only once
 void PresenceChannel::startReadRequests()
 {
-    // current idea: We initialize all KO which are used during read
     // in this phase there will be no output processing
     pCurrentState |= STATE_READ_REQUESTS;
-    // at the beginning we are on day phase 1
-    onDayPhase(0, true);
-    // external brightness is 0 (dark, pm works also in fallback mode)
-    getKo(PM_KoKOpLux)->value(5000.0f, getDPT(VAL_DPT_9));
-    // presence and move are false
-    getKo(PM_KoKOpPresence1)->value(false, getDPT(VAL_DPT_1));
-    getKo(PM_KoKOpPresence2)->value(false, getDPT(VAL_DPT_1));
-    // actor state is false and init auto state
-    getKo(PM_KoKOpAktorState)->value(false, getDPT(VAL_DPT_1));
-    getKo(PM_KoKOpIsManual)->value(false, getDPT(VAL_DPT_1));
-    // init lock state
-    switch (ParamPM_pLockType)
-    {
-        case VAL_PM_LockTypePriority:
-            getKo(PM_KoKOpLock)->value((uint8_t)0, getDPT(VAL_DPT_2));
-            break;
-        case VAL_PM_LockTypeLock:
-            getKo(PM_KoKOpLock)->value((uint8_t)0, getDPT(VAL_DPT_1));
-            break;
-        default:
-            // do nothing
-            break;
-    }
-    // scene KO must not be initialized
 }
 
 void PresenceChannel::processReadRequests()
@@ -550,7 +536,39 @@ void PresenceChannel::processReadRequests()
 
 void PresenceChannel::startRunning()
 {
+    // current idea: We initialize all KO which were not red after reading
     pCurrentState &= ~STATE_READ_REQUESTS;
+
+    // at the beginning we are on day phase 1
+    onDayPhase(getDayPhaseFromKO(), true);
+    // external brightness is 0 (dark, pm works also in fallback mode)
+    if (checkInitReadRequest(PM_KoKOpLux, true))
+        getKo(PM_KoKOpLux)->value(0.0f, getDPT(VAL_DPT_9));
+    // presence and move are false
+    if (checkInitReadRequest(PM_KoKOpPresence1, true))
+        getKo(PM_KoKOpPresence1)->value(false, getDPT(VAL_DPT_1));
+    if (checkInitReadRequest(PM_KoKOpPresence2, true))
+        getKo(PM_KoKOpPresence2)->value(false, getDPT(VAL_DPT_1));
+    // actor state is false and init auto state
+    if (checkInitReadRequest(PM_KoKOpAktorState, true))
+        getKo(PM_KoKOpAktorState)->value(false, getDPT(VAL_DPT_1));
+    if (checkInitReadRequest(PM_KoKOpIsManual, false))
+        getKo(PM_KoKOpIsManual)->value(false, getDPT(VAL_DPT_1));
+    // init lock state
+    if (checkInitReadRequest(PM_KoKOpLock, false))
+        switch (ParamPM_pLockType)
+        {
+            case VAL_PM_LockTypePriority:
+                getKo(PM_KoKOpLock)->value((uint8_t)0, getDPT(VAL_DPT_2));
+                break;
+            case VAL_PM_LockTypeLock:
+                getKo(PM_KoKOpLock)->value((uint8_t)0, getDPT(VAL_DPT_1));
+                break;
+            default:
+                // do nothing
+                break;
+        }
+    // scene KO must not be initialized
     pCurrentState |= STATE_RUNNING;
 }
 
