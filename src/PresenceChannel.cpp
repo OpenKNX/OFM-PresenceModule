@@ -279,7 +279,7 @@ bool PresenceChannel::processCommand(const std::string iCmd, bool iDebugKo)
 void PresenceChannel::processInputKo(GroupObject &iKo, int8_t iKoIndex)
 {
     // we process KO only if we are running
-    if (pCurrentState & STATE_RUNNING)
+    if (pCurrentState & (STATE_RUNNING | STATE_READ_REQUESTS))
     {
         // search for correct KO
         uint8_t lKoIndex = (iKoIndex >= 0) ? iKoIndex : calcKoIndex(iKo.asap());
@@ -539,8 +539,6 @@ void PresenceChannel::startRunning()
     // current idea: We initialize all KO which were not red after reading
     pCurrentState &= ~STATE_READ_REQUESTS;
 
-    // at the beginning we are on day phase 1
-    onDayPhase(getDayPhaseFromKO(), true);
     // external brightness is 0 (dark, pm works also in fallback mode)
     if (checkInitReadRequest(PM_KoKOpLux, true))
         getKo(PM_KoKOpLux)->value(0.0f, getDPT(VAL_DPT_9));
@@ -569,6 +567,12 @@ void PresenceChannel::startRunning()
                 break;
         }
     // scene KO must not be initialized
+
+    // at the beginning we are on day phase according to KO
+    uint8_t lDayPhase = 0;
+    if (!checkInitReadRequest(PM_KoKOpDayPhase, true))
+        lDayPhase = getDayPhaseFromKO();
+    onDayPhase(lDayPhase, false);
     pCurrentState |= STATE_RUNNING;
 }
 
@@ -1780,6 +1784,8 @@ void PresenceChannel::prepareInternalKo()
 void PresenceChannel::setup()
 {
     prepareInternalKo();
+    onDayPhase(0, false);
+
     // init output
     startOutput(false);
     forceOutput(false);
