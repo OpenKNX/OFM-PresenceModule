@@ -1,0 +1,20 @@
+{
+    "name": "OFM-PresenceModule",
+    "version": "5.0.0",
+    "dependencies": {
+        "adafruit/Adafruit VEML7700 Library": "2.1.0",
+        "adafruit/Adafruit BusIO": "^1.14.1"
+    },
+    "description": "Virtual Presence module for the knx stack, can be embedded in an ETS application",
+    "homepage": "https://openknx.de",
+    "authors": {
+        "name": "OpenKNX",
+        "email": "info@openknx.de",
+        "url": "https://openknx.de",
+        "maintainer": true
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/OpenKNX/OFM-PresenceModule"
+    }
+}
