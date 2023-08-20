@@ -8,6 +8,8 @@
 #include "SensorVEML7700.h"
 #include "SmartMF.h"
 
+#include "PresenceVersion.h"
+
 Presence::Presence()
 {
     // init KoMap (robustness)
@@ -17,6 +19,16 @@ Presence::Presence()
 
 Presence::~Presence()
 {
+}
+
+const std::string Presence::name()
+{
+    return "Presence";
+}
+
+const std::string Presence::version()
+{
+    return versionString(ModuleVersion, ModuleRevision);
 }
 
 void Presence::addKoMap(uint16_t iKoNumber, uint8_t iChannelId, uint8_t iKoIndex)
@@ -521,14 +533,4 @@ void Presence::setup()
             startPowercycleHfSensor();
         startSensors();
     }
-}
-
-const std::string Presence::name()
-{
-    return "Presence";
-}
-
-const std::string Presence::version()
-{
-    return "1.7";
 }
