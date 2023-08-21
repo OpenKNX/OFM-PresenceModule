@@ -8,7 +8,7 @@
 #include "SensorVEML7700.h"
 #include "SmartMF.h"
 
-#include "PresenceVersion.h"
+#include "ModuleVersion.h"
 
 Presence::Presence()
 {
