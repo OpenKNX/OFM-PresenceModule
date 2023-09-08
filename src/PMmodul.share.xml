@@ -358,6 +358,9 @@
               <!-- <choose ParamRefId="%AID%_UP-%T%000002_R-%T%00000201"> -->
                 <!-- <when test="1"> -->
                   <ParameterBlock Id="%AID%_PB-3" Name="HardwarePM" Text="PM-Hardware">
+                  <ParameterSeparator Id="%AID%_PS-nnn" Text="Version des VPM-Moduls: %ModuleVersion%" UIHint="Headline" />
+                  <ParameterSeparator Id="%AID%_PS-nnn" Text="" UIHint="HorizontalRuler" />
+
                     <!-- OR: Any hardware LED switched by KO -->
                     <ParameterRefRef RefId="%AID%_P-%T%000009_R-%T%00000901" />
                     <ParameterSeparator Id="%AID%_PS-nnn" Text="Präsenz-Hardware" UIHint="Headline" />

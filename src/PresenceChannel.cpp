@@ -1485,7 +1485,7 @@ void PresenceChannel::startBrightness()
     if (lEvalBrightness && lBrightness != NO_NUM)
     {
         // but only, if we are not calculating a new off value
-        if (!(pCurrentState & STATE_ADAPTIVE) && lBrightness > (float)getKo(PM_KoKOpLuxOff)->value(getDPT(VAL_DPT_9)))
+        if (!(pCurrentState & STATE_ADAPTIVE) && lBrightness >= (float)getKo(PM_KoKOpLuxOff)->value(getDPT(VAL_DPT_9)))
         {
             // we start timer off delay
             if (pBrightnessOffDelayTime == 0 && paramByte(PM_pABrightnessAuto, PM_pABrightnessAutoMask, PM_pABrightnessAutoShift, true) > 0)
