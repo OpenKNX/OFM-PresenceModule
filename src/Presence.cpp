@@ -8,7 +8,7 @@
 #include "SensorVEML7700.h"
 #include "SmartMF.h"
 
-#include "ModuleVersion.h"
+#include "ModuleVersionCheck.h"
 
 Presence::Presence()
 {
@@ -28,7 +28,7 @@ const std::string Presence::name()
 
 const std::string Presence::version()
 {
-    return versionString(ModuleVersion, ModuleRevision);
+    return MODULE_PresenceModule_Version;
 }
 
 void Presence::addKoMap(uint16_t iKoNumber, uint8_t iChannelId, uint8_t iKoIndex)
