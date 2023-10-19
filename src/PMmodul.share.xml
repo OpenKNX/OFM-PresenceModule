@@ -357,26 +357,26 @@
             <Channel Id="%AID%_CH-1" Name="PMChannels" Number="1" Text="PM-Kanäle">
               <!-- <choose ParamRefId="%AID%_UP-%T%000002_R-%T%00000201"> -->
                 <!-- <when test="1"> -->
-                  <ParameterBlock Id="%AID%_PB-3" Name="HardwarePM" Text="PM-Hardware">
+                  <ParameterBlock Id="%AID%_PB-3" Name="HardwarePM" Text="PM-Hardware" HelpContext="PM-PM-Hardware">
                   <ParameterSeparator Id="%AID%_PS-nnn" Text="Version des VPM-Moduls: %ModuleVersion%" UIHint="Headline" />
                   <ParameterSeparator Id="%AID%_PS-nnn" Text="" UIHint="HorizontalRuler" />
 
                     <!-- OR: Any hardware LED switched by KO -->
                     <ParameterRefRef RefId="%AID%_P-%T%000009_R-%T%00000901" />
                     <ParameterSeparator Id="%AID%_PS-nnn" Text="Präsenz-Hardware" UIHint="Headline" />
-                    <ParameterRefRef RefId="%AID%_UP-%T%000006_R-%T%00000601" />
-                    <ParameterRefRef RefId="%AID%_UP-%T%000007_R-%T%00000701" />
+                    <ParameterRefRef RefId="%AID%_UP-%T%000006_R-%T%00000601"  HelpContext="%DOC%" />
+                    <ParameterRefRef RefId="%AID%_UP-%T%000007_R-%T%00000701"  HelpContext="%DOC%" />
                     <choose ParamRefId="%AID%_UP-%T%000006_R-%T%00000601">
                       <when test="!=0">
                         <ParameterSeparator Id="%AID%_PS-nnn" Text="" UIHint="HorizontalRuler" />
                         <ParameterSeparator Id="%AID%_PS-nnn" Text="Einstellungen Präsenz-Hardware" UIHint="Headline" />
                       </when>
                       <when test="2">
-                        <ParameterRefRef RefId="%AID%_UP-%T%000015_R-%T%00001501" />
-                        <ParameterRefRef RefId="%AID%_UP-%T%000016_R-%T%00001601" />
+                        <ParameterRefRef RefId="%AID%_UP-%T%000015_R-%T%00001501"  HelpContext="%DOC%" />
+                        <ParameterRefRef RefId="%AID%_UP-%T%000016_R-%T%00001601"  HelpContext="%DOC%" />
                       </when>
                       <when test="!=0">
-                        <ParameterRefRef RefId="%AID%_UP-%T%000003_R-%T%00000301" />
+                        <ParameterRefRef RefId="%AID%_UP-%T%000003_R-%T%00000301"  HelpContext="%DOC%" />
                         <ParameterSeparator Id="%AID%_PS-nnn" Text="Auch wenn die Rohdaten nicht auf den Bus gesendet werden, können sie intern für PM-Kanäle genutzt werden." />
                         <ParameterSeparator Id="%AID%_PS-nnn" Text="In der gesamten Applikation wird vom Präsenzmelder gesprochen. Ob sich die Applikation als Präsenz- oder als Bewegungsmelder verhält, wird von der verwendeten Hardware (Präsenz-Sensor) bestimmt." />
                         <!-- KO für Präsenz einschalten -->
@@ -401,19 +401,19 @@
                       <when test="!=0">
                         <ParameterSeparator Id="%AID%_PS-nnn" Text="" UIHint="HorizontalRuler" />
                         <ParameterSeparator Id="%AID%_PS-nnn" Text="Helligkeit" UIHint="Headline" />
-                        <ParameterRefRef RefId="%AID%_UP-%T%000010_R-%T%00001001" />
-                        <ParameterRefRef RefId="%AID%_UP-%T%000014_R-%T%00001401" />
+                        <ParameterRefRef RefId="%AID%_UP-%T%000010_R-%T%00001001"  HelpContext="%DOC%" />
+                        <ParameterRefRef RefId="%AID%_UP-%T%000014_R-%T%00001401"  HelpContext="%DOC%" />
                         <choose ParamRefId="%AID%_UP-%T%000014_R-%T%00001401">
                           <when test="0">
-                            <ParameterRefRef RefId="%AID%_UP-%T%000011_R-%T%00001101" />
+                            <ParameterRefRef RefId="%AID%_UP-%T%000011_R-%T%00001101"  HelpContext="%DOC%" />
                           </when>
                           <when test="1">
-                            <ParameterRefRef RefId="%AID%_UP-%T%000011_R-%T%00001102" />
+                            <ParameterRefRef RefId="%AID%_UP-%T%000011_R-%T%00001102"  HelpContext="%DOC%" />
                           </when>
                         </choose>
                         <!-- Lux send cycle -->
                         <!-- Delay pattern -->
-                        <ParameterBlock Id="%AID%_PB-nnn" Name="LuxSendCycle" Inline="true" Layout="Grid">
+                        <ParameterBlock Id="%AID%_PB-nnn" Name="LuxSendCycle" Inline="true" Layout="Grid" HelpContext="PM-Helligkeitswert-zyklisch-senden">
                           <Rows>
                             <Row Id="%AID%_PB-nnn_R-1" Name="Row1" />
                           </Rows>
@@ -423,8 +423,8 @@
                             <Column Id="%AID%_PB-nnn_C-3" Name="Col3" Width="20%" />
                           </Columns>
                           <ParameterSeparator Id="%AID%_PS-nnn" Text="Helligkeitswert zyklisch senden alle" Cell="1,1" />
-                          <ParameterRefRef RefId="%AID%_UP-%T%000013_R-%T%00001301" Cell="1,2" />
-                          <ParameterRefRef RefId="%AID%_UP-%T%000012_R-%T%00001201" Cell="1,3" />
+                          <ParameterRefRef RefId="%AID%_UP-%T%000013_R-%T%00001301" Cell="1,2"  HelpContext="PM-Helligkeitswert-zyklisch-senden" />
+                          <ParameterRefRef RefId="%AID%_UP-%T%000012_R-%T%00001201" Cell="1,3"  HelpContext="PM-Helligkeitswert-zyklisch-senden" />
                         </ParameterBlock>
                         <!-- KO für Helligkeit einschalten -->
                         <choose ParamRefId="%AID%_UP-%T%000011_R-%T%00001101">
@@ -445,8 +445,8 @@
                       <when test="!=0">
                         <ParameterSeparator Id="%AID%_PS-nnn" Text="" UIHint="HorizontalRuler" />
                         <ParameterSeparator Id="%AID%_PS-nnn" Text="LED" UIHint="Headline" />
-                        <ParameterRefRef RefId="%AID%_UP-%T%000004_R-%T%00000401" />
-                        <ParameterRefRef RefId="%AID%_UP-%T%000005_R-%T%00000501" />
+                        <ParameterRefRef RefId="%AID%_UP-%T%000004_R-%T%00000401"  HelpContext="PM-LED-Dropdown" />
+                        <ParameterRefRef RefId="%AID%_UP-%T%000005_R-%T%00000501"  HelpContext="PM-LED-Dropdown" />
                         <!-- KO für LED Präsenz einschalten -->
                         <choose ParamRefId="%AID%_UP-%T%000004_R-%T%00000401">
                           <when test="3">
@@ -463,7 +463,7 @@
                         </choose>
                         <choose ParamRefId="%AID%_P-%T%000009_R-%T%00000901">
                           <when test="1">
-                            <ParameterRefRef RefId="%AID%_UP-%T%000008_R-%T%00000801" />
+                            <ParameterRefRef RefId="%AID%_UP-%T%000008_R-%T%00000801"  HelpContext="PM-LEDs-nach-Neustart-lesen" />
                           </when>
                         </choose>
                       </when>
@@ -475,6 +475,14 @@
           </Dynamic>
         </ApplicationProgram>
       </ApplicationPrograms>
+      <Baggages>
+        <Baggage TargetPath="" Name="Help_de.zip" Id="%FILE-HELP-de%">
+          <FileInfo TimeInfo="%DATETIME%" />
+        </Baggage>
+        <Baggage TargetPath="" Name="Icons.zip" Id="%FILE-ICONS%">
+          <FileInfo TimeInfo="%DATETIME%" />
+        </Baggage>
+      </Baggages>
     </Manufacturer>
   </ManufacturerData>
 </KNX>
