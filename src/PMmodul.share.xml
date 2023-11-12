@@ -27,6 +27,7 @@
                   <Enumeration Text="kein Sensor" Value="0" Id="%AID%_PT-PresenceSensor_EN-0" />
                   <Enumeration Text="PIR-Sensor" Value="1" Id="%AID%_PT-PresenceSensor_EN-1" />
                   <Enumeration Text="(HF) MR24xxB1" Value="2" Id="%AID%_PT-PresenceSensor_EN-2" />
+                  <Enumeration Text="(HF) HLK-LD2420" Value="3" Id="%AID%_PT-PresenceSensor_EN-3" />
                 </TypeRestriction>
               </ParameterType>
               <ParameterType Id="%AID%_PT-LuxSensor" Name="LuxSensor">
@@ -373,6 +374,8 @@
                       </when>
                       <when test="2">
                         <ParameterRefRef RefId="%AID%_UP-%T%000015_R-%T%00001501" />
+                      </when>
+                      <when test="2 3">
                         <ParameterRefRef RefId="%AID%_UP-%T%000016_R-%T%00001601" />
                       </when>
                       <when test="!=0">

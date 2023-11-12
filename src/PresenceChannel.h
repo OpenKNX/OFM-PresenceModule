@@ -129,7 +129,8 @@
 // Presence Hardware
 #define VAL_PM_PS_None 0
 #define VAL_PM_PS_Pir 1
-#define VAL_PM_PS_Hf 2
+#define VAL_PM_PS_Hf_MR24xxB1 2
+#define VAL_PM_PS_Hf_HLKLD2420 3
 
 // Presence Hardware
 #define VAL_PM_LUX_None 0
