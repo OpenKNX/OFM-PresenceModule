@@ -229,7 +229,7 @@ void Presence::startSensors()
             break;
         case VAL_PM_PS_Hf_HLKLD2420:
             mPresenceSensor = Sensor::factory(SENS_HLKLD2420, MeasureType::Pres);
-            static_cast<SensorHLKLD2420*>(mPresenceSensor)->defaultSensorParameters(ParamPM_HfSensitivity);
+            static_cast<SensorHLKLD2420*>(mPresenceSensor)->defaultSensorParameters(ParamPM_HfSensitivity, ParamPM_HfDelayTime, ParamPM_HfRangeGateMin, ParamPM_HfRangeGateMax);
             break;
         default:
             break;
@@ -293,8 +293,12 @@ void Presence::switchHfSensor(bool iOn)
     }
 #endif
 
+// HLK-LD2420 sensor does not always connect correctly after power cycle,
+// let's keep it always on for now
+#ifndef BOARD_AB_HFPM_HLKLD2420
     SERIAL_DEBUG.printf("switchHfSensor: HF_POWER_PIN will be set to: %i\n", iOn);
     digitalWrite(HF_POWER_PIN, iOn ? HIGH : LOW);
+#endif
 #endif
 }
 
@@ -458,6 +462,15 @@ void Presence::processHardwarePresence()
                     {
                         mSensitivity = (int8_t)lValue;
                         lKo.value(mSensitivity, getDPT(VAL_DPT_5));
+                    }
+                }
+                if (Sensor::measureValue(MeasureType::Distance, lValue))
+                {
+                    GroupObject &lKo = knx.getGroupObject(PM_KoDistanceOut);
+                    if (mDistance != lValue)
+                    {
+                        mDistance = lValue;
+                        lKo.value(mDistance, getDPT(VAL_DPT_7));
                     }
                 }
                 break;
