@@ -354,7 +354,7 @@
             </ComObjectRefs>
           </Static>
           <Dynamic>
-            <Channel Id="%AID%_CH-1" Name="PMChannels" Number="1" Text="PM-Kanäle">
+            <Channel Id="%AID%_CH-%T%" Name="PMChannels" Number="%T%" Text="PM-Kanäle" Icon="car-brake-worn-linings-custom" >
               <!-- <choose ParamRefId="%AID%_UP-%T%000002_R-%T%00000201"> -->
                 <!-- <when test="1"> -->
                   <ParameterBlock Id="%AID%_PB-3" Name="HardwarePM" Text="PM-Hardware" HelpContext="PM-PM-Hardware">
@@ -471,6 +471,7 @@
                   </ParameterBlock>
                 <!-- </when> -->
               <!-- </choose> -->
+              <op:include href="PMmodul.templ.xml" xpath="//Dynamic/ChannelIndependentBlock/*" type="template" prefix="PM" IsInner="true" />
             </Channel>
           </Dynamic>
         </ApplicationProgram>
