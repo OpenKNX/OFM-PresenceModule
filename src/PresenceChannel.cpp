@@ -1533,9 +1533,9 @@ void PresenceChannel::disableBrightness(bool iOn)
         {
             // we disable brightness handling according to current brightness and current output state
             // turn on even though there is enough light
-            bool lDisable1 = iOn && (lBrightness > (float)getKo(PM_KoKOpLuxOff)->value(getDPT(VAL_DPT_9)));
+            bool lDisable1 = iOn && (lBrightness >= (float)getKo(PM_KoKOpLuxOff)->value(getDPT(VAL_DPT_9)));
             // turn off even though it is too dark
-            bool lDisable2 = !iOn && (lBrightness < (float)getKo(PM_KoKOpLuxOff)->value(getDPT(VAL_DPT_9)));
+            bool lDisable2 = !iOn && (lBrightness <= (float)getKo(PM_KoKOpLuxOff)->value(getDPT(VAL_DPT_9)));
             if (lDisable1 || lDisable2)
                 pCurrentValue |= PM_BIT_DISABLE_BRIGHTNESS;
             else
