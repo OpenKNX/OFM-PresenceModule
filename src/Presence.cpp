@@ -4,6 +4,7 @@
 #include "PresenceChannel.h"
 #include "Sensor.h"
 #include "SensorMR24xxB1.h"
+#include "SensorHLKLD2420.h"
 #include "SensorOPT300x.h"
 #include "SensorVEML7700.h"
 #include "SmartMF.h"
@@ -148,7 +149,17 @@ void Presence::processInputKo(GroupObject &iKo)
             if (mSensitivity != lSensitivity)
             {
 #ifdef HF_POWER_PIN
-                mPresenceSensor->sendCommand(RadarCmd_WriteSensitivity, lSensitivity);
+                switch (ParamPM_HWPresence)
+                {
+                    case VAL_PM_PS_Hf_MR24xxB1:
+                        static_cast<SensorMR24xxB1*>(mPresenceSensor)->sendCommand(RadarCmd_WriteSensitivity, lSensitivity);
+                        break;
+                    case VAL_PM_PS_Hf_HLKLD2420:
+                        static_cast<SensorHLKLD2420*>(mPresenceSensor)->writeSensitivity(lSensitivity);
+                        break;
+                    default:
+                        break;
+                }
 #endif
             }
             break;
@@ -159,7 +170,17 @@ void Presence::processInputKo(GroupObject &iKo)
             if (mScenario != lScenario)
             {
 #ifdef HF_POWER_PIN
-                mPresenceSensor->sendCommand(RadarCmd_WriteScene, lScenario);
+                switch (ParamPM_HWPresence)
+                {
+                    case VAL_PM_PS_Hf_MR24xxB1:
+                        static_cast<SensorMR24xxB1*>(mPresenceSensor)->sendCommand(RadarCmd_WriteScene, lScenario);
+                        break;
+                    case VAL_PM_PS_Hf_HLKLD2420:
+                        // scenarios not supported by this scanner
+                        break;
+                    default:
+                        break;
+                }
 #endif
             }
             break;
@@ -199,13 +220,21 @@ bool Presence::getHardwareMove()
 // Starting all required sensors, this call may be blocking (with delay)
 void Presence::startSensors()
 {
-    if (ParamPM_HWPresence == VAL_PM_PS_Hf)
-    {
 #ifdef HF_POWER_PIN
-        mPresenceSensor = (SensorMR24xxB1 *)Sensor::factory(SENS_MR24xxB1, MeasureType::Pres);
-        mPresenceSensor->defaultSensorParameters(ParamPM_HfScenario - 1, ParamPM_HfSensitivity);
-#endif
+    switch (ParamPM_HWPresence)
+    {
+        case VAL_PM_PS_Hf_MR24xxB1:
+            mPresenceSensor = Sensor::factory(SENS_MR24xxB1, MeasureType::Pres);
+            static_cast<SensorMR24xxB1*>(mPresenceSensor)->defaultSensorParameters(ParamPM_HfScenario - 1, ParamPM_HfSensitivity);
+            break;
+        case VAL_PM_PS_Hf_HLKLD2420:
+            mPresenceSensor = Sensor::factory(SENS_HLKLD2420, MeasureType::Pres);
+            static_cast<SensorHLKLD2420*>(mPresenceSensor)->defaultSensorParameters(ParamPM_HfSensitivity, ParamPM_HfDelayTime, ParamPM_HfRangeGateMin, ParamPM_HfRangeGateMax);
+            break;
+        default:
+            break;
     }
+#endif
 
     switch (ParamPM_HWLux)
     {
@@ -225,6 +254,7 @@ void Presence::startSensors()
 void Presence::switchHfSensor(bool iOn)
 {
 #ifdef HF_POWER_PIN
+#ifndef BOARD_AB_HFPM_HLKLD2420
     if (smartmf.hardwareRevision() == 1)
     {
         iOn = !iOn;
@@ -261,8 +291,14 @@ void Presence::switchHfSensor(bool iOn)
                 break;
             }
     }
+#endif
+
+// HLK-LD2420 sensor does not always connect correctly after power cycle,
+// let's keep it always on for now
+#ifndef BOARD_AB_HFPM_HLKLD2420
     SERIAL_DEBUG.printf("switchHfSensor: HF_POWER_PIN will be set to: %i\n", iOn);
     digitalWrite(HF_POWER_PIN, iOn ? HIGH : LOW);
+#endif
 #endif
 }
 
@@ -349,58 +385,97 @@ void Presence::processHardwarePresence()
     if (mPresenceSensor != 0)
     {
         float lValue = 0;
-        if (Sensor::measureValue(MeasureType::Pres, lValue) && lValue != mPresenceCombined)
+        switch (ParamPM_HWPresence)
         {
-            mPresenceCombined = lValue;
-            bool lPresence = false;
-            uint8_t lMove;
-            uint8_t lFall;
-            uint8_t lAlarm;
-            if (SensorMR24xxB1::decodePresenceResult((uint8_t)lValue, lPresence, lMove, lFall, lAlarm))
-            {
-                if (lPresence != mPresence)
+            case VAL_PM_PS_Hf_MR24xxB1:
+                if (Sensor::measureValue(MeasureType::Pres, lValue) && lValue != mPresenceCombined)
                 {
-                    mPresence = lPresence;
-                    // digitalWrite(PRESENCE_LED_PIN, PRESENCE_LED_PIN_ACTIVE_ON == mPresence);
-                    processLED(mPresence, CallerPresence);
-                    knx.getGroupObject(PM_KoPresenceOut).value(mPresence, getDPT(VAL_DPT_1));
-                    if (mPresence)
-                        PresenceTrigger = true;
+                    mPresenceCombined = lValue;
+                    bool lPresence = false;
+                    uint8_t lMove;
+                    uint8_t lFall;
+                    uint8_t lAlarm;
+                    if (SensorMR24xxB1::decodePresenceResult((uint8_t)lValue, lPresence, lMove, lFall, lAlarm))
+                    {
+                        if (lPresence != mPresence)
+                        {
+                            mPresence = lPresence;
+                            processLED(mPresence, CallerPresence);
+                            knx.getGroupObject(PM_KoPresenceOut).value(mPresence, getDPT(VAL_DPT_1));
+                            if (mPresence)
+                                PresenceTrigger = true;
+                        }
+                        if (lMove != mMove)
+                        {
+                            mMove = lMove;
+                            processLED(mMove > 0, CallerMove);
+                            knx.getGroupObject(PM_KoMoveOut).value(mMove, getDPT(VAL_DPT_5));
+                            if (mMove)
+                                MoveTrigger = true;
+                        }
+                    }
                 }
-                if (lMove != mMove)
+                if (Sensor::measureValue(MeasureType::Speed, lValue))
                 {
-                    mMove = lMove;
-                    // digitalWrite(MOVE_LED_PIN, MOVE_LED_PIN_ACTIVE_ON == (mMove > 0));
-                    processLED(mMove > 0, CallerMove);
-                    knx.getGroupObject(PM_KoMoveOut).value(mMove, getDPT(VAL_DPT_5));
-                    if (mMove)
-                        MoveTrigger = true;
+                    GroupObject &lKo = knx.getGroupObject(PM_KoMoveSpeedOut);
+                    if ((uint8_t)lKo.value(getDPT(VAL_DPT_5001)) != (uint8_t)lValue)
+                        lKo.value(lValue, getDPT(VAL_DPT_5001));
                 }
-            }
-        }
-        if (Sensor::measureValue(MeasureType::Speed, lValue))
-        {
-            GroupObject &lKo = knx.getGroupObject(PM_KoMoveSpeedOut);
-            if ((uint8_t)lKo.value(getDPT(VAL_DPT_5001)) != (uint8_t)lValue)
-                lKo.value(lValue, getDPT(VAL_DPT_5001));
-        }
-        if (Sensor::measureValue(MeasureType::Scenario, lValue))
-        {
-            GroupObject &lKo = knx.getGroupObject(PM_KoScenario);
-            if (mScenario != (int8_t)lValue)
-            {
-                mScenario = (int8_t)lValue;
-                lKo.value(mScenario, getDPT(VAL_DPT_5));
-            }
-        }
-        if (Sensor::measureValue(MeasureType::Sensitivity, lValue))
-        {
-            GroupObject &lKo = knx.getGroupObject(PM_KoSensitivity);
-            if (mSensitivity != (int8_t)lValue)
-            {
-                mSensitivity = (int8_t)lValue;
-                lKo.value(mSensitivity, getDPT(VAL_DPT_5));
-            }
+                if (Sensor::measureValue(MeasureType::Scenario, lValue))
+                {
+                    GroupObject &lKo = knx.getGroupObject(PM_KoScenario);
+                    if (mScenario != (int8_t)lValue)
+                    {
+                        mScenario = (int8_t)lValue;
+                        lKo.value(mScenario, getDPT(VAL_DPT_5));
+                    }
+                }
+                if (Sensor::measureValue(MeasureType::Sensitivity, lValue))
+                {
+                    GroupObject &lKo = knx.getGroupObject(PM_KoSensitivity);
+                    if (mSensitivity != (int8_t)lValue)
+                    {
+                        mSensitivity = (int8_t)lValue;
+                        lKo.value(mSensitivity, getDPT(VAL_DPT_5));
+                    }
+                }
+                break;
+            case VAL_PM_PS_Hf_HLKLD2420:
+                if (Sensor::measureValue(MeasureType::Pres, lValue) && lValue != mPresenceCombined)
+                {
+                    mPresenceCombined = lValue;
+                    bool lPresence = lValue > -1;
+                    if (lPresence != mPresence)
+                    {
+                        mPresence = lPresence;
+                        logDebugP("mPresence: %i", mPresence);
+                        processLED(mPresence, CallerPresence);
+                        knx.getGroupObject(PM_KoPresenceOut).value(mPresence, getDPT(VAL_DPT_1));
+                        if (mPresence)
+                            PresenceTrigger = true;
+                    }
+                }
+                if (Sensor::measureValue(MeasureType::Sensitivity, lValue))
+                {
+                    GroupObject &lKo = knx.getGroupObject(PM_KoSensitivity);
+                    if (mSensitivity != (int8_t)lValue)
+                    {
+                        mSensitivity = (int8_t)lValue;
+                        lKo.value(mSensitivity, getDPT(VAL_DPT_5));
+                    }
+                }
+                if (Sensor::measureValue(MeasureType::Distance, lValue))
+                {
+                    GroupObject &lKo = knx.getGroupObject(PM_KoDistanceOut);
+                    if (mDistance != lValue)
+                    {
+                        mDistance = lValue;
+                        lKo.value(mDistance, getDPT(VAL_DPT_7));
+                    }
+                }
+                break;
+            default:
+                break;
         }
     }
 #endif
@@ -512,7 +587,6 @@ void Presence::loop()
 
 void Presence::setup()
 {
-
     if (knx.configured())
     {
         // setup channels, not possible in constructor, because knx is not configured there
