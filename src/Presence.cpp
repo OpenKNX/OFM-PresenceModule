@@ -554,6 +554,29 @@ void Presence::loop()
 {
     if (!openknx.afterStartupDelay())
         return;
+
+#ifdef HF_POWER_PIN
+    // only run the application code if the device was configured with ETS
+    if (knx.configured())
+    {
+        if (!mSerial2Active)
+        {
+            // we start HF communication as late as possible
+            mSerial2Active = true;
+            HF_SERIAL.begin(HF_SERIAL_SPEED);
+        }
+    }
+    else
+    {
+        if (mSerial2Active)
+        {
+            // during ETS programming, we stop HF communication
+            mSerial2Active = false;
+            HF_SERIAL.end();
+        }
+    }
+#endif
+
     uint32_t lLoopTime = millis();
     if (mDoPresenceHardwareCycle)
     {
@@ -589,6 +612,31 @@ void Presence::setup()
 {
     if (knx.configured())
     {
+#ifdef HF_POWER_PIN
+        pinMode(HF_POWER_PIN, OUTPUT);
+
+#if BOARD_AB_HFPM_HLKLD2420
+        // at startup, we turn HF-Sensor on (at least for now)
+        digitalWrite(HF_POWER_PIN, HIGH);
+
+        // ensure no data lost even for sensor raw data
+        // up to 1288 bytes are send by the sensor at once
+        HF_SERIAL.setFIFOSize(1300);
+#else
+        // at startup, we turn HF-Sensor off
+        digitalWrite(HF_POWER_PIN, LOW);
+#endif
+
+        HF_SERIAL.setRX(HF_UART_RX_PIN);
+        HF_SERIAL.setTX(HF_UART_TX_PIN);
+        pinMode(PRESENCE_LED_PIN, OUTPUT);
+        pinMode(MOVE_LED_PIN, OUTPUT);
+#endif
+
+#ifdef PIR_PIN
+        pinMode(PIR_PIN, INPUT_PULLDOWN);
+#endif
+        
         // setup channels, not possible in constructor, because knx is not configured there
         // get number of channels from knxprod
         mNumChannels = PM_ChannelCount; // knx.paramByte(PM_PMChannels);
