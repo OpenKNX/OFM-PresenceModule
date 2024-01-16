@@ -3,13 +3,15 @@
 #include "OpenKNX.h"
 #include "PresenceChannel.h"
 #include "Sensor.h"
-#include "SensorMR24xxB1.h"
 #include "SensorHLKLD2420.h"
+#include "SensorMR24xxB1.h"
 #include "SensorOPT300x.h"
 #include "SensorVEML7700.h"
 #include "SmartMF.h"
 
 #include "ModuleVersionCheck.h"
+
+Presence openknxPresenceModule;
 
 Presence::Presence()
 {
@@ -152,10 +154,10 @@ void Presence::processInputKo(GroupObject &iKo)
                 switch (ParamPM_HWPresence)
                 {
                     case VAL_PM_PS_Hf_MR24xxB1:
-                        static_cast<SensorMR24xxB1*>(mPresenceSensor)->sendCommand(RadarCmd_WriteSensitivity, lSensitivity);
+                        static_cast<SensorMR24xxB1 *>(mPresenceSensor)->sendCommand(RadarCmd_WriteSensitivity, lSensitivity);
                         break;
                     case VAL_PM_PS_Hf_HLKLD2420:
-                        static_cast<SensorHLKLD2420*>(mPresenceSensor)->writeSensitivity(lSensitivity);
+                        static_cast<SensorHLKLD2420 *>(mPresenceSensor)->writeSensitivity(lSensitivity);
                         break;
                     default:
                         break;
@@ -173,7 +175,7 @@ void Presence::processInputKo(GroupObject &iKo)
                 switch (ParamPM_HWPresence)
                 {
                     case VAL_PM_PS_Hf_MR24xxB1:
-                        static_cast<SensorMR24xxB1*>(mPresenceSensor)->sendCommand(RadarCmd_WriteScene, lScenario);
+                        static_cast<SensorMR24xxB1 *>(mPresenceSensor)->sendCommand(RadarCmd_WriteScene, lScenario);
                         break;
                     case VAL_PM_PS_Hf_HLKLD2420:
                         // scenarios not supported by this scanner
@@ -225,11 +227,11 @@ void Presence::startSensors()
     {
         case VAL_PM_PS_Hf_MR24xxB1:
             mPresenceSensor = Sensor::factory(SENS_MR24xxB1, MeasureType::Pres);
-            static_cast<SensorMR24xxB1*>(mPresenceSensor)->defaultSensorParameters(ParamPM_HfScenario - 1, ParamPM_HfSensitivity);
+            static_cast<SensorMR24xxB1 *>(mPresenceSensor)->defaultSensorParameters(ParamPM_HfScenario - 1, ParamPM_HfSensitivity);
             break;
         case VAL_PM_PS_Hf_HLKLD2420:
             mPresenceSensor = Sensor::factory(SENS_HLKLD2420, MeasureType::Pres);
-            static_cast<SensorHLKLD2420*>(mPresenceSensor)->defaultSensorParameters(ParamPM_HfSensitivity, ParamPM_HfDelayTime, ParamPM_HfRangeGateMin, ParamPM_HfRangeGateMax);
+            static_cast<SensorHLKLD2420 *>(mPresenceSensor)->defaultSensorParameters(ParamPM_HfSensitivity, ParamPM_HfDelayTime, ParamPM_HfRangeGateMin, ParamPM_HfRangeGateMax);
             break;
         default:
             break;
@@ -254,7 +256,7 @@ void Presence::startSensors()
 void Presence::switchHfSensor(bool iOn)
 {
 #ifdef HF_POWER_PIN
-#ifndef BOARD_AB_HFPM_HLKLD2420
+    #ifndef BOARD_AB_HFPM_HLKLD2420
     if (smartmf.hardwareRevision() == 1)
     {
         iOn = !iOn;
@@ -291,14 +293,14 @@ void Presence::switchHfSensor(bool iOn)
                 break;
             }
     }
-#endif
+    #endif
 
-// HLK-LD2420 sensor does not always connect correctly after power cycle,
-// let's keep it always on for now
-#ifndef BOARD_AB_HFPM_HLKLD2420
+    // HLK-LD2420 sensor does not always connect correctly after power cycle,
+    // let's keep it always on for now
+    #ifndef BOARD_AB_HFPM_HLKLD2420
     SERIAL_DEBUG.printf("switchHfSensor: HF_POWER_PIN will be set to: %i\n", iOn);
     digitalWrite(HF_POWER_PIN, iOn ? HIGH : LOW);
-#endif
+    #endif
 #endif
 }
 
@@ -593,8 +595,6 @@ void Presence::setup()
         // get number of channels from knxprod
         mNumChannels = PM_ChannelCount; // knx.paramByte(PM_PMChannels);
         mChannelsToProcess = MIN(mNumChannels, NUM_CHANNELS_TO_PROCESS);
-        // set back reference
-        PresenceChannel::setPresence(this);
         // calculate parameter block size for day phase parameters
         PresenceChannel::setDayPhaseParameterSize(PM_pBBrightnessAuto - PM_pABrightnessAuto);
         for (uint8_t lIndex = 0; lIndex < mNumChannels; lIndex++)
