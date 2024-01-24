@@ -103,3 +103,5 @@ class Presence : public OpenKNX::Module
     void startPowercycleHfSensor();
     void processPowercycleHfSensor();
 };
+
+extern Presence openknxPresenceModule;

@@ -4,7 +4,6 @@
 #include "KnxHelper.h"
 // #include "IncludeManager.h"
 
-Presence *PresenceChannel::sPresence = nullptr;
 uint8_t PresenceChannel::sDayPhaseParameterSize = 0;
 
 PresenceChannel::PresenceChannel(uint8_t iChannelNumber)
@@ -15,11 +14,6 @@ PresenceChannel::PresenceChannel(uint8_t iChannelNumber)
 }
 
 PresenceChannel::~PresenceChannel() {}
-
-void PresenceChannel::setPresence(Presence *iPresence)
-{
-    sPresence = iPresence;
-}
 
 void PresenceChannel::setDayPhaseParameterSize(uint8_t iSize)
 {
@@ -657,14 +651,14 @@ void PresenceChannel::onDayPhase(uint8_t iPhase, bool iIsStartup /* = false */)
     // cleanup old day phase, here we are still in old day phase
     // remove hardware LED lock
     if (paramBit(PM_pALockHardwareLEDs, PM_pALockHardwareLEDsMask, true))
-        sPresence->processLED(false, Presence::CallerLock);
+        openknxPresenceModule.processLED(false, Presence::CallerLock);
 
     // set the new day phase
     mCurrentDayPhase = iPhase;
 
     // process hardware led lock
     if (paramBit(PM_pALockHardwareLEDs, PM_pALockHardwareLEDsMask, true))
-        sPresence->processLED(true, Presence::CallerLock);
+        openknxPresenceModule.processLED(true, Presence::CallerLock);
 
     // Here we preset KO values, which directly influence PM processing
     // with according parameters from day phase.
@@ -690,6 +684,7 @@ void PresenceChannel::onDayPhase(uint8_t iPhase, bool iIsStartup /* = false */)
 
 bool PresenceChannel::getRawPresence(bool iJustMove /* false */)
 {
+    if (!knx.configured()) return false;
     // iJustMove is ignored, if there is only presence available
     bool lJustMove = false;
     // are external inputs offering presence and move?
@@ -708,7 +703,7 @@ float PresenceChannel::getRawBrightness()
 {
     float lResult = NO_NUM;
     if (ParamPM_pBrightnessIntern)
-        lResult = sPresence->getHardwareBrightness();
+        lResult = openknxPresenceModule.getHardwareBrightness();
     else
     {
         GroupObject *lKo = getKo(PM_KoKOpLux);
@@ -725,9 +720,9 @@ bool PresenceChannel::getHardwarePresence(bool iJustMove /* false */)
     // if hardware presence sensor is available, we evaluate its value
     bool lPresence = false;
     if (ParamPM_pPresenceUsage == VAL_PM_PresenceUsageMove)
-        lPresence = sPresence->getHardwareMove();
+        lPresence = openknxPresenceModule.getHardwareMove();
     if (!iJustMove && !lPresence && ParamPM_pPresenceUsage == VAL_PM_PresenceUsagePresence)
-        lPresence = sPresence->getHardwarePresence();
+        lPresence = openknxPresenceModule.getHardwarePresence();
     return lPresence;
 }
 
@@ -747,7 +742,7 @@ void PresenceChannel::startHardwarePresence()
     bool lTrigger = false;
     if (ParamPM_pPresenceUsage == VAL_PM_PresenceUsageMove)
     {
-        lValue = sPresence->getHardwareMove();
+        lValue = openknxPresenceModule.getHardwareMove();
         if (mHardwareMove != lValue)
         {
             mHardwareMove = lValue;
@@ -757,7 +752,7 @@ void PresenceChannel::startHardwarePresence()
     // and we eval hardware presence if required
     if (!lValue && ParamPM_pPresenceUsage == VAL_PM_PresenceUsagePresence)
     {
-        lValue = sPresence->getHardwarePresence();
+        lValue = openknxPresenceModule.getHardwarePresence();
         if (mHardwarePresence != lValue)
         {
             mHardwarePresence = lValue;
@@ -1776,7 +1771,7 @@ void PresenceChannel::prepareInternalKo()
         if (lInternalKo & 0x8000)
         {
             uint8_t lKoIndex = (lIndex < PM_pNumScene) ? (lIndex - PM_pNumLux) / 2 + PM_KoKOpLux : PM_KoKOpScene;
-            sPresence->addKoMap(lInternalKo & 0x7FFF, channelIndex(), lKoIndex);
+            openknxPresenceModule.addKoMap(lInternalKo & 0x7FFF, channelIndex(), lKoIndex);
         }
     }
 }

@@ -249,7 +249,6 @@ class PresenceChannel : public OpenKNX::Channel
 
   protected:
     // static
-    static Presence *sPresence;
     static uint8_t sDayPhaseParameterSize; // memory block size of day phase parameters, calculated in setup
 
     // instance
@@ -275,7 +274,6 @@ class PresenceChannel : public OpenKNX::Channel
     PresenceChannel(uint8_t iChannelNumber);
     ~PresenceChannel();
 
-    static void setPresence(Presence *iPresence);
     static void setDayPhaseParameterSize(uint8_t iSize);
 
     void processInputKo(GroupObject &iKo, int8_t iKoIndex = -1);
