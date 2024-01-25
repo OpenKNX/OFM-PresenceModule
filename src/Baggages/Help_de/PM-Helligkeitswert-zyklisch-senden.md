@@ -1,4 +1,4 @@
-﻿### **Helligkeitswert zyklisch senden**
+﻿### Helligkeitswert zyklisch senden
 
 Die gemessene Helligkeit kann auf den Bus gesendet werden. Mit dieser Einstellung wird das Zeitintervall zum erneuten Senden festgelegt.
 

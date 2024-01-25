@@ -1,4 +1,4 @@
-﻿### **Ausschalten verzögern um**
+﻿### Ausschalten verzögern um
 
 Hier kann eine Zeit eingegeben werden, um die das Ausschalten nach dem Überscheiten der Ausschaltschwelle verzögert wird. Das Licht bleibt also um die angegebene Zeit länger an, obwohl die Ausschaltschwelle schon überschritten ist.
 

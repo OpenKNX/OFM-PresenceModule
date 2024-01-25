@@ -1,4 +1,4 @@
-﻿### **Beim AUSschalten wird**
+﻿### Beim AUSschalten wird
 
 Erscheint nur, wenn das Sperrobjekt "Sperre" eingestellt ist.
 
@@ -6,19 +6,19 @@ Der Melder kann beim deaktivieren einer Sperre etwas senden lassen, hier wird be
 
 > Achtung: Ein EIN- bzw. AUS-Signal ist nicht zu verwechseln mit einem EIN- oder AUS-Telegramm. Das entsprechende Signal wird am Ausgang in das passende Telegramm verwandelt, das in der aktuellen Tagesphase für  EIN- bzw. AUS-Signal gesendet werden soll. Ein EIN-Signal kann somit durchaus zu einer Szene 5 und ein AUS-Signal zu einer Szene 17 führen.
 
-#### **nichts gesendet**
+#### nichts gesendet
 
 Beim Deaktivieren der Sperre passiert nichts am Ausgang.
 
-#### **AUS gesendet**
+#### AUS gesendet
 
 Beim Deaktivieren der Sperre wird ein AUS-Signal gesendet.
 
-#### **EIN gesendet**
+#### EIN gesendet
 
 Beim Deaktivieren der Sperre wird ein EIN-Signal gesendet.
 
-#### **Aktueller Zustand gesendet**
+#### Aktueller Zustand gesendet
 
 Beim deaktivieren der Sperre wird das Signal gesendet, dass gerade am Ausgang anliegen würde, wenn der Melder nicht gesperrt gewesen wäre.
 

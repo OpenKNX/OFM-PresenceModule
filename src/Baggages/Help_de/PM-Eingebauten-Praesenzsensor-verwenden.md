@@ -1,4 +1,4 @@
-﻿### **Eingebauten Präsenzsensor verwenden**
+﻿### Eingebauten Präsenzsensor verwenden
 
 
 Folgendes kann ausgewählt werden:

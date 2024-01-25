@@ -1,4 +1,4 @@
-﻿### **Ausschalten: Wie viel heller darf es werden**
+﻿### Ausschalten: Wie viel heller darf es werden
 
 Hier wird ein Luxwert eingegeben. Dieser Luxwert wird nach dem Einschalten zur aktuellen Helligkeit im Raum addiert und so die Ausschaltschwelle bestimmt.
 

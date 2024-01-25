@@ -1,4 +1,4 @@
-﻿### **Manueller Modus ist präsenzabhängig**
+﻿### Manueller Modus ist präsenzabhängig
 
 Bei einem "Nein" beginnt der Timer für die automatische Beendigung des Manuell-Modus sofort beim Betreten von Manuell-Modus zu laufen.
 

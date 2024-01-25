@@ -517,6 +517,7 @@ Das *x* ist eine Zahl und steht für die Nummer des Kanals, der definiert wird.
 
 Der Text *unbekannt* wird durch die Beschreibung des Kanals ersetzt, sobald eine Beschreibung vergeben wurde.
 
+<!-- DOC Skip="1" -->
 <kbd>![PM-Kanal](pics/PM-Kanal.png)</kbd>
 
 Auf der Hauptseite werden globale Einstellungen für den gesamten Kanal vorgenommen und die Anzahl der Tagesphasen definiert. Spezielle Tagesphasen-Einstellungen werden auf weiteres Unterseiten vorgenommen.
@@ -591,6 +592,7 @@ Wenn hier ein Ja ausgewählt wurde, kann man die Helligkeit nicht mehr über ein
 <!-- DOC -->
 ### **Totzeit bis zur Helligkeitsanpassung**
 
+<!-- DOC Skip="1" -->
 Diese Einstellung ist nur wichtig, wenn die [adaptive Ausschaltschwelle](#adaptive-ausschaltschwelle-über-helligkeit) genutzt werden soll.
 
 Ändert sich die Helligkeit im Raum, indem ein weiterer Lichtkreis ein-, ausgeschaltet oder gedimmt wurde, benötigt der entsprechende Helligkeitssensor eine gewisse Zeit, um die neue Helligkeit zu messen. Erst danach macht es Sinn, eine neue Ausschaltschwelle für das Licht zu berechnen.
@@ -601,6 +603,7 @@ Die Zeit sollte wohlüberlegt sein. Der interne Sensor benötigt für eine Licht
 
 Bei einem externen Helligkeitssensor sollte die Zeitspanne mindestens die Zeit sein, mit der der externe Sensor seine Helligkeit zyklisch sendet. Da Telegramme verloren gehen können, wird eher die doppelte Zykluszeit empfohlen. 
 Wenn der externe Helligkeitssensor auf Lesetelegramme antwortet und beim lesen wirklich die aktuell gemessene Helligkeit zurückliefert (machen die wenigsten), kann man die Zeit auch kürzer angeben und für die Neuberechnung den Helligkeitswert lesen lassen.
+<!-- DOCEND -->
 
 > WICHTIG: Wenn man die [adaptive Ausschaltschwelle](#adaptive-ausschaltschwelle-über-helligkeit) nutzen will, ist es wichtig, dass nach dem einschalten einer neuen Lichtquelle auch ein neuer Helligkeitswert dem Melder vorliegt und er anhand dieses neuen Helligkeitswertes eine neue Ausschaltschwelle berechnen kann. Falls noch mit dem alten Helligkeitswert gerechnet wird, bleibt es bei der alten Ausschaltschwelle und das Licht wird möglicherweise sofort ausgeschaltet.
 
@@ -844,6 +847,7 @@ Somit funktioniert ein gesperrter Melder intern normal weiter und sendet einfach
 Werden Sperren bzw. eine Zwangsführung manuell geschaltet, so ist es nicht ungewöhnlich, dass vergessen wird, diese Sperre/Zwangsführung wieder zu beenden. Vor allem, wenn die Sperre/Zwangsführung mit einem AUS verbunden wird, denkt man nicht mehr dran, die Sperre aufzuheben.
 
 Mit dieser Einstellung kann man eine Rückfallzeit aktivieren, nach der der Melder von sich aus die Sperre aufhebt und wieder in den Normalbetrieb geht.
+<!-- DOCEND -->
 
 Bei der Aufhebung einer Sperre wird die unter [Beim AUSschalten wird](#beim-ausschalten-wird) definierte Aktion ausgeführt.
 Bei der Aufhebung einer Zwangsführung wird in den Zustand "normal, AUS" gesprungen.
@@ -1085,7 +1089,12 @@ Dies ist ein klassisches Ausschaltverhalten über eine absolute Schwelle. Es wir
 
 #### **adaptive Schwelle**
 
-Diese Einstellung wählt die neue und innovative [adaptive Ausschaltschwelle](#adaptive-ausschaltschwelle-über-helligkeit), die in diesem Melder implementiert ist. Damit diese korrekt und erwartungskonform funktionieren kann, ist es unbedingt notwendig, dass der Melder von allen Lichtquellen, die die Helligkeit in dem Raum beeinflussen können, entsprechende Informationen über Helligkeitsänderungen bekommt. Dazu muss
+Diese Einstellung wählt die neue und innovative adaptive Ausschaltschwelle, die in diesem Melder implementiert ist. 
+
+<!-- DOC Skip="1" -->
+Siehe [adaptive Ausschaltschwelle](#adaptive-ausschaltschwelle-über-helligkeit).
+
+Damit diese korrekt und erwartungskonform funktionieren kann, ist es unbedingt notwendig, dass der Melder von allen Lichtquellen, die die Helligkeit in dem Raum beeinflussen können, entsprechende Informationen über Helligkeitsänderungen bekommt. Dazu muss
 
 * am Kommunikationsobjekt 'Änderung schalten' der Aktorstatus einer jeden Lichtquelle verbunden sein (als hörende Adresse)
 * am Kommunikationsobjekt 'Änderung relativ dimmen' alle Dimmadressen einer jeden Lichtquelle verbunden sein (als hörende Adresse)
@@ -1274,6 +1283,7 @@ Viele Funktionen, für die ein Kommunikationsobjekt zur Verfügung steht, könne
 <kbd>![Szenensteuerung](pics/Szenensteuerung.png)</kbd>
 
 In der Tabelle können bis zu 10 Szenen ausgewählt werden, die mit entsprechenden Funktionen verbunden werden. Sobald eine der ausgewählten Szenen am Kommunikationsobjekt "PM über Szenen steuern" empfangen wird, wird die verknüpfte Funktion ausgeführt.
+<!-- DOCEND -->
 
 Im Folgenden werden die verknüpfbaren Funktionen beschrieben:
 
@@ -1387,8 +1397,10 @@ Dies ist eine Funktion für erfahrene Benutzer.
 
 <!-- DOCCONTENT
 Bitte details in der Applikationsbeschreibung nachlesen! 
--->
-<!-- ENDDOC -->
+DOCCONTENT -->
+
+<!-- DOCEND -->
+
 <kbd>![Eingänge](pics/InterneEingaenge.png)</kbd>
 
 ### **Lesetelegramme beim Neustart**

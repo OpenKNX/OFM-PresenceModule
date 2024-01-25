@@ -1,4 +1,4 @@
-﻿### **Korrektur Luxwert**
+﻿### Korrektur Luxwert
 
 Der vom Helligkeitssensor gemessene Luxwert kann hier korrigiert werden. Der auf den Bus gesendete Luxwert wird um den hier eingestellten Wert erhöht.
 
