@@ -281,144 +281,144 @@
             <Parameters>
               <!-- Logic share parameters go from 0 to 29? We leave some space -->
               <!-- Here we start with non-multiplied parameters -->
-              <Parameter Id="%AID%_P-%T%000001" Name="PMChannels" ParameterType="%AID%_PT-PMChannels" Text="PM-Kanäle" Value="%N%" Access="Read">
+              <Parameter Id="%AID%_P-%TT%00001" Name="PMChannels" ParameterType="%AID%_PT-PMChannels" Text="PM-Kanäle" Value="%N%" Access="Read">
                 <Memory CodeSegment="%AID%_RS-04-00000" Offset="0" BitOffset="0" />
               </Parameter>
               <Union SizeInBit="16">
                 <Memory CodeSegment="%AID%_RS-04-00000" Offset="1" BitOffset="0" />
-                <!-- <Parameter Id="%AID%_UP-%T%000002" Name="HardwarePM" Offset="0" BitOffset="0" ParameterType="%AID%_PT-CheckBox" Text="PM-Hardware ist vorhanden" Value="0" /> -->
-                <Parameter Id="%AID%_UP-%T%000003" Name="SendRAW" Offset="0" BitOffset="0" ParameterType="%AID%_PT-OnOffYesNo" Text="Präsenz-Rohdaten auf den Bus senden?" Value="0" />
-                <Parameter Id="%AID%_UP-%T%000004" Name="LEDPresence" Offset="0" BitOffset="1" ParameterType="%AID%_PT-StatusLED" Text="LED Präsenz" Value="0" />
-                <Parameter Id="%AID%_UP-%T%000005" Name="LEDMove" Offset="0" BitOffset="3" ParameterType="%AID%_PT-StatusLED" Text="LED Bewegung" Value="0" />
-                <Parameter Id="%AID%_UP-%T%000006" Name="HWPresence" Offset="0" BitOffset="5" ParameterType="%AID%_PT-PresenceSensor" Text="Präsenz-Sensor" Value="0" />
-                <Parameter Id="%AID%_UP-%T%000007" Name="HWLux" Offset="1" BitOffset="0" ParameterType="%AID%_PT-LuxSensor" Text="Helligkeits-Sensor" Value="0" />
-                <Parameter Id="%AID%_UP-%T%000008" Name="ReadLed" Offset="1" BitOffset="2" ParameterType="%AID%_PT-OnOffYesNo" Text="Wert nach einem Neustart lesen?" Value="0" />
+                <!-- <Parameter Id="%AID%_UP-%TT%00002" Name="HardwarePM" Offset="0" BitOffset="0" ParameterType="%AID%_PT-CheckBox" Text="PM-Hardware ist vorhanden" Value="0" /> -->
+                <Parameter Id="%AID%_UP-%TT%00003" Name="SendRAW" Offset="0" BitOffset="0" ParameterType="%AID%_PT-OnOffYesNo" Text="Präsenz-Rohdaten auf den Bus senden?" Value="0" />
+                <Parameter Id="%AID%_UP-%TT%00004" Name="LEDPresence" Offset="0" BitOffset="1" ParameterType="%AID%_PT-StatusLED" Text="LED Präsenz" Value="0" />
+                <Parameter Id="%AID%_UP-%TT%00005" Name="LEDMove" Offset="0" BitOffset="3" ParameterType="%AID%_PT-StatusLED" Text="LED Bewegung" Value="0" />
+                <Parameter Id="%AID%_UP-%TT%00006" Name="HWPresence" Offset="0" BitOffset="5" ParameterType="%AID%_PT-PresenceSensor" Text="Präsenz-Sensor" Value="0" />
+                <Parameter Id="%AID%_UP-%TT%00007" Name="HWLux" Offset="1" BitOffset="0" ParameterType="%AID%_PT-LuxSensor" Text="Helligkeits-Sensor" Value="0" />
+                <Parameter Id="%AID%_UP-%TT%00008" Name="ReadLed" Offset="1" BitOffset="2" ParameterType="%AID%_PT-OnOffYesNo" Text="Wert nach einem Neustart lesen?" Value="0" />
                 <!-- 5 Bit frei -->
               </Union>
               <!-- internal (ets only) parameters, invisible but necessary -->
-              <Parameter Id="%AID%_P-%T%000009" Name="LedFromKO" ParameterType="%AID%_PT-CheckBox" Text="Irgendeine Led vom KO lesen" Value="0" Access="None" />
+              <Parameter Id="%AID%_P-%TT%00009" Name="LedFromKO" ParameterType="%AID%_PT-CheckBox" Text="Irgendeine Led vom KO lesen" Value="0" Access="None" />
               <!-- Brightness related settings (local hardware) -->
               <Union SizeInBit="24">
                 <Memory CodeSegment="%AID%_RS-04-00000" Offset="3" BitOffset="0" />
-                <Parameter Id="%AID%_UP-%T%000010" Name="LuxOffsetPM" Offset="0" BitOffset="0" ParameterType="%AID%_PT-OffsetLuxPM" Text="Korrektur Luxwert" SuffixText="Lux" Value="0" />
-                <Parameter Id="%AID%_UP-%T%000014" Name="LuxSendDeltaAbsRel" Offset="1" BitOffset="0" ParameterType="%AID%_PT-LuxAbsRel" Text="Helligkeitsänderung wird angegeben in" Value="0" />
-                <Parameter Id="%AID%_UP-%T%000011" Name="LuxSendDelta" Offset="1" BitOffset="1" ParameterType="%AID%_PT-AbsLux" Text="Senden der Helligkeit bei Änderung um" Value="0" />
+                <Parameter Id="%AID%_UP-%TT%00010" Name="LuxOffsetPM" Offset="0" BitOffset="0" ParameterType="%AID%_PT-OffsetLuxPM" Text="Korrektur Luxwert" SuffixText="Lux" Value="0" />
+                <Parameter Id="%AID%_UP-%TT%00014" Name="LuxSendDeltaAbsRel" Offset="1" BitOffset="0" ParameterType="%AID%_PT-LuxAbsRel" Text="Helligkeitsänderung wird angegeben in" Value="0" />
+                <Parameter Id="%AID%_UP-%TT%00011" Name="LuxSendDelta" Offset="1" BitOffset="1" ParameterType="%AID%_PT-AbsLux" Text="Senden der Helligkeit bei Änderung um" Value="0" />
               </Union>
               <!-- send cyclic brightness (delay pattern) -->
               <Union SizeInBit="16">
                 <Memory CodeSegment="%AID%_RS-04-00000" Offset="6" BitOffset="0" />
-                <Parameter Id="%AID%_UP-%T%000012" Name="LuxSendCycleDelayBase" ParameterType="%AID%_PT-DelayBase" Offset="0" BitOffset="0" Text="Zeitbasis" Value="0" />
-                <Parameter Id="%AID%_UP-%T%000013" Name="LuxSendCycleDelayTime" ParameterType="%AID%_PT-DelayTime" Offset="0" BitOffset="2" Text="Zeit" Value="0" />
+                <Parameter Id="%AID%_UP-%TT%00012" Name="LuxSendCycleDelayBase" ParameterType="%AID%_PT-DelayBase" Offset="0" BitOffset="0" Text="Zeitbasis" Value="0" />
+                <Parameter Id="%AID%_UP-%TT%00013" Name="LuxSendCycleDelayTime" ParameterType="%AID%_PT-DelayTime" Offset="0" BitOffset="2" Text="Zeit" Value="0" />
               </Union>
               <!-- Hardware HF-Sensor settings -->
               <Union SizeInBit="32">
                 <Memory CodeSegment="%AID%_RS-04-00000" Offset="8" BitOffset="0" />
-                <Parameter Id="%AID%_UP-%T%000015" Name="HfScenario" ParameterType="%AID%_PT-HfScenario" Offset="0" BitOffset="0" Text="Detektions-Szenario" Value="0" />
-                <Parameter Id="%AID%_UP-%T%000016" Name="HfSensitivity" ParameterType="%AID%_PT-HfSensitivity" Offset="0" BitOffset="3" Text="Sensor-Empfindlichkeit" Value="0" />
+                <Parameter Id="%AID%_UP-%TT%00015" Name="HfScenario" ParameterType="%AID%_PT-HfScenario" Offset="0" BitOffset="0" Text="Detektions-Szenario" Value="0" />
+                <Parameter Id="%AID%_UP-%TT%00016" Name="HfSensitivity" ParameterType="%AID%_PT-HfSensitivity" Offset="0" BitOffset="3" Text="Sensor-Empfindlichkeit" Value="0" />
                 <!-- 1 Bit frei -->
-                <Parameter Id="%AID%_UP-%T%000017" Name="HfDelayTime" ParameterType="%AID%_PT-HfDelayTime" Offset="1" BitOffset="0" Text="Verzögerung" Value="30" />
-                <Parameter Id="%AID%_UP-%T%000018" Name="HfRangeGateMin" ParameterType="%AID%_PT-HfRangeGate" Offset="3" BitOffset="0" Text="Mindestentfernung" Value="0" />
-                <Parameter Id="%AID%_UP-%T%000019" Name="HfRangeGateMax" ParameterType="%AID%_PT-HfRangeGate" Offset="3" BitOffset="4" Text="Maximalentfernung" Value="15" />
+                <Parameter Id="%AID%_UP-%TT%00017" Name="HfDelayTime" ParameterType="%AID%_PT-HfDelayTime" Offset="1" BitOffset="0" Text="Verzögerung" Value="30" />
+                <Parameter Id="%AID%_UP-%TT%00018" Name="HfRangeGateMin" ParameterType="%AID%_PT-HfRangeGate" Offset="3" BitOffset="0" Text="Mindestentfernung" Value="0" />
+                <Parameter Id="%AID%_UP-%TT%00019" Name="HfRangeGateMax" ParameterType="%AID%_PT-HfRangeGate" Offset="3" BitOffset="4" Text="Maximalentfernung" Value="15" />
               </Union>
             </Parameters>
             <ParameterRefs>
-              <ParameterRef Id="%AID%_P-%T%000001_R-%T%00000101" RefId="%AID%_P-%T%000001" />
-              <!-- <ParameterRef Id="%AID%_UP-%T%000002_R-%T%00000201" RefId="%AID%_UP-%T%000002" /> -->
-              <ParameterRef Id="%AID%_UP-%T%000003_R-%T%00000301" RefId="%AID%_UP-%T%000003" />
-              <ParameterRef Id="%AID%_UP-%T%000004_R-%T%00000401" RefId="%AID%_UP-%T%000004" />
-              <ParameterRef Id="%AID%_UP-%T%000005_R-%T%00000501" RefId="%AID%_UP-%T%000005" />
-              <ParameterRef Id="%AID%_UP-%T%000006_R-%T%00000601" RefId="%AID%_UP-%T%000006" />
-              <ParameterRef Id="%AID%_UP-%T%000007_R-%T%00000701" RefId="%AID%_UP-%T%000007" />
-              <ParameterRef Id="%AID%_UP-%T%000008_R-%T%00000801" RefId="%AID%_UP-%T%000008" />
-              <ParameterRef Id="%AID%_P-%T%000009_R-%T%00000901" RefId="%AID%_P-%T%000009" />
-              <ParameterRef Id="%AID%_UP-%T%000010_R-%T%00001001" RefId="%AID%_UP-%T%000010" />
-              <ParameterRef Id="%AID%_UP-%T%000011_R-%T%00001101" RefId="%AID%_UP-%T%000011" SuffixText="Lux" />
-              <ParameterRef Id="%AID%_UP-%T%000011_R-%T%00001102" RefId="%AID%_UP-%T%000011" SuffixText="%" />
-              <ParameterRef Id="%AID%_UP-%T%000012_R-%T%00001201" RefId="%AID%_UP-%T%000012" />
-              <ParameterRef Id="%AID%_UP-%T%000013_R-%T%00001301" RefId="%AID%_UP-%T%000013" />
-              <ParameterRef Id="%AID%_UP-%T%000014_R-%T%00001401" RefId="%AID%_UP-%T%000014" />
-              <ParameterRef Id="%AID%_UP-%T%000015_R-%T%00001501" RefId="%AID%_UP-%T%000015" />
-              <ParameterRef Id="%AID%_UP-%T%000016_R-%T%00001601" RefId="%AID%_UP-%T%000016" />
-              <ParameterRef Id="%AID%_UP-%T%000017_R-%T%00001701" RefId="%AID%_UP-%T%000017" />
-              <ParameterRef Id="%AID%_UP-%T%000018_R-%T%00001801" RefId="%AID%_UP-%T%000018" />
-              <ParameterRef Id="%AID%_UP-%T%000019_R-%T%00001901" RefId="%AID%_UP-%T%000019" />
+              <ParameterRef Id="%AID%_P-%TT%00001_R-%TT%0000101" RefId="%AID%_P-%TT%00001" />
+              <!-- <ParameterRef Id="%AID%_UP-%TT%00002_R-%TT%0000201" RefId="%AID%_UP-%TT%00002" /> -->
+              <ParameterRef Id="%AID%_UP-%TT%00003_R-%TT%0000301" RefId="%AID%_UP-%TT%00003" />
+              <ParameterRef Id="%AID%_UP-%TT%00004_R-%TT%0000401" RefId="%AID%_UP-%TT%00004" />
+              <ParameterRef Id="%AID%_UP-%TT%00005_R-%TT%0000501" RefId="%AID%_UP-%TT%00005" />
+              <ParameterRef Id="%AID%_UP-%TT%00006_R-%TT%0000601" RefId="%AID%_UP-%TT%00006" />
+              <ParameterRef Id="%AID%_UP-%TT%00007_R-%TT%0000701" RefId="%AID%_UP-%TT%00007" />
+              <ParameterRef Id="%AID%_UP-%TT%00008_R-%TT%0000801" RefId="%AID%_UP-%TT%00008" />
+              <ParameterRef Id="%AID%_P-%TT%00009_R-%TT%0000901" RefId="%AID%_P-%TT%00009" />
+              <ParameterRef Id="%AID%_UP-%TT%00010_R-%TT%0001001" RefId="%AID%_UP-%TT%00010" />
+              <ParameterRef Id="%AID%_UP-%TT%00011_R-%TT%0001101" RefId="%AID%_UP-%TT%00011" SuffixText="Lux" />
+              <ParameterRef Id="%AID%_UP-%TT%00011_R-%TT%0001102" RefId="%AID%_UP-%TT%00011" SuffixText="%" />
+              <ParameterRef Id="%AID%_UP-%TT%00012_R-%TT%0001201" RefId="%AID%_UP-%TT%00012" />
+              <ParameterRef Id="%AID%_UP-%TT%00013_R-%TT%0001301" RefId="%AID%_UP-%TT%00013" />
+              <ParameterRef Id="%AID%_UP-%TT%00014_R-%TT%0001401" RefId="%AID%_UP-%TT%00014" />
+              <ParameterRef Id="%AID%_UP-%TT%00015_R-%TT%0001501" RefId="%AID%_UP-%TT%00015" />
+              <ParameterRef Id="%AID%_UP-%TT%00016_R-%TT%0001601" RefId="%AID%_UP-%TT%00016" />
+              <ParameterRef Id="%AID%_UP-%TT%00017_R-%TT%0001701" RefId="%AID%_UP-%TT%00017" />
+              <ParameterRef Id="%AID%_UP-%TT%00018_R-%TT%0001801" RefId="%AID%_UP-%TT%00018" />
+              <ParameterRef Id="%AID%_UP-%TT%00019_R-%TT%0001901" RefId="%AID%_UP-%TT%00019" />
             </ParameterRefs>
             <ComObjectTable>
-              <ComObject Id="%AID%_O-%T%000001" Name="LuxOut" Text="Ausgang Helligkeitssensor" Number="20" FunctionText="Messwert in Lux" ObjectSize="2 Bytes" ReadFlag="Enabled" WriteFlag="Disabled" CommunicationFlag="Enabled" TransmitFlag="Enabled" UpdateFlag="Disabled" ReadOnInitFlag="Disabled" DatapointType="DPST-9-4" />
-              <ComObject Id="%AID%_O-%T%000005" Name="PresenceOut" Text="Ausgang Präsenz" Number="21" FunctionText="Status" ObjectSize="1 Bit" ReadFlag="Enabled" WriteFlag="Disabled" CommunicationFlag="Enabled" TransmitFlag="Enabled" UpdateFlag="Disabled" ReadOnInitFlag="Disabled" DatapointType="DPST-1-2" />
-              <ComObject Id="%AID%_O-%T%000002" Name="MoveOut" Text="Ausgang Bewegung (0=keine, 1=radial, 2=nähern, 3=entf.)" Number="22" FunctionText="Status" ObjectSize="1 Byte" ReadFlag="Enabled" WriteFlag="Disabled" CommunicationFlag="Enabled" TransmitFlag="Enabled" UpdateFlag="Disabled" ReadOnInitFlag="Disabled" DatapointType="DPST-5-5" />
-              <ComObject Id="%AID%_O-%T%000006" Name="MoveSpeedOut" Text="Ausgang Bewegungsmoment" Number="23" FunctionText="Status" ObjectSize="1 Byte" ReadFlag="Enabled" WriteFlag="Disabled" CommunicationFlag="Enabled" TransmitFlag="Enabled" UpdateFlag="Disabled" ReadOnInitFlag="Disabled" DatapointType="DPST-5-1" />
-              <ComObject Id="%AID%_O-%T%000010" Name="DistanceOut" Text="Ausgang Entfernung" Number="29" FunctionText="Entfernung in Meter" ObjectSize="2 Bytes" ReadFlag="Enabled" WriteFlag="Disabled" CommunicationFlag="Enabled" TransmitFlag="Enabled" UpdateFlag="Disabled" ReadOnInitFlag="Disabled" DatapointType="DPST-7-11" />
-              <ComObject Id="%AID%_O-%T%000003" Name="LEDPresence" Text="Eingang LED Präsenz" Number="24" FunctionText="Schalten/Status" ObjectSize="1 Bit" ReadFlag="Enabled" WriteFlag="Enabled" CommunicationFlag="Enabled" TransmitFlag="Disabled" UpdateFlag="Enabled" ReadOnInitFlag="Disabled" DatapointType="DPST-1-1" />
-              <ComObject Id="%AID%_O-%T%000004" Name="LEDMove" Text="Eingang LED Bewegung" Number="25" FunctionText="Schalten/Status" ObjectSize="1 Bit" ReadFlag="Enabled" WriteFlag="Enabled" CommunicationFlag="Enabled" TransmitFlag="Disabled" UpdateFlag="Enabled" ReadOnInitFlag="Disabled" DatapointType="DPST-1-1" />
-              <ComObject Id="%AID%_O-%T%000007" Name="Scenario" Text="Eingang Szenario" Number="26" FunctionText="Wert/Status" ObjectSize="1 Byte" ReadFlag="Enabled" WriteFlag="Enabled" CommunicationFlag="Enabled" TransmitFlag="Disabled" UpdateFlag="Disabled" ReadOnInitFlag="Disabled" DatapointType="DPST-5-5" />
-              <ComObject Id="%AID%_O-%T%000008" Name="Sensitivity" Text="Eingang Empfindlichkeit" Number="27" FunctionText="Wert/Status" ObjectSize="1 Byte" ReadFlag="Enabled" WriteFlag="Enabled" CommunicationFlag="Enabled" TransmitFlag="Disabled" UpdateFlag="Disabled" ReadOnInitFlag="Disabled" DatapointType="DPST-5-5" />
-              <ComObject Id="%AID%_O-%T%000009" Name="HfReset" Text="Reset HF-Sensor" Number="28" FunctionText="Trigger" ObjectSize="1 Bit" ReadFlag="Disabled" WriteFlag="Enabled" CommunicationFlag="Enabled" TransmitFlag="Disabled" UpdateFlag="Disabled" ReadOnInitFlag="Disabled" DatapointType="DPST-1-1" />
+              <ComObject Id="%AID%_O-%TT%00001" Name="LuxOut" Text="Ausgang Helligkeitssensor" Number="20" FunctionText="Messwert in Lux" ObjectSize="2 Bytes" ReadFlag="Enabled" WriteFlag="Disabled" CommunicationFlag="Enabled" TransmitFlag="Enabled" UpdateFlag="Disabled" ReadOnInitFlag="Disabled" DatapointType="DPST-9-4" />
+              <ComObject Id="%AID%_O-%TT%00005" Name="PresenceOut" Text="Ausgang Präsenz" Number="21" FunctionText="Status" ObjectSize="1 Bit" ReadFlag="Enabled" WriteFlag="Disabled" CommunicationFlag="Enabled" TransmitFlag="Enabled" UpdateFlag="Disabled" ReadOnInitFlag="Disabled" DatapointType="DPST-1-2" />
+              <ComObject Id="%AID%_O-%TT%00002" Name="MoveOut" Text="Ausgang Bewegung (0=keine, 1=radial, 2=nähern, 3=entf.)" Number="22" FunctionText="Status" ObjectSize="1 Byte" ReadFlag="Enabled" WriteFlag="Disabled" CommunicationFlag="Enabled" TransmitFlag="Enabled" UpdateFlag="Disabled" ReadOnInitFlag="Disabled" DatapointType="DPST-5-5" />
+              <ComObject Id="%AID%_O-%TT%00006" Name="MoveSpeedOut" Text="Ausgang Bewegungsmoment" Number="23" FunctionText="Status" ObjectSize="1 Byte" ReadFlag="Enabled" WriteFlag="Disabled" CommunicationFlag="Enabled" TransmitFlag="Enabled" UpdateFlag="Disabled" ReadOnInitFlag="Disabled" DatapointType="DPST-5-1" />
+              <ComObject Id="%AID%_O-%TT%00010" Name="DistanceOut" Text="Ausgang Entfernung" Number="29" FunctionText="Entfernung in Meter" ObjectSize="2 Bytes" ReadFlag="Enabled" WriteFlag="Disabled" CommunicationFlag="Enabled" TransmitFlag="Enabled" UpdateFlag="Disabled" ReadOnInitFlag="Disabled" DatapointType="DPST-7-11" />
+              <ComObject Id="%AID%_O-%TT%00003" Name="LEDPresence" Text="Eingang LED Präsenz" Number="24" FunctionText="Schalten/Status" ObjectSize="1 Bit" ReadFlag="Enabled" WriteFlag="Enabled" CommunicationFlag="Enabled" TransmitFlag="Disabled" UpdateFlag="Enabled" ReadOnInitFlag="Disabled" DatapointType="DPST-1-1" />
+              <ComObject Id="%AID%_O-%TT%00004" Name="LEDMove" Text="Eingang LED Bewegung" Number="25" FunctionText="Schalten/Status" ObjectSize="1 Bit" ReadFlag="Enabled" WriteFlag="Enabled" CommunicationFlag="Enabled" TransmitFlag="Disabled" UpdateFlag="Enabled" ReadOnInitFlag="Disabled" DatapointType="DPST-1-1" />
+              <ComObject Id="%AID%_O-%TT%00007" Name="Scenario" Text="Eingang Szenario" Number="26" FunctionText="Wert/Status" ObjectSize="1 Byte" ReadFlag="Enabled" WriteFlag="Enabled" CommunicationFlag="Enabled" TransmitFlag="Disabled" UpdateFlag="Disabled" ReadOnInitFlag="Disabled" DatapointType="DPST-5-5" />
+              <ComObject Id="%AID%_O-%TT%00008" Name="Sensitivity" Text="Eingang Empfindlichkeit" Number="27" FunctionText="Wert/Status" ObjectSize="1 Byte" ReadFlag="Enabled" WriteFlag="Enabled" CommunicationFlag="Enabled" TransmitFlag="Disabled" UpdateFlag="Disabled" ReadOnInitFlag="Disabled" DatapointType="DPST-5-5" />
+              <ComObject Id="%AID%_O-%TT%00009" Name="HfReset" Text="Reset HF-Sensor" Number="28" FunctionText="Trigger" ObjectSize="1 Bit" ReadFlag="Disabled" WriteFlag="Enabled" CommunicationFlag="Enabled" TransmitFlag="Disabled" UpdateFlag="Disabled" ReadOnInitFlag="Disabled" DatapointType="DPST-1-1" />
             </ComObjectTable>
             <ComObjectRefs>
-              <ComObjectRef Id="%AID%_O-%T%000001_R-%T%00000101" RefId="%AID%_O-%T%000001" />
-              <ComObjectRef Id="%AID%_O-%T%000002_R-%T%00000201" RefId="%AID%_O-%T%000002" />
-              <ComObjectRef Id="%AID%_O-%T%000002_R-%T%00000202" RefId="%AID%_O-%T%000002" Text="Bewegung" ObjectSize="1 Bit" DatapointType="DPST-1-1" />
-              <ComObjectRef Id="%AID%_O-%T%000003_R-%T%00000301" RefId="%AID%_O-%T%000003" />
-              <ComObjectRef Id="%AID%_O-%T%000004_R-%T%00000401" RefId="%AID%_O-%T%000004" />
-              <ComObjectRef Id="%AID%_O-%T%000005_R-%T%00000501" RefId="%AID%_O-%T%000005" />
-              <ComObjectRef Id="%AID%_O-%T%000006_R-%T%00000601" RefId="%AID%_O-%T%000006" />
-              <ComObjectRef Id="%AID%_O-%T%000007_R-%T%00000701" RefId="%AID%_O-%T%000007" />
-              <ComObjectRef Id="%AID%_O-%T%000008_R-%T%00000801" RefId="%AID%_O-%T%000008" />
-              <ComObjectRef Id="%AID%_O-%T%000009_R-%T%00000901" RefId="%AID%_O-%T%000009" />
-              <ComObjectRef Id="%AID%_O-%T%000010_R-%T%00001001" RefId="%AID%_O-%T%000010" />
+              <ComObjectRef Id="%AID%_O-%TT%00001_R-%TT%0000101" RefId="%AID%_O-%TT%00001" />
+              <ComObjectRef Id="%AID%_O-%TT%00002_R-%TT%0000201" RefId="%AID%_O-%TT%00002" />
+              <ComObjectRef Id="%AID%_O-%TT%00002_R-%TT%0000202" RefId="%AID%_O-%TT%00002" Text="Bewegung" ObjectSize="1 Bit" DatapointType="DPST-1-1" />
+              <ComObjectRef Id="%AID%_O-%TT%00003_R-%TT%0000301" RefId="%AID%_O-%TT%00003" />
+              <ComObjectRef Id="%AID%_O-%TT%00004_R-%TT%0000401" RefId="%AID%_O-%TT%00004" />
+              <ComObjectRef Id="%AID%_O-%TT%00005_R-%TT%0000501" RefId="%AID%_O-%TT%00005" />
+              <ComObjectRef Id="%AID%_O-%TT%00006_R-%TT%0000601" RefId="%AID%_O-%TT%00006" />
+              <ComObjectRef Id="%AID%_O-%TT%00007_R-%TT%0000701" RefId="%AID%_O-%TT%00007" />
+              <ComObjectRef Id="%AID%_O-%TT%00008_R-%TT%0000801" RefId="%AID%_O-%TT%00008" />
+              <ComObjectRef Id="%AID%_O-%TT%00009_R-%TT%0000901" RefId="%AID%_O-%TT%00009" />
+              <ComObjectRef Id="%AID%_O-%TT%00010_R-%TT%0001001" RefId="%AID%_O-%TT%00010" />
             </ComObjectRefs>
           </Static>
           <Dynamic>
-            <Channel Id="%AID%_CH-%T%" Name="PMChannels" Number="%T%" Text="PM-Kanäle" Icon="car-brake-worn-linings-custom" >
-              <!-- <choose ParamRefId="%AID%_UP-%T%000002_R-%T%00000201"> -->
+            <Channel Id="%AID%_CH-%TT%" Name="PMChannels" Number="%TT%" Text="PM-Kanäle" Icon="car-brake-worn-linings-custom" >
+              <!-- <choose ParamRefId="%AID%_UP-%TT%00002_R-%TT%0000201"> -->
                 <!-- <when test="1"> -->
                   <ParameterBlock Id="%AID%_PB-3" Name="HardwarePM" Text="PM-Hardware" HelpContext="PM-PM-Hardware">
                   <ParameterSeparator Id="%AID%_PS-nnn" Text="Version des VPM-Moduls: %ModuleVersion%" UIHint="Headline" />
                   <ParameterSeparator Id="%AID%_PS-nnn" Text="" UIHint="HorizontalRuler" />
 
                     <!-- OR: Any hardware LED switched by KO -->
-                    <ParameterRefRef RefId="%AID%_P-%T%000009_R-%T%00000901" />
+                    <ParameterRefRef RefId="%AID%_P-%TT%00009_R-%TT%0000901" />
                     <ParameterSeparator Id="%AID%_PS-nnn" Text="Präsenz-Hardware" UIHint="Headline" />
-                    <ParameterRefRef RefId="%AID%_UP-%T%000006_R-%T%00000601"  HelpContext="%DOC%" />
-                    <ParameterRefRef RefId="%AID%_UP-%T%000007_R-%T%00000701"  HelpContext="%DOC%" />
-                    <choose ParamRefId="%AID%_UP-%T%000006_R-%T%00000601">
+                    <ParameterRefRef RefId="%AID%_UP-%TT%00006_R-%TT%0000601"  HelpContext="%DOC%" />
+                    <ParameterRefRef RefId="%AID%_UP-%TT%00007_R-%TT%0000701"  HelpContext="%DOC%" />
+                    <choose ParamRefId="%AID%_UP-%TT%00006_R-%TT%0000601">
                       <when test="!=0">
                         <ParameterSeparator Id="%AID%_PS-nnn" Text="" UIHint="HorizontalRuler" />
                         <ParameterSeparator Id="%AID%_PS-nnn" Text="Einstellungen Präsenz-Hardware" UIHint="Headline" />
                       </when>
                       <when test="2">
-                        <ParameterRefRef RefId="%AID%_UP-%T%000015_R-%T%00001501" HelpContext="%DOC%" />
+                        <ParameterRefRef RefId="%AID%_UP-%TT%00015_R-%TT%0001501" HelpContext="%DOC%" />
                       </when>
                       <when test="2 3">
-                        <ParameterRefRef RefId="%AID%_UP-%T%000016_R-%T%00001601" />
+                        <ParameterRefRef RefId="%AID%_UP-%TT%00016_R-%TT%0001601" />
                       </when>
                       <when test="3">
-                        <ParameterRefRef RefId="%AID%_UP-%T%000017_R-%T%00001701" />
-                        <ParameterRefRef RefId="%AID%_UP-%T%000018_R-%T%00001801" />
-                        <ParameterRefRef RefId="%AID%_UP-%T%000019_R-%T%00001901" />
+                        <ParameterRefRef RefId="%AID%_UP-%TT%00017_R-%TT%0001701" />
+                        <ParameterRefRef RefId="%AID%_UP-%TT%00018_R-%TT%0001801" />
+                        <ParameterRefRef RefId="%AID%_UP-%TT%00019_R-%TT%0001901" />
                       </when>
                       <when test="!=0">
-                        <ParameterRefRef RefId="%AID%_UP-%T%000003_R-%T%00000301"  HelpContext="%DOC%" />
+                        <ParameterRefRef RefId="%AID%_UP-%TT%00003_R-%TT%0000301"  HelpContext="%DOC%" />
                         <ParameterSeparator Id="%AID%_PS-nnn" Text="Auch wenn die Rohdaten nicht auf den Bus gesendet werden, können sie intern für PM-Kanäle genutzt werden." />
                         <ParameterSeparator Id="%AID%_PS-nnn" Text="In der gesamten Applikation wird vom Präsenzmelder gesprochen. Ob sich die Applikation als Präsenz- oder als Bewegungsmelder verhält, wird von der verwendeten Hardware (Präsenz-Sensor) bestimmt." />
                         <!-- KO für Präsenz einschalten -->
-                        <choose ParamRefId="%AID%_UP-%T%000003_R-%T%00000301">
+                        <choose ParamRefId="%AID%_UP-%TT%00003_R-%TT%0000301">
                           <when test="!=0">
-                            <ComObjectRefRef RefId="%AID%_O-%T%000005_R-%T%00000501" />
-                            <choose ParamRefId="%AID%_UP-%T%000006_R-%T%00000601">
+                            <ComObjectRefRef RefId="%AID%_O-%TT%00005_R-%TT%0000501" />
+                            <choose ParamRefId="%AID%_UP-%TT%00006_R-%TT%0000601">
                               <when test="2 3">
-                                <ComObjectRefRef RefId="%AID%_O-%T%000008_R-%T%00000801" />
-                                <ComObjectRefRef RefId="%AID%_O-%T%000009_R-%T%00000901" />
+                                <ComObjectRefRef RefId="%AID%_O-%TT%00008_R-%TT%0000801" />
+                                <ComObjectRefRef RefId="%AID%_O-%TT%00009_R-%TT%0000901" />
                               </when>
                               <when test="2">
-                                <ComObjectRefRef RefId="%AID%_O-%T%000002_R-%T%00000201" />
-                                <ComObjectRefRef RefId="%AID%_O-%T%000006_R-%T%00000601" />
-                                <ComObjectRefRef RefId="%AID%_O-%T%000007_R-%T%00000701" />
+                                <ComObjectRefRef RefId="%AID%_O-%TT%00002_R-%TT%0000201" />
+                                <ComObjectRefRef RefId="%AID%_O-%TT%00006_R-%TT%0000601" />
+                                <ComObjectRefRef RefId="%AID%_O-%TT%00007_R-%TT%0000701" />
                               </when>
                               <when test="3">
-                                <ComObjectRefRef RefId="%AID%_O-%T%000002_R-%T%00000202" />
-                                <ComObjectRefRef RefId="%AID%_O-%T%000010_R-%T%00001001" />
+                                <ComObjectRefRef RefId="%AID%_O-%TT%00002_R-%TT%0000202" />
+                                <ComObjectRefRef RefId="%AID%_O-%TT%00010_R-%TT%0001001" />
                               </when>
                             </choose>
                           </when>
@@ -426,18 +426,18 @@
                       </when>
                     </choose>
                     <!-- Helligkeit -->
-                    <choose ParamRefId="%AID%_UP-%T%000007_R-%T%00000701">
+                    <choose ParamRefId="%AID%_UP-%TT%00007_R-%TT%0000701">
                       <when test="!=0">
                         <ParameterSeparator Id="%AID%_PS-nnn" Text="" UIHint="HorizontalRuler" />
                         <ParameterSeparator Id="%AID%_PS-nnn" Text="Helligkeit" UIHint="Headline" />
-                        <ParameterRefRef RefId="%AID%_UP-%T%000010_R-%T%00001001"  HelpContext="%DOC%" />
-                        <ParameterRefRef RefId="%AID%_UP-%T%000014_R-%T%00001401"  HelpContext="%DOC%" />
-                        <choose ParamRefId="%AID%_UP-%T%000014_R-%T%00001401">
+                        <ParameterRefRef RefId="%AID%_UP-%TT%00010_R-%TT%0001001"  HelpContext="%DOC%" />
+                        <ParameterRefRef RefId="%AID%_UP-%TT%00014_R-%TT%0001401"  HelpContext="%DOC%" />
+                        <choose ParamRefId="%AID%_UP-%TT%00014_R-%TT%0001401">
                           <when test="0">
-                            <ParameterRefRef RefId="%AID%_UP-%T%000011_R-%T%00001101"  HelpContext="%DOC%" />
+                            <ParameterRefRef RefId="%AID%_UP-%TT%00011_R-%TT%0001101"  HelpContext="%DOC%" />
                           </when>
                           <when test="1">
-                            <ParameterRefRef RefId="%AID%_UP-%T%000011_R-%T%00001102"  HelpContext="%DOC%" />
+                            <ParameterRefRef RefId="%AID%_UP-%TT%00011_R-%TT%0001102"  HelpContext="%DOC%" />
                           </when>
                         </choose>
                         <!-- Lux send cycle -->
@@ -452,47 +452,47 @@
                             <Column Id="%AID%_PB-nnn_C-3" Name="Col3" Width="20%" />
                           </Columns>
                           <ParameterSeparator Id="%AID%_PS-nnn" Text="Helligkeitswert zyklisch senden alle" Cell="1,1" />
-                          <ParameterRefRef RefId="%AID%_UP-%T%000013_R-%T%00001301" Cell="1,2"  HelpContext="PM-Helligkeitswert-zyklisch-senden" />
-                          <ParameterRefRef RefId="%AID%_UP-%T%000012_R-%T%00001201" Cell="1,3"  HelpContext="PM-Helligkeitswert-zyklisch-senden" />
+                          <ParameterRefRef RefId="%AID%_UP-%TT%00013_R-%TT%0001301" Cell="1,2"  HelpContext="PM-Helligkeitswert-zyklisch-senden" />
+                          <ParameterRefRef RefId="%AID%_UP-%TT%00012_R-%TT%0001201" Cell="1,3"  HelpContext="PM-Helligkeitswert-zyklisch-senden" />
                         </ParameterBlock>
                         <!-- KO für Helligkeit einschalten -->
-                        <choose ParamRefId="%AID%_UP-%T%000011_R-%T%00001101">
+                        <choose ParamRefId="%AID%_UP-%TT%00011_R-%TT%0001101">
                           <when test="!=0">
-                            <ComObjectRefRef RefId="%AID%_O-%T%000001_R-%T%00000101" />
+                            <ComObjectRefRef RefId="%AID%_O-%TT%00001_R-%TT%0000101" />
                           </when>
                         </choose>
-                        <choose ParamRefId="%AID%_UP-%T%000013_R-%T%00001301">
+                        <choose ParamRefId="%AID%_UP-%TT%00013_R-%TT%0001301">
                           <when test="!=0">
-                            <ComObjectRefRef RefId="%AID%_O-%T%000001_R-%T%00000101" />
+                            <ComObjectRefRef RefId="%AID%_O-%TT%00001_R-%TT%0000101" />
                           </when>
                         </choose>
                         <ParameterSeparator Id="%AID%_PS-nnn" Text="Es wird keine Helligkeit auf den Bus gesendet, wenn beide Sendewerte oben auf 0 stehen." />
                       </when>
                     </choose>
                     <!-- LED -->
-                    <choose ParamRefId="%AID%_UP-%T%000006_R-%T%00000601">
+                    <choose ParamRefId="%AID%_UP-%TT%00006_R-%TT%0000601">
                       <when test="!=0">
                         <ParameterSeparator Id="%AID%_PS-nnn" Text="" UIHint="HorizontalRuler" />
                         <ParameterSeparator Id="%AID%_PS-nnn" Text="LED" UIHint="Headline" />
-                        <ParameterRefRef RefId="%AID%_UP-%T%000004_R-%T%00000401"  HelpContext="PM-LED-Dropdown" />
-                        <ParameterRefRef RefId="%AID%_UP-%T%000005_R-%T%00000501"  HelpContext="PM-LED-Dropdown" />
+                        <ParameterRefRef RefId="%AID%_UP-%TT%00004_R-%TT%0000401"  HelpContext="PM-LED-Dropdown" />
+                        <ParameterRefRef RefId="%AID%_UP-%TT%00005_R-%TT%0000501"  HelpContext="PM-LED-Dropdown" />
                         <!-- KO für LED Präsenz einschalten -->
-                        <choose ParamRefId="%AID%_UP-%T%000004_R-%T%00000401">
+                        <choose ParamRefId="%AID%_UP-%TT%00004_R-%TT%0000401">
                           <when test="3">
-                            <ComObjectRefRef RefId="%AID%_O-%T%000003_R-%T%00000301" />
-                            <Assign TargetParamRefRef="%AID%_P-%T%000009_R-%T%00000901" Value="1" />
+                            <ComObjectRefRef RefId="%AID%_O-%TT%00003_R-%TT%0000301" />
+                            <Assign TargetParamRefRef="%AID%_P-%TT%00009_R-%TT%0000901" Value="1" />
                           </when>
                         </choose>
                         <!-- KO für LED Bewegung einschalten -->
-                        <choose ParamRefId="%AID%_UP-%T%000005_R-%T%00000501">
+                        <choose ParamRefId="%AID%_UP-%TT%00005_R-%TT%0000501">
                           <when test="3">
-                            <ComObjectRefRef RefId="%AID%_O-%T%000004_R-%T%00000401" />
-                            <Assign TargetParamRefRef="%AID%_P-%T%000009_R-%T%00000901" Value="1" />
+                            <ComObjectRefRef RefId="%AID%_O-%TT%00004_R-%TT%0000401" />
+                            <Assign TargetParamRefRef="%AID%_P-%TT%00009_R-%TT%0000901" Value="1" />
                           </when>
                         </choose>
-                        <choose ParamRefId="%AID%_P-%T%000009_R-%T%00000901">
+                        <choose ParamRefId="%AID%_P-%TT%00009_R-%TT%0000901">
                           <when test="1">
-                            <ParameterRefRef RefId="%AID%_UP-%T%000008_R-%T%00000801"  HelpContext="PM-LEDs-nach-Neustart-lesen" />
+                            <ParameterRefRef RefId="%AID%_UP-%TT%00008_R-%TT%0000801"  HelpContext="PM-LEDs-nach-Neustart-lesen" />
                           </when>
                         </choose>
                       </when>
