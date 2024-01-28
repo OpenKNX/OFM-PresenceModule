@@ -34,6 +34,8 @@
                   <Enumeration Text="PIR-Sensor (digital)" Value="1" Id="%AID%_PT-PresenceSensor_EN-1" />
                   <Enumeration Text="(HF) MR24xxB1" Value="2" Id="%AID%_PT-PresenceSensor_EN-2" />
                   <Enumeration Text="(HF) HLK-LD2420" Value="3" Id="%AID%_PT-PresenceSensor_EN-3" />
+                  <Enumeration Text="(HF) HLK-LD2420 + PIR (digital)" Value="4" Id="%AID%_PT-PresenceSensor_EN-4" />
+                  <Enumeration Text="(HF) HLK-LD2420 + PIR (analog)" Value="5" Id="%AID%_PT-PresenceSensor_EN-5" />
                 </TypeRestriction>
               </ParameterType>
               <ParameterType Id="%AID%_PT-LuxSensor" Name="LuxSensor">
@@ -255,19 +257,19 @@
                   <Enumeration Text="6 - Hotelzimmer (Wandmontage, 66 m²)" Value="7" Id="%AID%_PT-HfScenario_EN-7" />
                 </TypeRestriction>
               </ParameterType>
-              <ParameterType Id="%AID%_PT-HfSensitivity" Name="HfSensitivity">
+              <ParameterType Id="%AID%_PT-Sensitivity" Name="Sensitivity">
                 <TypeRestriction Base="Value" SizeInBit="4">
-                  <Enumeration Text="Letzter gesetzter Wert" Value="0" Id="%AID%_PT-HfSensitivity_EN-0" />
-                  <Enumeration Text="10% Empfindlichkeit" Value="1" Id="%AID%_PT-HfSensitivity_EN-1" />
-                  <Enumeration Text="20% Empfindlichkeit" Value="2" Id="%AID%_PT-HfSensitivity_EN-2" />
-                  <Enumeration Text="30% Empfindlichkeit" Value="3" Id="%AID%_PT-HfSensitivity_EN-3" />
-                  <Enumeration Text="40% Empfindlichkeit" Value="4" Id="%AID%_PT-HfSensitivity_EN-4" />
-                  <Enumeration Text="50% Empfindlichkeit" Value="5" Id="%AID%_PT-HfSensitivity_EN-5" />
-                  <Enumeration Text="60% Empfindlichkeit" Value="6" Id="%AID%_PT-HfSensitivity_EN-6" />
-                  <Enumeration Text="70% Empfindlichkeit" Value="7" Id="%AID%_PT-HfSensitivity_EN-7" />
-                  <Enumeration Text="80% Empfindlichkeit" Value="8" Id="%AID%_PT-HfSensitivity_EN-8" />
-                  <Enumeration Text="90% Empfindlichkeit" Value="9" Id="%AID%_PT-HfSensitivity_EN-9" />
-                  <Enumeration Text="100% Empfindlichkeit" Value="10" Id="%AID%_PT-HfSensitivity_EN-10" />
+                  <Enumeration Text="Letzter gesetzter Wert" Value="0" Id="%AID%_PT-Sensitivity_EN-0" />
+                  <Enumeration Text="10% Empfindlichkeit" Value="1" Id="%AID%_PT-Sensitivity_EN-1" />
+                  <Enumeration Text="20% Empfindlichkeit" Value="2" Id="%AID%_PT-Sensitivity_EN-2" />
+                  <Enumeration Text="30% Empfindlichkeit" Value="3" Id="%AID%_PT-Sensitivity_EN-3" />
+                  <Enumeration Text="40% Empfindlichkeit" Value="4" Id="%AID%_PT-Sensitivity_EN-4" />
+                  <Enumeration Text="50% Empfindlichkeit" Value="5" Id="%AID%_PT-Sensitivity_EN-5" />
+                  <Enumeration Text="60% Empfindlichkeit" Value="6" Id="%AID%_PT-Sensitivity_EN-6" />
+                  <Enumeration Text="70% Empfindlichkeit" Value="7" Id="%AID%_PT-Sensitivity_EN-7" />
+                  <Enumeration Text="80% Empfindlichkeit" Value="8" Id="%AID%_PT-Sensitivity_EN-8" />
+                  <Enumeration Text="90% Empfindlichkeit" Value="9" Id="%AID%_PT-Sensitivity_EN-9" />
+                  <Enumeration Text="100% Empfindlichkeit" Value="10" Id="%AID%_PT-Sensitivity_EN-10" />
                 </TypeRestriction>
               </ParameterType>
               <ParameterType Id="%AID%_PT-DayPhaseFunction" Name="DayPhaseFunction">
@@ -293,7 +295,8 @@
                 <Parameter Id="%AID%_UP-%TT%00006" Name="HWPresence" Offset="0" BitOffset="5" ParameterType="%AID%_PT-PresenceSensor" Text="Präsenz-Sensor" Value="0" />
                 <Parameter Id="%AID%_UP-%TT%00007" Name="HWLux" Offset="1" BitOffset="0" ParameterType="%AID%_PT-LuxSensor" Text="Helligkeits-Sensor" Value="0" />
                 <Parameter Id="%AID%_UP-%TT%00008" Name="ReadLed" Offset="1" BitOffset="2" ParameterType="%AID%_PT-OnOffYesNo" Text="Wert nach einem Neustart lesen?" Value="0" />
-                <!-- 5 Bit frei -->
+                <Parameter Id="%AID%_UP-%TT%00020" Name="PirSensitivity" ParameterType="%AID%_PT-Sensitivity" Offset="0" BitOffset="3" Text="PIR-Empfindlichkeit" Value="0" />
+                <!-- 1 Bit frei -->
               </Union>
               <!-- internal (ets only) parameters, invisible but necessary -->
               <Parameter Id="%AID%_P-%TT%00009" Name="LedFromKO" ParameterType="%AID%_PT-CheckBox" Text="Irgendeine Led vom KO lesen" Value="0" Access="None" />
@@ -314,7 +317,7 @@
               <Union SizeInBit="32">
                 <Memory CodeSegment="%AID%_RS-04-00000" Offset="8" BitOffset="0" />
                 <Parameter Id="%AID%_UP-%TT%00015" Name="HfScenario" ParameterType="%AID%_PT-HfScenario" Offset="0" BitOffset="0" Text="Detektions-Szenario" Value="0" />
-                <Parameter Id="%AID%_UP-%TT%00016" Name="HfSensitivity" ParameterType="%AID%_PT-HfSensitivity" Offset="0" BitOffset="3" Text="Sensor-Empfindlichkeit" Value="0" />
+                <Parameter Id="%AID%_UP-%TT%00016" Name="HfSensitivity" ParameterType="%AID%_PT-Sensitivity" Offset="0" BitOffset="3" Text="Sensor-Empfindlichkeit" Value="0" />
                 <!-- 1 Bit frei -->
                 <Parameter Id="%AID%_UP-%TT%00017" Name="HfDelayTime" ParameterType="%AID%_PT-HfDelayTime" Offset="1" BitOffset="0" Text="Verzögerung" Value="30" />
                 <Parameter Id="%AID%_UP-%TT%00018" Name="HfRangeGateMin" ParameterType="%AID%_PT-HfRangeGate" Offset="3" BitOffset="0" Text="Mindestentfernung" Value="0" />
@@ -342,6 +345,7 @@
               <ParameterRef Id="%AID%_UP-%TT%00017_R-%TT%0001701" RefId="%AID%_UP-%TT%00017" SuffixText="Sekunden" />
               <ParameterRef Id="%AID%_UP-%TT%00018_R-%TT%0001801" RefId="%AID%_UP-%TT%00018" SuffixText="x0,7 m" />
               <ParameterRef Id="%AID%_UP-%TT%00019_R-%TT%0001901" RefId="%AID%_UP-%TT%00019" SuffixText="x0,7 m" />
+              <ParameterRef Id="%AID%_UP-%TT%00020_R-%TT%0002001" RefId="%AID%_UP-%TT%00020" />
             </ParameterRefs>
             <ComObjectTable>
               <ComObject Id="%AID%_O-%TT%00001" Name="LuxOut" Text="Ausgang Helligkeitssensor" Number="20" FunctionText="Messwert in Lux" ObjectSize="2 Bytes" ReadFlag="Enabled" WriteFlag="Disabled" CommunicationFlag="Enabled" TransmitFlag="Enabled" UpdateFlag="Disabled" ReadOnInitFlag="Disabled" DatapointType="DPST-9-4" />
@@ -352,8 +356,9 @@
               <ComObject Id="%AID%_O-%TT%00003" Name="LEDPresence" Text="Eingang LED Präsenz" Number="24" FunctionText="Schalten/Status" ObjectSize="1 Bit" ReadFlag="Enabled" WriteFlag="Enabled" CommunicationFlag="Enabled" TransmitFlag="Disabled" UpdateFlag="Enabled" ReadOnInitFlag="Disabled" DatapointType="DPST-1-1" />
               <ComObject Id="%AID%_O-%TT%00004" Name="LEDMove" Text="Eingang LED Bewegung" Number="25" FunctionText="Schalten/Status" ObjectSize="1 Bit" ReadFlag="Enabled" WriteFlag="Enabled" CommunicationFlag="Enabled" TransmitFlag="Disabled" UpdateFlag="Enabled" ReadOnInitFlag="Disabled" DatapointType="DPST-1-1" />
               <ComObject Id="%AID%_O-%TT%00007" Name="Scenario" Text="Eingang Szenario" Number="26" FunctionText="Wert/Status" ObjectSize="1 Byte" ReadFlag="Enabled" WriteFlag="Enabled" CommunicationFlag="Enabled" TransmitFlag="Disabled" UpdateFlag="Disabled" ReadOnInitFlag="Disabled" DatapointType="DPST-5-5" />
-              <ComObject Id="%AID%_O-%TT%00008" Name="Sensitivity" Text="Eingang Empfindlichkeit" Number="27" FunctionText="Wert/Status" ObjectSize="1 Byte" ReadFlag="Enabled" WriteFlag="Enabled" CommunicationFlag="Enabled" TransmitFlag="Disabled" UpdateFlag="Disabled" ReadOnInitFlag="Disabled" DatapointType="DPST-5-5" />
+              <ComObject Id="%AID%_O-%TT%00008" Name="HfSensitivity" Text="Eingang Hf-Empfindlichkeit" Number="27" FunctionText="Wert/Status" ObjectSize="1 Byte" ReadFlag="Enabled" WriteFlag="Enabled" CommunicationFlag="Enabled" TransmitFlag="Disabled" UpdateFlag="Disabled" ReadOnInitFlag="Disabled" DatapointType="DPST-5-5" />
               <ComObject Id="%AID%_O-%TT%00009" Name="HfReset" Text="Reset HF-Sensor" Number="28" FunctionText="Trigger" ObjectSize="1 Bit" ReadFlag="Disabled" WriteFlag="Enabled" CommunicationFlag="Enabled" TransmitFlag="Disabled" UpdateFlag="Disabled" ReadOnInitFlag="Disabled" DatapointType="DPST-1-1" />
+              <ComObject Id="%AID%_O-%TT%00011" Name="PirSensitivity" Text="Eingang Pir-Empfindlichkeit" Number="30" FunctionText="Wert/Status" ObjectSize="1 Byte" ReadFlag="Enabled" WriteFlag="Enabled" CommunicationFlag="Enabled" TransmitFlag="Disabled" UpdateFlag="Disabled" ReadOnInitFlag="Disabled" DatapointType="DPST-5-5" />
             </ComObjectTable>
             <ComObjectRefs>
               <ComObjectRef Id="%AID%_O-%TT%00001_R-%TT%0000101" RefId="%AID%_O-%TT%00001" />
@@ -367,6 +372,7 @@
               <ComObjectRef Id="%AID%_O-%TT%00008_R-%TT%0000801" RefId="%AID%_O-%TT%00008" />
               <ComObjectRef Id="%AID%_O-%TT%00009_R-%TT%0000901" RefId="%AID%_O-%TT%00009" />
               <ComObjectRef Id="%AID%_O-%TT%00010_R-%TT%0001001" RefId="%AID%_O-%TT%00010" />
+              <ComObjectRef Id="%AID%_O-%TT%00011_R-%TT%0001101" RefId="%AID%_O-%TT%00011" />
             </ComObjectRefs>
           </Static>
           <Dynamic>
@@ -390,10 +396,13 @@
                       <when test="2">
                         <ParameterRefRef RefId="%AID%_UP-%TT%00015_R-%TT%0001501" HelpContext="%DOC%" />
                       </when>
-                      <when test="2 3">
+                      <when test="2 3 4 5">
                         <ParameterRefRef RefId="%AID%_UP-%TT%00016_R-%TT%0001601" />
                       </when>
-                      <when test="3">
+                      <when test="5">
+                        <ParameterRefRef RefId="%AID%_UP-%TT%00020_R-%TT%0002001" />
+                      </when>
+                      <when test="3 4 5">
                         <ParameterRefRef RefId="%AID%_UP-%TT%00017_R-%TT%0001701" />
                         <ParameterRefRef RefId="%AID%_UP-%TT%00018_R-%TT%0001801" />
                         <ParameterRefRef RefId="%AID%_UP-%TT%00019_R-%TT%0001901" />
@@ -407,7 +416,7 @@
                           <when test="!=0">
                             <ComObjectRefRef RefId="%AID%_O-%TT%00005_R-%TT%0000501" />
                             <choose ParamRefId="%AID%_UP-%TT%00006_R-%TT%0000601">
-                              <when test="2 3">
+                              <when test="2 3 4 5">
                                 <ComObjectRefRef RefId="%AID%_O-%TT%00008_R-%TT%0000801" />
                                 <ComObjectRefRef RefId="%AID%_O-%TT%00009_R-%TT%0000901" />
                               </when>
@@ -416,9 +425,12 @@
                                 <ComObjectRefRef RefId="%AID%_O-%TT%00006_R-%TT%0000601" />
                                 <ComObjectRefRef RefId="%AID%_O-%TT%00007_R-%TT%0000701" />
                               </when>
-                              <when test="3">
+                              <when test="3 4 5">
                                 <ComObjectRefRef RefId="%AID%_O-%TT%00002_R-%TT%0000202" />
                                 <ComObjectRefRef RefId="%AID%_O-%TT%00010_R-%TT%0001001" />
+                              </when>
+                              <when test="5">
+                                <ComObjectRefRef RefId="%AID%_O-%TT%00011_R-%TT%0001101" />
                               </when>
                             </choose>
                           </when>
