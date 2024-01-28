@@ -31,7 +31,7 @@
               <ParameterType Id="%AID%_PT-PresenceSensor" Name="PresenceSensor">
                 <TypeRestriction Base="Value" SizeInBit="3">
                   <Enumeration Text="kein Sensor" Value="0" Id="%AID%_PT-PresenceSensor_EN-0" />
-                  <Enumeration Text="PIR-Sensor" Value="1" Id="%AID%_PT-PresenceSensor_EN-1" />
+                  <Enumeration Text="PIR-Sensor (digital)" Value="1" Id="%AID%_PT-PresenceSensor_EN-1" />
                   <Enumeration Text="(HF) MR24xxB1" Value="2" Id="%AID%_PT-PresenceSensor_EN-2" />
                   <Enumeration Text="(HF) HLK-LD2420" Value="3" Id="%AID%_PT-PresenceSensor_EN-3" />
                 </TypeRestriction>
@@ -339,9 +339,9 @@
               <ParameterRef Id="%AID%_UP-%TT%00014_R-%TT%0001401" RefId="%AID%_UP-%TT%00014" />
               <ParameterRef Id="%AID%_UP-%TT%00015_R-%TT%0001501" RefId="%AID%_UP-%TT%00015" />
               <ParameterRef Id="%AID%_UP-%TT%00016_R-%TT%0001601" RefId="%AID%_UP-%TT%00016" />
-              <ParameterRef Id="%AID%_UP-%TT%00017_R-%TT%0001701" RefId="%AID%_UP-%TT%00017" />
-              <ParameterRef Id="%AID%_UP-%TT%00018_R-%TT%0001801" RefId="%AID%_UP-%TT%00018" />
-              <ParameterRef Id="%AID%_UP-%TT%00019_R-%TT%0001901" RefId="%AID%_UP-%TT%00019" />
+              <ParameterRef Id="%AID%_UP-%TT%00017_R-%TT%0001701" RefId="%AID%_UP-%TT%00017" SuffixText="Sekunden" />
+              <ParameterRef Id="%AID%_UP-%TT%00018_R-%TT%0001801" RefId="%AID%_UP-%TT%00018" SuffixText="x0,7 m" />
+              <ParameterRef Id="%AID%_UP-%TT%00019_R-%TT%0001901" RefId="%AID%_UP-%TT%00019" SuffixText="x0,7 m" />
             </ParameterRefs>
             <ComObjectTable>
               <ComObject Id="%AID%_O-%TT%00001" Name="LuxOut" Text="Ausgang Helligkeitssensor" Number="20" FunctionText="Messwert in Lux" ObjectSize="2 Bytes" ReadFlag="Enabled" WriteFlag="Disabled" CommunicationFlag="Enabled" TransmitFlag="Enabled" UpdateFlag="Disabled" ReadOnInitFlag="Disabled" DatapointType="DPST-9-4" />
