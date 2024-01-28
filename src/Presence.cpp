@@ -261,51 +261,56 @@ void Presence::startSensors()
 void Presence::switchHfSensor(bool iOn)
 {
 #ifdef HF_POWER_PIN
-    #ifndef BOARD_AB_HFPM_HLKLD2420
-    if (smartmf.hardwareRevision() == 1)
+    switch (ParamPM_HWPresence)
     {
-        iOn = !iOn;
-    }
-    else
-    {
-        // we check für specific serial numbers, which have an inverted HF_POWER_PIN (hardware bug)
-        const uint8_t specialCount = 11;
-        const uint64_t special[specialCount] = {
-            // 0x1334842F,  // test - Devel Board Waldemar, where power pin has no function
-            // 0x47591F2E,  // Waldemar Wohnzimmer
-            0x23534121,
-            0x23364521,
-            0x23503321,
-            0x23464121,
-            0x23534821,
-            0x17493927,
-            0x17265A22,
-            0x173C1627,
-            0x175A3527,
-            0x173C1E27};
-
-        uint32_t lSerial = knx.platform().uniqueSerialNumber();
-        SERIAL_DEBUG.printf("\nswitchHfSensor: Turning Sensor on: %i\n", iOn);
-        SERIAL_DEBUG.printf("Serial HEX 32: %08lX\n", lSerial);
-        // if (0x2F843413 == lSerial) {
-        //     Serial.println("Match Waldemar");
-        // }
-        for (uint8_t i = 0; i < specialCount; i++)
-            if (lSerial == special[i])
+        case VAL_PM_PS_Hf_MR24xxB1:
+            if (smartmf.hardwareRevision() == 1)
             {
-                SERIAL_DEBUG.printf("switchHfSensor: Special board number %i found\n", i);
                 iOn = !iOn;
-                break;
             }
-    }
-    #endif
+            else
+            {
+                // we check für specific serial numbers, which have an inverted HF_POWER_PIN (hardware bug)
+                const uint8_t specialCount = 11;
+                const uint64_t special[specialCount] = {
+                    // 0x1334842F,  // test - Devel Board Waldemar, where power pin has no function
+                    // 0x47591F2E,  // Waldemar Wohnzimmer
+                    0x23534121,
+                    0x23364521,
+                    0x23503321,
+                    0x23464121,
+                    0x23534821,
+                    0x17493927,
+                    0x17265A22,
+                    0x173C1627,
+                    0x175A3527,
+                    0x173C1E27};
 
-    // HLK-LD2420 sensor does not always connect correctly after power cycle,
-    // let's keep it always on for now
-    #ifndef BOARD_AB_HFPM_HLKLD2420
-    SERIAL_DEBUG.printf("switchHfSensor: HF_POWER_PIN will be set to: %i\n", iOn);
-    digitalWrite(HF_POWER_PIN, iOn ? HIGH : LOW);
-    #endif
+                uint32_t lSerial = knx.platform().uniqueSerialNumber();
+                SERIAL_DEBUG.printf("\nswitchHfSensor: Turning Sensor on: %i\n", iOn);
+                SERIAL_DEBUG.printf("Serial HEX 32: %08lX\n", lSerial);
+                // if (0x2F843413 == lSerial) {
+                //     Serial.println("Match Waldemar");
+                // }
+                for (uint8_t i = 0; i < specialCount; i++)
+                    if (lSerial == special[i])
+                    {
+                        SERIAL_DEBUG.printf("switchHfSensor: Special board number %i found\n", i);
+                        iOn = !iOn;
+                        break;
+                    }
+            }
+
+            SERIAL_DEBUG.printf("switchHfSensor: HF_POWER_PIN will be set to: %i\n", iOn);
+            digitalWrite(HF_POWER_PIN, iOn ? HIGH : LOW);
+            break;
+        case VAL_PM_PS_Hf_HLKLD2420:
+            // HLK-LD2420 sensor does not always connect correctly after power cycle,
+            // let's keep it always on for now
+            break;
+        default:
+            break;
+    }
 #endif
 }
 
@@ -622,17 +627,23 @@ void Presence::setup()
 #ifdef HF_POWER_PIN
         pinMode(HF_POWER_PIN, OUTPUT);
 
-    #if BOARD_AB_HFPM_HLKLD2420
-        // at startup, we turn HF-Sensor on (at least for now)
-        digitalWrite(HF_POWER_PIN, HIGH);
+        switch (ParamPM_HWPresence)
+        {
+            case VAL_PM_PS_Hf_MR24xxB1:
+                // at startup, we turn HF-Sensor off
+                digitalWrite(HF_POWER_PIN, LOW);
+                break;
+            case VAL_PM_PS_Hf_HLKLD2420:
+                // at startup, we turn HF-Sensor on (at least for now)
+                digitalWrite(HF_POWER_PIN, HIGH);
 
-        // ensure no data lost even for sensor raw data
-        // up to 1288 bytes are send by the sensor at once
-        HF_SERIAL.setFIFOSize(1300);
-    #else
-        // at startup, we turn HF-Sensor off
-        digitalWrite(HF_POWER_PIN, LOW);
-    #endif
+                // ensure no data lost even for sensor raw data
+                // up to 1288 bytes are send by the sensor at once
+                HF_SERIAL.setFIFOSize(1300);
+                break;
+            default:
+                break;
+        }
 
         HF_SERIAL.setRX(HF_UART_RX_PIN);
         HF_SERIAL.setTX(HF_UART_TX_PIN);
