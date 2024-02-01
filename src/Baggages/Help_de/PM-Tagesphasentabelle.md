@@ -1,4 +1,4 @@
-﻿### **Phase, Name, Szene**
+﻿### Phase, Name, Szene
 
 In der folgenden Tabelle kann jeder Phase ein Name zugewiesen werden und eine Szene, über die diese Phase aufgerufen werden kann.
 

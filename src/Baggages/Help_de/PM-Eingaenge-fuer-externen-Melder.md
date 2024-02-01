@@ -1,4 +1,4 @@
-﻿### **Eingänge für externen Melder**
+﻿### Eingänge für externen Melder
 
 Dieser Melder kann Präsenz- bzw. Bewegungssignale von externen Meldern verarbeiten. Die externen Melder sind dann Slaves, der (virtuelle) PM agiert als Master.
 
@@ -16,7 +16,7 @@ Für die Applikation ist es somit erwartungskonform, wenn ein Bewegungssignal zu
 
 Damit mehrere Slaves an den Melder ohne weitere Logik angeschlossen werden können, erlaubt jeder Eingang ein triggerndes Signal (sich wiederholende EIN-Signale). Bevorzugt werden aber schaltende Signale (EIN bei Bewegung/Präsenz, AUS bei deren Ende). Schaltende Signale erlauben kürzere Nachlaufzeiten und exaktere Einstellungen. Hat man mehrere schaltende Slaves, dann ist die Empfehlung, diese über ein ODER der enthaltenen Logik zusammenzuführen und dann als schaltendes Signal zu nutzen.
 
-#### **Empfohlene Auswahl**
+#### Empfohlene Auswahl
 
 Diese Auswahlbox unterstützt einige klassische Konstellationen:
 

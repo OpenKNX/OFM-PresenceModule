@@ -1,4 +1,4 @@
-﻿### **Startverzögerung für diesen Kanal**
+﻿### Startverzögerung für diesen Kanal
 
 Neben "Allgemeine Parameter -> Zeit bis das Gerät nach einem Neustart aktiv wird" kann auch noch pro Kanal eine Startverzögerung sinnvoll sein.
 

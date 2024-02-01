@@ -128,11 +128,17 @@
 
 // Presence Hardware
 #define VAL_PM_PS_None 0
-#define VAL_PM_PS_Pir 1
+#define VAL_PM_PS_Pir_Digital 1
 #define VAL_PM_PS_Hf_MR24xxB1 2
 #define VAL_PM_PS_Hf_HLKLD2420 3
+#define VAL_PM_PS_Hf_HLKLD2420_Pir_Digital 4
+#define VAL_PM_PS_Hf_HLKLD2420_Pir_Analog 5
 
-// Presence Hardware
+// PIR Hardware
+#define VAL_PM_PIR_Analog_Trigger_Min 380
+#define VAL_PM_PIR_Analog_Trigger_Max 680
+
+// Brightness Hardware
 #define VAL_PM_LUX_None 0
 #define VAL_PM_LUX_VEML 1
 #define VAL_PM_LUX_OPT 2
@@ -274,7 +280,6 @@ class PresenceChannel : public OpenKNX::Channel
     PresenceChannel(uint8_t iChannelNumber);
     ~PresenceChannel();
 
-    static void setPresence(Presence *iPresence);
     static void setDayPhaseParameterSize(uint8_t iSize);
 
     void processInputKo(GroupObject &iKo, int8_t iKoIndex = -1);

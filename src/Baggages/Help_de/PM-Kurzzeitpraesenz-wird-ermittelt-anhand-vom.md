@@ -1,4 +1,4 @@
-﻿### **Kurzzeitpräsenz wird ermittelt anhand vom**
+﻿### Kurzzeitpräsenz wird ermittelt anhand vom
 
 Hier kann eingestellt werden, anhand welcher Information die Kurzzeitpräsenz ermittelt wird. 
 

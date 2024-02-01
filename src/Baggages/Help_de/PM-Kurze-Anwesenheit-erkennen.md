@@ -1,4 +1,4 @@
-﻿### **Kurze Anwesenheit erkennen?**
+﻿### Kurze Anwesenheit erkennen?
 
 Es gibt Situationen, in denen man einen Raum nur kurz betritt und schnell danach wieder verlässt. Solche Situationen können erkannt werden und dann kann das Licht entsprechend früher ausgemacht werden.
 

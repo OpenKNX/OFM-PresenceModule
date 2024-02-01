@@ -1,4 +1,4 @@
-﻿### **'Automatik übersteuern'=AUS heißt 'Raum verlassen'**
+﻿### 'Automatik übersteuern'=AUS heißt 'Raum verlassen'
 
 Bei "Nein" wird ein "Licht aus" im Automatikmodus als "Licht ausschalten solange Präsenz im Raum festgestellt wird" interpretiert (das obige Beispiel "Fernsehen"). Da Nachlaufzeiten üblicherweise größer 60 Sekunden sind, wird erst nach dem Ablaufen der Nachlaufzeit ohne Präsenz das Licht erneut angehen.
 

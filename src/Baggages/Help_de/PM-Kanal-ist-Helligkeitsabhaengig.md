@@ -1,4 +1,4 @@
-﻿### **Kanal ist Helligkeitsabhängig**
+﻿### Kanal ist Helligkeitsabhängig
 
 Ein PM-Kanal berücksichtigt normalerweise eine gemessene Helligkeit bei seinen Ein- und Ausschalt-Vorgängen. Es gibt auch Anwendungsfälle, die unabhängig von der Helligkeit funktionieren sollen, so ist z.B. das Ein- bzw. Ausschalten einer Klimaanlage bei Anwesenheit eher von der Temperatur als von der Helligkeit abhängig.
 

@@ -467,9 +467,10 @@ bool PresenceChannel::checkInitReadRequest(uint8_t iKoIndex, bool isInput)
     bool lResult = false;
     GroupObject *lKo = getKo(iKoIndex);
     // in case KO is uninitialized, we init it here
-    lResult = lKo->commFlag() == ComFlag::Uninitialized;
-    if (!lResult && isInput)
-        lResult = lKo->commFlag() == ComFlag::Transmitting;
+    lResult = !lKo->initialized();
+    // lResult = lKo->commFlag() == ComFlag::Uninitialized;
+    // if (!lResult && isInput)
+    //     lResult = lKo->commFlag() == ComFlag::Transmitting;
     return lResult;
 }
 
@@ -578,7 +579,7 @@ int8_t PresenceChannel::getDayPhaseFromKO()
     {
         lPhaseCount = (uint8_t)getKo(PM_KoKOpDayPhase)->value(getDPT(VAL_DPT_1));
     }
-    else
+    else if (lPhaseCount >= 1) // no calculation if only one phase defined
     {
         uint8_t lScene = (uint8_t)getKo(PM_KoKOpDayPhase)->value(getDPT(VAL_DPT_17)) + 1;
         for (; lPhaseCount >= 0; lPhaseCount--)
@@ -606,7 +607,7 @@ void PresenceChannel::processDayPhasePrepare()
 
 void PresenceChannel::startDayPhase(uint8_t iPhase, bool iForce /* = false*/)
 {
-    // derive day phase from scene number of from parameter
+    // derive day phase from scene number or from parameter
     if (iPhase == 255)
         mNextDayPhase = getDayPhaseFromKO();
     else
@@ -684,6 +685,7 @@ void PresenceChannel::onDayPhase(uint8_t iPhase, bool iIsStartup /* = false */)
 
 bool PresenceChannel::getRawPresence(bool iJustMove /* false */)
 {
+    if (!knx.configured()) return false;
     // iJustMove is ignored, if there is only presence available
     bool lJustMove = false;
     // are external inputs offering presence and move?

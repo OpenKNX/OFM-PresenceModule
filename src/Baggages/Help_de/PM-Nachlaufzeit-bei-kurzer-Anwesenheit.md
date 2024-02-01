@@ -1,4 +1,4 @@
-﻿### **Nachlaufzeit bei kurzer Anwesenheit**
+﻿### Nachlaufzeit bei kurzer Anwesenheit
 
 
 Dies ist die Dauer, die nach einer kurzen Anwesenheit keine Präsenz festgestellt werden darf, damit eine Kurzzeitpräsenz erkannt werden kann. Wird in dieser Zeit eine Präsenz erkannt, so wird aus der Kurzzeitpräsenz eine Langzeitpräsenz.

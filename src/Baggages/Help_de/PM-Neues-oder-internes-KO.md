@@ -1,4 +1,4 @@
-﻿### **Spalte Neues KO erzeugen oder ein bestehendes KO nutzen**
+﻿### Spalte Neues KO erzeugen oder ein bestehendes KO nutzen
 
 In dieser Spalte kann man angeben, ob man eine interne Verknüpfung mit einem anderen KO haben möchte. 
 

@@ -1,4 +1,4 @@
-﻿### **Beschreibung des PM**
+﻿### Beschreibung des PM
 
 Der hier angegebene Name wird an verschiedenen Stellen verwendet, um diesen Kanal wiederzufinden.
 

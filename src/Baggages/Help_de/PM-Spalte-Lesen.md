@@ -1,4 +1,4 @@
-﻿### **Spalte Lesen**
+﻿### Spalte Lesen
 
 In der Spalte Lesen kann man eine Markierung setzen, wenn man möchte, dass für diesen Eingang bei einem Neustart ein Initialwert gelesen wird. 
 

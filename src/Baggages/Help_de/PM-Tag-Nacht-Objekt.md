@@ -1,4 +1,4 @@
-﻿### **Spezialfall Tag-/Nacht-Objekt**
+﻿### Spezialfall Tag-/Nacht-Objekt
 
 Für diejenigen, die nur ein einfaches Tag-/Nacht-Objekt haben wollen, das über ein normales Schaltobjekt umgeschaltet werden kann, bieten die Tagesphasen eine zusätzliche Einstellmöglichkeit.
 

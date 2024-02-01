@@ -72,11 +72,13 @@ class Presence : public OpenKNX::Module
     bool mInfoLedOn = false;
     bool mPresenceChanged = false;
     int8_t mScenario = -1;
-    int8_t mSensitivity = 1;
+    int8_t mHfSensitivity = 1;
     float mDistance = 0;
+    int8_t mPirSensitivity = 1;
 // brightness is missing
 #ifdef HF_POWER_PIN
     Sensor *mPresenceSensor;
+    uint8_t mSerial2Active = false;
 #endif
     Sensor *mBrightnessSensor;
     uint32_t mBrightnessDelay = 0;

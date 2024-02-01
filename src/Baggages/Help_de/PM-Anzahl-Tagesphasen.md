@@ -1,4 +1,4 @@
-﻿### **Anzahl Tagesphasen**
+﻿### Anzahl Tagesphasen
 
 Hier wird die Anzahl der Tagesphasen angegeben, es muss mindestens eine Tagesphase geben. Das Maximum sind 4 Tagesphasen.
 
