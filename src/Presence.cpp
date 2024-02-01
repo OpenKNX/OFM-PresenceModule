@@ -492,11 +492,10 @@ void Presence::processHardwarePresence()
                 if (Sensor::measureValue(MeasureType::Pres, lValue) && lValue != mPresenceCombined)
                 {
                     mPresenceCombined = lValue;
-                    bool lPresence = lValue > -1;
+                    bool lPresence = lValue == 1;
                     if (lPresence != mPresence)
                     {
                         mPresence = lPresence;
-                        logDebugP("mPresence: %i", mPresence);
                         processLED(mPresence, CallerPresence);
                         knx.getGroupObject(PM_KoPresenceOut).value(mPresence, getDPT(VAL_DPT_1));
                         if (mPresence)
