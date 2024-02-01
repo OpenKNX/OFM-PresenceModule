@@ -453,19 +453,19 @@ void Presence::processHardwarePresence()
                 }
                 if (Sensor::measureValue(MeasureType::Scenario, lValue))
                 {
-                    GroupObject &lKo = knx.getGroupObject(PM_KoScenario);
                     if (mScenario != (int8_t)lValue)
                     {
                         mScenario = (int8_t)lValue;
+                        GroupObject &lKo = knx.getGroupObject(PM_KoScenario);
                         lKo.value(mScenario, getDPT(VAL_DPT_5));
                     }
                 }
                 if (Sensor::measureValue(MeasureType::Sensitivity, lValue))
                 {
-                    GroupObject &lKo = knx.getGroupObject(PM_KoHfSensitivity);
                     if (mHfSensitivity != (int8_t)lValue)
                     {
                         mHfSensitivity = (int8_t)lValue;
+                        GroupObject &lKo = knx.getGroupObject(PM_KoHfSensitivity);
                         lKo.value(mHfSensitivity, getDPT(VAL_DPT_5));
                     }
                 }
@@ -489,19 +489,19 @@ void Presence::processHardwarePresence()
                 }
                 if (Sensor::measureValue(MeasureType::Sensitivity, lValue))
                 {
-                    GroupObject &lKo = knx.getGroupObject(PM_KoHfSensitivity);
                     if (mHfSensitivity != (int8_t)lValue)
                     {
                         mHfSensitivity = (int8_t)lValue;
+                        GroupObject &lKo = knx.getGroupObject(PM_KoHfSensitivity);
                         lKo.value(mHfSensitivity, getDPT(VAL_DPT_5));
                     }
                 }
                 if (Sensor::measureValue(MeasureType::Distance, lValue))
                 {
-                    GroupObject &lKo = knx.getGroupObject(PM_KoDistanceOut);
                     if (mDistance != lValue)
                     {
                         mDistance = lValue;
+                        GroupObject &lKo = knx.getGroupObject(PM_KoMoveSpeedOut);
                         lKo.value(mDistance, getDPT(VAL_DPT_7));
                     }
                 }
