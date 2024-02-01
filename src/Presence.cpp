@@ -240,12 +240,28 @@ void Presence::startSensors()
     switch (ParamPM_HWPresence)
     {
         case VAL_PM_PS_Hf_MR24xxB1:
+            logDebugP("Using HF sensor MR24xxB1");
+
             mPresenceSensor = Sensor::factory(SENS_MR24xxB1, MeasureType::Pres);
             static_cast<SensorMR24xxB1 *>(mPresenceSensor)->defaultSensorParameters(ParamPM_HfScenario - 1, ParamPM_HfSensitivity);
             break;
         case VAL_PM_PS_Hf_HLKLD2420:
         case VAL_PM_PS_Hf_HLKLD2420_Pir_Digital:
         case VAL_PM_PS_Hf_HLKLD2420_Pir_Analog:
+            logDebugP("Using HF sensor HLKLD2420");
+            if (ParamPM_HWPresence == VAL_PM_PS_Hf_HLKLD2420_Pir_Digital)
+            {
+                logIndentUp();
+                logDebugP("with PIR (digital)");
+                logIndentDown();
+            }
+            else if (ParamPM_HWPresence == VAL_PM_PS_Hf_HLKLD2420_Pir_Analog)
+            {
+                logIndentUp();
+                logDebugP("with PIR (analog)");
+                logIndentDown();
+            }
+
             mPresenceSensor = Sensor::factory(SENS_HLKLD2420, MeasureType::Pres);
             static_cast<SensorHLKLD2420 *>(mPresenceSensor)->defaultSensorParameters(ParamPM_HfSensitivity, ParamPM_HfDelayTime, ParamPM_HfRangeGateMin, ParamPM_HfRangeGateMax);
             break;
