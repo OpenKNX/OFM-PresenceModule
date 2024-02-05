@@ -561,6 +561,7 @@ void Presence::processHardwarePresence()
     {
         mPresenceChanged = false;
         processLED(mMove > 0, CallerMove);
+        knx.getGroupObject(PM_KoMoveOut).value(mMove, getDPT(VAL_DPT_1));
     }
     // add Trigger for any channel which registered for Hardware-PIR
 #endif
