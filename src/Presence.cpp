@@ -517,7 +517,7 @@ void Presence::processHardwarePresence()
                     {
                         mDistance = lValue;
                         GroupObject &lKo = knx.getGroupObject(PM_KoMoveSpeedOut);
-                        lKo.value(mDistance, getDPT(VAL_DPT_7));
+                        lKo.value(mDistance, getDPT(VAL_DPT_14));
                     }
                 }
                 break;
