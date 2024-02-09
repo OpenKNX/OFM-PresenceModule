@@ -83,7 +83,10 @@ void Presence::processAfterStartupDelay()
 void Presence::showHelp()
 {
     openknx.console.printHelpLine("vpm hw", "print hardware move and presence signal");
-    PresenceChannel::showHelp();
+    openknx.console.printHelpLine("vpm chNN pres", "return presence time info for channel NN");
+    openknx.console.printHelpLine("vpm chNN leave", "return leave room info for channel NN");
+    openknx.console.printHelpLine("vpm chNN state", "return state flags for channel NN");
+    openknx.console.printHelpLine("vpm chNN all", "exec all channel commands for channel NN");
 }
 
 bool Presence::processCommand(const std::string iCmd, bool iDebugKo)
@@ -96,7 +99,21 @@ bool Presence::processCommand(const std::string iCmd, bool iDebugKo)
     if (iCmd.substr(0, 3) != "vpm" || iCmd.length() < 5)
         return lResult;
 
-    if (iCmd.substr(4, 2) == "ch")
+    if (iCmd.length() == 5 && iCmd.substr(4, 1) == "h")
+    {
+        // Command help
+        openknx.console.writeDiagenoseKo("-> hw");
+        openknx.console.writeDiagenoseKo("");
+        openknx.console.writeDiagenoseKo("-> chNN pres");
+        openknx.console.writeDiagenoseKo("");
+        openknx.console.writeDiagenoseKo("-> chNN leave");
+        openknx.console.writeDiagenoseKo("");
+        openknx.console.writeDiagenoseKo("-> chNN state");
+        openknx.console.writeDiagenoseKo("");
+        openknx.console.writeDiagenoseKo("-> chNN all");
+        openknx.console.writeDiagenoseKo("");
+    }
+    else if (iCmd.length() >= 8 || iCmd.substr(4, 2) == "ch")
     {
         // Command ch<nn>:
         // find channel and dispatch
@@ -107,7 +124,7 @@ bool Presence::processCommand(const std::string iCmd, bool iDebugKo)
             lResult = mChannel[lIndex]->processCommand(iCmd, iDebugKo);
         }
     }
-    else if (iCmd.substr(4, 2) == "hw")
+    else if (iCmd.length() == 6 || iCmd.substr(4, 2) == "hw")
     {
         // output hardware move/presence state
         logInfoP("Move %d, Presence %d", mMove, mPresence);
@@ -609,7 +626,7 @@ float Presence::getHardwareBrightness()
     return mLux + ParamPM_LuxOffsetPM;
 }
 
-#define NUM_CHANNELS_TO_PROCESS 1
+#define NUM_CHANNELS_TO_PROCESS 5
 
 void Presence::loop()
 {
@@ -708,7 +725,7 @@ void Presence::setup()
 
         // setup channels, not possible in constructor, because knx is not configured there
         // get number of channels from knxprod
-        mNumChannels = PM_ChannelCount; // knx.paramByte(PM_PMChannels);
+        mNumChannels = ParamPM_VisibleChannels; // knx.paramByte(PM_PMChannels);
         mChannelsToProcess = MIN(mNumChannels, NUM_CHANNELS_TO_PROCESS);
         // calculate parameter block size for day phase parameters
         PresenceChannel::setDayPhaseParameterSize(PM_pBBrightnessAuto - PM_pABrightnessAuto);

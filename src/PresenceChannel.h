@@ -178,7 +178,6 @@ class PresenceChannel : public OpenKNX::Channel
     void startReadRequests();
     void processReadRequests();
     void sendReadRequest(uint8_t iKoIndex);
-    bool checkInitReadRequest(uint8_t iKoIndex, bool isInput);
     void startRunning();
 
     bool getRawPresence(bool iJustMove = false);
@@ -283,7 +282,6 @@ class PresenceChannel : public OpenKNX::Channel
     static void setDayPhaseParameterSize(uint8_t iSize);
 
     void processInputKo(GroupObject &iKo, int8_t iKoIndex = -1);
-    static void showHelp();
     bool processCommand(const std::string iCmd, bool iDebugKo);
     void setup();
     void loop();

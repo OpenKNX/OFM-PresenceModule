@@ -23,10 +23,10 @@
                 <Parameter Id="%AID%_UP-%TT%%CC%034" Name="p%C%BrightnessIntern" Offset="2" BitOffset="1" ParameterType="%AID%_PT-OnOffYesNo" Text="Eingebauten Helligkeitssensor verwenden?" Value="0" />
                 <!-- 1-Bit free -->
                 <Parameter Id="%AID%_UP-%TT%%CC%012" Name="p%C%LockType" Offset="2" BitOffset="3" ParameterType="%AID%_PT-LockType" Text="Sperrobjekt" Value="0" />
-                <Parameter Id="%AID%_UP-%TT%%CC%013" Name="p%C%LockActive" Offset="2" BitOffset="5" ParameterType="%AID%_PT-LockActive" Text="    Sperraktivität" Value="0" />
-                <Parameter Id="%AID%_UP-%TT%%CC%014" Name="p%C%LockOn" Offset="2" BitOffset="6" ParameterType="%AID%_PT-LockOn" Text="    Beim EINschalten wird" Value="0" />
-                <Parameter Id="%AID%_UP-%TT%%CC%015" Name="p%C%LockOff" Offset="3" BitOffset="0" ParameterType="%AID%_PT-LockOff" Text="    Beim AUSschalten wird" Value="0" />
-                <Parameter Id="%AID%_UP-%TT%%CC%016" Name="p%C%LockFallback" Offset="3" BitOffset="2" ParameterType="%AID%_PT-OnOffYesNo" Text="    Mit Rückfallzeit?" Value="0" />
+                <Parameter Id="%AID%_UP-%TT%%CC%013" Name="p%C%LockActive" Offset="2" BitOffset="5" ParameterType="%AID%_PT-LockActive" Text="Sperraktivität" Value="0" />
+                <Parameter Id="%AID%_UP-%TT%%CC%014" Name="p%C%LockOn" Offset="2" BitOffset="6" ParameterType="%AID%_PT-LockOn" Text="Beim EINschalten wird" Value="0" />
+                <Parameter Id="%AID%_UP-%TT%%CC%015" Name="p%C%LockOff" Offset="3" BitOffset="0" ParameterType="%AID%_PT-LockOff" Text="Beim AUSschalten wird" Value="0" />
+                <Parameter Id="%AID%_UP-%TT%%CC%016" Name="p%C%LockFallback" Offset="3" BitOffset="2" ParameterType="%AID%_PT-OnOffYesNo" Text="Mit Rückfallzeit?" Value="0" />
                 <Parameter Id="%AID%_UP-%TT%%CC%017" Name="p%C%PhaseChange" Offset="3" BitOffset="3" ParameterType="%AID%_PT-PhaseChange" Text="Neue Tagesphase übernehmen" Value="0" />
                 <Parameter Id="%AID%_UP-%TT%%CC%035" Name="p%C%PresenceUsage" Offset="3" BitOffset="4" ParameterType="%AID%_PT-PresenceUsage" Text="Eingebauten Präsenzsensor verwenden?" Value="0" />
                 <Parameter Id="%AID%_UP-%TT%%CC%036" Name="p%C%PresenceUsagePIR" Offset="3" BitOffset="4" ParameterType="%AID%_PT-PresenceUsagePIR" Text="Eingebauten Präsenzsensor verwenden?" Value="0" />
@@ -763,23 +763,24 @@
                         <ParameterRefRef RefId="%AID%_P-%TT%%CC%021_R-%TT%%CC%02101" />
                         <ParameterSeparator Id="%AID%_PS-nnn" Text="Kanaldefinition" UIHint="Headline" />
                         <!-- Channel name -->
-                        <ParameterRefRef RefId="%AID%_P-%TT%%CC%000_R-%TT%%CC%00001"  HelpContext="%DOC%" />
+                        <ParameterRefRef RefId="%AID%_P-%TT%%CC%000_R-%TT%%CC%00001"  HelpContext="%DOC%" IndentLevel="1" />
                         <!-- Delay pattern: Channel delay -->
                         <ParameterBlock Id="%AID%_PB-nnn" Name="p%C%ChannelDelay" Inline="true" Layout="Grid" HelpContext="PM-Startverzoegerung-fuer-diesen-Kanal">
                           <Rows>
                             <Row Id="%AID%_PB-nnn_R-1" Name="Row1" />
                           </Rows>
                           <Columns>
-                            <Column Id="%AID%_PB-nnn_C-1" Name="Col1" Width="45%" />
-                            <Column Id="%AID%_PB-nnn_C-2" Name="Col2" Width="15%" />
-                            <Column Id="%AID%_PB-nnn_C-3" Name="Col3" Width="20%" />
+                            <Column Id="%AID%_PB-nnn_C-1" Name="Col1" Width="1%" />
+                            <Column Id="%AID%_PB-nnn_C-2" Name="Col2" Width="44%" />
+                            <Column Id="%AID%_PB-nnn_C-3" Name="Col3" Width="15%" />
+                            <Column Id="%AID%_PB-nnn_C-4" Name="Col4" Width="20%" />
                           </Columns>
-                          <ParameterSeparator Id="%AID%_PS-nnn" Text="Startverzögerung für diesen Kanal" Cell="1,1" />
-                          <ParameterRefRef RefId="%AID%_UP-%TT%%CC%019_R-%TT%%CC%01901" Cell="1,2"  HelpContext="%DOC%" />
-                          <ParameterRefRef RefId="%AID%_UP-%TT%%CC%018_R-%TT%%CC%01801" Cell="1,3"  HelpContext="%DOC%" />
+                          <ParameterSeparator Id="%AID%_PS-nnn" Text=" Startverzögerung für diesen Kanal" Cell="1,2" />
+                          <ParameterRefRef RefId="%AID%_UP-%TT%%CC%019_R-%TT%%CC%01901" Cell="1,3"  HelpContext="%DOC%" />
+                          <ParameterRefRef RefId="%AID%_UP-%TT%%CC%018_R-%TT%%CC%01801" Cell="1,4"  HelpContext="%DOC%" />
                         </ParameterBlock>
                         <!-- end of delay pattern -->
-                        <ParameterRefRef RefId="%AID%_UP-%TT%%CC%008_R-%TT%%CC%00801"  HelpContext="%DOC%" />
+                        <ParameterRefRef RefId="%AID%_UP-%TT%%CC%008_R-%TT%%CC%00801"  HelpContext="%DOC%" IndentLevel="1" />
                         <choose ParamRefId="%AID%_UP-%TT%%CC%008_R-%TT%%CC%00801">
                           <when test="2">
                             <ParameterSeparator Id="%AID%_PS-nnn" Text="Wenn ein Kanal funktionslos geschaltet wird, bleiben alle Parameter und GA-Zuweisungen erhalten, ohne dass der Kanal etwas macht. Dies kann bei einer Fehlersuche sinnvoll sein." />
@@ -820,7 +821,7 @@
                             <ParameterSeparator Id="%AID%_PS-nnn" Text="" UIHint="HorizontalRuler" />
                             <!-- lux settings -->
                             <ParameterSeparator Id="%AID%_PS-nnn" Text="Helligkeit" UIHint="Headline" />
-                            <ParameterRefRef RefId="%AID%_UP-%TT%%CC%009_R-%TT%%CC%00901"  HelpContext="%DOC%" />
+                            <ParameterRefRef RefId="%AID%_UP-%TT%%CC%009_R-%TT%%CC%00901"  HelpContext="%DOC%" IndentLevel="1" />
                             <choose ParamRefId="%AID%_UP-%TT%%CC%009_R-%TT%%CC%00901">
                               <when test="0">
                                 <!-- Reset external brightness -->
@@ -834,7 +835,7 @@
                                     <Assign TargetParamRefRef="%AID%_P-%TT%%CC%084_R-%TT%%CC%08401" Value="1" />
                                   </when>
                                   <when test="!=0">
-                                    <ParameterRefRef RefId="%AID%_UP-%TT%%CC%034_R-%TT%%CC%03401"  HelpContext="%DOC%" />
+                                    <ParameterRefRef RefId="%AID%_UP-%TT%%CC%034_R-%TT%%CC%03401"  HelpContext="%DOC%" IndentLevel="1" />
                                     <choose ParamRefId="%AID%_UP-%TT%%CC%034_R-%TT%%CC%03401">
                                       <when test="0">
                                         <!-- the user don't want to use hardware sensor, we use external brightness -->
@@ -861,16 +862,17 @@
                                     <Row Id="%AID%_PB-nnn_R-1" Name="Row1" />
                                   </Rows>
                                   <Columns>
-                                    <Column Id="%AID%_PB-nnn_C-1" Name="Col1" Width="45%" />
-                                    <Column Id="%AID%_PB-nnn_C-2" Name="Col2" Width="15%" />
-                                    <Column Id="%AID%_PB-nnn_C-3" Name="Col3" Width="25%" />
+                                    <Column Id="%AID%_PB-nnn_C-1" Name="Col1" Width="1%" />
+                                    <Column Id="%AID%_PB-nnn_C-2" Name="Col2" Width="44%" />
+                                    <Column Id="%AID%_PB-nnn_C-3" Name="Col3" Width="15%" />
+                                    <Column Id="%AID%_PB-nnn_C-4" Name="Col4" Width="20%" />
                                   </Columns>
-                                  <ParameterSeparator Id="%AID%_PS-nnn" Text="Totzeit bis zur Helligkeitsanpassung" Cell="1,1" />
-                                  <ParameterRefRef RefId="%AID%_UP-%TT%%CC%062_R-%TT%%CC%06201" Cell="1,2"  HelpContext="%DOC%" />
-                                  <ParameterRefRef RefId="%AID%_UP-%TT%%CC%061_R-%TT%%CC%06101" Cell="1,3"  HelpContext="%DOC%" />
+                                  <ParameterSeparator Id="%AID%_PS-nnn" Text=" Totzeit bis zur Helligkeitsanpassung" Cell="1,2" />
+                                  <ParameterRefRef RefId="%AID%_UP-%TT%%CC%062_R-%TT%%CC%06201" Cell="1,3"  HelpContext="%DOC%" />
+                                  <ParameterRefRef RefId="%AID%_UP-%TT%%CC%061_R-%TT%%CC%06101" Cell="1,4"  HelpContext="%DOC%" />
                                 </ParameterBlock>
                                 <!-- end of delay pattern -->
-                                <ParameterRefRef RefId="%AID%_UP-%TT%%CC%063_R-%TT%%CC%06301"  HelpContext="%DOC%" />
+                                <ParameterRefRef RefId="%AID%_UP-%TT%%CC%063_R-%TT%%CC%06301"  HelpContext="%DOC%" IndentLevel="1" />
                               </when>
                             </choose>
                             <ParameterSeparator Id="%AID%_PS-nnn" Text="" UIHint="HorizontalRuler" />
@@ -879,7 +881,7 @@
                             <!-- is there also presence hardware -->
                             <choose ParamRefId="%AID%_UP-%TT%00006_R-%TT%0000601">
                               <when test="1">
-                                <ParameterRefRef RefId="%AID%_UP-%TT%%CC%036_R-%TT%%CC%03601"  HelpContext="%DOC%" />
+                                <ParameterRefRef RefId="%AID%_UP-%TT%%CC%036_R-%TT%%CC%03601"  HelpContext="%DOC%" IndentLevel="1" />
                                 <choose ParamRefId="%AID%_UP-%TT%%CC%036_R-%TT%%CC%03601">
                                   <when test=">0">
                                     <Assign TargetParamRefRef="%AID%_P-%TT%%CC%095_R-%TT%%CC%09501" Value="1" />
@@ -887,7 +889,7 @@
                                 </choose>
                               </when>
                               <when test="2">
-                                <ParameterRefRef RefId="%AID%_UP-%TT%%CC%035_R-%TT%%CC%03501"  HelpContext="%DOC%" />
+                                <ParameterRefRef RefId="%AID%_UP-%TT%%CC%035_R-%TT%%CC%03501"  HelpContext="%DOC%" IndentLevel="1" />
                                 <choose ParamRefId="%AID%_UP-%TT%%CC%035_R-%TT%%CC%03501">
                                   <when test=">0">
                                     <Assign TargetParamRefRef="%AID%_P-%TT%%CC%095_R-%TT%%CC%09501" Value="1" />
@@ -896,41 +898,41 @@
                               </when>
                             </choose>
                             <!-- external PM -->
-                            <ParameterRefRef RefId="%AID%_UP-%TT%%CC%900_R-%TT%%CC%90001"  HelpContext="%DOC%" />
+                            <ParameterRefRef RefId="%AID%_UP-%TT%%CC%900_R-%TT%%CC%90001"  HelpContext="%DOC%" IndentLevel="1" />
                             <choose ParamRefId="%AID%_UP-%TT%%CC%900_R-%TT%%CC%90001">
                               <when test="1">
                                 <!-- Presence input exists -->
-                                <ParameterRefRef RefId="%AID%_UP-%TT%%CC%901_R-%TT%%CC%90101"  HelpContext="PM-Eingang" />
+                                <ParameterRefRef RefId="%AID%_UP-%TT%%CC%901_R-%TT%%CC%90101"  HelpContext="PM-Eingang" IndentLevel="1" />
                                 <!-- is there also presence hardware, so we allow just keep alive mode -->
                                 <choose ParamRefId="%AID%_P-%TT%%CC%095_R-%TT%%CC%09501">
                                   <when test="1">
-                                    <ParameterRefRef RefId="%AID%_UP-%TT%%CC%903_R-%TT%%CC%90301"  HelpContext="PM-kann-nicht-einschalten" />
+                                    <ParameterRefRef RefId="%AID%_UP-%TT%%CC%903_R-%TT%%CC%90301"  HelpContext="PM-kann-nicht-einschalten" IndentLevel="1" />
                                   </when>
                                 </choose>
                               </when>
                               <when test="2">
                                 <!-- Move input exists -->
-                                <ParameterRefRef RefId="%AID%_UP-%TT%%CC%902_R-%TT%%CC%90201"  HelpContext="PM-Eingang" />
+                                <ParameterRefRef RefId="%AID%_UP-%TT%%CC%902_R-%TT%%CC%90201"  HelpContext="PM-Eingang" IndentLevel="1" />
                                 <!-- is there also presence hardware, so we allow just keep alive mode -->
                                 <choose ParamRefId="%AID%_P-%TT%%CC%095_R-%TT%%CC%09501">
                                   <when test="1">
-                                    <ParameterRefRef RefId="%AID%_UP-%TT%%CC%904_R-%TT%%CC%90401"  HelpContext="PM-kann-nicht-einschalten" />
+                                    <ParameterRefRef RefId="%AID%_UP-%TT%%CC%904_R-%TT%%CC%90401"  HelpContext="PM-kann-nicht-einschalten" IndentLevel="1" />
                                   </when>
                                 </choose>
                               </when>
                               <when test="3">
                                 <!-- Presence and Move input exists -->
-                                <ParameterRefRef RefId="%AID%_UP-%TT%%CC%901_R-%TT%%CC%90101"  HelpContext="PM-Eingang" />
-                                <ParameterRefRef RefId="%AID%_UP-%TT%%CC%903_R-%TT%%CC%90301"  HelpContext="PM-kann-nicht-einschalten" />
-                                <ParameterRefRef RefId="%AID%_UP-%TT%%CC%902_R-%TT%%CC%90201"  HelpContext="PM-Eingang" />
-                                <ParameterRefRef RefId="%AID%_UP-%TT%%CC%904_R-%TT%%CC%90401"  HelpContext="PM-kann-nicht-einschalten" />
+                                <ParameterRefRef RefId="%AID%_UP-%TT%%CC%901_R-%TT%%CC%90101"  HelpContext="PM-Eingang" IndentLevel="1" />
+                                <ParameterRefRef RefId="%AID%_UP-%TT%%CC%903_R-%TT%%CC%90301"  HelpContext="PM-kann-nicht-einschalten" IndentLevel="1" />
+                                <ParameterRefRef RefId="%AID%_UP-%TT%%CC%902_R-%TT%%CC%90201"  HelpContext="PM-Eingang" IndentLevel="1" />
+                                <ParameterRefRef RefId="%AID%_UP-%TT%%CC%904_R-%TT%%CC%90401"  HelpContext="PM-kann-nicht-einschalten" IndentLevel="1" />
                               </when>
                               <when test="4">
                                 <!-- Presence and additional Presence input exists -->
-                                <ParameterRefRef RefId="%AID%_UP-%TT%%CC%901_R-%TT%%CC%90101"  HelpContext="PM-Eingang" />
-                                <ParameterRefRef RefId="%AID%_UP-%TT%%CC%903_R-%TT%%CC%90301"  HelpContext="PM-kann-nicht-einschalten" />
-                                <ParameterRefRef RefId="%AID%_UP-%TT%%CC%902_R-%TT%%CC%90202"  HelpContext="PM-Eingang" />
-                                <ParameterRefRef RefId="%AID%_UP-%TT%%CC%904_R-%TT%%CC%90401"  HelpContext="PM-kann-nicht-einschalten" />
+                                <ParameterRefRef RefId="%AID%_UP-%TT%%CC%901_R-%TT%%CC%90101"  HelpContext="PM-Eingang" IndentLevel="1" />
+                                <ParameterRefRef RefId="%AID%_UP-%TT%%CC%903_R-%TT%%CC%90301"  HelpContext="PM-kann-nicht-einschalten" IndentLevel="1" />
+                                <ParameterRefRef RefId="%AID%_UP-%TT%%CC%902_R-%TT%%CC%90202"  HelpContext="PM-Eingang" IndentLevel="1" />
+                                <ParameterRefRef RefId="%AID%_UP-%TT%%CC%904_R-%TT%%CC%90401"  HelpContext="PM-kann-nicht-einschalten" IndentLevel="1" />
                               </when>
                               <when test="1 3 4">
                                 <!-- we use external presence input 1 -->
@@ -1015,7 +1017,7 @@
                               </when>
                               <when test=">0">
                                 <!-- If an external PM is used, we check if it can be resetted -->
-                                <ParameterRefRef RefId="%AID%_UP-%TT%%CC%093_R-%TT%%CC%09301"  HelpContext="%DOC%" />
+                                <ParameterRefRef RefId="%AID%_UP-%TT%%CC%093_R-%TT%%CC%09301"  HelpContext="%DOC%" IndentLevel="1" />
                                 <choose ParamRefId="%AID%_UP-%TT%%CC%093_R-%TT%%CC%09301">
                                   <when test="1 2">
                                     <!-- we activate reset output -->
@@ -1158,7 +1160,7 @@
                             <!-- General output settings -->
                             <ParameterSeparator Id="%AID%_PS-nnn" Text="Ausgänge" UIHint="Headline" />
                             <ParameterSeparator Id="%AID%_PS-nnn" Text="Hier erfolgen die allgemeinen Einstellungen zu den Ausgängen. In den Tagesphasen wird eingestellt, welche konkreten Werte gesendet werden. " />
-                            <ParameterRefRef RefId="%AID%_UP-%TT%%CC%006_R-%TT%%CC%00601"  HelpContext="PM-Ausgang-ist-vom-Typ" />
+                            <ParameterRefRef RefId="%AID%_UP-%TT%%CC%006_R-%TT%%CC%00601"  HelpContext="PM-Ausgang-ist-vom-Typ" IndentLevel="1" />
                             <choose ParamRefId="%AID%_UP-%TT%%CC%006_R-%TT%%CC%00601">
                               <when test="1">
                                 <ComObjectRefRef RefId="%AID%_O-%TT%%CC%013_R-%TT%%CC%01301" />
@@ -1173,7 +1175,7 @@
                                 <ComObjectRefRef RefId="%AID%_O-%TT%%CC%013_R-%TT%%CC%01304" />
                               </when>
                             </choose>
-                            <ParameterRefRef RefId="%AID%_UP-%TT%%CC%007_R-%TT%%CC%00701"  HelpContext="PM-Ausgang-ist-vom-Typ" />
+                            <ParameterRefRef RefId="%AID%_UP-%TT%%CC%007_R-%TT%%CC%00701"  HelpContext="PM-Ausgang-ist-vom-Typ" IndentLevel="1" />
                             <choose ParamRefId="%AID%_UP-%TT%%CC%007_R-%TT%%CC%00701">
                               <when test="1">
                                 <ComObjectRefRef RefId="%AID%_O-%TT%%CC%014_R-%TT%%CC%01401" />
@@ -1191,7 +1193,7 @@
                             <ParameterSeparator Id="%AID%_PS-nnn" Text="" UIHint="HorizontalRuler" />
                             <!-- Lock -->
                             <ParameterSeparator Id="%AID%_PS-nnn" Text="Sperre" UIHint="Headline" />
-                            <ParameterRefRef RefId="%AID%_UP-%TT%%CC%012_R-%TT%%CC%01201"  HelpContext="%DOC%" />
+                            <ParameterRefRef RefId="%AID%_UP-%TT%%CC%012_R-%TT%%CC%01201"  HelpContext="%DOC%" IndentLevel="1" />
                             <choose ParamRefId="%AID%_UP-%TT%%CC%012_R-%TT%%CC%01201">
                               <when test="1">
                                 <!-- Zwangsführung -->
@@ -1210,12 +1212,12 @@
                                     <ComObjectRefRef RefId="%AID%_O-%TT%%CC%007_R-%TT%%CC%00701" />
                                   </when>
                                 </choose>
-                                <ParameterRefRef RefId="%AID%_UP-%TT%%CC%013_R-%TT%%CC%01301"  HelpContext="%DOC%" />
-                                <ParameterRefRef RefId="%AID%_UP-%TT%%CC%014_R-%TT%%CC%01401"  HelpContext="%DOC%" />
-                                <ParameterRefRef RefId="%AID%_UP-%TT%%CC%015_R-%TT%%CC%01501"  HelpContext="%DOC%" />
+                                <ParameterRefRef RefId="%AID%_UP-%TT%%CC%013_R-%TT%%CC%01301"  HelpContext="%DOC%" IndentLevel="2" />
+                                <ParameterRefRef RefId="%AID%_UP-%TT%%CC%014_R-%TT%%CC%01401"  HelpContext="%DOC%" IndentLevel="2" />
+                                <ParameterRefRef RefId="%AID%_UP-%TT%%CC%015_R-%TT%%CC%01501"  HelpContext="%DOC%" IndentLevel="2" />
                               </when>
                               <when test=">0">
-                                <ParameterRefRef RefId="%AID%_UP-%TT%%CC%016_R-%TT%%CC%01601"  HelpContext="%DOC%" />
+                                <ParameterRefRef RefId="%AID%_UP-%TT%%CC%016_R-%TT%%CC%01601"  HelpContext="%DOC%" IndentLevel="2" />
                                 <choose ParamRefId="%AID%_UP-%TT%%CC%016_R-%TT%%CC%01601">
                                   <when test="1">
                                     <!-- Delay pattern: Lock Fallback Delay -->
@@ -1224,13 +1226,14 @@
                                         <Row Id="%AID%_PB-nnn_R-1" Name="Row1" />
                                       </Rows>
                                       <Columns>
-                                        <Column Id="%AID%_PB-nnn_C-1" Name="Col1" Width="45%" />
-                                        <Column Id="%AID%_PB-nnn_C-2" Name="Col2" Width="15%" />
-                                        <Column Id="%AID%_PB-nnn_C-3" Name="Col3" Width="20%" />
+                                        <Column Id="%AID%_PB-nnn_C-1" Name="Col1" Width="4%" />
+                                        <Column Id="%AID%_PB-nnn_C-2" Name="Col2" Width="40%" />
+                                        <Column Id="%AID%_PB-nnn_C-3" Name="Col3" Width="15%" />
+                                        <Column Id="%AID%_PB-nnn_C-4" Name="Col4" Width="20%" />
                                       </Columns>
-                                      <ParameterSeparator Id="%AID%_PS-nnn" Text="    Rückfall nach" Cell="1,1" />
-                                      <ParameterRefRef RefId="%AID%_UP-%TT%%CC%025_R-%TT%%CC%02501" Cell="1,2"  HelpContext="%DOC%" />
-                                      <ParameterRefRef RefId="%AID%_UP-%TT%%CC%024_R-%TT%%CC%02401" Cell="1,3"  HelpContext="%DOC%" />
+                                      <ParameterSeparator Id="%AID%_PS-nnn" Text="Rückfall nach" Cell="1,2" />
+                                      <ParameterRefRef RefId="%AID%_UP-%TT%%CC%025_R-%TT%%CC%02501" Cell="1,3"  HelpContext="%DOC%" />
+                                      <ParameterRefRef RefId="%AID%_UP-%TT%%CC%024_R-%TT%%CC%02401" Cell="1,4"  HelpContext="%DOC%" />
                                     </ParameterBlock>
                                     <!-- end of delay pattern -->
                                   </when>
@@ -1240,7 +1243,7 @@
                             <ParameterSeparator Id="%AID%_PS-nnn" Text="" UIHint="HorizontalRuler" />
                             <!-- Day phases -->
                             <ParameterSeparator Id="%AID%_PS-nnn" Text="Tagesphasen" UIHint="Headline" />
-                            <ParameterRefRef RefId="%AID%_UP-%TT%%CC%005_R-%TT%%CC%00501"  HelpContext="%DOC%" />
+                            <ParameterRefRef RefId="%AID%_UP-%TT%%CC%005_R-%TT%%CC%00501"  HelpContext="%DOC%" IndentLevel="1" />
                             <choose ParamRefId="%AID%_UP-%TT%%CC%005_R-%TT%%CC%00501">
                               <when test="0">
                                 <!-- 1 Phase -->
@@ -1267,11 +1270,11 @@
                                 </ParameterBlock>
                               </when>
                               <when test=">0">
-                                <ParameterRefRef RefId="%AID%_UP-%TT%%CC%017_R-%TT%%CC%01701"  HelpContext="%DOC%" />
+                                <ParameterRefRef RefId="%AID%_UP-%TT%%CC%017_R-%TT%%CC%01701"  HelpContext="%DOC%" IndentLevel="1" />
                               </when>
                               <when test="1">
                                 <ParameterSeparator Id="%AID%_PS-nnn" Text="Bei 2 Tagesphasen könen diese über Szenen oder über ein Tag-/Nacht-Objekt angewählt werden. Bei Tag-/Nacht-Objekt gilt: 0=Phase 1, 1=Phase 2" />
-                                <ParameterRefRef RefId="%AID%_UP-%TT%%CC%004_R-%TT%%CC%00401"  HelpContext="PM-Tag-Nacht-Objekt" />
+                                <ParameterRefRef RefId="%AID%_UP-%TT%%CC%004_R-%TT%%CC%00401"  HelpContext="PM-Tag-Nacht-Objekt" IndentLevel="1" />
                                 <choose ParamRefId="%AID%_UP-%TT%%CC%004_R-%TT%%CC%00401">
                                   <when test="0">
                                     <Assign TargetParamRefRef="%AID%_P-%TT%%CC%085_R-%TT%%CC%08501" Value="1" />
@@ -1432,15 +1435,15 @@
                                 <ParameterSeparator Id="%AID%_PS-nnn" Text="Raum verlassen" UIHint="Headline" />
                               </when>
                               <when test="1">
-                                <ParameterRefRef RefId="%AID%_UP-%TT%%CC%099_R-%TT%%CC%09901"  HelpContext="%DOC%" />
+                                <ParameterRefRef RefId="%AID%_UP-%TT%%CC%099_R-%TT%%CC%09901"  HelpContext="%DOC%" IndentLevel="1" />
                                 <Assign TargetParamRefRef="%AID%_P-%TT%%CC%003_R-%TT%%CC%00301" SourceParamRefRef="%AID%_UP-%TT%%CC%099_R-%TT%%CC%09901" />
                               </when>
                               <when test="2">
-                                <ParameterRefRef RefId="%AID%_UP-%TT%%CC%098_R-%TT%%CC%09801"  HelpContext="%DOC%" />
+                                <ParameterRefRef RefId="%AID%_UP-%TT%%CC%098_R-%TT%%CC%09801"  HelpContext="%DOC%" IndentLevel="1" />
                                 <Assign TargetParamRefRef="%AID%_P-%TT%%CC%003_R-%TT%%CC%00301" SourceParamRefRef="%AID%_UP-%TT%%CC%098_R-%TT%%CC%09801" />
                               </when>
                               <when test="3">
-                                <ParameterRefRef RefId="%AID%_UP-%TT%%CC%097_R-%TT%%CC%09701"  HelpContext="%DOC%" />
+                                <ParameterRefRef RefId="%AID%_UP-%TT%%CC%097_R-%TT%%CC%09701"  HelpContext="%DOC%" IndentLevel="1" />
                                 <Assign TargetParamRefRef="%AID%_P-%TT%%CC%003_R-%TT%%CC%00301" SourceParamRefRef="%AID%_UP-%TT%%CC%097_R-%TT%%CC%09701" />
                               </when>
                               <when test=">0">
@@ -1452,16 +1455,17 @@
                                         <Row Id="%AID%_PB-nnn_R-1" Name="Row1" />
                                       </Rows>
                                       <Columns>
-                                        <Column Id="%AID%_PB-nnn_C-1" Name="Col1" Width="45%" />
-                                        <Column Id="%AID%_PB-nnn_C-2" Name="Col2" Width="15%" />
-                                        <Column Id="%AID%_PB-nnn_C-3" Name="Col3" Width="20%" />
+                                        <Column Id="%AID%_PB-nnn_C-1" Name="Col1" Width="1%" />
+                                        <Column Id="%AID%_PB-nnn_C-2" Name="Col2" Width="44%" />
+                                        <Column Id="%AID%_PB-nnn_C-3" Name="Col3" Width="15%" />
+                                        <Column Id="%AID%_PB-nnn_C-4" Name="Col4" Width="20%" />
                                       </Columns>
-                                      <ParameterSeparator Id="%AID%_PS-nnn" Text="Totzeit nach Raum verlassen" Cell="1,1" />
-                                      <ParameterRefRef RefId="%AID%_UP-%TT%%CC%038_R-%TT%%CC%03801" Cell="1,2"  HelpContext="%DOC%" />
-                                      <ParameterRefRef RefId="%AID%_UP-%TT%%CC%037_R-%TT%%CC%03701" Cell="1,3"  HelpContext="%DOC%" />
+                                      <ParameterSeparator Id="%AID%_PS-nnn" Text=" Totzeit nach Raum verlassen" Cell="1,2" />
+                                      <ParameterRefRef RefId="%AID%_UP-%TT%%CC%038_R-%TT%%CC%03801" Cell="1,3"  HelpContext="%DOC%" />
+                                      <ParameterRefRef RefId="%AID%_UP-%TT%%CC%037_R-%TT%%CC%03701" Cell="1,4"  HelpContext="%DOC%" />
                                     </ParameterBlock>
                                     <!-- end of delay pattern -->
-                                    <ParameterRefRef RefId="%AID%_UP-%TT%%CC%039_R-%TT%%CC%03901"  HelpContext="%DOC%" />
+                                    <ParameterRefRef RefId="%AID%_UP-%TT%%CC%039_R-%TT%%CC%03901"  HelpContext="%DOC%" IndentLevel="1" />
                                   </when>
                                 </choose>
                                 <ParameterSeparator Id="%AID%_PS-nnn" Text="" UIHint="HorizontalRuler" />
@@ -1469,7 +1473,7 @@
                             </choose>
                             <!-- Manual mode number of keys -->
                             <ParameterSeparator Id="%AID%_PS-nnn" Text="Manuell übersteuern" UIHint="Headline" />
-                            <ParameterRefRef RefId="%AID%_UP-%TT%%CC%060_R-%TT%%CC%06001"  HelpContext="%DOC%" />
+                            <ParameterRefRef RefId="%AID%_UP-%TT%%CC%060_R-%TT%%CC%06001"  HelpContext="%DOC%" IndentLevel="1" />
                           </when>
                         </choose>
                         <choose ParamRefId="%AID%_UP-%TT%%CC%100_R-%TT%%CC%10001">
@@ -1530,13 +1534,13 @@
                             <ParameterSeparator Id="%AID%_PS-nnn" UIHint="Headline" Text="&#10;KO-Nr." Cell="1,4" />
                             <ParameterSeparator Id="%AID%_PS-nnn" UIHint="Headline" Text="&#10;DPT" Cell="1,5" />
                             <!-- constant texts -->
-                            <ParameterSeparator Id="%AID%_PS-nnn" Text="Helligkeit extern" Cell="2,1" />
-                            <ParameterSeparator Id="%AID%_PS-nnn" Text="Präsenz" Cell="3,1" />
-                            <ParameterSeparator Id="%AID%_PS-nnn" Text="Automatik übersteuern" Cell="5,1" />
-                            <ParameterSeparator Id="%AID%_PS-nnn" Text="Manuell übersteuern" Cell="6,1" />
-                            <ParameterSeparator Id="%AID%_PS-nnn" Text="Aktorstatus" Cell="7,1" />
-                            <ParameterSeparator Id="%AID%_PS-nnn" Text="Reset" Cell="9,1" />
-                            <ParameterSeparator Id="%AID%_PS-nnn" Text="PM über Szene steuern" Cell="11,1" />
+                            <ParameterSeparator Id="%AID%_PS-nnn" Text="  Helligkeit extern" Cell="2,1" />
+                            <ParameterSeparator Id="%AID%_PS-nnn" Text="  Präsenz" Cell="3,1" />
+                            <ParameterSeparator Id="%AID%_PS-nnn" Text="  Automatik übersteuern" Cell="5,1" />
+                            <ParameterSeparator Id="%AID%_PS-nnn" Text="  Manuell übersteuern" Cell="6,1" />
+                            <ParameterSeparator Id="%AID%_PS-nnn" Text="  Aktorstatus" Cell="7,1" />
+                            <ParameterSeparator Id="%AID%_PS-nnn" Text="  Reset" Cell="9,1" />
+                            <ParameterSeparator Id="%AID%_PS-nnn" Text="  PM über Szene steuern" Cell="11,1" />
 
                             <choose ParamRefId="%AID%_P-%TT%%CC%084_R-%TT%%CC%08401">
                               <when test="0">
@@ -1781,27 +1785,27 @@
                         <ParameterBlock Id="%AID%_PB-%C%11" Name="PM%C%Phase1" Text="Phase 1: {{0: ...}}" TextParameterRefId="%AID%_P-%TT%%CC%026_R-%TT%%CC%02601" Icon="roman-numeral-1" HelpContext="PM-Tagesphase" >
                           <!-- Phase function -->
                           <ParameterSeparator Id="%AID%_PS-nnn" Text="Funktion" UIHint="Headline" />
-                          <ParameterRefRef RefId="%AID%_UP-%TT%%CC%139_R-%TT%%CC%13901"  HelpContext="%DOC%" />
+                          <ParameterRefRef RefId="%AID%_UP-%TT%%CC%139_R-%TT%%CC%13901"  HelpContext="%DOC%" IndentLevel="1" />
                           <choose ParamRefId="%AID%_UP-%TT%%CC%009_R-%TT%%CC%00901">
                             <when test="0">
                               <!-- Lux send cycle -->
                               <ParameterSeparator Id="%AID%_PS-nnn" Text="Helligkeit" UIHint="Headline" />
                               <choose ParamRefId="%AID%_UP-%TT%%CC%139_R-%TT%%CC%13901">
                                 <when test="0 2">
-                                  <ParameterRefRef RefId="%AID%_UP-%TT%%CC%115_R-%TT%%CC%11501"  HelpContext="%DOC%" />
+                                  <ParameterRefRef RefId="%AID%_UP-%TT%%CC%115_R-%TT%%CC%11501"  HelpContext="%DOC%"  IndentLevel="1" />
                                 </when>
                                 <when test="0 1">
                                   <ParameterSeparator Id="%AID%_PS-nnn" Text="Hier kann man wählen, ob und wann das Licht ausgeht, wenn es im Raum heller wird (z.B. durch Sonneneinstrahlung)" />
-                                  <ParameterRefRef RefId="%AID%_UP-%TT%%CC%100_R-%TT%%CC%10001"  HelpContext="%DOC%" />
+                                  <ParameterRefRef RefId="%AID%_UP-%TT%%CC%100_R-%TT%%CC%10001"  HelpContext="%DOC%"  IndentLevel="1" />
                                   <choose ParamRefId="%AID%_UP-%TT%%CC%100_R-%TT%%CC%10001">
                                     <when test="1">
                                       <ParameterSeparator Id="%AID%_PS-nnn" Text="Die Ausschaltschwelle sollte so gewählt werden, dass sie höher ist als die Gesamthelligkeit aller Lichtquellen, da sonst das Licht bei weiteren zugeschalteten Quellen ausgehen würde." />
                                       <choose ParamRefId="%AID%_UP-%TT%%CC%139_R-%TT%%CC%13901">
                                         <when test="0">
-                                          <ParameterRefRef RefId="%AID%_UP-%TT%%CC%116_R-%TT%%CC%11601"  HelpContext="%DOC%" />
+                                          <ParameterRefRef RefId="%AID%_UP-%TT%%CC%116_R-%TT%%CC%11601"  HelpContext="%DOC%"  IndentLevel="1" />
                                         </when>
                                         <when test="1">
-                                          <ParameterRefRef RefId="%AID%_UP-%TT%%CC%116_R-%TT%%CC%11603"  HelpContext="%DOC%" />
+                                          <ParameterRefRef RefId="%AID%_UP-%TT%%CC%116_R-%TT%%CC%11603"  HelpContext="%DOC%"  IndentLevel="1" />
                                         </when>
                                       </choose>
                                     </when>
@@ -1809,10 +1813,10 @@
                                       <ParameterSeparator Id="%AID%_PS-nnn" Text="Die Ausschaltschwelle wird hier für jede zugeschaltete Lichtquelle neu berechnet, so dass dieser Wert wesentlich geringer gewählt werden kann." />
                                       <choose ParamRefId="%AID%_UP-%TT%%CC%139_R-%TT%%CC%13901">
                                         <when test="0">
-                                          <ParameterRefRef RefId="%AID%_UP-%TT%%CC%116_R-%TT%%CC%11602"  HelpContext="%DOC%" />
+                                          <ParameterRefRef RefId="%AID%_UP-%TT%%CC%116_R-%TT%%CC%11602"  HelpContext="%DOC%"  IndentLevel="1" />
                                         </when>
                                         <when test="1">
-                                          <ParameterRefRef RefId="%AID%_UP-%TT%%CC%116_R-%TT%%CC%11603"  HelpContext="%DOC%" />
+                                          <ParameterRefRef RefId="%AID%_UP-%TT%%CC%116_R-%TT%%CC%11603"  HelpContext="%DOC%"  IndentLevel="1" />
                                         </when>
                                       </choose>
                                     </when>
@@ -1824,13 +1828,14 @@
                                           <Row Id="%AID%_PB-nnn_R-1" Name="Row1" />
                                         </Rows>
                                         <Columns>
-                                          <Column Id="%AID%_PB-nnn_C-1" Name="Col1" Width="45%" />
-                                          <Column Id="%AID%_PB-nnn_C-2" Name="Col2" Width="15%" />
-                                          <Column Id="%AID%_PB-nnn_C-3" Name="Col3" Width="25%" />
+                                          <Column Id="%AID%_PB-nnn_C-1" Name="Col1" Width="1%" />
+                                          <Column Id="%AID%_PB-nnn_C-2" Name="Col2" Width="44%" />
+                                          <Column Id="%AID%_PB-nnn_C-3" Name="Col3" Width="15%" />
+                                          <Column Id="%AID%_PB-nnn_C-4" Name="Col4" Width="20%" />
                                         </Columns>
-                                        <ParameterSeparator Id="%AID%_PS-nnn" Text="Ausschalten verzögern um" Cell="1,1" />
-                                        <ParameterRefRef RefId="%AID%_UP-%TT%%CC%114_R-%TT%%CC%11401" Cell="1,2"  HelpContext="%DOC%" />
-                                        <ParameterRefRef RefId="%AID%_UP-%TT%%CC%113_R-%TT%%CC%11301" Cell="1,3"  HelpContext="%DOC%" />
+                                        <ParameterSeparator Id="%AID%_PS-nnn" Text=" Ausschalten verzögern um" Cell="1,2" />
+                                        <ParameterRefRef RefId="%AID%_UP-%TT%%CC%114_R-%TT%%CC%11401" Cell="1,3"  HelpContext="%DOC%" />
+                                        <ParameterRefRef RefId="%AID%_UP-%TT%%CC%113_R-%TT%%CC%11301" Cell="1,4"  HelpContext="%DOC%" />
                                       </ParameterBlock>
                                       <!-- end of delay pattern -->
                                     </when>
@@ -1849,16 +1854,17 @@
                                   <Row Id="%AID%_PB-nnn_R-1" Name="Row1" />
                                 </Rows>
                                 <Columns>
-                                  <Column Id="%AID%_PB-nnn_C-1" Name="Col1" Width="45%" />
-                                  <Column Id="%AID%_PB-nnn_C-2" Name="Col2" Width="15%" />
-                                  <Column Id="%AID%_PB-nnn_C-3" Name="Col3" Width="20%" />
+                                  <Column Id="%AID%_PB-nnn_C-1" Name="Col1" Width="1%" />
+                                  <Column Id="%AID%_PB-nnn_C-2" Name="Col2" Width="44%" />
+                                  <Column Id="%AID%_PB-nnn_C-3" Name="Col3" Width="15%" />
+                                  <Column Id="%AID%_PB-nnn_C-4" Name="Col4" Width="20%" />
                                 </Columns>
-                                <ParameterSeparator Id="%AID%_PS-nnn" Text="Nachlaufzeit" Cell="1,1" />
-                                <ParameterRefRef RefId="%AID%_UP-%TT%%CC%108_R-%TT%%CC%10801" Cell="1,2"  HelpContext="%DOC%" />
-                                <ParameterRefRef RefId="%AID%_UP-%TT%%CC%107_R-%TT%%CC%10701" Cell="1,3"  HelpContext="%DOC%" />
+                                <ParameterSeparator Id="%AID%_PS-nnn" Text=" Nachlaufzeit" Cell="1,2" />
+                                <ParameterRefRef RefId="%AID%_UP-%TT%%CC%108_R-%TT%%CC%10801" Cell="1,3"  HelpContext="%DOC%" />
+                                <ParameterRefRef RefId="%AID%_UP-%TT%%CC%107_R-%TT%%CC%10701" Cell="1,4"  HelpContext="%DOC%" />
                               </ParameterBlock>
                               <!-- end of delay pattern -->
-                              <ParameterRefRef RefId="%AID%_UP-%TT%%CC%101_R-%TT%%CC%10101"  HelpContext="%DOC%" />
+                              <ParameterRefRef RefId="%AID%_UP-%TT%%CC%101_R-%TT%%CC%10101"  HelpContext="%DOC%"  IndentLevel="1" />
                               <choose ParamRefId="%AID%_UP-%TT%%CC%101_R-%TT%%CC%10101">
                                 <when test=">0">
                                   <!-- choose move or presence signal for short presence, but only if both are available -->
@@ -1866,7 +1872,7 @@
                                     <when test="1">
                                       <choose ParamRefId="%AID%_P-%TT%%CC%002_R-%TT%%CC%00201">
                                         <when test="1">
-                                          <ParameterRefRef RefId="%AID%_UP-%TT%%CC%138_R-%TT%%CC%13801" HelpContext="%DOC%" />
+                                          <ParameterRefRef RefId="%AID%_UP-%TT%%CC%138_R-%TT%%CC%13801" HelpContext="%DOC%"  IndentLevel="1" />
                                         </when>
                                       </choose>
                                     </when>
@@ -1877,13 +1883,14 @@
                                       <Row Id="%AID%_PB-nnn_R-1" Name="Row1" />
                                     </Rows>
                                     <Columns>
-                                      <Column Id="%AID%_PB-nnn_C-1" Name="Col1" Width="45%" />
-                                      <Column Id="%AID%_PB-nnn_C-2" Name="Col2" Width="15%" />
-                                      <Column Id="%AID%_PB-nnn_C-3" Name="Col3" Width="20%" />
+                                      <Column Id="%AID%_PB-nnn_C-1" Name="Col1" Width="1%" />
+                                      <Column Id="%AID%_PB-nnn_C-2" Name="Col2" Width="44%" />
+                                      <Column Id="%AID%_PB-nnn_C-3" Name="Col3" Width="15%" />
+                                      <Column Id="%AID%_PB-nnn_C-4" Name="Col4" Width="20%" />
                                     </Columns>
-                                    <ParameterSeparator Id="%AID%_PS-nnn" Text="Dauer der kurzen Anwesenheit" Cell="1,1" />
-                                    <ParameterRefRef RefId="%AID%_UP-%TT%%CC%110_R-%TT%%CC%11001" Cell="1,2"  HelpContext="%DOC%" />
-                                    <ParameterRefRef RefId="%AID%_UP-%TT%%CC%109_R-%TT%%CC%10901" Cell="1,3"  HelpContext="%DOC%" />
+                                    <ParameterSeparator Id="%AID%_PS-nnn" Text=" Dauer der kurzen Anwesenheit" Cell="1,2" />
+                                    <ParameterRefRef RefId="%AID%_UP-%TT%%CC%110_R-%TT%%CC%11001" Cell="1,3"  HelpContext="%DOC%" />
+                                    <ParameterRefRef RefId="%AID%_UP-%TT%%CC%109_R-%TT%%CC%10901" Cell="1,4"  HelpContext="%DOC%" />
                                   </ParameterBlock>
                                   <!-- end of delay pattern -->
                                   <!-- Delay pattern PresenceShortDelay -->
@@ -1892,13 +1899,14 @@
                                       <Row Id="%AID%_PB-nnn_R-1" Name="Row1" />
                                     </Rows>
                                     <Columns>
-                                      <Column Id="%AID%_PB-nnn_C-1" Name="Col1" Width="45%" />
-                                      <Column Id="%AID%_PB-nnn_C-2" Name="Col2" Width="15%" />
-                                      <Column Id="%AID%_PB-nnn_C-3" Name="Col3" Width="20%" />
+                                      <Column Id="%AID%_PB-nnn_C-1" Name="Col1" Width="1%" />
+                                      <Column Id="%AID%_PB-nnn_C-2" Name="Col2" Width="44%" />
+                                      <Column Id="%AID%_PB-nnn_C-3" Name="Col3" Width="15%" />
+                                      <Column Id="%AID%_PB-nnn_C-4" Name="Col4" Width="20%" />
                                     </Columns>
-                                    <ParameterSeparator Id="%AID%_PS-nnn" Text="Nachlaufzeit bei kurzer Anwesenheit" Cell="1,1" />
-                                    <ParameterRefRef RefId="%AID%_UP-%TT%%CC%112_R-%TT%%CC%11201" Cell="1,2"  HelpContext="%DOC%" />
-                                    <ParameterRefRef RefId="%AID%_UP-%TT%%CC%111_R-%TT%%CC%11101" Cell="1,3"  HelpContext="%DOC%" />
+                                    <ParameterSeparator Id="%AID%_PS-nnn" Text=" Nachlaufzeit bei kurzer Anwesenheit" Cell="1,2" />
+                                    <ParameterRefRef RefId="%AID%_UP-%TT%%CC%112_R-%TT%%CC%11201" Cell="1,3"  HelpContext="%DOC%" />
+                                    <ParameterRefRef RefId="%AID%_UP-%TT%%CC%111_R-%TT%%CC%11101" Cell="1,4"  HelpContext="%DOC%" />
                                   </ParameterBlock>
                                   <!-- end of delay pattern -->
                                   <ParameterRefRef RefId="%AID%_UP-%TT%%CC%137_R-%TT%%CC%13701"  HelpContext="PM-Erst-nach-der-Kurzzeitpraesenz-schalten" />
@@ -1906,12 +1914,12 @@
                               </choose>
                               <choose ParamRefId="%AID%_UP-%TT%%CC%035_R-%TT%%CC%03501">
                                 <when test=">0">
-                                  <ParameterRefRef RefId="%AID%_UP-%TT%%CC%136_R-%TT%%CC%13601"  HelpContext="%DOC%" />
+                                  <ParameterRefRef RefId="%AID%_UP-%TT%%CC%136_R-%TT%%CC%13601"  HelpContext="%DOC%"  IndentLevel="1" />
                                 </when>
                               </choose>
                               <choose ParamRefId="%AID%_UP-%TT%%CC%036_R-%TT%%CC%03601">
                                 <when test=">0">
-                                  <ParameterRefRef RefId="%AID%_UP-%TT%%CC%136_R-%TT%%CC%13601"  HelpContext="%DOC%" />
+                                  <ParameterRefRef RefId="%AID%_UP-%TT%%CC%136_R-%TT%%CC%13601"  HelpContext="%DOC%"  IndentLevel="1" />
                                 </when>
                               </choose>
                               <ParameterSeparator Id="%AID%_PS-nnn" Text="" UIHint="HorizontalRuler" />
@@ -1928,52 +1936,52 @@
                                 <when test="1">
                                   <choose ParamRefId="%AID%_UP-%TT%%CC%006_R-%TT%%CC%00601">
                                     <when test="1">
-                                      <ParameterRefRef RefId="%AID%_UP-%TT%%CC%117_R-%TT%%CC%11701"  HelpContext="%DOC%" />
+                                      <ParameterRefRef RefId="%AID%_UP-%TT%%CC%117_R-%TT%%CC%11701"  HelpContext="%DOC%"  IndentLevel="1" />
                                     </when>
                                     <when test="2">
-                                      <ParameterRefRef RefId="%AID%_UP-%TT%%CC%118_R-%TT%%CC%11801"  HelpContext="%DOC%" />
+                                      <ParameterRefRef RefId="%AID%_UP-%TT%%CC%118_R-%TT%%CC%11801"  HelpContext="%DOC%"  IndentLevel="1" />
                                     </when>
                                     <when test="3">
-                                      <ParameterRefRef RefId="%AID%_UP-%TT%%CC%119_R-%TT%%CC%11901"  HelpContext="%DOC%" />
+                                      <ParameterRefRef RefId="%AID%_UP-%TT%%CC%119_R-%TT%%CC%11901"  HelpContext="%DOC%"  IndentLevel="1" />
                                     </when>
                                     <when test="4">
-                                      <ParameterRefRef RefId="%AID%_UP-%TT%%CC%120_R-%TT%%CC%12001"  HelpContext="%DOC%" />
+                                      <ParameterRefRef RefId="%AID%_UP-%TT%%CC%120_R-%TT%%CC%12001"  HelpContext="%DOC%"  IndentLevel="1" />
                                     </when>
                                   </choose>
                                 </when>
                                 <when test="2">
                                   <choose ParamRefId="%AID%_UP-%TT%%CC%006_R-%TT%%CC%00601">
                                     <when test="1">
-                                      <ParameterRefRef RefId="%AID%_UP-%TT%%CC%121_R-%TT%%CC%12101"  HelpContext="%DOC%" />
+                                      <ParameterRefRef RefId="%AID%_UP-%TT%%CC%121_R-%TT%%CC%12101"  HelpContext="%DOC%"  IndentLevel="1" />
                                     </when>
                                     <when test="2">
-                                      <ParameterRefRef RefId="%AID%_UP-%TT%%CC%122_R-%TT%%CC%12201"  HelpContext="%DOC%" />
+                                      <ParameterRefRef RefId="%AID%_UP-%TT%%CC%122_R-%TT%%CC%12201"  HelpContext="%DOC%"  IndentLevel="1" />
                                     </when>
                                     <when test="3">
-                                      <ParameterRefRef RefId="%AID%_UP-%TT%%CC%123_R-%TT%%CC%12301"  HelpContext="%DOC%" />
+                                      <ParameterRefRef RefId="%AID%_UP-%TT%%CC%123_R-%TT%%CC%12301"  HelpContext="%DOC%"  IndentLevel="1" />
                                     </when>
                                     <when test="4">
-                                      <ParameterRefRef RefId="%AID%_UP-%TT%%CC%124_R-%TT%%CC%12401"  HelpContext="%DOC%" />
+                                      <ParameterRefRef RefId="%AID%_UP-%TT%%CC%124_R-%TT%%CC%12401"  HelpContext="%DOC%"  IndentLevel="1" />
                                     </when>
                                   </choose>
                                 </when>
                                 <when test="3">
                                   <choose ParamRefId="%AID%_UP-%TT%%CC%006_R-%TT%%CC%00601">
                                     <when test="1">
-                                      <ParameterRefRef RefId="%AID%_UP-%TT%%CC%117_R-%TT%%CC%11701"  HelpContext="%DOC%" />
-                                      <ParameterRefRef RefId="%AID%_UP-%TT%%CC%121_R-%TT%%CC%12101"  HelpContext="%DOC%" />
+                                      <ParameterRefRef RefId="%AID%_UP-%TT%%CC%117_R-%TT%%CC%11701"  HelpContext="%DOC%"  IndentLevel="1" />
+                                      <ParameterRefRef RefId="%AID%_UP-%TT%%CC%121_R-%TT%%CC%12101"  HelpContext="%DOC%"  IndentLevel="1" />
                                     </when>
                                     <when test="2">
-                                      <ParameterRefRef RefId="%AID%_UP-%TT%%CC%118_R-%TT%%CC%11801"  HelpContext="%DOC%" />
-                                      <ParameterRefRef RefId="%AID%_UP-%TT%%CC%122_R-%TT%%CC%12201"  HelpContext="%DOC%" />
+                                      <ParameterRefRef RefId="%AID%_UP-%TT%%CC%118_R-%TT%%CC%11801"  HelpContext="%DOC%"  IndentLevel="1" />
+                                      <ParameterRefRef RefId="%AID%_UP-%TT%%CC%122_R-%TT%%CC%12201"  HelpContext="%DOC%"  IndentLevel="1" />
                                     </when>
                                     <when test="3">
-                                      <ParameterRefRef RefId="%AID%_UP-%TT%%CC%119_R-%TT%%CC%11901"  HelpContext="%DOC%" />
-                                      <ParameterRefRef RefId="%AID%_UP-%TT%%CC%123_R-%TT%%CC%12301"  HelpContext="%DOC%" />
+                                      <ParameterRefRef RefId="%AID%_UP-%TT%%CC%119_R-%TT%%CC%11901"  HelpContext="%DOC%"  IndentLevel="1" />
+                                      <ParameterRefRef RefId="%AID%_UP-%TT%%CC%123_R-%TT%%CC%12301"  HelpContext="%DOC%"  IndentLevel="1" />
                                     </when>
                                     <when test="4">
-                                      <ParameterRefRef RefId="%AID%_UP-%TT%%CC%120_R-%TT%%CC%12001"  HelpContext="%DOC%" />
-                                      <ParameterRefRef RefId="%AID%_UP-%TT%%CC%124_R-%TT%%CC%12401"  HelpContext="%DOC%" />
+                                      <ParameterRefRef RefId="%AID%_UP-%TT%%CC%120_R-%TT%%CC%12001"  HelpContext="%DOC%"  IndentLevel="1" />
+                                      <ParameterRefRef RefId="%AID%_UP-%TT%%CC%124_R-%TT%%CC%12401"  HelpContext="%DOC%"  IndentLevel="1" />
                                     </when>
                                   </choose>
                                 </when>
@@ -1991,52 +1999,52 @@
                                 <when test="1">
                                   <choose ParamRefId="%AID%_UP-%TT%%CC%007_R-%TT%%CC%00701">
                                     <when test="1">
-                                      <ParameterRefRef RefId="%AID%_UP-%TT%%CC%125_R-%TT%%CC%12501"  HelpContext="%DOC%" />
+                                      <ParameterRefRef RefId="%AID%_UP-%TT%%CC%125_R-%TT%%CC%12501"  HelpContext="%DOC%"  IndentLevel="1" />
                                     </when>
                                     <when test="2">
-                                      <ParameterRefRef RefId="%AID%_UP-%TT%%CC%126_R-%TT%%CC%12601"  HelpContext="%DOC%" />
+                                      <ParameterRefRef RefId="%AID%_UP-%TT%%CC%126_R-%TT%%CC%12601"  HelpContext="%DOC%"  IndentLevel="1" />
                                     </when>
                                     <when test="3">
-                                      <ParameterRefRef RefId="%AID%_UP-%TT%%CC%127_R-%TT%%CC%12701"  HelpContext="%DOC%" />
+                                      <ParameterRefRef RefId="%AID%_UP-%TT%%CC%127_R-%TT%%CC%12701"  HelpContext="%DOC%"  IndentLevel="1" />
                                     </when>
                                     <when test="4">
-                                      <ParameterRefRef RefId="%AID%_UP-%TT%%CC%128_R-%TT%%CC%12801"  HelpContext="%DOC%" />
+                                      <ParameterRefRef RefId="%AID%_UP-%TT%%CC%128_R-%TT%%CC%12801"  HelpContext="%DOC%"  IndentLevel="1" />
                                     </when>
                                   </choose>
                                 </when>
                                 <when test="2">
                                   <choose ParamRefId="%AID%_UP-%TT%%CC%007_R-%TT%%CC%00701">
                                     <when test="1">
-                                      <ParameterRefRef RefId="%AID%_UP-%TT%%CC%129_R-%TT%%CC%12901"  HelpContext="%DOC%" />
+                                      <ParameterRefRef RefId="%AID%_UP-%TT%%CC%129_R-%TT%%CC%12901"  HelpContext="%DOC%"  IndentLevel="1" />
                                     </when>
                                     <when test="2">
-                                      <ParameterRefRef RefId="%AID%_UP-%TT%%CC%130_R-%TT%%CC%13001"  HelpContext="%DOC%" />
+                                      <ParameterRefRef RefId="%AID%_UP-%TT%%CC%130_R-%TT%%CC%13001"  HelpContext="%DOC%"  IndentLevel="1" />
                                     </when>
                                     <when test="3">
-                                      <ParameterRefRef RefId="%AID%_UP-%TT%%CC%131_R-%TT%%CC%13101"  HelpContext="%DOC%" />
+                                      <ParameterRefRef RefId="%AID%_UP-%TT%%CC%131_R-%TT%%CC%13101"  HelpContext="%DOC%"  IndentLevel="1" />
                                     </when>
                                     <when test="4">
-                                      <ParameterRefRef RefId="%AID%_UP-%TT%%CC%132_R-%TT%%CC%13201"  HelpContext="%DOC%" />
+                                      <ParameterRefRef RefId="%AID%_UP-%TT%%CC%132_R-%TT%%CC%13201"  HelpContext="%DOC%"  IndentLevel="1" />
                                     </when>
                                   </choose>
                                 </when>
                                 <when test="3">
                                   <choose ParamRefId="%AID%_UP-%TT%%CC%007_R-%TT%%CC%00701">
                                     <when test="1">
-                                      <ParameterRefRef RefId="%AID%_UP-%TT%%CC%125_R-%TT%%CC%12501"  HelpContext="%DOC%" />
-                                      <ParameterRefRef RefId="%AID%_UP-%TT%%CC%129_R-%TT%%CC%12901"  HelpContext="%DOC%" />
+                                      <ParameterRefRef RefId="%AID%_UP-%TT%%CC%125_R-%TT%%CC%12501"  HelpContext="%DOC%"  IndentLevel="1" />
+                                      <ParameterRefRef RefId="%AID%_UP-%TT%%CC%129_R-%TT%%CC%12901"  HelpContext="%DOC%"  IndentLevel="1" />
                                     </when>
                                     <when test="2">
-                                      <ParameterRefRef RefId="%AID%_UP-%TT%%CC%126_R-%TT%%CC%12601"  HelpContext="%DOC%" />
-                                      <ParameterRefRef RefId="%AID%_UP-%TT%%CC%130_R-%TT%%CC%13001"  HelpContext="%DOC%" />
+                                      <ParameterRefRef RefId="%AID%_UP-%TT%%CC%126_R-%TT%%CC%12601"  HelpContext="%DOC%"  IndentLevel="1" />
+                                      <ParameterRefRef RefId="%AID%_UP-%TT%%CC%130_R-%TT%%CC%13001"  HelpContext="%DOC%"  IndentLevel="1" />
                                     </when>
                                     <when test="3">
-                                      <ParameterRefRef RefId="%AID%_UP-%TT%%CC%127_R-%TT%%CC%12701"  HelpContext="%DOC%" />
-                                      <ParameterRefRef RefId="%AID%_UP-%TT%%CC%131_R-%TT%%CC%13101"  HelpContext="%DOC%" />
+                                      <ParameterRefRef RefId="%AID%_UP-%TT%%CC%127_R-%TT%%CC%12701"  HelpContext="%DOC%"  IndentLevel="1" />
+                                      <ParameterRefRef RefId="%AID%_UP-%TT%%CC%131_R-%TT%%CC%13101"  HelpContext="%DOC%"  IndentLevel="1" />
                                     </when>
                                     <when test="4">
-                                      <ParameterRefRef RefId="%AID%_UP-%TT%%CC%128_R-%TT%%CC%12801"  HelpContext="%DOC%" />
-                                      <ParameterRefRef RefId="%AID%_UP-%TT%%CC%132_R-%TT%%CC%13201"  HelpContext="%DOC%" />
+                                      <ParameterRefRef RefId="%AID%_UP-%TT%%CC%128_R-%TT%%CC%12801"  HelpContext="%DOC%"  IndentLevel="1" />
+                                      <ParameterRefRef RefId="%AID%_UP-%TT%%CC%132_R-%TT%%CC%13201"  HelpContext="%DOC%"  IndentLevel="1" />
                                     </when>
                                   </choose>
                                 </when>
@@ -2051,18 +2059,19 @@
                               <Row Id="%AID%_PB-nnn_R-1" Name="Row1" />
                             </Rows>
                             <Columns>
-                              <Column Id="%AID%_PB-nnn_C-1" Name="Col1" Width="45%" />
-                              <Column Id="%AID%_PB-nnn_C-2" Name="Col2" Width="15%" />
-                              <Column Id="%AID%_PB-nnn_C-3" Name="Col3" Width="20%" />
+                              <Column Id="%AID%_PB-nnn_C-1" Name="Col1" Width="1%" />
+                              <Column Id="%AID%_PB-nnn_C-2" Name="Col2" Width="44%" />
+                              <Column Id="%AID%_PB-nnn_C-3" Name="Col3" Width="15%" />
+                              <Column Id="%AID%_PB-nnn_C-4" Name="Col4" Width="20%" />
                             </Columns>
-                            <ParameterSeparator Id="%AID%_PS-nnn" Text="Manuellen Modus beenden nach&#10;(0=nicht beenden)" Cell="1,1" />
-                            <ParameterRefRef RefId="%AID%_UP-%TT%%CC%134_R-%TT%%CC%13401" Cell="1,2"  HelpContext="%DOC%" />
-                            <ParameterRefRef RefId="%AID%_UP-%TT%%CC%133_R-%TT%%CC%13301" Cell="1,3"  HelpContext="%DOC%" />
+                            <ParameterSeparator Id="%AID%_PS-nnn" Text=" Manuellen Modus beenden nach&#10; (0=nicht beenden)" Cell="1,2" />
+                            <ParameterRefRef RefId="%AID%_UP-%TT%%CC%134_R-%TT%%CC%13401" Cell="1,3"  HelpContext="%DOC%" />
+                            <ParameterRefRef RefId="%AID%_UP-%TT%%CC%133_R-%TT%%CC%13301" Cell="1,4"  HelpContext="%DOC%" />
                           </ParameterBlock>
                           <!-- end of delay pattern -->
                           <choose ParamRefId="%AID%_UP-%TT%%CC%134_R-%TT%%CC%13401">
                             <when test=">0">
-                              <ParameterRefRef RefId="%AID%_UP-%TT%%CC%135_R-%TT%%CC%13501"  HelpContext="%DOC%" />
+                              <ParameterRefRef RefId="%AID%_UP-%TT%%CC%135_R-%TT%%CC%13501"  HelpContext="%DOC%"  IndentLevel="1" />
                             </when>
                           </choose>
                         </ParameterBlock>
@@ -2072,27 +2081,27 @@
                             <ParameterBlock Id="%AID%_PB-%C%12" Name="PM%C%Phase2" Text="Phase 2: {{0: ...}}" TextParameterRefId="%AID%_P-%TT%%CC%027_R-%TT%%CC%02701" Icon="roman-numeral-2" HelpContext="PM-Tagesphase" >
                               <!-- Phase function -->
                               <ParameterSeparator Id="%AID%_PS-nnn" Text="Funktion" UIHint="Headline" />
-                              <ParameterRefRef RefId="%AID%_UP-%TT%%CC%239_R-%TT%%CC%23901"  HelpContext="%DOC%" />
+                              <ParameterRefRef RefId="%AID%_UP-%TT%%CC%239_R-%TT%%CC%23901"  HelpContext="%DOC%"  IndentLevel="1" />
                               <choose ParamRefId="%AID%_UP-%TT%%CC%009_R-%TT%%CC%00901">
                                 <when test="0">
                                   <!-- Lux send cycle -->
                                   <ParameterSeparator Id="%AID%_PS-nnn" Text="Helligkeit" UIHint="Headline" />
                                   <choose ParamRefId="%AID%_UP-%TT%%CC%239_R-%TT%%CC%23901">
                                     <when test="0 2">
-                                      <ParameterRefRef RefId="%AID%_UP-%TT%%CC%215_R-%TT%%CC%21501"  HelpContext="%DOC%" />
+                                      <ParameterRefRef RefId="%AID%_UP-%TT%%CC%215_R-%TT%%CC%21501"  HelpContext="%DOC%"  IndentLevel="1" />
                                     </when>
                                     <when test="0 1">
                                       <ParameterSeparator Id="%AID%_PS-nnn" Text="Hier kann man wählen, ob und wann das Licht ausgeht, wenn es im Raum heller wird (z.B. durch Sonneneinstrahlung)" />
-                                      <ParameterRefRef RefId="%AID%_UP-%TT%%CC%200_R-%TT%%CC%20001"  HelpContext="%DOC%" />
+                                      <ParameterRefRef RefId="%AID%_UP-%TT%%CC%200_R-%TT%%CC%20001"  HelpContext="%DOC%"  IndentLevel="1" />
                                       <choose ParamRefId="%AID%_UP-%TT%%CC%200_R-%TT%%CC%20001">
                                         <when test="1">
                                           <ParameterSeparator Id="%AID%_PS-nnn" Text="Die Ausschaltschwelle sollte so gewählt werden, dass sie höher ist als die Gesamthelligkeit aller Lichtquellen, da sonst das Licht bei weiteren zugeschalteten Quellen ausgehen würde." />
                                           <choose ParamRefId="%AID%_UP-%TT%%CC%239_R-%TT%%CC%23901">
                                             <when test="0">
-                                              <ParameterRefRef RefId="%AID%_UP-%TT%%CC%216_R-%TT%%CC%21601"  HelpContext="%DOC%" />
+                                              <ParameterRefRef RefId="%AID%_UP-%TT%%CC%216_R-%TT%%CC%21601"  HelpContext="%DOC%"  IndentLevel="1" />
                                             </when>
                                             <when test="1">
-                                              <ParameterRefRef RefId="%AID%_UP-%TT%%CC%216_R-%TT%%CC%21603"  HelpContext="%DOC%" />
+                                              <ParameterRefRef RefId="%AID%_UP-%TT%%CC%216_R-%TT%%CC%21603"  HelpContext="%DOC%"  IndentLevel="1" />
                                             </when>
                                           </choose>
                                         </when>
@@ -2100,10 +2109,10 @@
                                           <ParameterSeparator Id="%AID%_PS-nnn" Text="Die Ausschaltschwelle wird hier für jede zugeschaltete Lichtquelle neu berechnet, so dass dieser Wert wesentlich geringer gewählt werden kann." />
                                           <choose ParamRefId="%AID%_UP-%TT%%CC%239_R-%TT%%CC%23901">
                                             <when test="0">
-                                              <ParameterRefRef RefId="%AID%_UP-%TT%%CC%216_R-%TT%%CC%21602"  HelpContext="%DOC%" />
+                                              <ParameterRefRef RefId="%AID%_UP-%TT%%CC%216_R-%TT%%CC%21602"  HelpContext="%DOC%"  IndentLevel="1" />
                                             </when>
                                             <when test="1">
-                                              <ParameterRefRef RefId="%AID%_UP-%TT%%CC%216_R-%TT%%CC%21603"  HelpContext="%DOC%" />
+                                              <ParameterRefRef RefId="%AID%_UP-%TT%%CC%216_R-%TT%%CC%21603"  HelpContext="%DOC%"  IndentLevel="1" />
                                             </when>
                                           </choose>
                                         </when>
@@ -2115,13 +2124,14 @@
                                               <Row Id="%AID%_PB-nnn_R-1" Name="Row1" />
                                             </Rows>
                                             <Columns>
-                                              <Column Id="%AID%_PB-nnn_C-1" Name="Col1" Width="45%" />
-                                              <Column Id="%AID%_PB-nnn_C-2" Name="Col2" Width="15%" />
-                                              <Column Id="%AID%_PB-nnn_C-3" Name="Col3" Width="25%" />
+                                              <Column Id="%AID%_PB-nnn_C-1" Name="Col1" Width="1%" />
+                                              <Column Id="%AID%_PB-nnn_C-2" Name="Col2" Width="44%" />
+                                              <Column Id="%AID%_PB-nnn_C-3" Name="Col3" Width="15%" />
+                                              <Column Id="%AID%_PB-nnn_C-4" Name="Col4" Width="20%" />
                                             </Columns>
-                                            <ParameterSeparator Id="%AID%_PS-nnn" Text="Ausschalten verzögern um" Cell="1,1" />
-                                            <ParameterRefRef RefId="%AID%_UP-%TT%%CC%214_R-%TT%%CC%21401" Cell="1,2"  HelpContext="%DOC%" />
-                                            <ParameterRefRef RefId="%AID%_UP-%TT%%CC%213_R-%TT%%CC%21301" Cell="1,3"  HelpContext="%DOC%" />
+                                            <ParameterSeparator Id="%AID%_PS-nnn" Text=" Ausschalten verzögern um" Cell="1,2" />
+                                            <ParameterRefRef RefId="%AID%_UP-%TT%%CC%214_R-%TT%%CC%21401" Cell="1,3"  HelpContext="%DOC%" />
+                                            <ParameterRefRef RefId="%AID%_UP-%TT%%CC%213_R-%TT%%CC%21301" Cell="1,4"  HelpContext="%DOC%" />
                                           </ParameterBlock>
                                           <!-- end of delay pattern -->
                                         </when>
@@ -2140,16 +2150,17 @@
                                       <Row Id="%AID%_PB-nnn_R-1" Name="Row1" />
                                     </Rows>
                                     <Columns>
-                                      <Column Id="%AID%_PB-nnn_C-1" Name="Col1" Width="45%" />
-                                      <Column Id="%AID%_PB-nnn_C-2" Name="Col2" Width="15%" />
-                                      <Column Id="%AID%_PB-nnn_C-3" Name="Col3" Width="20%" />
+                                      <Column Id="%AID%_PB-nnn_C-1" Name="Col1" Width="1%" />
+                                      <Column Id="%AID%_PB-nnn_C-2" Name="Col2" Width="44%" />
+                                      <Column Id="%AID%_PB-nnn_C-3" Name="Col3" Width="15%" />
+                                      <Column Id="%AID%_PB-nnn_C-4" Name="Col4" Width="20%" />
                                     </Columns>
-                                    <ParameterSeparator Id="%AID%_PS-nnn" Text="Nachlaufzeit" Cell="1,1" />
-                                    <ParameterRefRef RefId="%AID%_UP-%TT%%CC%208_R-%TT%%CC%20801" Cell="1,2"  HelpContext="%DOC%" />
-                                    <ParameterRefRef RefId="%AID%_UP-%TT%%CC%207_R-%TT%%CC%20701" Cell="1,3"  HelpContext="%DOC%" />
+                                    <ParameterSeparator Id="%AID%_PS-nnn" Text=" Nachlaufzeit" Cell="1,2" />
+                                    <ParameterRefRef RefId="%AID%_UP-%TT%%CC%208_R-%TT%%CC%20801" Cell="1,3"  HelpContext="%DOC%" />
+                                    <ParameterRefRef RefId="%AID%_UP-%TT%%CC%207_R-%TT%%CC%20701" Cell="1,4"  HelpContext="%DOC%" />
                                   </ParameterBlock>
                                   <!-- end of delay pattern -->
-                                  <ParameterRefRef RefId="%AID%_UP-%TT%%CC%201_R-%TT%%CC%20101"  HelpContext="%DOC%" />
+                                  <ParameterRefRef RefId="%AID%_UP-%TT%%CC%201_R-%TT%%CC%20101"  HelpContext="%DOC%"  IndentLevel="1" />
                                   <choose ParamRefId="%AID%_UP-%TT%%CC%201_R-%TT%%CC%20101">
                                     <when test=">0">
                                       <!-- choose move or presence signal for short presence, but only if both are available -->
@@ -2157,7 +2168,7 @@
                                         <when test="1">
                                           <choose ParamRefId="%AID%_P-%TT%%CC%002_R-%TT%%CC%00201">
                                             <when test="1">
-                                              <ParameterRefRef RefId="%AID%_UP-%TT%%CC%238_R-%TT%%CC%23801" HelpContext="%DOC%" />
+                                              <ParameterRefRef RefId="%AID%_UP-%TT%%CC%238_R-%TT%%CC%23801" HelpContext="%DOC%"  IndentLevel="1" />
                                             </when>
                                           </choose>
                                         </when>
@@ -2168,13 +2179,14 @@
                                           <Row Id="%AID%_PB-nnn_R-1" Name="Row1" />
                                         </Rows>
                                         <Columns>
-                                          <Column Id="%AID%_PB-nnn_C-1" Name="Col1" Width="45%" />
-                                          <Column Id="%AID%_PB-nnn_C-2" Name="Col2" Width="15%" />
-                                          <Column Id="%AID%_PB-nnn_C-3" Name="Col3" Width="20%" />
+                                          <Column Id="%AID%_PB-nnn_C-1" Name="Col1" Width="1%" />
+                                          <Column Id="%AID%_PB-nnn_C-2" Name="Col2" Width="44%" />
+                                          <Column Id="%AID%_PB-nnn_C-3" Name="Col3" Width="15%" />
+                                          <Column Id="%AID%_PB-nnn_C-4" Name="Col4" Width="20%" />
                                         </Columns>
-                                        <ParameterSeparator Id="%AID%_PS-nnn" Text="Dauer der kurzen Anwesenheit" Cell="1,1" />
-                                        <ParameterRefRef RefId="%AID%_UP-%TT%%CC%210_R-%TT%%CC%21001" Cell="1,2"  HelpContext="%DOC%" />
-                                        <ParameterRefRef RefId="%AID%_UP-%TT%%CC%209_R-%TT%%CC%20901" Cell="1,3"  HelpContext="%DOC%" />
+                                        <ParameterSeparator Id="%AID%_PS-nnn" Text=" Dauer der kurzen Anwesenheit" Cell="1,2" />
+                                        <ParameterRefRef RefId="%AID%_UP-%TT%%CC%210_R-%TT%%CC%21001" Cell="1,3"  HelpContext="%DOC%" />
+                                        <ParameterRefRef RefId="%AID%_UP-%TT%%CC%209_R-%TT%%CC%20901" Cell="1,4"  HelpContext="%DOC%" />
                                       </ParameterBlock>
                                       <!-- end of delay pattern -->
                                       <!-- Delay pattern PresenceShortDelay -->
@@ -2183,13 +2195,14 @@
                                           <Row Id="%AID%_PB-nnn_R-1" Name="Row1" />
                                         </Rows>
                                         <Columns>
-                                          <Column Id="%AID%_PB-nnn_C-1" Name="Col1" Width="45%" />
-                                          <Column Id="%AID%_PB-nnn_C-2" Name="Col2" Width="15%" />
-                                          <Column Id="%AID%_PB-nnn_C-3" Name="Col3" Width="20%" />
+                                          <Column Id="%AID%_PB-nnn_C-1" Name="Col1" Width="1%" />
+                                          <Column Id="%AID%_PB-nnn_C-2" Name="Col2" Width="44%" />
+                                          <Column Id="%AID%_PB-nnn_C-3" Name="Col3" Width="15%" />
+                                          <Column Id="%AID%_PB-nnn_C-4" Name="Col4" Width="20%" />
                                         </Columns>
-                                        <ParameterSeparator Id="%AID%_PS-nnn" Text="Nachlaufzeit bei kurzer Anwesenheit" Cell="1,1" />
-                                        <ParameterRefRef RefId="%AID%_UP-%TT%%CC%212_R-%TT%%CC%21201" Cell="1,2"  HelpContext="%DOC%" />
-                                        <ParameterRefRef RefId="%AID%_UP-%TT%%CC%211_R-%TT%%CC%21101" Cell="1,3"  HelpContext="%DOC%" />
+                                        <ParameterSeparator Id="%AID%_PS-nnn" Text=" Nachlaufzeit bei kurzer Anwesenheit" Cell="1,2" />
+                                        <ParameterRefRef RefId="%AID%_UP-%TT%%CC%212_R-%TT%%CC%21201" Cell="1,3"  HelpContext="%DOC%" />
+                                        <ParameterRefRef RefId="%AID%_UP-%TT%%CC%211_R-%TT%%CC%21101" Cell="1,4"  HelpContext="%DOC%" />
                                       </ParameterBlock>
                                       <!-- end of delay pattern -->
                                       <ParameterRefRef RefId="%AID%_UP-%TT%%CC%237_R-%TT%%CC%23701"  HelpContext="PM-Erst-nach-der-Kurzzeitpraesenz-schalten" />
@@ -2197,12 +2210,12 @@
                                   </choose>
                                   <choose ParamRefId="%AID%_UP-%TT%%CC%035_R-%TT%%CC%03501">
                                     <when test=">0">
-                                      <ParameterRefRef RefId="%AID%_UP-%TT%%CC%236_R-%TT%%CC%23601"  HelpContext="%DOC%" />
+                                      <ParameterRefRef RefId="%AID%_UP-%TT%%CC%236_R-%TT%%CC%23601"  HelpContext="%DOC%"  IndentLevel="1" />
                                     </when>
                                   </choose>
                                   <choose ParamRefId="%AID%_UP-%TT%%CC%036_R-%TT%%CC%03601">
                                     <when test=">0">
-                                      <ParameterRefRef RefId="%AID%_UP-%TT%%CC%236_R-%TT%%CC%23601"  HelpContext="%DOC%" />
+                                      <ParameterRefRef RefId="%AID%_UP-%TT%%CC%236_R-%TT%%CC%23601"  HelpContext="%DOC%"  IndentLevel="1" />
                                     </when>
                                   </choose>
                                   <ParameterSeparator Id="%AID%_PS-nnn" Text="" UIHint="HorizontalRuler" />
@@ -2219,57 +2232,57 @@
                                     <when test="1">
                                       <choose ParamRefId="%AID%_UP-%TT%%CC%006_R-%TT%%CC%00601">
                                         <when test="1">
-                                          <ParameterRefRef RefId="%AID%_UP-%TT%%CC%217_R-%TT%%CC%21701"  HelpContext="%DOC%" />
+                                          <ParameterRefRef RefId="%AID%_UP-%TT%%CC%217_R-%TT%%CC%21701"  HelpContext="%DOC%"  IndentLevel="1" />
                                         </when>
                                         <when test="2">
-                                          <ParameterRefRef RefId="%AID%_UP-%TT%%CC%218_R-%TT%%CC%21801"  HelpContext="%DOC%" />
+                                          <ParameterRefRef RefId="%AID%_UP-%TT%%CC%218_R-%TT%%CC%21801"  HelpContext="%DOC%"  IndentLevel="1" />
                                         </when>
                                         <when test="3">
-                                          <ParameterRefRef RefId="%AID%_UP-%TT%%CC%219_R-%TT%%CC%21901"  HelpContext="%DOC%" />
+                                          <ParameterRefRef RefId="%AID%_UP-%TT%%CC%219_R-%TT%%CC%21901"  HelpContext="%DOC%"  IndentLevel="1" />
                                         </when>
                                         <when test="4">
-                                          <ParameterRefRef RefId="%AID%_UP-%TT%%CC%220_R-%TT%%CC%22001"  HelpContext="%DOC%" />
+                                          <ParameterRefRef RefId="%AID%_UP-%TT%%CC%220_R-%TT%%CC%22001"  HelpContext="%DOC%"  IndentLevel="1" />
                                         </when>
                                       </choose>
                                     </when>
                                     <when test="2">
                                       <choose ParamRefId="%AID%_UP-%TT%%CC%006_R-%TT%%CC%00601">
                                         <when test="1">
-                                          <ParameterRefRef RefId="%AID%_UP-%TT%%CC%221_R-%TT%%CC%22101"  HelpContext="%DOC%" />
+                                          <ParameterRefRef RefId="%AID%_UP-%TT%%CC%221_R-%TT%%CC%22101"  HelpContext="%DOC%"  IndentLevel="1" />
                                         </when>
                                         <when test="2">
-                                          <ParameterRefRef RefId="%AID%_UP-%TT%%CC%222_R-%TT%%CC%22201"  HelpContext="%DOC%" />
+                                          <ParameterRefRef RefId="%AID%_UP-%TT%%CC%222_R-%TT%%CC%22201"  HelpContext="%DOC%"  IndentLevel="1" />
                                         </when>
                                         <when test="3">
-                                          <ParameterRefRef RefId="%AID%_UP-%TT%%CC%223_R-%TT%%CC%22301"  HelpContext="%DOC%" />
+                                          <ParameterRefRef RefId="%AID%_UP-%TT%%CC%223_R-%TT%%CC%22301"  HelpContext="%DOC%"  IndentLevel="1" />
                                         </when>
                                         <when test="4">
-                                          <ParameterRefRef RefId="%AID%_UP-%TT%%CC%224_R-%TT%%CC%22401"  HelpContext="%DOC%" />
+                                          <ParameterRefRef RefId="%AID%_UP-%TT%%CC%224_R-%TT%%CC%22401"  HelpContext="%DOC%"  IndentLevel="1" />
                                         </when>
                                       </choose>
                                     </when>
                                     <when test="3">
                                       <choose ParamRefId="%AID%_UP-%TT%%CC%006_R-%TT%%CC%00601">
                                         <when test="1">
-                                          <ParameterRefRef RefId="%AID%_UP-%TT%%CC%217_R-%TT%%CC%21701"  HelpContext="%DOC%" />
-                                          <ParameterRefRef RefId="%AID%_UP-%TT%%CC%221_R-%TT%%CC%22101"  HelpContext="%DOC%" />
+                                          <ParameterRefRef RefId="%AID%_UP-%TT%%CC%217_R-%TT%%CC%21701"  HelpContext="%DOC%"  IndentLevel="1" />
+                                          <ParameterRefRef RefId="%AID%_UP-%TT%%CC%221_R-%TT%%CC%22101"  HelpContext="%DOC%"  IndentLevel="1" />
                                         </when>
                                         <when test="2">
-                                          <ParameterRefRef RefId="%AID%_UP-%TT%%CC%218_R-%TT%%CC%21801"  HelpContext="%DOC%" />
-                                          <ParameterRefRef RefId="%AID%_UP-%TT%%CC%222_R-%TT%%CC%22201"  HelpContext="%DOC%" />
+                                          <ParameterRefRef RefId="%AID%_UP-%TT%%CC%218_R-%TT%%CC%21801"  HelpContext="%DOC%"  IndentLevel="1" />
+                                          <ParameterRefRef RefId="%AID%_UP-%TT%%CC%222_R-%TT%%CC%22201"  HelpContext="%DOC%"  IndentLevel="1" />
                                         </when>
                                         <when test="3">
-                                          <ParameterRefRef RefId="%AID%_UP-%TT%%CC%219_R-%TT%%CC%21901"  HelpContext="%DOC%" />
-                                          <ParameterRefRef RefId="%AID%_UP-%TT%%CC%223_R-%TT%%CC%22301"  HelpContext="%DOC%" />
+                                          <ParameterRefRef RefId="%AID%_UP-%TT%%CC%219_R-%TT%%CC%21901"  HelpContext="%DOC%"  IndentLevel="1" />
+                                          <ParameterRefRef RefId="%AID%_UP-%TT%%CC%223_R-%TT%%CC%22301"  HelpContext="%DOC%"  IndentLevel="1" />
                                         </when>
                                         <when test="4">
-                                          <ParameterRefRef RefId="%AID%_UP-%TT%%CC%220_R-%TT%%CC%22001"  HelpContext="%DOC%" />
-                                          <ParameterRefRef RefId="%AID%_UP-%TT%%CC%224_R-%TT%%CC%22401"  HelpContext="%DOC%" />
+                                          <ParameterRefRef RefId="%AID%_UP-%TT%%CC%220_R-%TT%%CC%22001"  HelpContext="%DOC%"  IndentLevel="1" />
+                                          <ParameterRefRef RefId="%AID%_UP-%TT%%CC%224_R-%TT%%CC%22401"  HelpContext="%DOC%"  IndentLevel="1" />
                                         </when>
                                       </choose>
                                     </when>
                                     <!-- <when test=">0">
-                            <ParameterRefRef RefId="%AID%_UP-%TT%%CC%202_R-%TT%%CC%20201"  HelpContext="%DOC%" />
+                            <ParameterRefRef RefId="%AID%_UP-%TT%%CC%202_R-%TT%%CC%20201"  HelpContext="%DOC%"  IndentLevel="1" />
                           </when> -->
                                   </choose>
                                 </when>
@@ -2285,57 +2298,57 @@
                                     <when test="1">
                                       <choose ParamRefId="%AID%_UP-%TT%%CC%007_R-%TT%%CC%00701">
                                         <when test="1">
-                                          <ParameterRefRef RefId="%AID%_UP-%TT%%CC%225_R-%TT%%CC%22501"  HelpContext="%DOC%" />
+                                          <ParameterRefRef RefId="%AID%_UP-%TT%%CC%225_R-%TT%%CC%22501"  HelpContext="%DOC%"  IndentLevel="1" />
                                         </when>
                                         <when test="2">
-                                          <ParameterRefRef RefId="%AID%_UP-%TT%%CC%226_R-%TT%%CC%22601"  HelpContext="%DOC%" />
+                                          <ParameterRefRef RefId="%AID%_UP-%TT%%CC%226_R-%TT%%CC%22601"  HelpContext="%DOC%"  IndentLevel="1" />
                                         </when>
                                         <when test="3">
-                                          <ParameterRefRef RefId="%AID%_UP-%TT%%CC%227_R-%TT%%CC%22701"  HelpContext="%DOC%" />
+                                          <ParameterRefRef RefId="%AID%_UP-%TT%%CC%227_R-%TT%%CC%22701"  HelpContext="%DOC%"  IndentLevel="1" />
                                         </when>
                                         <when test="4">
-                                          <ParameterRefRef RefId="%AID%_UP-%TT%%CC%228_R-%TT%%CC%22801"  HelpContext="%DOC%" />
+                                          <ParameterRefRef RefId="%AID%_UP-%TT%%CC%228_R-%TT%%CC%22801"  HelpContext="%DOC%"  IndentLevel="1" />
                                         </when>
                                       </choose>
                                     </when>
                                     <when test="2">
                                       <choose ParamRefId="%AID%_UP-%TT%%CC%007_R-%TT%%CC%00701">
                                         <when test="1">
-                                          <ParameterRefRef RefId="%AID%_UP-%TT%%CC%229_R-%TT%%CC%22901"  HelpContext="%DOC%" />
+                                          <ParameterRefRef RefId="%AID%_UP-%TT%%CC%229_R-%TT%%CC%22901"  HelpContext="%DOC%"  IndentLevel="1" />
                                         </when>
                                         <when test="2">
-                                          <ParameterRefRef RefId="%AID%_UP-%TT%%CC%230_R-%TT%%CC%23001"  HelpContext="%DOC%" />
+                                          <ParameterRefRef RefId="%AID%_UP-%TT%%CC%230_R-%TT%%CC%23001"  HelpContext="%DOC%"  IndentLevel="1" />
                                         </when>
                                         <when test="3">
-                                          <ParameterRefRef RefId="%AID%_UP-%TT%%CC%231_R-%TT%%CC%23101"  HelpContext="%DOC%" />
+                                          <ParameterRefRef RefId="%AID%_UP-%TT%%CC%231_R-%TT%%CC%23101"  HelpContext="%DOC%"  IndentLevel="1" />
                                         </when>
                                         <when test="4">
-                                          <ParameterRefRef RefId="%AID%_UP-%TT%%CC%232_R-%TT%%CC%23201"  HelpContext="%DOC%" />
+                                          <ParameterRefRef RefId="%AID%_UP-%TT%%CC%232_R-%TT%%CC%23201"  HelpContext="%DOC%"  IndentLevel="1" />
                                         </when>
                                       </choose>
                                     </when>
                                     <when test="3">
                                       <choose ParamRefId="%AID%_UP-%TT%%CC%007_R-%TT%%CC%00701">
                                         <when test="1">
-                                          <ParameterRefRef RefId="%AID%_UP-%TT%%CC%225_R-%TT%%CC%22501"  HelpContext="%DOC%" />
-                                          <ParameterRefRef RefId="%AID%_UP-%TT%%CC%229_R-%TT%%CC%22901"  HelpContext="%DOC%" />
+                                          <ParameterRefRef RefId="%AID%_UP-%TT%%CC%225_R-%TT%%CC%22501"  HelpContext="%DOC%"  IndentLevel="1" />
+                                          <ParameterRefRef RefId="%AID%_UP-%TT%%CC%229_R-%TT%%CC%22901"  HelpContext="%DOC%"  IndentLevel="1" />
                                         </when>
                                         <when test="2">
-                                          <ParameterRefRef RefId="%AID%_UP-%TT%%CC%226_R-%TT%%CC%22601"  HelpContext="%DOC%" />
-                                          <ParameterRefRef RefId="%AID%_UP-%TT%%CC%230_R-%TT%%CC%23001"  HelpContext="%DOC%" />
+                                          <ParameterRefRef RefId="%AID%_UP-%TT%%CC%226_R-%TT%%CC%22601"  HelpContext="%DOC%"  IndentLevel="1" />
+                                          <ParameterRefRef RefId="%AID%_UP-%TT%%CC%230_R-%TT%%CC%23001"  HelpContext="%DOC%"  IndentLevel="1" />
                                         </when>
                                         <when test="3">
-                                          <ParameterRefRef RefId="%AID%_UP-%TT%%CC%227_R-%TT%%CC%22701"  HelpContext="%DOC%" />
-                                          <ParameterRefRef RefId="%AID%_UP-%TT%%CC%231_R-%TT%%CC%23101"  HelpContext="%DOC%" />
+                                          <ParameterRefRef RefId="%AID%_UP-%TT%%CC%227_R-%TT%%CC%22701"  HelpContext="%DOC%"  IndentLevel="1" />
+                                          <ParameterRefRef RefId="%AID%_UP-%TT%%CC%231_R-%TT%%CC%23101"  HelpContext="%DOC%"  IndentLevel="1" />
                                         </when>
                                         <when test="4">
-                                          <ParameterRefRef RefId="%AID%_UP-%TT%%CC%228_R-%TT%%CC%22801"  HelpContext="%DOC%" />
-                                          <ParameterRefRef RefId="%AID%_UP-%TT%%CC%232_R-%TT%%CC%23201"  HelpContext="%DOC%" />
+                                          <ParameterRefRef RefId="%AID%_UP-%TT%%CC%228_R-%TT%%CC%22801"  HelpContext="%DOC%"  IndentLevel="1" />
+                                          <ParameterRefRef RefId="%AID%_UP-%TT%%CC%232_R-%TT%%CC%23201"  HelpContext="%DOC%"  IndentLevel="1" />
                                         </when>
                                       </choose>
                                     </when>
                                     <!-- <when test=">0">
-                            <ParameterRefRef RefId="%AID%_UP-%TT%%CC%203_R-%TT%%CC%20301"  HelpContext="%DOC%" />
+                            <ParameterRefRef RefId="%AID%_UP-%TT%%CC%203_R-%TT%%CC%20301"  HelpContext="%DOC%"  IndentLevel="1" />
                           </when> -->
                                   </choose>
                                 </when>
@@ -2348,18 +2361,19 @@
                                   <Row Id="%AID%_PB-nnn_R-1" Name="Row1" />
                                 </Rows>
                                 <Columns>
-                                  <Column Id="%AID%_PB-nnn_C-1" Name="Col1" Width="45%" />
-                                  <Column Id="%AID%_PB-nnn_C-2" Name="Col2" Width="15%" />
-                                  <Column Id="%AID%_PB-nnn_C-3" Name="Col3" Width="20%" />
+                                  <Column Id="%AID%_PB-nnn_C-1" Name="Col1" Width="1%" />
+                                  <Column Id="%AID%_PB-nnn_C-2" Name="Col2" Width="44%" />
+                                  <Column Id="%AID%_PB-nnn_C-3" Name="Col3" Width="15%" />
+                                  <Column Id="%AID%_PB-nnn_C-4" Name="Col4" Width="20%" />
                                 </Columns>
-                                <ParameterSeparator Id="%AID%_PS-nnn" Text="Manuellen Modus beenden nach&#10;(0=nicht beenden)" Cell="1,1" />
-                                <ParameterRefRef RefId="%AID%_UP-%TT%%CC%234_R-%TT%%CC%23401" Cell="1,2"  HelpContext="%DOC%" />
-                                <ParameterRefRef RefId="%AID%_UP-%TT%%CC%233_R-%TT%%CC%23301" Cell="1,3"  HelpContext="%DOC%" />
+                                <ParameterSeparator Id="%AID%_PS-nnn" Text=" Manuellen Modus beenden nach&#10; (0=nicht beenden)" Cell="1,2" />
+                                <ParameterRefRef RefId="%AID%_UP-%TT%%CC%234_R-%TT%%CC%23401" Cell="1,3"  HelpContext="%DOC%" />
+                                <ParameterRefRef RefId="%AID%_UP-%TT%%CC%233_R-%TT%%CC%23301" Cell="1,4"  HelpContext="%DOC%" />
                               </ParameterBlock>
                               <!-- end of delay pattern -->
                               <choose ParamRefId="%AID%_UP-%TT%%CC%234_R-%TT%%CC%23401">
                                 <when test=">0">
-                                  <ParameterRefRef RefId="%AID%_UP-%TT%%CC%235_R-%TT%%CC%23501"  HelpContext="%DOC%" />
+                                  <ParameterRefRef RefId="%AID%_UP-%TT%%CC%235_R-%TT%%CC%23501"  HelpContext="%DOC%"  IndentLevel="1" />
                                 </when>
                               </choose>
                             </ParameterBlock>
@@ -2369,27 +2383,27 @@
                             <ParameterBlock Id="%AID%_PB-%C%13" Name="PM%C%Phase3" Text="Phase 3: {{0: ...}}" TextParameterRefId="%AID%_P-%TT%%CC%028_R-%TT%%CC%02801" Icon="roman-numeral-3" HelpContext="PM-Tagesphase" >
                               <!-- Phase function -->
                               <ParameterSeparator Id="%AID%_PS-nnn" Text="Funktion" UIHint="Headline" />
-                              <ParameterRefRef RefId="%AID%_UP-%TT%%CC%339_R-%TT%%CC%33901"  HelpContext="%DOC%" />
+                              <ParameterRefRef RefId="%AID%_UP-%TT%%CC%339_R-%TT%%CC%33901"  HelpContext="%DOC%"  IndentLevel="1" />
                               <choose ParamRefId="%AID%_UP-%TT%%CC%009_R-%TT%%CC%00901">
                                 <when test="0">
                                   <!-- Lux send cycle -->
                                   <ParameterSeparator Id="%AID%_PS-nnn" Text="Helligkeit" UIHint="Headline" />
                                   <choose ParamRefId="%AID%_UP-%TT%%CC%339_R-%TT%%CC%33901">
                                     <when test="0 2">
-                                      <ParameterRefRef RefId="%AID%_UP-%TT%%CC%315_R-%TT%%CC%31501"  HelpContext="%DOC%" />
+                                      <ParameterRefRef RefId="%AID%_UP-%TT%%CC%315_R-%TT%%CC%31501"  HelpContext="%DOC%"  IndentLevel="1" />
                                     </when>
                                     <when test="0 1">
                                       <ParameterSeparator Id="%AID%_PS-nnn" Text="Hier kann man wählen, ob und wann das Licht ausgeht, wenn es im Raum heller wird (z.B. durch Sonneneinstrahlung)" />
-                                      <ParameterRefRef RefId="%AID%_UP-%TT%%CC%300_R-%TT%%CC%30001"  HelpContext="%DOC%" />
+                                      <ParameterRefRef RefId="%AID%_UP-%TT%%CC%300_R-%TT%%CC%30001"  HelpContext="%DOC%"  IndentLevel="1" />
                                       <choose ParamRefId="%AID%_UP-%TT%%CC%300_R-%TT%%CC%30001">
                                         <when test="1">
                                           <ParameterSeparator Id="%AID%_PS-nnn" Text="Die Ausschaltschwelle sollte so gewählt werden, dass sie höher ist als die Gesamthelligkeit aller Lichtquellen, da sonst das Licht bei weiteren zugeschalteten Quellen ausgehen würde." />
                                           <choose ParamRefId="%AID%_UP-%TT%%CC%339_R-%TT%%CC%33901">
                                             <when test="0">
-                                              <ParameterRefRef RefId="%AID%_UP-%TT%%CC%316_R-%TT%%CC%31601"  HelpContext="%DOC%" />
+                                              <ParameterRefRef RefId="%AID%_UP-%TT%%CC%316_R-%TT%%CC%31601"  HelpContext="%DOC%"  IndentLevel="1" />
                                             </when>
                                             <when test="1">
-                                              <ParameterRefRef RefId="%AID%_UP-%TT%%CC%316_R-%TT%%CC%31603"  HelpContext="%DOC%" />
+                                              <ParameterRefRef RefId="%AID%_UP-%TT%%CC%316_R-%TT%%CC%31603"  HelpContext="%DOC%"  IndentLevel="1" />
                                             </when>
                                           </choose>
                                         </when>
@@ -2397,10 +2411,10 @@
                                           <ParameterSeparator Id="%AID%_PS-nnn" Text="Die Ausschaltschwelle wird hier für jede zugeschaltete Lichtquelle neu berechnet, so dass dieser Wert wesentlich geringer gewählt werden kann." />
                                           <choose ParamRefId="%AID%_UP-%TT%%CC%339_R-%TT%%CC%33901">
                                             <when test="0">
-                                              <ParameterRefRef RefId="%AID%_UP-%TT%%CC%316_R-%TT%%CC%31602"  HelpContext="%DOC%" />
+                                              <ParameterRefRef RefId="%AID%_UP-%TT%%CC%316_R-%TT%%CC%31602"  HelpContext="%DOC%"  IndentLevel="1" />
                                             </when>
                                             <when test="1">
-                                              <ParameterRefRef RefId="%AID%_UP-%TT%%CC%316_R-%TT%%CC%31603"  HelpContext="%DOC%" />
+                                              <ParameterRefRef RefId="%AID%_UP-%TT%%CC%316_R-%TT%%CC%31603"  HelpContext="%DOC%"  IndentLevel="1" />
                                             </when>
                                           </choose>
                                         </when>
@@ -2412,13 +2426,14 @@
                                               <Row Id="%AID%_PB-nnn_R-1" Name="Row1" />
                                             </Rows>
                                             <Columns>
-                                              <Column Id="%AID%_PB-nnn_C-1" Name="Col1" Width="45%" />
-                                              <Column Id="%AID%_PB-nnn_C-2" Name="Col2" Width="15%" />
-                                              <Column Id="%AID%_PB-nnn_C-3" Name="Col3" Width="25%" />
+                                              <Column Id="%AID%_PB-nnn_C-1" Name="Col1" Width="1%" />
+                                              <Column Id="%AID%_PB-nnn_C-2" Name="Col2" Width="44%" />
+                                              <Column Id="%AID%_PB-nnn_C-3" Name="Col3" Width="15%" />
+                                              <Column Id="%AID%_PB-nnn_C-4" Name="Col4" Width="20%" />
                                             </Columns>
-                                            <ParameterSeparator Id="%AID%_PS-nnn" Text="Ausschalten verzögern um" Cell="1,1" />
-                                            <ParameterRefRef RefId="%AID%_UP-%TT%%CC%314_R-%TT%%CC%31401" Cell="1,2"  HelpContext="%DOC%" />
-                                            <ParameterRefRef RefId="%AID%_UP-%TT%%CC%313_R-%TT%%CC%31301" Cell="1,3"  HelpContext="%DOC%" />
+                                            <ParameterSeparator Id="%AID%_PS-nnn" Text=" Ausschalten verzögern um" Cell="1,2" />
+                                            <ParameterRefRef RefId="%AID%_UP-%TT%%CC%314_R-%TT%%CC%31401" Cell="1,3"  HelpContext="%DOC%" />
+                                            <ParameterRefRef RefId="%AID%_UP-%TT%%CC%313_R-%TT%%CC%31301" Cell="1,4"  HelpContext="%DOC%" />
                                           </ParameterBlock>
                                           <!-- end of delay pattern -->
                                         </when>
@@ -2437,16 +2452,17 @@
                                       <Row Id="%AID%_PB-nnn_R-1" Name="Row1" />
                                     </Rows>
                                     <Columns>
-                                      <Column Id="%AID%_PB-nnn_C-1" Name="Col1" Width="45%" />
-                                      <Column Id="%AID%_PB-nnn_C-2" Name="Col2" Width="15%" />
-                                      <Column Id="%AID%_PB-nnn_C-3" Name="Col3" Width="20%" />
+                                      <Column Id="%AID%_PB-nnn_C-1" Name="Col1" Width="1%" />
+                                      <Column Id="%AID%_PB-nnn_C-2" Name="Col2" Width="44%" />
+                                      <Column Id="%AID%_PB-nnn_C-3" Name="Col3" Width="15%" />
+                                      <Column Id="%AID%_PB-nnn_C-4" Name="Col4" Width="20%" />
                                     </Columns>
-                                    <ParameterSeparator Id="%AID%_PS-nnn" Text="Nachlaufzeit" Cell="1,1" />
-                                    <ParameterRefRef RefId="%AID%_UP-%TT%%CC%308_R-%TT%%CC%30801" Cell="1,2"  HelpContext="%DOC%" />
-                                    <ParameterRefRef RefId="%AID%_UP-%TT%%CC%307_R-%TT%%CC%30701" Cell="1,3"  HelpContext="%DOC%" />
+                                    <ParameterSeparator Id="%AID%_PS-nnn" Text=" Nachlaufzeit" Cell="1,2" />
+                                    <ParameterRefRef RefId="%AID%_UP-%TT%%CC%308_R-%TT%%CC%30801" Cell="1,3"  HelpContext="%DOC%" />
+                                    <ParameterRefRef RefId="%AID%_UP-%TT%%CC%307_R-%TT%%CC%30701" Cell="1,4"  HelpContext="%DOC%" />
                                   </ParameterBlock>
                                   <!-- end of delay pattern -->
-                                  <ParameterRefRef RefId="%AID%_UP-%TT%%CC%301_R-%TT%%CC%30101"  HelpContext="%DOC%" />
+                                  <ParameterRefRef RefId="%AID%_UP-%TT%%CC%301_R-%TT%%CC%30101"  HelpContext="%DOC%"  IndentLevel="1" />
                                   <choose ParamRefId="%AID%_UP-%TT%%CC%301_R-%TT%%CC%30101">
                                     <when test=">0">
                                       <!-- choose move or presence signal for short presence, but only if both are available -->
@@ -2454,7 +2470,7 @@
                                         <when test="1">
                                           <choose ParamRefId="%AID%_P-%TT%%CC%002_R-%TT%%CC%00201">
                                             <when test="1">
-                                              <ParameterRefRef RefId="%AID%_UP-%TT%%CC%338_R-%TT%%CC%33801" HelpContext="%DOC%" />
+                                              <ParameterRefRef RefId="%AID%_UP-%TT%%CC%338_R-%TT%%CC%33801" HelpContext="%DOC%"  IndentLevel="1" />
                                             </when>
                                           </choose>
                                         </when>
@@ -2465,13 +2481,14 @@
                                           <Row Id="%AID%_PB-nnn_R-1" Name="Row1" />
                                         </Rows>
                                         <Columns>
-                                          <Column Id="%AID%_PB-nnn_C-1" Name="Col1" Width="45%" />
-                                          <Column Id="%AID%_PB-nnn_C-2" Name="Col2" Width="15%" />
-                                          <Column Id="%AID%_PB-nnn_C-3" Name="Col3" Width="20%" />
+                                          <Column Id="%AID%_PB-nnn_C-1" Name="Col1" Width="1%" />
+                                          <Column Id="%AID%_PB-nnn_C-2" Name="Col2" Width="44%" />
+                                          <Column Id="%AID%_PB-nnn_C-3" Name="Col3" Width="15%" />
+                                          <Column Id="%AID%_PB-nnn_C-4" Name="Col4" Width="20%" />
                                         </Columns>
-                                        <ParameterSeparator Id="%AID%_PS-nnn" Text="Dauer der kurzen Anwesenheit" Cell="1,1" />
-                                        <ParameterRefRef RefId="%AID%_UP-%TT%%CC%310_R-%TT%%CC%31001" Cell="1,2"  HelpContext="%DOC%" />
-                                        <ParameterRefRef RefId="%AID%_UP-%TT%%CC%309_R-%TT%%CC%30901" Cell="1,3"  HelpContext="%DOC%" />
+                                        <ParameterSeparator Id="%AID%_PS-nnn" Text=" Dauer der kurzen Anwesenheit" Cell="1,2" />
+                                        <ParameterRefRef RefId="%AID%_UP-%TT%%CC%310_R-%TT%%CC%31001" Cell="1,3"  HelpContext="%DOC%" />
+                                        <ParameterRefRef RefId="%AID%_UP-%TT%%CC%309_R-%TT%%CC%30901" Cell="1,4"  HelpContext="%DOC%" />
                                       </ParameterBlock>
                                       <!-- end of delay pattern -->
                                       <!-- Delay pattern PresenceShortDelay -->
@@ -2480,13 +2497,14 @@
                                           <Row Id="%AID%_PB-nnn_R-1" Name="Row1" />
                                         </Rows>
                                         <Columns>
-                                          <Column Id="%AID%_PB-nnn_C-1" Name="Col1" Width="45%" />
-                                          <Column Id="%AID%_PB-nnn_C-2" Name="Col2" Width="15%" />
-                                          <Column Id="%AID%_PB-nnn_C-3" Name="Col3" Width="20%" />
+                                          <Column Id="%AID%_PB-nnn_C-1" Name="Col1" Width="1%" />
+                                          <Column Id="%AID%_PB-nnn_C-2" Name="Col2" Width="44%" />
+                                          <Column Id="%AID%_PB-nnn_C-3" Name="Col3" Width="15%" />
+                                          <Column Id="%AID%_PB-nnn_C-4" Name="Col4" Width="20%" />
                                         </Columns>
-                                        <ParameterSeparator Id="%AID%_PS-nnn" Text="Nachlaufzeit bei kurzer Anwesenheit" Cell="1,1" />
-                                        <ParameterRefRef RefId="%AID%_UP-%TT%%CC%312_R-%TT%%CC%31201" Cell="1,2"  HelpContext="%DOC%" />
-                                        <ParameterRefRef RefId="%AID%_UP-%TT%%CC%311_R-%TT%%CC%31101" Cell="1,3"  HelpContext="%DOC%" />
+                                        <ParameterSeparator Id="%AID%_PS-nnn" Text=" Nachlaufzeit bei kurzer Anwesenheit" Cell="1,2" />
+                                        <ParameterRefRef RefId="%AID%_UP-%TT%%CC%312_R-%TT%%CC%31201" Cell="1,3"  HelpContext="%DOC%" />
+                                        <ParameterRefRef RefId="%AID%_UP-%TT%%CC%311_R-%TT%%CC%31101" Cell="1,4"  HelpContext="%DOC%" />
                                       </ParameterBlock>
                                       <!-- end of delay pattern -->
                                       <ParameterRefRef RefId="%AID%_UP-%TT%%CC%337_R-%TT%%CC%33701"  HelpContext="PM-Erst-nach-der-Kurzzeitpraesenz-schalten" />
@@ -2494,12 +2512,12 @@
                                   </choose>
                                   <choose ParamRefId="%AID%_UP-%TT%%CC%035_R-%TT%%CC%03501">
                                     <when test=">0">
-                                      <ParameterRefRef RefId="%AID%_UP-%TT%%CC%336_R-%TT%%CC%33601"  HelpContext="%DOC%" />
+                                      <ParameterRefRef RefId="%AID%_UP-%TT%%CC%336_R-%TT%%CC%33601"  HelpContext="%DOC%"  IndentLevel="1" />
                                     </when>
                                   </choose>
                                   <choose ParamRefId="%AID%_UP-%TT%%CC%036_R-%TT%%CC%03601">
                                     <when test=">0">
-                                      <ParameterRefRef RefId="%AID%_UP-%TT%%CC%336_R-%TT%%CC%33601"  HelpContext="%DOC%" />
+                                      <ParameterRefRef RefId="%AID%_UP-%TT%%CC%336_R-%TT%%CC%33601"  HelpContext="%DOC%"  IndentLevel="1" />
                                     </when>
                                   </choose>
                                   <ParameterSeparator Id="%AID%_PS-nnn" Text="" UIHint="HorizontalRuler" />
@@ -2516,57 +2534,57 @@
                                     <when test="1">
                                       <choose ParamRefId="%AID%_UP-%TT%%CC%006_R-%TT%%CC%00601">
                                         <when test="1">
-                                          <ParameterRefRef RefId="%AID%_UP-%TT%%CC%317_R-%TT%%CC%31701"  HelpContext="%DOC%" />
+                                          <ParameterRefRef RefId="%AID%_UP-%TT%%CC%317_R-%TT%%CC%31701"  HelpContext="%DOC%"  IndentLevel="1" />
                                         </when>
                                         <when test="2">
-                                          <ParameterRefRef RefId="%AID%_UP-%TT%%CC%318_R-%TT%%CC%31801"  HelpContext="%DOC%" />
+                                          <ParameterRefRef RefId="%AID%_UP-%TT%%CC%318_R-%TT%%CC%31801"  HelpContext="%DOC%"  IndentLevel="1" />
                                         </when>
                                         <when test="3">
-                                          <ParameterRefRef RefId="%AID%_UP-%TT%%CC%319_R-%TT%%CC%31901"  HelpContext="%DOC%" />
+                                          <ParameterRefRef RefId="%AID%_UP-%TT%%CC%319_R-%TT%%CC%31901"  HelpContext="%DOC%"  IndentLevel="1" />
                                         </when>
                                         <when test="4">
-                                          <ParameterRefRef RefId="%AID%_UP-%TT%%CC%320_R-%TT%%CC%32001"  HelpContext="%DOC%" />
+                                          <ParameterRefRef RefId="%AID%_UP-%TT%%CC%320_R-%TT%%CC%32001"  HelpContext="%DOC%"  IndentLevel="1" />
                                         </when>
                                       </choose>
                                     </when>
                                     <when test="2">
                                       <choose ParamRefId="%AID%_UP-%TT%%CC%006_R-%TT%%CC%00601">
                                         <when test="1">
-                                          <ParameterRefRef RefId="%AID%_UP-%TT%%CC%321_R-%TT%%CC%32101"  HelpContext="%DOC%" />
+                                          <ParameterRefRef RefId="%AID%_UP-%TT%%CC%321_R-%TT%%CC%32101"  HelpContext="%DOC%"  IndentLevel="1" />
                                         </when>
                                         <when test="2">
-                                          <ParameterRefRef RefId="%AID%_UP-%TT%%CC%322_R-%TT%%CC%32201"  HelpContext="%DOC%" />
+                                          <ParameterRefRef RefId="%AID%_UP-%TT%%CC%322_R-%TT%%CC%32201"  HelpContext="%DOC%"  IndentLevel="1" />
                                         </when>
                                         <when test="3">
-                                          <ParameterRefRef RefId="%AID%_UP-%TT%%CC%323_R-%TT%%CC%32301"  HelpContext="%DOC%" />
+                                          <ParameterRefRef RefId="%AID%_UP-%TT%%CC%323_R-%TT%%CC%32301"  HelpContext="%DOC%"  IndentLevel="1" />
                                         </when>
                                         <when test="4">
-                                          <ParameterRefRef RefId="%AID%_UP-%TT%%CC%324_R-%TT%%CC%32401"  HelpContext="%DOC%" />
+                                          <ParameterRefRef RefId="%AID%_UP-%TT%%CC%324_R-%TT%%CC%32401"  HelpContext="%DOC%"  IndentLevel="1" />
                                         </when>
                                       </choose>
                                     </when>
                                     <when test="3">
                                       <choose ParamRefId="%AID%_UP-%TT%%CC%006_R-%TT%%CC%00601">
                                         <when test="1">
-                                          <ParameterRefRef RefId="%AID%_UP-%TT%%CC%317_R-%TT%%CC%31701"  HelpContext="%DOC%" />
-                                          <ParameterRefRef RefId="%AID%_UP-%TT%%CC%321_R-%TT%%CC%32101"  HelpContext="%DOC%" />
+                                          <ParameterRefRef RefId="%AID%_UP-%TT%%CC%317_R-%TT%%CC%31701"  HelpContext="%DOC%"  IndentLevel="1" />
+                                          <ParameterRefRef RefId="%AID%_UP-%TT%%CC%321_R-%TT%%CC%32101"  HelpContext="%DOC%"  IndentLevel="1" />
                                         </when>
                                         <when test="2">
-                                          <ParameterRefRef RefId="%AID%_UP-%TT%%CC%318_R-%TT%%CC%31801"  HelpContext="%DOC%" />
-                                          <ParameterRefRef RefId="%AID%_UP-%TT%%CC%322_R-%TT%%CC%32201"  HelpContext="%DOC%" />
+                                          <ParameterRefRef RefId="%AID%_UP-%TT%%CC%318_R-%TT%%CC%31801"  HelpContext="%DOC%"  IndentLevel="1" />
+                                          <ParameterRefRef RefId="%AID%_UP-%TT%%CC%322_R-%TT%%CC%32201"  HelpContext="%DOC%"  IndentLevel="1" />
                                         </when>
                                         <when test="3">
-                                          <ParameterRefRef RefId="%AID%_UP-%TT%%CC%319_R-%TT%%CC%31901"  HelpContext="%DOC%" />
-                                          <ParameterRefRef RefId="%AID%_UP-%TT%%CC%323_R-%TT%%CC%32301"  HelpContext="%DOC%" />
+                                          <ParameterRefRef RefId="%AID%_UP-%TT%%CC%319_R-%TT%%CC%31901"  HelpContext="%DOC%"  IndentLevel="1" />
+                                          <ParameterRefRef RefId="%AID%_UP-%TT%%CC%323_R-%TT%%CC%32301"  HelpContext="%DOC%"  IndentLevel="1" />
                                         </when>
                                         <when test="4">
-                                          <ParameterRefRef RefId="%AID%_UP-%TT%%CC%320_R-%TT%%CC%32001"  HelpContext="%DOC%" />
-                                          <ParameterRefRef RefId="%AID%_UP-%TT%%CC%324_R-%TT%%CC%32401"  HelpContext="%DOC%" />
+                                          <ParameterRefRef RefId="%AID%_UP-%TT%%CC%320_R-%TT%%CC%32001"  HelpContext="%DOC%"  IndentLevel="1" />
+                                          <ParameterRefRef RefId="%AID%_UP-%TT%%CC%324_R-%TT%%CC%32401"  HelpContext="%DOC%"  IndentLevel="1" />
                                         </when>
                                       </choose>
                                     </when>
                                     <!-- <when test=">0">
-                            <ParameterRefRef RefId="%AID%_UP-%TT%%CC%302_R-%TT%%CC%30201"  HelpContext="%DOC%" />
+                            <ParameterRefRef RefId="%AID%_UP-%TT%%CC%302_R-%TT%%CC%30201"  HelpContext="%DOC%"  IndentLevel="1" />
                           </when> -->
                                   </choose>
                                 </when>
@@ -2582,57 +2600,57 @@
                                     <when test="1">
                                       <choose ParamRefId="%AID%_UP-%TT%%CC%007_R-%TT%%CC%00701">
                                         <when test="1">
-                                          <ParameterRefRef RefId="%AID%_UP-%TT%%CC%325_R-%TT%%CC%32501"  HelpContext="%DOC%" />
+                                          <ParameterRefRef RefId="%AID%_UP-%TT%%CC%325_R-%TT%%CC%32501"  HelpContext="%DOC%"  IndentLevel="1" />
                                         </when>
                                         <when test="2">
-                                          <ParameterRefRef RefId="%AID%_UP-%TT%%CC%326_R-%TT%%CC%32601"  HelpContext="%DOC%" />
+                                          <ParameterRefRef RefId="%AID%_UP-%TT%%CC%326_R-%TT%%CC%32601"  HelpContext="%DOC%"  IndentLevel="1" />
                                         </when>
                                         <when test="3">
-                                          <ParameterRefRef RefId="%AID%_UP-%TT%%CC%327_R-%TT%%CC%32701"  HelpContext="%DOC%" />
+                                          <ParameterRefRef RefId="%AID%_UP-%TT%%CC%327_R-%TT%%CC%32701"  HelpContext="%DOC%"  IndentLevel="1" />
                                         </when>
                                         <when test="4">
-                                          <ParameterRefRef RefId="%AID%_UP-%TT%%CC%328_R-%TT%%CC%32801"  HelpContext="%DOC%" />
+                                          <ParameterRefRef RefId="%AID%_UP-%TT%%CC%328_R-%TT%%CC%32801"  HelpContext="%DOC%"  IndentLevel="1" />
                                         </when>
                                       </choose>
                                     </when>
                                     <when test="2">
                                       <choose ParamRefId="%AID%_UP-%TT%%CC%007_R-%TT%%CC%00701">
                                         <when test="1">
-                                          <ParameterRefRef RefId="%AID%_UP-%TT%%CC%329_R-%TT%%CC%32901"  HelpContext="%DOC%" />
+                                          <ParameterRefRef RefId="%AID%_UP-%TT%%CC%329_R-%TT%%CC%32901"  HelpContext="%DOC%"  IndentLevel="1" />
                                         </when>
                                         <when test="2">
-                                          <ParameterRefRef RefId="%AID%_UP-%TT%%CC%330_R-%TT%%CC%33001"  HelpContext="%DOC%" />
+                                          <ParameterRefRef RefId="%AID%_UP-%TT%%CC%330_R-%TT%%CC%33001"  HelpContext="%DOC%"  IndentLevel="1" />
                                         </when>
                                         <when test="3">
-                                          <ParameterRefRef RefId="%AID%_UP-%TT%%CC%331_R-%TT%%CC%33101"  HelpContext="%DOC%" />
+                                          <ParameterRefRef RefId="%AID%_UP-%TT%%CC%331_R-%TT%%CC%33101"  HelpContext="%DOC%"  IndentLevel="1" />
                                         </when>
                                         <when test="4">
-                                          <ParameterRefRef RefId="%AID%_UP-%TT%%CC%332_R-%TT%%CC%33201"  HelpContext="%DOC%" />
+                                          <ParameterRefRef RefId="%AID%_UP-%TT%%CC%332_R-%TT%%CC%33201"  HelpContext="%DOC%"  IndentLevel="1" />
                                         </when>
                                       </choose>
                                     </when>
                                     <when test="3">
                                       <choose ParamRefId="%AID%_UP-%TT%%CC%007_R-%TT%%CC%00701">
                                         <when test="1">
-                                          <ParameterRefRef RefId="%AID%_UP-%TT%%CC%325_R-%TT%%CC%32501"  HelpContext="%DOC%" />
-                                          <ParameterRefRef RefId="%AID%_UP-%TT%%CC%329_R-%TT%%CC%32901"  HelpContext="%DOC%" />
+                                          <ParameterRefRef RefId="%AID%_UP-%TT%%CC%325_R-%TT%%CC%32501"  HelpContext="%DOC%"  IndentLevel="1" />
+                                          <ParameterRefRef RefId="%AID%_UP-%TT%%CC%329_R-%TT%%CC%32901"  HelpContext="%DOC%"  IndentLevel="1" />
                                         </when>
                                         <when test="2">
-                                          <ParameterRefRef RefId="%AID%_UP-%TT%%CC%326_R-%TT%%CC%32601"  HelpContext="%DOC%" />
-                                          <ParameterRefRef RefId="%AID%_UP-%TT%%CC%330_R-%TT%%CC%33001"  HelpContext="%DOC%" />
+                                          <ParameterRefRef RefId="%AID%_UP-%TT%%CC%326_R-%TT%%CC%32601"  HelpContext="%DOC%"  IndentLevel="1" />
+                                          <ParameterRefRef RefId="%AID%_UP-%TT%%CC%330_R-%TT%%CC%33001"  HelpContext="%DOC%"  IndentLevel="1" />
                                         </when>
                                         <when test="3">
-                                          <ParameterRefRef RefId="%AID%_UP-%TT%%CC%327_R-%TT%%CC%32701"  HelpContext="%DOC%" />
-                                          <ParameterRefRef RefId="%AID%_UP-%TT%%CC%331_R-%TT%%CC%33101"  HelpContext="%DOC%" />
+                                          <ParameterRefRef RefId="%AID%_UP-%TT%%CC%327_R-%TT%%CC%32701"  HelpContext="%DOC%"  IndentLevel="1" />
+                                          <ParameterRefRef RefId="%AID%_UP-%TT%%CC%331_R-%TT%%CC%33101"  HelpContext="%DOC%"  IndentLevel="1" />
                                         </when>
                                         <when test="4">
-                                          <ParameterRefRef RefId="%AID%_UP-%TT%%CC%328_R-%TT%%CC%32801"  HelpContext="%DOC%" />
-                                          <ParameterRefRef RefId="%AID%_UP-%TT%%CC%332_R-%TT%%CC%33201"  HelpContext="%DOC%" />
+                                          <ParameterRefRef RefId="%AID%_UP-%TT%%CC%328_R-%TT%%CC%32801"  HelpContext="%DOC%"  IndentLevel="1" />
+                                          <ParameterRefRef RefId="%AID%_UP-%TT%%CC%332_R-%TT%%CC%33201"  HelpContext="%DOC%"  IndentLevel="1" />
                                         </when>
                                       </choose>
                                     </when>
                                     <!-- <when test=">0">
-                            <ParameterRefRef RefId="%AID%_UP-%TT%%CC%303_R-%TT%%CC%30301"  HelpContext="%DOC%" />
+                            <ParameterRefRef RefId="%AID%_UP-%TT%%CC%303_R-%TT%%CC%30301"  HelpContext="%DOC%"  IndentLevel="1" />
                           </when> -->
                                   </choose>
                                 </when>
@@ -2645,18 +2663,19 @@
                                   <Row Id="%AID%_PB-nnn_R-1" Name="Row1" />
                                 </Rows>
                                 <Columns>
-                                  <Column Id="%AID%_PB-nnn_C-1" Name="Col1" Width="45%" />
-                                  <Column Id="%AID%_PB-nnn_C-2" Name="Col2" Width="15%" />
-                                  <Column Id="%AID%_PB-nnn_C-3" Name="Col3" Width="20%" />
+                                  <Column Id="%AID%_PB-nnn_C-1" Name="Col1" Width="1%" />
+                                  <Column Id="%AID%_PB-nnn_C-2" Name="Col2" Width="44%" />
+                                  <Column Id="%AID%_PB-nnn_C-3" Name="Col3" Width="15%" />
+                                  <Column Id="%AID%_PB-nnn_C-4" Name="Col4" Width="20%" />
                                 </Columns>
-                                <ParameterSeparator Id="%AID%_PS-nnn" Text="Manuellen Modus beenden nach&#10;(0=nicht beenden)" Cell="1,1" />
-                                <ParameterRefRef RefId="%AID%_UP-%TT%%CC%334_R-%TT%%CC%33401" Cell="1,2"  HelpContext="%DOC%" />
-                                <ParameterRefRef RefId="%AID%_UP-%TT%%CC%333_R-%TT%%CC%33301" Cell="1,3"  HelpContext="%DOC%" />
+                                <ParameterSeparator Id="%AID%_PS-nnn" Text=" Manuellen Modus beenden nach&#10; (0=nicht beenden)" Cell="1,2" />
+                                <ParameterRefRef RefId="%AID%_UP-%TT%%CC%334_R-%TT%%CC%33401" Cell="1,3"  HelpContext="%DOC%" />
+                                <ParameterRefRef RefId="%AID%_UP-%TT%%CC%333_R-%TT%%CC%33301" Cell="1,4"  HelpContext="%DOC%" />
                               </ParameterBlock>
                               <!-- end of delay pattern -->
                               <choose ParamRefId="%AID%_UP-%TT%%CC%334_R-%TT%%CC%33401">
                                 <when test=">0">
-                                  <ParameterRefRef RefId="%AID%_UP-%TT%%CC%335_R-%TT%%CC%33501"  HelpContext="%DOC%" />
+                                  <ParameterRefRef RefId="%AID%_UP-%TT%%CC%335_R-%TT%%CC%33501"  HelpContext="%DOC%"  IndentLevel="1" />
                                 </when>
                               </choose>
                             </ParameterBlock>
@@ -2666,27 +2685,27 @@
                             <ParameterBlock Id="%AID%_PB-%C%14" Name="PM%C%Phase4" Text="Phase 4: {{0: ...}}" TextParameterRefId="%AID%_P-%TT%%CC%029_R-%TT%%CC%02901" Icon="roman-numeral-4" HelpContext="PM-Tagesphase" >
                               <!-- Phase function -->
                               <ParameterSeparator Id="%AID%_PS-nnn" Text="Funktion" UIHint="Headline" />
-                              <ParameterRefRef RefId="%AID%_UP-%TT%%CC%439_R-%TT%%CC%43901"  HelpContext="%DOC%" />
+                              <ParameterRefRef RefId="%AID%_UP-%TT%%CC%439_R-%TT%%CC%43901"  HelpContext="%DOC%"  IndentLevel="1" />
                               <choose ParamRefId="%AID%_UP-%TT%%CC%009_R-%TT%%CC%00901">
                                 <when test="0">
                                   <!-- Lux send cycle -->
                                   <ParameterSeparator Id="%AID%_PS-nnn" Text="Helligkeit" UIHint="Headline" />
                                   <choose ParamRefId="%AID%_UP-%TT%%CC%439_R-%TT%%CC%43901">
                                     <when test="0 2">
-                                      <ParameterRefRef RefId="%AID%_UP-%TT%%CC%415_R-%TT%%CC%41501"  HelpContext="%DOC%" />
+                                      <ParameterRefRef RefId="%AID%_UP-%TT%%CC%415_R-%TT%%CC%41501"  HelpContext="%DOC%"  IndentLevel="1" />
                                     </when>
                                     <when test="0 1">
                                       <ParameterSeparator Id="%AID%_PS-nnn" Text="Hier kann man wählen, ob und wann das Licht ausgeht, wenn es im Raum heller wird (z.B. durch Sonneneinstrahlung)" />
-                                      <ParameterRefRef RefId="%AID%_UP-%TT%%CC%400_R-%TT%%CC%40001"  HelpContext="%DOC%" />
+                                      <ParameterRefRef RefId="%AID%_UP-%TT%%CC%400_R-%TT%%CC%40001"  HelpContext="%DOC%"  IndentLevel="1" />
                                       <choose ParamRefId="%AID%_UP-%TT%%CC%400_R-%TT%%CC%40001">
                                         <when test="1">
                                           <ParameterSeparator Id="%AID%_PS-nnn" Text="Die Ausschaltschwelle sollte so gewählt werden, dass sie höher ist als die Gesamthelligkeit aller Lichtquellen, da sonst das Licht bei weiteren zugeschalteten Quellen ausgehen würde." />
                                           <choose ParamRefId="%AID%_UP-%TT%%CC%439_R-%TT%%CC%43901">
                                             <when test="0">
-                                              <ParameterRefRef RefId="%AID%_UP-%TT%%CC%416_R-%TT%%CC%41601"  HelpContext="%DOC%" />
+                                              <ParameterRefRef RefId="%AID%_UP-%TT%%CC%416_R-%TT%%CC%41601"  HelpContext="%DOC%"  IndentLevel="1" />
                                             </when>
                                             <when test="1">
-                                              <ParameterRefRef RefId="%AID%_UP-%TT%%CC%416_R-%TT%%CC%41603"  HelpContext="%DOC%" />
+                                              <ParameterRefRef RefId="%AID%_UP-%TT%%CC%416_R-%TT%%CC%41603"  HelpContext="%DOC%"  IndentLevel="1" />
                                             </when>
                                           </choose>
                                         </when>
@@ -2694,10 +2713,10 @@
                                           <ParameterSeparator Id="%AID%_PS-nnn" Text="Die Ausschaltschwelle wird hier für jede zugeschaltete Lichtquelle neu berechnet, so dass dieser Wert wesentlich geringer gewählt werden kann." />
                                           <choose ParamRefId="%AID%_UP-%TT%%CC%439_R-%TT%%CC%43901">
                                             <when test="0">
-                                              <ParameterRefRef RefId="%AID%_UP-%TT%%CC%416_R-%TT%%CC%41602"  HelpContext="%DOC%" />
+                                              <ParameterRefRef RefId="%AID%_UP-%TT%%CC%416_R-%TT%%CC%41602"  HelpContext="%DOC%"  IndentLevel="1" />
                                             </when>
                                             <when test="1">
-                                              <ParameterRefRef RefId="%AID%_UP-%TT%%CC%416_R-%TT%%CC%41603"  HelpContext="%DOC%" />
+                                              <ParameterRefRef RefId="%AID%_UP-%TT%%CC%416_R-%TT%%CC%41603"  HelpContext="%DOC%"  IndentLevel="1" />
                                             </when>
                                           </choose>
                                         </when>
@@ -2709,13 +2728,14 @@
                                               <Row Id="%AID%_PB-nnn_R-1" Name="Row1" />
                                             </Rows>
                                             <Columns>
-                                              <Column Id="%AID%_PB-nnn_C-1" Name="Col1" Width="45%" />
-                                              <Column Id="%AID%_PB-nnn_C-2" Name="Col2" Width="15%" />
-                                              <Column Id="%AID%_PB-nnn_C-3" Name="Col3" Width="25%" />
+                                              <Column Id="%AID%_PB-nnn_C-1" Name="Col1" Width="1%" />
+                                              <Column Id="%AID%_PB-nnn_C-2" Name="Col2" Width="44%" />
+                                              <Column Id="%AID%_PB-nnn_C-3" Name="Col3" Width="15%" />
+                                              <Column Id="%AID%_PB-nnn_C-4" Name="Col4" Width="20%" />
                                             </Columns>
-                                            <ParameterSeparator Id="%AID%_PS-nnn" Text="Ausschalten verzögern um" Cell="1,1" />
-                                            <ParameterRefRef RefId="%AID%_UP-%TT%%CC%414_R-%TT%%CC%41401" Cell="1,2"  HelpContext="%DOC%" />
-                                            <ParameterRefRef RefId="%AID%_UP-%TT%%CC%413_R-%TT%%CC%41301" Cell="1,3"  HelpContext="%DOC%" />
+                                            <ParameterSeparator Id="%AID%_PS-nnn" Text=" Ausschalten verzögern um" Cell="1,2" />
+                                            <ParameterRefRef RefId="%AID%_UP-%TT%%CC%414_R-%TT%%CC%41401" Cell="1,3"  HelpContext="%DOC%" />
+                                            <ParameterRefRef RefId="%AID%_UP-%TT%%CC%413_R-%TT%%CC%41301" Cell="1,4"  HelpContext="%DOC%" />
                                           </ParameterBlock>
                                           <!-- end of delay pattern -->
                                         </when>
@@ -2734,16 +2754,17 @@
                                       <Row Id="%AID%_PB-nnn_R-1" Name="Row1" />
                                     </Rows>
                                     <Columns>
-                                      <Column Id="%AID%_PB-nnn_C-1" Name="Col1" Width="45%" />
-                                      <Column Id="%AID%_PB-nnn_C-2" Name="Col2" Width="15%" />
-                                      <Column Id="%AID%_PB-nnn_C-3" Name="Col3" Width="20%" />
+                                      <Column Id="%AID%_PB-nnn_C-1" Name="Col1" Width="1%" />
+                                      <Column Id="%AID%_PB-nnn_C-2" Name="Col2" Width="44%" />
+                                      <Column Id="%AID%_PB-nnn_C-3" Name="Col3" Width="15%" />
+                                      <Column Id="%AID%_PB-nnn_C-4" Name="Col4" Width="20%" />
                                     </Columns>
-                                    <ParameterSeparator Id="%AID%_PS-nnn" Text="Nachlaufzeit" Cell="1,1" />
-                                    <ParameterRefRef RefId="%AID%_UP-%TT%%CC%408_R-%TT%%CC%40801" Cell="1,2"  HelpContext="%DOC%" />
-                                    <ParameterRefRef RefId="%AID%_UP-%TT%%CC%407_R-%TT%%CC%40701" Cell="1,3"  HelpContext="%DOC%" />
+                                    <ParameterSeparator Id="%AID%_PS-nnn" Text=" Nachlaufzeit" Cell="1,2" />
+                                    <ParameterRefRef RefId="%AID%_UP-%TT%%CC%408_R-%TT%%CC%40801" Cell="1,3"  HelpContext="%DOC%" />
+                                    <ParameterRefRef RefId="%AID%_UP-%TT%%CC%407_R-%TT%%CC%40701" Cell="1,4"  HelpContext="%DOC%" />
                                   </ParameterBlock>
                                   <!-- end of delay pattern -->
-                                  <ParameterRefRef RefId="%AID%_UP-%TT%%CC%401_R-%TT%%CC%40101"  HelpContext="%DOC%" />
+                                  <ParameterRefRef RefId="%AID%_UP-%TT%%CC%401_R-%TT%%CC%40101"  HelpContext="%DOC%"  IndentLevel="1" />
                                   <choose ParamRefId="%AID%_UP-%TT%%CC%401_R-%TT%%CC%40101">
                                     <when test=">0">
                                       <!-- choose move or presence signal for short presence, but only if both are available -->
@@ -2751,7 +2772,7 @@
                                         <when test="1">
                                           <choose ParamRefId="%AID%_P-%TT%%CC%002_R-%TT%%CC%00201">
                                             <when test="1">
-                                              <ParameterRefRef RefId="%AID%_UP-%TT%%CC%438_R-%TT%%CC%43801" HelpContext="%DOC%" />
+                                              <ParameterRefRef RefId="%AID%_UP-%TT%%CC%438_R-%TT%%CC%43801" HelpContext="%DOC%"  IndentLevel="1" />
                                             </when>
                                           </choose>
                                         </when>
@@ -2762,13 +2783,14 @@
                                           <Row Id="%AID%_PB-nnn_R-1" Name="Row1" />
                                         </Rows>
                                         <Columns>
-                                          <Column Id="%AID%_PB-nnn_C-1" Name="Col1" Width="45%" />
-                                          <Column Id="%AID%_PB-nnn_C-2" Name="Col2" Width="15%" />
-                                          <Column Id="%AID%_PB-nnn_C-3" Name="Col3" Width="20%" />
+                                          <Column Id="%AID%_PB-nnn_C-1" Name="Col1" Width="1%" />
+                                          <Column Id="%AID%_PB-nnn_C-2" Name="Col2" Width="44%" />
+                                          <Column Id="%AID%_PB-nnn_C-3" Name="Col3" Width="15%" />
+                                          <Column Id="%AID%_PB-nnn_C-4" Name="Col4" Width="20%" />
                                         </Columns>
-                                        <ParameterSeparator Id="%AID%_PS-nnn" Text="Dauer der kurzen Anwesenheit" Cell="1,1" />
-                                        <ParameterRefRef RefId="%AID%_UP-%TT%%CC%410_R-%TT%%CC%41001" Cell="1,2"  HelpContext="%DOC%" />
-                                        <ParameterRefRef RefId="%AID%_UP-%TT%%CC%409_R-%TT%%CC%40901" Cell="1,3"  HelpContext="%DOC%" />
+                                        <ParameterSeparator Id="%AID%_PS-nnn" Text=" Dauer der kurzen Anwesenheit" Cell="1,2" />
+                                        <ParameterRefRef RefId="%AID%_UP-%TT%%CC%410_R-%TT%%CC%41001" Cell="1,3"  HelpContext="%DOC%" />
+                                        <ParameterRefRef RefId="%AID%_UP-%TT%%CC%409_R-%TT%%CC%40901" Cell="1,4"  HelpContext="%DOC%" />
                                       </ParameterBlock>
                                       <!-- end of delay pattern -->
                                       <!-- Delay pattern PresenceShortDelay -->
@@ -2777,13 +2799,14 @@
                                           <Row Id="%AID%_PB-nnn_R-1" Name="Row1" />
                                         </Rows>
                                         <Columns>
-                                          <Column Id="%AID%_PB-nnn_C-1" Name="Col1" Width="45%" />
-                                          <Column Id="%AID%_PB-nnn_C-2" Name="Col2" Width="15%" />
-                                          <Column Id="%AID%_PB-nnn_C-3" Name="Col3" Width="20%" />
+                                          <Column Id="%AID%_PB-nnn_C-1" Name="Col1" Width="1%" />
+                                          <Column Id="%AID%_PB-nnn_C-2" Name="Col2" Width="44%" />
+                                          <Column Id="%AID%_PB-nnn_C-3" Name="Col3" Width="15%" />
+                                          <Column Id="%AID%_PB-nnn_C-4" Name="Col4" Width="20%" />
                                         </Columns>
-                                        <ParameterSeparator Id="%AID%_PS-nnn" Text="Nachlaufzeit bei kurzer Anwesenheit" Cell="1,1" />
-                                        <ParameterRefRef RefId="%AID%_UP-%TT%%CC%412_R-%TT%%CC%41201" Cell="1,2"  HelpContext="%DOC%" />
-                                        <ParameterRefRef RefId="%AID%_UP-%TT%%CC%411_R-%TT%%CC%41101" Cell="1,3"  HelpContext="%DOC%" />
+                                        <ParameterSeparator Id="%AID%_PS-nnn" Text=" Nachlaufzeit bei kurzer Anwesenheit" Cell="1,2" />
+                                        <ParameterRefRef RefId="%AID%_UP-%TT%%CC%412_R-%TT%%CC%41201" Cell="1,3"  HelpContext="%DOC%" />
+                                        <ParameterRefRef RefId="%AID%_UP-%TT%%CC%411_R-%TT%%CC%41101" Cell="1,4"  HelpContext="%DOC%" />
                                       </ParameterBlock>
                                       <!-- end of delay pattern -->
                                       <ParameterRefRef RefId="%AID%_UP-%TT%%CC%437_R-%TT%%CC%43701"  HelpContext="PM-Erst-nach-der-Kurzzeitpraesenz-schalten" />
@@ -2791,12 +2814,12 @@
                                   </choose>
                                   <choose ParamRefId="%AID%_UP-%TT%%CC%035_R-%TT%%CC%03501">
                                     <when test=">0">
-                                      <ParameterRefRef RefId="%AID%_UP-%TT%%CC%436_R-%TT%%CC%43601"  HelpContext="%DOC%" />
+                                      <ParameterRefRef RefId="%AID%_UP-%TT%%CC%436_R-%TT%%CC%43601"  HelpContext="%DOC%"  IndentLevel="1" />
                                     </when>
                                   </choose>
                                   <choose ParamRefId="%AID%_UP-%TT%%CC%036_R-%TT%%CC%03601">
                                     <when test=">0">
-                                      <ParameterRefRef RefId="%AID%_UP-%TT%%CC%436_R-%TT%%CC%43601"  HelpContext="%DOC%" />
+                                      <ParameterRefRef RefId="%AID%_UP-%TT%%CC%436_R-%TT%%CC%43601"  HelpContext="%DOC%"  IndentLevel="1" />
                                     </when>
                                   </choose>
                                   <ParameterSeparator Id="%AID%_PS-nnn" Text="" UIHint="HorizontalRuler" />
@@ -2813,57 +2836,57 @@
                                     <when test="1">
                                       <choose ParamRefId="%AID%_UP-%TT%%CC%006_R-%TT%%CC%00601">
                                         <when test="1">
-                                          <ParameterRefRef RefId="%AID%_UP-%TT%%CC%417_R-%TT%%CC%41701"  HelpContext="%DOC%" />
+                                          <ParameterRefRef RefId="%AID%_UP-%TT%%CC%417_R-%TT%%CC%41701"  HelpContext="%DOC%"  IndentLevel="1" />
                                         </when>
                                         <when test="2">
-                                          <ParameterRefRef RefId="%AID%_UP-%TT%%CC%418_R-%TT%%CC%41801"  HelpContext="%DOC%" />
+                                          <ParameterRefRef RefId="%AID%_UP-%TT%%CC%418_R-%TT%%CC%41801"  HelpContext="%DOC%"  IndentLevel="1" />
                                         </when>
                                         <when test="3">
-                                          <ParameterRefRef RefId="%AID%_UP-%TT%%CC%419_R-%TT%%CC%41901"  HelpContext="%DOC%" />
+                                          <ParameterRefRef RefId="%AID%_UP-%TT%%CC%419_R-%TT%%CC%41901"  HelpContext="%DOC%"  IndentLevel="1" />
                                         </when>
                                         <when test="4">
-                                          <ParameterRefRef RefId="%AID%_UP-%TT%%CC%420_R-%TT%%CC%42001"  HelpContext="%DOC%" />
+                                          <ParameterRefRef RefId="%AID%_UP-%TT%%CC%420_R-%TT%%CC%42001"  HelpContext="%DOC%"  IndentLevel="1" />
                                         </when>
                                       </choose>
                                     </when>
                                     <when test="2">
                                       <choose ParamRefId="%AID%_UP-%TT%%CC%006_R-%TT%%CC%00601">
                                         <when test="1">
-                                          <ParameterRefRef RefId="%AID%_UP-%TT%%CC%421_R-%TT%%CC%42101"  HelpContext="%DOC%" />
+                                          <ParameterRefRef RefId="%AID%_UP-%TT%%CC%421_R-%TT%%CC%42101"  HelpContext="%DOC%"  IndentLevel="1" />
                                         </when>
                                         <when test="2">
-                                          <ParameterRefRef RefId="%AID%_UP-%TT%%CC%422_R-%TT%%CC%42201"  HelpContext="%DOC%" />
+                                          <ParameterRefRef RefId="%AID%_UP-%TT%%CC%422_R-%TT%%CC%42201"  HelpContext="%DOC%"  IndentLevel="1" />
                                         </when>
                                         <when test="3">
-                                          <ParameterRefRef RefId="%AID%_UP-%TT%%CC%423_R-%TT%%CC%42301"  HelpContext="%DOC%" />
+                                          <ParameterRefRef RefId="%AID%_UP-%TT%%CC%423_R-%TT%%CC%42301"  HelpContext="%DOC%"  IndentLevel="1" />
                                         </when>
                                         <when test="4">
-                                          <ParameterRefRef RefId="%AID%_UP-%TT%%CC%424_R-%TT%%CC%42401"  HelpContext="%DOC%" />
+                                          <ParameterRefRef RefId="%AID%_UP-%TT%%CC%424_R-%TT%%CC%42401"  HelpContext="%DOC%"  IndentLevel="1" />
                                         </when>
                                       </choose>
                                     </when>
                                     <when test="3">
                                       <choose ParamRefId="%AID%_UP-%TT%%CC%006_R-%TT%%CC%00601">
                                         <when test="1">
-                                          <ParameterRefRef RefId="%AID%_UP-%TT%%CC%417_R-%TT%%CC%41701"  HelpContext="%DOC%" />
-                                          <ParameterRefRef RefId="%AID%_UP-%TT%%CC%421_R-%TT%%CC%42101"  HelpContext="%DOC%" />
+                                          <ParameterRefRef RefId="%AID%_UP-%TT%%CC%417_R-%TT%%CC%41701"  HelpContext="%DOC%"  IndentLevel="1" />
+                                          <ParameterRefRef RefId="%AID%_UP-%TT%%CC%421_R-%TT%%CC%42101"  HelpContext="%DOC%"  IndentLevel="1" />
                                         </when>
                                         <when test="2">
-                                          <ParameterRefRef RefId="%AID%_UP-%TT%%CC%418_R-%TT%%CC%41801"  HelpContext="%DOC%" />
-                                          <ParameterRefRef RefId="%AID%_UP-%TT%%CC%422_R-%TT%%CC%42201"  HelpContext="%DOC%" />
+                                          <ParameterRefRef RefId="%AID%_UP-%TT%%CC%418_R-%TT%%CC%41801"  HelpContext="%DOC%"  IndentLevel="1" />
+                                          <ParameterRefRef RefId="%AID%_UP-%TT%%CC%422_R-%TT%%CC%42201"  HelpContext="%DOC%"  IndentLevel="1" />
                                         </when>
                                         <when test="3">
-                                          <ParameterRefRef RefId="%AID%_UP-%TT%%CC%419_R-%TT%%CC%41901"  HelpContext="%DOC%" />
-                                          <ParameterRefRef RefId="%AID%_UP-%TT%%CC%423_R-%TT%%CC%42301"  HelpContext="%DOC%" />
+                                          <ParameterRefRef RefId="%AID%_UP-%TT%%CC%419_R-%TT%%CC%41901"  HelpContext="%DOC%"  IndentLevel="1" />
+                                          <ParameterRefRef RefId="%AID%_UP-%TT%%CC%423_R-%TT%%CC%42301"  HelpContext="%DOC%"  IndentLevel="1" />
                                         </when>
                                         <when test="4">
-                                          <ParameterRefRef RefId="%AID%_UP-%TT%%CC%420_R-%TT%%CC%42001"  HelpContext="%DOC%" />
-                                          <ParameterRefRef RefId="%AID%_UP-%TT%%CC%424_R-%TT%%CC%42401"  HelpContext="%DOC%" />
+                                          <ParameterRefRef RefId="%AID%_UP-%TT%%CC%420_R-%TT%%CC%42001"  HelpContext="%DOC%"  IndentLevel="1" />
+                                          <ParameterRefRef RefId="%AID%_UP-%TT%%CC%424_R-%TT%%CC%42401"  HelpContext="%DOC%"  IndentLevel="1" />
                                         </when>
                                       </choose>
                                     </when>
                                     <!-- <when test=">0">
-                            <ParameterRefRef RefId="%AID%_UP-%TT%%CC%402_R-%TT%%CC%40201"  HelpContext="%DOC%" />
+                            <ParameterRefRef RefId="%AID%_UP-%TT%%CC%402_R-%TT%%CC%40201"  HelpContext="%DOC%"  IndentLevel="1" />
                           </when> -->
                                   </choose>
                                 </when>
@@ -2879,57 +2902,57 @@
                                     <when test="1">
                                       <choose ParamRefId="%AID%_UP-%TT%%CC%007_R-%TT%%CC%00701">
                                         <when test="1">
-                                          <ParameterRefRef RefId="%AID%_UP-%TT%%CC%425_R-%TT%%CC%42501"  HelpContext="%DOC%" />
+                                          <ParameterRefRef RefId="%AID%_UP-%TT%%CC%425_R-%TT%%CC%42501"  HelpContext="%DOC%"  IndentLevel="1" />
                                         </when>
                                         <when test="2">
-                                          <ParameterRefRef RefId="%AID%_UP-%TT%%CC%426_R-%TT%%CC%42601"  HelpContext="%DOC%" />
+                                          <ParameterRefRef RefId="%AID%_UP-%TT%%CC%426_R-%TT%%CC%42601"  HelpContext="%DOC%"  IndentLevel="1" />
                                         </when>
                                         <when test="3">
-                                          <ParameterRefRef RefId="%AID%_UP-%TT%%CC%427_R-%TT%%CC%42701"  HelpContext="%DOC%" />
+                                          <ParameterRefRef RefId="%AID%_UP-%TT%%CC%427_R-%TT%%CC%42701"  HelpContext="%DOC%"  IndentLevel="1" />
                                         </when>
                                         <when test="4">
-                                          <ParameterRefRef RefId="%AID%_UP-%TT%%CC%428_R-%TT%%CC%42801"  HelpContext="%DOC%" />
+                                          <ParameterRefRef RefId="%AID%_UP-%TT%%CC%428_R-%TT%%CC%42801"  HelpContext="%DOC%"  IndentLevel="1" />
                                         </when>
                                       </choose>
                                     </when>
                                     <when test="2">
                                       <choose ParamRefId="%AID%_UP-%TT%%CC%007_R-%TT%%CC%00701">
                                         <when test="1">
-                                          <ParameterRefRef RefId="%AID%_UP-%TT%%CC%429_R-%TT%%CC%42901"  HelpContext="%DOC%" />
+                                          <ParameterRefRef RefId="%AID%_UP-%TT%%CC%429_R-%TT%%CC%42901"  HelpContext="%DOC%"  IndentLevel="1" />
                                         </when>
                                         <when test="2">
-                                          <ParameterRefRef RefId="%AID%_UP-%TT%%CC%430_R-%TT%%CC%43001"  HelpContext="%DOC%" />
+                                          <ParameterRefRef RefId="%AID%_UP-%TT%%CC%430_R-%TT%%CC%43001"  HelpContext="%DOC%"  IndentLevel="1" />
                                         </when>
                                         <when test="3">
-                                          <ParameterRefRef RefId="%AID%_UP-%TT%%CC%431_R-%TT%%CC%43101"  HelpContext="%DOC%" />
+                                          <ParameterRefRef RefId="%AID%_UP-%TT%%CC%431_R-%TT%%CC%43101"  HelpContext="%DOC%"  IndentLevel="1" />
                                         </when>
                                         <when test="4">
-                                          <ParameterRefRef RefId="%AID%_UP-%TT%%CC%432_R-%TT%%CC%43201"  HelpContext="%DOC%" />
+                                          <ParameterRefRef RefId="%AID%_UP-%TT%%CC%432_R-%TT%%CC%43201"  HelpContext="%DOC%"  IndentLevel="1" />
                                         </when>
                                       </choose>
                                     </when>
                                     <when test="3">
                                       <choose ParamRefId="%AID%_UP-%TT%%CC%007_R-%TT%%CC%00701">
                                         <when test="1">
-                                          <ParameterRefRef RefId="%AID%_UP-%TT%%CC%425_R-%TT%%CC%42501"  HelpContext="%DOC%" />
-                                          <ParameterRefRef RefId="%AID%_UP-%TT%%CC%429_R-%TT%%CC%42901"  HelpContext="%DOC%" />
+                                          <ParameterRefRef RefId="%AID%_UP-%TT%%CC%425_R-%TT%%CC%42501"  HelpContext="%DOC%"  IndentLevel="1" />
+                                          <ParameterRefRef RefId="%AID%_UP-%TT%%CC%429_R-%TT%%CC%42901"  HelpContext="%DOC%"  IndentLevel="1" />
                                         </when>
                                         <when test="2">
-                                          <ParameterRefRef RefId="%AID%_UP-%TT%%CC%426_R-%TT%%CC%42601"  HelpContext="%DOC%" />
-                                          <ParameterRefRef RefId="%AID%_UP-%TT%%CC%430_R-%TT%%CC%43001"  HelpContext="%DOC%" />
+                                          <ParameterRefRef RefId="%AID%_UP-%TT%%CC%426_R-%TT%%CC%42601"  HelpContext="%DOC%"  IndentLevel="1" />
+                                          <ParameterRefRef RefId="%AID%_UP-%TT%%CC%430_R-%TT%%CC%43001"  HelpContext="%DOC%"  IndentLevel="1" />
                                         </when>
                                         <when test="3">
-                                          <ParameterRefRef RefId="%AID%_UP-%TT%%CC%427_R-%TT%%CC%42701"  HelpContext="%DOC%" />
-                                          <ParameterRefRef RefId="%AID%_UP-%TT%%CC%431_R-%TT%%CC%43101"  HelpContext="%DOC%" />
+                                          <ParameterRefRef RefId="%AID%_UP-%TT%%CC%427_R-%TT%%CC%42701"  HelpContext="%DOC%"  IndentLevel="1" />
+                                          <ParameterRefRef RefId="%AID%_UP-%TT%%CC%431_R-%TT%%CC%43101"  HelpContext="%DOC%"  IndentLevel="1" />
                                         </when>
                                         <when test="4">
-                                          <ParameterRefRef RefId="%AID%_UP-%TT%%CC%428_R-%TT%%CC%42801"  HelpContext="%DOC%" />
-                                          <ParameterRefRef RefId="%AID%_UP-%TT%%CC%432_R-%TT%%CC%43201"  HelpContext="%DOC%" />
+                                          <ParameterRefRef RefId="%AID%_UP-%TT%%CC%428_R-%TT%%CC%42801"  HelpContext="%DOC%"  IndentLevel="1" />
+                                          <ParameterRefRef RefId="%AID%_UP-%TT%%CC%432_R-%TT%%CC%43201"  HelpContext="%DOC%"  IndentLevel="1" />
                                         </when>
                                       </choose>
                                     </when>
                                     <!-- <when test=">0">
-                                      <ParameterRefRef RefId="%AID%_UP-%TT%%CC%403_R-%TT%%CC%40301"  HelpContext="%DOC%" />
+                                      <ParameterRefRef RefId="%AID%_UP-%TT%%CC%403_R-%TT%%CC%40301"  HelpContext="%DOC%"  IndentLevel="1" />
                                     </when> -->
                                   </choose>
                                 </when>
@@ -2942,18 +2965,19 @@
                                   <Row Id="%AID%_PB-nnn_R-1" Name="Row1" />
                                 </Rows>
                                 <Columns>
-                                  <Column Id="%AID%_PB-nnn_C-1" Name="Col1" Width="45%" />
-                                  <Column Id="%AID%_PB-nnn_C-2" Name="Col2" Width="15%" />
-                                  <Column Id="%AID%_PB-nnn_C-3" Name="Col3" Width="20%" />
+                                  <Column Id="%AID%_PB-nnn_C-1" Name="Col1" Width="1%" />
+                                  <Column Id="%AID%_PB-nnn_C-2" Name="Col2" Width="44%" />
+                                  <Column Id="%AID%_PB-nnn_C-3" Name="Col3" Width="15%" />
+                                  <Column Id="%AID%_PB-nnn_C-4" Name="Col4" Width="20%" />
                                 </Columns>
-                                <ParameterSeparator Id="%AID%_PS-nnn" Text="Manuellen Modus beenden nach&#10;(0=nicht beenden)" Cell="1,1" />
-                                <ParameterRefRef RefId="%AID%_UP-%TT%%CC%434_R-%TT%%CC%43401" Cell="1,2"  HelpContext="%DOC%" />
-                                <ParameterRefRef RefId="%AID%_UP-%TT%%CC%433_R-%TT%%CC%43301" Cell="1,3"  HelpContext="%DOC%" />
+                                <ParameterSeparator Id="%AID%_PS-nnn" Text=" Manuellen Modus beenden nach&#10; (0=nicht beenden)" Cell="1,2" />
+                                <ParameterRefRef RefId="%AID%_UP-%TT%%CC%434_R-%TT%%CC%43401" Cell="1,3"  HelpContext="%DOC%" />
+                                <ParameterRefRef RefId="%AID%_UP-%TT%%CC%433_R-%TT%%CC%43301" Cell="1,4"  HelpContext="%DOC%" />
                               </ParameterBlock>
                               <!-- end of delay pattern -->
                               <choose ParamRefId="%AID%_UP-%TT%%CC%434_R-%TT%%CC%43401">
                                 <when test=">0">
-                                  <ParameterRefRef RefId="%AID%_UP-%TT%%CC%435_R-%TT%%CC%43501"  HelpContext="%DOC%" />
+                                  <ParameterRefRef RefId="%AID%_UP-%TT%%CC%435_R-%TT%%CC%43501"  HelpContext="%DOC%"  IndentLevel="1" />
                                 </when>
                               </choose>
                             </ParameterBlock>
