@@ -371,7 +371,7 @@
               <ComObjectRef Id="%AID%_O-%TT%00004_R-%TT%0000401" RefId="%AID%_O-%TT%00004" />
               <ComObjectRef Id="%AID%_O-%TT%00005_R-%TT%0000501" RefId="%AID%_O-%TT%00005" />
               <ComObjectRef Id="%AID%_O-%TT%00006_R-%TT%0000601" RefId="%AID%_O-%TT%00006" />
-              <ComObjectRef Id="%AID%_O-%TT%00006_R-%TT%0000602" RefId="%AID%_O-%TT%00006" Text="Ausgang Entfernung" FunctionText="Entfernung in Meter" ObjectSize="2 Bytes" DatapointType="DPST-7-11"/>
+              <ComObjectRef Id="%AID%_O-%TT%00006_R-%TT%0000602" RefId="%AID%_O-%TT%00006" Text="Ausgang Entfernung" FunctionText="Entfernung in Meter" ObjectSize="4 Bytes" DatapointType="DPST-14-39"/>
               <ComObjectRef Id="%AID%_O-%TT%00007_R-%TT%0000701" RefId="%AID%_O-%TT%00007" />
               <ComObjectRef Id="%AID%_O-%TT%00008_R-%TT%0000801" RefId="%AID%_O-%TT%00008" />
               <ComObjectRef Id="%AID%_O-%TT%00009_R-%TT%0000901" RefId="%AID%_O-%TT%00009" />

@@ -509,11 +509,10 @@ void Presence::processHardwarePresence()
                 if (Sensor::measureValue(MeasureType::Pres, lValue) && lValue != mPresenceCombined)
                 {
                     mPresenceCombined = lValue;
-                    bool lPresence = lValue > -1;
+                    bool lPresence = lValue == 1;
                     if (lPresence != mPresence)
                     {
                         mPresence = lPresence;
-                        logDebugP("mPresence: %i", mPresence);
                         processLED(mPresence, CallerPresence);
                         knx.getGroupObject(PM_KoPresenceOut).value(mPresence, getDPT(VAL_DPT_1));
                         if (mPresence)
@@ -535,7 +534,7 @@ void Presence::processHardwarePresence()
                     {
                         mDistance = lValue;
                         GroupObject &lKo = knx.getGroupObject(PM_KoMoveSpeedOut);
-                        lKo.value(mDistance, getDPT(VAL_DPT_7));
+                        lKo.value(mDistance, getDPT(VAL_DPT_14));
                     }
                 }
                 break;
@@ -579,6 +578,7 @@ void Presence::processHardwarePresence()
     {
         mPresenceChanged = false;
         processLED(mMove > 0, CallerMove);
+        knx.getGroupObject(PM_KoMoveOut).value(mMove, getDPT(VAL_DPT_1));
     }
     // add Trigger for any channel which registered for Hardware-PIR
 #endif
