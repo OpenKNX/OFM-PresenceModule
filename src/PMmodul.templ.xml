@@ -1560,7 +1560,7 @@
                                 <ParameterSeparator Id="%AID%_PS-nnn" Text="Eingang deaktiviert" Cell="3,3" />
                               </when>
                               <when test="0 1 2 3">
-                                <ParameterSeparator Id="%AID%_PS-nnn" Text="Bewegung" Cell="4,1" />
+                                <ParameterSeparator Id="%AID%_PS-nnn" Text="  Bewegung" Cell="4,1" />
                               </when>
                               <when test="4">
                                 <ParameterSeparator Id="%AID%_PS-nnn" Text="Weitere Präsenz" Cell="4,1" />
@@ -1584,7 +1584,7 @@
                             <choose ParamRefId="%AID%_UP-%TT%%CC%012_R-%TT%%CC%01201">
                               <when test="0">
                                 <!-- inaktiv -->
-                                <ParameterSeparator Id="%AID%_PS-nnn" Text="Sperre" Cell="8,1" />
+                                <ParameterSeparator Id="%AID%_PS-nnn" Text="  Sperre" Cell="8,1" />
                                 <ParameterSeparator Id="%AID%_PS-nnn" Text="Eingang deaktiviert" Cell="8,3" />
                               </when>
                               <when test="1">
@@ -1594,7 +1594,7 @@
                               </when>
                               <when test="2">
                                 <!-- Lock -->
-                                <ParameterSeparator Id="%AID%_PS-nnn" Text="Sperre" Cell="8,1" />
+                                <ParameterSeparator Id="%AID%_PS-nnn" Text="  Sperre" Cell="8,1" />
                                 <ParameterSeparator Id="%AID%_PS-nnn" Text=" 1.001" Cell="8,5" />
                               </when>
                               <when test=">0">
@@ -1609,16 +1609,16 @@
                               <when test="0">
                                 <!-- inaktiv -->
                                 <ParameterSeparator Id="%AID%_PS-nnn" Text="Eingang deaktiviert" Cell="10,3" />
-                                <ParameterSeparator Id="%AID%_PS-nnn" Text="Tagesphase" Cell="10,1" />
+                                <ParameterSeparator Id="%AID%_PS-nnn" Text="  Tagesphase" Cell="10,1" />
                               </when>
                               <when test="1">
                                 <!-- Tagesphase -->
-                                <ParameterSeparator Id="%AID%_PS-nnn" Text="Tagesphase" Cell="10,1" />
+                                <ParameterSeparator Id="%AID%_PS-nnn" Text="  Tagesphase" Cell="10,1" />
                                 <ParameterSeparator Id="%AID%_PS-nnn" Text="17.001" Cell="10,5" />
                               </when>
                               <when test="2">
                                 <!-- Tag/Nacht -->
-                                <ParameterSeparator Id="%AID%_PS-nnn" Text="Tag/Nacht" Cell="10,1" />
+                                <ParameterSeparator Id="%AID%_PS-nnn" Text="  Tag/Nacht" Cell="10,1" />
                                 <ParameterSeparator Id="%AID%_PS-nnn" Text=" 1.001" Cell="10,5" />
                               </when>
                               <when test=">0">
