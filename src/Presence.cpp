@@ -655,7 +655,8 @@ void Presence::loop()
     }
 #endif
 
-    uint32_t lLoopTime = millis();
+    static uint32_t sLoopTime = 0;
+    sLoopTime = millis();
     if (mDoPresenceHardwareCycle)
     {
         processHardwarePresence();
@@ -682,8 +683,8 @@ void Presence::loop()
     }
     if (lChannelsProcessed < mChannelsToProcess)
         logInfoP("PM did not process %i channels during loop as expected, just %i channels", mChannelsToProcess, lChannelsProcessed);
-    if (millis() - lLoopTime > 3)
-        logInfoP("PM LoopTime: %i", millis() - lLoopTime);
+    if (millis() - sLoopTime > 3)
+        logInfoP("PM LoopTime: %i", millis() - sLoopTime);
 }
 
 void Presence::setup()
