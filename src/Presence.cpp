@@ -3,6 +3,7 @@
 #include "OpenKNX.h"
 #include "PresenceChannel.h"
 #include "Sensor.h"
+#include "SensorDevices.h"
 #include "SensorHLKLD2420.h"
 #include "SensorMR24xxB1.h"
 #include "SensorOPT300x.h"
@@ -259,7 +260,7 @@ void Presence::startSensors()
         case VAL_PM_PS_Hf_MR24xxB1:
             logDebugP("Using HF sensor MR24xxB1");
 
-            mPresenceSensor = Sensor::factory(SENS_MR24xxB1, MeasureType::Pres);
+            mPresenceSensor = openknxSensorDevicesModule.factory(SENS_MR24xxB1, MeasureType::Pres);
             static_cast<SensorMR24xxB1 *>(mPresenceSensor)->defaultSensorParameters(ParamPM_HfScenario - 1, ParamPM_HfSensitivity);
             break;
         case VAL_PM_PS_Hf_HLKLD2420:
@@ -279,7 +280,7 @@ void Presence::startSensors()
                 logIndentDown();
             }
 
-            mPresenceSensor = Sensor::factory(SENS_HLKLD2420, MeasureType::Pres);
+            mPresenceSensor = openknxSensorDevicesModule.factory(SENS_HLKLD2420, MeasureType::Pres);
             static_cast<SensorHLKLD2420 *>(mPresenceSensor)->defaultSensorParameters(ParamPM_HfSensitivity, ParamPM_HfDelayTime, ParamPM_HfRangeGateMin, ParamPM_HfRangeGateMax);
             break;
         default:
@@ -295,16 +296,16 @@ void Presence::startSensors()
     switch (ParamPM_HWLux)
     {
         case VAL_PM_LUX_VEML:
-            mBrightnessSensor = Sensor::factory(SENS_VEML7700, Lux);
+            mBrightnessSensor = openknxSensorDevicesModule.factory(SENS_VEML7700, Lux);
             break;
         case VAL_PM_LUX_OPT:
-            mBrightnessSensor = Sensor::factory(SENS_OPT300X, Lux);
+            mBrightnessSensor = openknxSensorDevicesModule.factory(SENS_OPT300X, Lux);
             break;
         default:
             break;
     }
     // now start all sensors at the correct speed
-    Sensor::beginSensors();
+    openknxSensorDevicesModule.beginSensors();
 }
 
 void Presence::switchHfSensor(bool iOn)
@@ -451,7 +452,7 @@ void Presence::processHardwarePresence()
         switch (ParamPM_HWPresence)
         {
             case VAL_PM_PS_Hf_MR24xxB1:
-                if (Sensor::measureValue(MeasureType::Pres, lValue) && lValue != mPresenceCombined)
+                if (openknxSensorDevicesModule.measureValue(MeasureType::Pres, lValue) && lValue != mPresenceCombined)
                 {
                     mPresenceCombined = lValue;
                     bool lPresence = false;
@@ -478,13 +479,13 @@ void Presence::processHardwarePresence()
                         }
                     }
                 }
-                if (Sensor::measureValue(MeasureType::Speed, lValue))
+                if (openknxSensorDevicesModule.measureValue(MeasureType::Speed, lValue))
                 {
                     GroupObject &lKo = knx.getGroupObject(PM_KoMoveSpeedOut);
                     if ((uint8_t)lKo.value(getDPT(VAL_DPT_5001)) != (uint8_t)lValue)
                         lKo.value(lValue, getDPT(VAL_DPT_5001));
                 }
-                if (Sensor::measureValue(MeasureType::Scenario, lValue))
+                if (openknxSensorDevicesModule.measureValue(MeasureType::Scenario, lValue))
                 {
                     if (mScenario != (int8_t)lValue)
                     {
@@ -493,7 +494,7 @@ void Presence::processHardwarePresence()
                         lKo.value(mScenario, getDPT(VAL_DPT_5));
                     }
                 }
-                if (Sensor::measureValue(MeasureType::Sensitivity, lValue))
+                if (openknxSensorDevicesModule.measureValue(MeasureType::Sensitivity, lValue))
                 {
                     if (mHfSensitivity != (int8_t)lValue)
                     {
@@ -506,7 +507,7 @@ void Presence::processHardwarePresence()
             case VAL_PM_PS_Hf_HLKLD2420:
             case VAL_PM_PS_Hf_HLKLD2420_Pir_Digital:
             case VAL_PM_PS_Hf_HLKLD2420_Pir_Analog:
-                if (Sensor::measureValue(MeasureType::Pres, lValue) && lValue != mPresenceCombined)
+                if (openknxSensorDevicesModule.measureValue(MeasureType::Pres, lValue) && lValue != mPresenceCombined)
                 {
                     mPresenceCombined = lValue;
                     bool lPresence = lValue == 1;
@@ -519,7 +520,7 @@ void Presence::processHardwarePresence()
                             PresenceTrigger = true;
                     }
                 }
-                if (Sensor::measureValue(MeasureType::Sensitivity, lValue))
+                if (openknxSensorDevicesModule.measureValue(MeasureType::Sensitivity, lValue))
                 {
                     if (mHfSensitivity != (int8_t)lValue)
                     {
@@ -528,7 +529,7 @@ void Presence::processHardwarePresence()
                         lKo.value(mHfSensitivity, getDPT(VAL_DPT_5));
                     }
                 }
-                if (Sensor::measureValue(MeasureType::Distance, lValue))
+                if (openknxSensorDevicesModule.measureValue(MeasureType::Distance, lValue))
                 {
                     if (mDistance != lValue)
                     {
@@ -590,7 +591,7 @@ void Presence::processHardwareLux()
     {
         float lValue = 0;
         // we check for brightness only every second
-        if (delayCheck(mBrightnessProcess, 1000) && Sensor::measureValue(MeasureType::Lux, lValue))
+        if (delayCheck(mBrightnessProcess, 1000) && openknxSensorDevicesModule.measureValue(MeasureType::Lux, lValue))
         {
             mBrightnessProcess = delayTimerInit();
             bool lSend = false;
@@ -633,28 +634,6 @@ void Presence::loop()
     if (!openknx.afterStartupDelay())
         return;
 
-#ifdef HF_POWER_PIN
-    // only run the application code if the device was configured with ETS
-    if (knx.configured())
-    {
-        if (!mSerial2Active)
-        {
-            // we start HF communication as late as possible
-            mSerial2Active = true;
-            HF_SERIAL.begin(HF_SERIAL_SPEED);
-        }
-    }
-    else
-    {
-        if (mSerial2Active)
-        {
-            // during ETS programming, we stop HF communication
-            mSerial2Active = false;
-            HF_SERIAL.end();
-        }
-    }
-#endif
-
     static uint32_t sLoopTime = 0;
     sLoopTime = millis();
     if (mDoPresenceHardwareCycle)
@@ -662,7 +641,7 @@ void Presence::loop()
         processHardwarePresence();
         processHardwareLux();
         processPowercycleHfSensor();
-        Sensor::sensorLoop();
+        // Sensor::sensorLoop();
     }
     // we iterate through all channels and execute state logic
     uint8_t lChannelsProcessed = 0;
@@ -718,6 +697,7 @@ void Presence::setup()
         HF_SERIAL.setTX(HF_UART_TX_PIN);
         pinMode(PRESENCE_LED_PIN, OUTPUT);
         pinMode(MOVE_LED_PIN, OUTPUT);
+        HF_SERIAL.begin(HF_SERIAL_SPEED);
 #endif
 
 #ifdef PIR_PIN
