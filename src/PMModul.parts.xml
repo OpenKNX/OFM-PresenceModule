@@ -1,15 +1,18 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
-<?xml-model href="../../Organization/knxprod-support/knx_project_14/knx-editor.xsd" type="application/xml" schematypens="http://www.w3.org/2001/XMLSchema"?>
-<KNX xmlns:op="http://github.com/OpenKNX/OpenKNXproducer" xmlns="http://knx.org/xml/project/14" CreatedBy="KNX MT" ToolVersion="5.1.255.16695">
+﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml-model href="../../Organization/knxprod-support/knx_project_20/knx-editor.xsd" type="application/xml" schematypens="http://www.w3.org/2001/XMLSchema"?>
+<KNX xmlns:op="http://github.com/OpenKNX/OpenKNXproducer" xmlns="http://knx.org/xml/project/20" CreatedBy="KNX MT" ToolVersion="5.1.255.16695">
   <ManufacturerData>
     <Manufacturer RefId="M-00FA">
       <ApplicationPrograms>
         <ApplicationProgram Id="%AID%" ApplicationNumber="110" ApplicationVersion="1" ProgramType="ApplicationProgram" MaskVersion="MV-07B0" Name="WP-PM-Logic" LoadProcedureStyle="MergedProcedure" PeiType="0" DefaultLanguage="de" DynamicTableManagement="false" Linkable="true" MinEtsVersion="4.0">
-          <op:param name="%ParamOffset%" value="58" />
-          <op:param name="%Pl%" value="A" /> <!-- Phase letter -->
-          <op:param name="%Pn%" value="1" /> <!-- Phase number -->
-          <op:param name="%PPP%" value="100" />
-          <op:param name="%TRef%" value="26" />
+          <op:partParams name="PHASE">
+            <!-- this ist just for documentation reasons, as an example for the caller -->
+            <op:param name="%ParamOffset%" value="58" />
+            <op:param name="%Pl%" value="A" /> <!-- Phase letter -->
+            <op:param name="%Pn%" value="1" /> <!-- Phase number -->
+            <op:param name="%PPP%" value="100" />
+            <op:param name="%TRef%" value="26" />
+          </op:partParams>
           <Static>
             <Parameters>
               <!-- Bitfield settings (per day phase) -->
@@ -121,7 +124,7 @@
           </Static>
           <Dynamic>
             <ChannelIndependentBlock>
-              <ParameterBlock Id="%AID%_PB-%C%11" Name="PM%C%Phase%Pn%" Text="Phase %Pn%: {{0: ...}}" TextParameterRefId="%AID%_P-%TT%%CC%0%TRef%_R-%TT%%CC%0%TRef%01" Icon="roman-numeral-%Pn%" HelpContext="PM-Tagesphase">
+              <ParameterBlock Id="%AID%_PB-%C%11" Name="PM%C%Phase%Pn%" Text="Phase %Pn%: {{0: ...}}" TextParameterRefId="%AID%_P-%TT%%CC%0%TRef%_R-%TT%%CC%0%TRef+0%01" Icon="roman-numeral-%Pn%" HelpContext="PM-Tagesphase">
                 <!-- Phase function -->
                 <ParameterSeparator Id="%AID%_PS-nnn" Text="Funktion" UIHint="Headline" />
                 <ParameterRefRef RefId="%AID%_UP-%TT%%CC%%PPP+39%_R-%TT%%CC%%PPP+39%01" HelpContext="%DOC%" IndentLevel="1" />

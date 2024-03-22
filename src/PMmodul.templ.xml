@@ -5,41 +5,41 @@
     <Manufacturer RefId="M-00FA">
       <ApplicationPrograms>
         <ApplicationProgram Id="%AID%" ProgramType="ApplicationProgram" MaskVersion="MV-07B0" Name="WP-Presence-Logic-Develop" LoadProcedureStyle="MergedProcedure" PeiType="0" DefaultLanguage="de" DynamicTableManagement="false" Linkable="true" MinEtsVersion="4.0" ApplicationNumber="0" ApplicationVersion="0" ReplacesVersions="0">
-          <!-- <op:part href="PMModul.parts.xml" name="PHASE" instances="4">
+          <op:part href="PMModul.parts.xml" name="PHASE" instances="4">
             <op:param name="%ParamOffset%" value="58" increment="20" />
-            <op:param name="%Pl%" value="1" asLetter="true" increment="1" /> 
+            <op:param name="%Pl%" value="0" asLetter="true" increment="1" />
             <op:param name="%Pn%" value="1" increment="1" />
             <op:param name="%PPP%" value="100" increment="100" />
             <op:param name="%TRef%" value="26" increment="1" digits="2" />
-          </op:part> -->
-          <op:part href="PMModul.parts.xml" instance="PHASE-1">
+          </op:part>
+          <!-- <op:part href="PMModul.parts.xml" name="PHASE-1">
             <op:param name="%ParamOffset%" value="58" />
-            <op:param name="%Pl%" value="A" /> <!-- Phase letter -->
-            <op:param name="%Pn%" value="1" /> <!-- Phase number -->
+            <op:param name="%Pl%" value="A" />
+            <op:param name="%Pn%" value="1" />
             <op:param name="%PPP%" value="100" />
             <op:param name="%TRef%" value="26" digits="2" />
           </op:part>
-          <op:part href="PMModul.parts.xml" instance="PHASE-2">
+          <op:part href="PMModul.parts.xml" name="PHASE-2">
             <op:param name="%ParamOffset%" value="78" />
-            <op:param name="%Pl%" value="B" /> <!-- Phase letter -->
-            <op:param name="%Pn%" value="2" /> <!-- Phase number -->
+            <op:param name="%Pl%" value="B" />
+            <op:param name="%Pn%" value="2" />
             <op:param name="%PPP%" value="200" />
             <op:param name="%TRef%" value="27" digits="2" />
           </op:part>
-          <op:part href="PMModul.parts.xml" instance="PHASE-3">
+          <op:part href="PMModul.parts.xml" name="PHASE-3">
             <op:param name="%ParamOffset%" value="98" />
-            <op:param name="%Pl%" value="C" /> <!-- Phase letter -->
-            <op:param name="%Pn%" value="3" /> <!-- Phase number -->
+            <op:param name="%Pl%" value="C" />
+            <op:param name="%Pn%" value="3" />
             <op:param name="%PPP%" value="300" />
             <op:param name="%TRef%" value="28" digits="2" />
           </op:part>
-          <op:part href="PMModul.parts.xml" instance="PHASE-4">
+          <op:part href="PMModul.parts.xml" name="PHASE-4">
             <op:param name="%ParamOffset%" value="118" />
-            <op:param name="%Pl%" value="D" /> <!-- Phase letter -->
-            <op:param name="%Pn%" value="4" /> <!-- Phase number -->
+            <op:param name="%Pl%" value="D" />
+            <op:param name="%Pn%" value="4" />
             <op:param name="%PPP%" value="400" />
             <op:param name="%TRef%" value="29" digits="2" />
-          </op:part>
+          </op:part> -->
           <Static>
             <Parameters>
               <Parameter Id="%AID%_P-%TT%%CC%000" Name="p%C%Name" ParameterType="%AID%_PT-Text40Byte" Text="Beschreibung des PM" Value="" />
@@ -179,14 +179,14 @@
               <Parameter Id="%AID%_P-%TT%%CC%011" Name="p%C%ExternalSignalPresence" ParameterType="%AID%_PT-CheckBox" Text="External presence signal exists" Value="0" />
               <Parameter Id="%AID%_P-%TT%%CC%020" Name="p%C%HardwareSignalMove" ParameterType="%AID%_PT-CheckBox" Text="External move signal exists" Value="0" />
               <Parameter Id="%AID%_P-%TT%%CC%021" Name="p%C%HardwareSignalPresence" ParameterType="%AID%_PT-CheckBox" Text="External presence signal exists" Value="0" />
-              <!-- Phase 1 -->
-              <op:include href="PMModul.parts.xml" xpath="//Parameters/*" type="part" instance="PHASE-1" />
+              <!-- Phase 1 - 4 -->
+              <op:usePart name="PHASE" xpath="//Parameters/*" />
               <!-- Phase 2 -->
-              <op:include href="PMModul.parts.xml" xpath="//Parameters/*" type="part" instance="PHASE-2" />
+              <!-- <op:usePart name="PHASE" xpath="//Parameters/*" /> -->
               <!-- Phase 3 -->
-              <op:include href="PMModul.parts.xml" xpath="//Parameters/*" type="part" instance="PHASE-3" />
+              <!-- <op:usePart name="PHASE" xpath="//Parameters/*" /> -->
               <!-- Phase 4 -->
-              <op:include href="PMModul.parts.xml" xpath="//Parameters/*" type="part" instance="PHASE-4" />
+              <!-- <op:usePart name="PHASE" xpath="//Parameters/*" /> -->
             </Parameters>
             <ParameterRefs>
               <ParameterRef Id="%AID%_P-%TT%%CC%000_R-%TT%%CC%00001" RefId="%AID%_P-%TT%%CC%000" />
@@ -306,13 +306,13 @@
               <ParameterRef Id="%AID%_UP-%TT%%CC%903_R-%TT%%CC%90301" RefId="%AID%_UP-%TT%%CC%903" />
               <ParameterRef Id="%AID%_UP-%TT%%CC%904_R-%TT%%CC%90401" RefId="%AID%_UP-%TT%%CC%904" />
               <!-- Phase 1 -->
-              <op:include href="PMModul.parts.xml" xpath="//ParameterRefs/*" type="part" instance="PHASE-1" />
+              <op:usePart name="PHASE" xpath="//ParameterRefs/*" instanceFrom="1" instanceTo="4" />
               <!-- Phase 2 -->
-              <op:include href="PMModul.parts.xml" xpath="//ParameterRefs/*" type="part" instance="PHASE-2" />
+              <!-- <op:usePart name="PHASE" xpath="//ParameterRefs/*" /> -->
               <!-- Phase 3 -->
-              <op:include href="PMModul.parts.xml" xpath="//ParameterRefs/*" type="part" instance="PHASE-3" />
+              <!-- <op:usePart name="PHASE" xpath="//ParameterRefs/*" /> -->
               <!-- Phase 4 -->
-              <op:include href="PMModul.parts.xml" xpath="//ParameterRefs/*" type="part" instance="PHASE-4" />
+              <!-- <op:usePart name="PHASE" xpath="//ParameterRefs/*" /> -->
             </ParameterRefs>
             <ComObjectTable>
               <ComObject Id="%AID%_O-%TT%%CC%000" Name="KOp%C%Lux" Number="%K0%" Text="Helligkeit extern" ObjectSize="2 Bytes" FunctionText="PM %C%, Eingang" ReadFlag="Disabled" WriteFlag="Enabled" CommunicationFlag="Enabled" TransmitFlag="Disabled" UpdateFlag="Enabled" ReadOnInitFlag="Disabled" DatapointType="DPST-9-4" />
@@ -1410,19 +1410,19 @@
                           </ParameterBlock>
                         </ParameterBlock>
                         <!-- Phase 1 -->
-                        <op:include href="PMModul.parts.xml" xpath="//Dynamic/ChannelIndependentBlock/*" type="part" instance="PHASE-1" />
+                        <op:usePart name="PHASE" xpath="//Dynamic/ChannelIndependentBlock/*" instance="1" />
                         <choose ParamRefId="%AID%_UP-%TT%%CC%005_R-%TT%%CC%00501">
                           <!-- Phase 2 -->
                           <when test=">0">
-                            <op:include href="PMModul.parts.xml" xpath="//Dynamic/ChannelIndependentBlock/*" type="part" instance="PHASE-2" />
+                            <op:usePart name="PHASE" xpath="//Dynamic/ChannelIndependentBlock/*" instance="2" />
                           </when>
                           <!-- Phase 3 -->
                           <when test=">1">
-                            <op:include href="PMModul.parts.xml" xpath="//Dynamic/ChannelIndependentBlock/*" type="part" instance="PHASE-3" />
+                            <op:usePart name="PHASE" xpath="//Dynamic/ChannelIndependentBlock/*" instance="3" />
                           </when>
                           <!-- Phase 4 -->
                           <when test=">2">
-                            <op:include href="PMModul.parts.xml" xpath="//Dynamic/ChannelIndependentBlock/*" type="part" instance="PHASE-4" />
+                            <op:usePart name="PHASE" xpath="//Dynamic/ChannelIndependentBlock/*" instance="4" />
                           </when>
                         </choose>
                       </when>
