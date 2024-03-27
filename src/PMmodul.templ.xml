@@ -145,25 +145,25 @@
               <!-- any changes here should be also included in coding!!!! -->
               <Union SizeInBit="160">
                 <Memory CodeSegment="%AID%_RS-04-00000" Offset="38" BitOffset="0" />
-                <Parameter Id="%AID%_UP-%TT%%CC%064" Name="p%C%IntLux" ParameterType="%AID%_PT-KOInputTab" Offset="0" BitOffset="0" Text="Neues oder internes KO" Value="0" />
+                <Parameter Id="%AID%_UP-%TT%%CC%064" Name="p%C%IntLux" ParameterType="%AID%_PT-KOInput" Offset="0" BitOffset="0" Text="Neues oder internes KO" Value="0" />
                 <Parameter Id="%AID%_UP-%TT%%CC%065" Name="p%C%NumLux" ParameterType="%AID%_PT-KONumber" Offset="0" BitOffset="1" Text="Nummer vom internen KO" Value="%K0%" />
-                <Parameter Id="%AID%_UP-%TT%%CC%066" Name="p%C%IntPresence1" ParameterType="%AID%_PT-KOInputTab" Offset="2" BitOffset="0" Text="Neues oder internes KO" Value="0" />
+                <Parameter Id="%AID%_UP-%TT%%CC%066" Name="p%C%IntPresence1" ParameterType="%AID%_PT-KOInput" Offset="2" BitOffset="0" Text="Neues oder internes KO" Value="0" />
                 <Parameter Id="%AID%_UP-%TT%%CC%067" Name="p%C%NumPresence1" ParameterType="%AID%_PT-KONumber" Offset="2" BitOffset="1" Text="Nummer vom internen KO" Value="%K1%" />
-                <Parameter Id="%AID%_UP-%TT%%CC%068" Name="p%C%IntPresence2" ParameterType="%AID%_PT-KOInputTab" Offset="4" BitOffset="0" Text="Neues oder internes KO" Value="0" />
+                <Parameter Id="%AID%_UP-%TT%%CC%068" Name="p%C%IntPresence2" ParameterType="%AID%_PT-KOInput" Offset="4" BitOffset="0" Text="Neues oder internes KO" Value="0" />
                 <Parameter Id="%AID%_UP-%TT%%CC%069" Name="p%C%NumPresence2" ParameterType="%AID%_PT-KONumber" Offset="4" BitOffset="1" Text="Nummer vom internen KO" Value="%K2%" />
-                <Parameter Id="%AID%_UP-%TT%%CC%070" Name="p%C%IntSetAuto" ParameterType="%AID%_PT-KOInputTab" Offset="6" BitOffset="0" Text="Neues oder internes KO" Value="0" />
+                <Parameter Id="%AID%_UP-%TT%%CC%070" Name="p%C%IntSetAuto" ParameterType="%AID%_PT-KOInput" Offset="6" BitOffset="0" Text="Neues oder internes KO" Value="0" />
                 <Parameter Id="%AID%_UP-%TT%%CC%071" Name="p%C%NumSetAuto" ParameterType="%AID%_PT-KONumber" Offset="6" BitOffset="1" Text="Nummer vom internen KO" Value="%K3%" />
-                <Parameter Id="%AID%_UP-%TT%%CC%072" Name="p%C%IntSetManual" ParameterType="%AID%_PT-KOInputTab" Offset="8" BitOffset="0" Text="Neues oder internes KO" Value="0" />
+                <Parameter Id="%AID%_UP-%TT%%CC%072" Name="p%C%IntSetManual" ParameterType="%AID%_PT-KOInput" Offset="8" BitOffset="0" Text="Neues oder internes KO" Value="0" />
                 <Parameter Id="%AID%_UP-%TT%%CC%073" Name="p%C%NumSetManual" ParameterType="%AID%_PT-KONumber" Offset="8" BitOffset="1" Text="Nummer vom internen KO" Value="%K4%" />
-                <Parameter Id="%AID%_UP-%TT%%CC%074" Name="p%C%IntActorState" ParameterType="%AID%_PT-KOInputTab" Offset="10" BitOffset="0" Text="Neues oder internes KO" Value="0" />
+                <Parameter Id="%AID%_UP-%TT%%CC%074" Name="p%C%IntActorState" ParameterType="%AID%_PT-KOInput" Offset="10" BitOffset="0" Text="Neues oder internes KO" Value="0" />
                 <Parameter Id="%AID%_UP-%TT%%CC%075" Name="p%C%NumActorState" ParameterType="%AID%_PT-KONumber" Offset="10" BitOffset="1" Text="Nummer vom internen KO" Value="%K5%" />
-                <Parameter Id="%AID%_UP-%TT%%CC%076" Name="p%C%IntLock" ParameterType="%AID%_PT-KOInputTab" Offset="12" BitOffset="0" Text="Neues oder internes KO" Value="0" />
+                <Parameter Id="%AID%_UP-%TT%%CC%076" Name="p%C%IntLock" ParameterType="%AID%_PT-KOInput" Offset="12" BitOffset="0" Text="Neues oder internes KO" Value="0" />
                 <Parameter Id="%AID%_UP-%TT%%CC%077" Name="p%C%NumLock" ParameterType="%AID%_PT-KONumber" Offset="12" BitOffset="1" Text="Nummer vom internen KO" Value="%K6%" />
-                <Parameter Id="%AID%_UP-%TT%%CC%078" Name="p%C%IntReset" ParameterType="%AID%_PT-KOInputTab" Offset="14" BitOffset="0" Text="Neues oder internes KO" Value="0" />
+                <Parameter Id="%AID%_UP-%TT%%CC%078" Name="p%C%IntReset" ParameterType="%AID%_PT-KOInput" Offset="14" BitOffset="0" Text="Neues oder internes KO" Value="0" />
                 <Parameter Id="%AID%_UP-%TT%%CC%079" Name="p%C%NumReset" ParameterType="%AID%_PT-KONumber" Offset="14" BitOffset="1" Text="Nummer vom internen KO" Value="%K7%" />
-                <Parameter Id="%AID%_UP-%TT%%CC%080" Name="p%C%IntDayPhase" ParameterType="%AID%_PT-KOInputTab" Offset="16" BitOffset="0" Text="Neues oder internes KO" Value="0" />
+                <Parameter Id="%AID%_UP-%TT%%CC%080" Name="p%C%IntDayPhase" ParameterType="%AID%_PT-KOInput" Offset="16" BitOffset="0" Text="Neues oder internes KO" Value="0" />
                 <Parameter Id="%AID%_UP-%TT%%CC%081" Name="p%C%NumDayPhase" ParameterType="%AID%_PT-KONumber" Offset="16" BitOffset="1" Text="Nummer vom internen KO" Value="%K8%" />
-                <Parameter Id="%AID%_UP-%TT%%CC%082" Name="p%C%IntScene" ParameterType="%AID%_PT-KOInputTab" Offset="18" BitOffset="0" Text="Neues oder internes KO" Value="0" />
+                <Parameter Id="%AID%_UP-%TT%%CC%082" Name="p%C%IntScene" ParameterType="%AID%_PT-KOInput" Offset="18" BitOffset="0" Text="Neues oder internes KO" Value="0" />
                 <Parameter Id="%AID%_UP-%TT%%CC%083" Name="p%C%NumScene" ParameterType="%AID%_PT-KONumber" Offset="18" BitOffset="1" Text="Nummer vom internen KO" Value="%K12%" />
               </Union>
               <!-- KO enablement (for internal KO, once per channel, just ets local and invisible) -->
