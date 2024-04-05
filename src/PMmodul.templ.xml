@@ -321,15 +321,15 @@
               <ComObject Id="%AID%_O-%TT%%CC%003" Name="KOp%C%SetAuto" Number="%K3%" Text="Automatik übersteuern" ObjectSize="1 Bit" FunctionText="PM %C%, Eingang" ReadFlag="Disabled" WriteFlag="Enabled" CommunicationFlag="Enabled" TransmitFlag="Disabled" UpdateFlag="Disabled" ReadOnInitFlag="Disabled" DatapointType="DPST-1-1" />
               <ComObject Id="%AID%_O-%TT%%CC%004" Name="KOp%C%SetManual" Number="%K4%" Text="Manuell übersteuern" ObjectSize="1 Bit" FunctionText="PM %C%, Eingang" ReadFlag="Disabled" WriteFlag="Enabled" CommunicationFlag="Enabled" TransmitFlag="Disabled" UpdateFlag="Disabled" ReadOnInitFlag="Disabled" DatapointType="DPST-1-1" />
               <ComObject Id="%AID%_O-%TT%%CC%005" Name="KOp%C%AktorState" Number="%K5%" Text="Aktorstatus" ObjectSize="1 Bit" FunctionText="PM %C%, Eingang" ReadFlag="Disabled" WriteFlag="Enabled" CommunicationFlag="Enabled" TransmitFlag="Disabled" UpdateFlag="Enabled" ReadOnInitFlag="Disabled" DatapointType="DPST-1-1" />
-              <ComObject Id="%AID%_O-%TT%%CC%007" Name="KOp%C%Lock" Number="%K6%" Text="Sperre" ObjectSize="1 Bit" FunctionText="PM %C%, Ein-/Ausgang" ReadFlag="Enabled" WriteFlag="Enabled" CommunicationFlag="Enabled" TransmitFlag="Enabled" UpdateFlag="Disabled" ReadOnInitFlag="Disabled" DatapointType="DPST-1-1" />
+              <ComObject Id="%AID%_O-%TT%%CC%007" Name="KOp%C%Lock" Number="%K6%" Text="Zwangsführung" ObjectSize="2 Bit" FunctionText="PM %C%, Ein-/Ausgang" ReadFlag="Enabled" WriteFlag="Enabled" CommunicationFlag="Enabled" TransmitFlag="Enabled" UpdateFlag="Disabled" ReadOnInitFlag="Disabled" DatapointType="DPST-2-1" />
               <ComObject Id="%AID%_O-%TT%%CC%008" Name="KOp%C%Reset" Number="%K7%" Text="Reset" ObjectSize="1 Bit" FunctionText="PM %C%, Eingang, Trigger" ReadFlag="Disabled" WriteFlag="Enabled" CommunicationFlag="Enabled" TransmitFlag="Disabled" UpdateFlag="Disabled" ReadOnInitFlag="Disabled" DatapointType="DPST-1-15" />
               <ComObject Id="%AID%_O-%TT%%CC%009" Name="KOp%C%DayPhase" Number="%K8%" Text="Tagesphase" ObjectSize="1 Byte" FunctionText="PM %C%, Eingang" ReadFlag="Disabled" WriteFlag="Enabled" CommunicationFlag="Enabled" TransmitFlag="Disabled" UpdateFlag="Enabled" ReadOnInitFlag="Disabled" DatapointType="DPST-17-1" />
               <ComObject Id="%AID%_O-%TT%%CC%010" Name="KOp%C%LuxOn" Number="%K9%" Text="Einschalt-Helligkeitsschwelle" ObjectSize="2 Bytes" FunctionText="PM %C%, Ein-/Ausgang" ReadFlag="Enabled" WriteFlag="Enabled" CommunicationFlag="Enabled" TransmitFlag="Disabled" UpdateFlag="Enabled" ReadOnInitFlag="Disabled" DatapointType="DPST-9-4" />
               <ComObject Id="%AID%_O-%TT%%CC%006" Name="KOp%C%LuxOff" Number="%K10%" Text="Ausschalt-Helligkeitsschwelle" ObjectSize="2 Bytes" FunctionText="PM %C%, Ausgang" ReadFlag="Enabled" WriteFlag="Disabled" CommunicationFlag="Enabled" TransmitFlag="Disabled" UpdateFlag="Disabled" ReadOnInitFlag="Disabled" DatapointType="DPST-9-4" />
               <ComObject Id="%AID%_O-%TT%%CC%011" Name="KOp%C%PresenceDelay" Number="%K11%" Text="Nachlaufzeit" ObjectSize="2 Bytes" FunctionText="PM %C%, Ein-/Ausgang" ReadFlag="Enabled" WriteFlag="Enabled" CommunicationFlag="Enabled" TransmitFlag="Disabled" UpdateFlag="Enabled" ReadOnInitFlag="Disabled" DatapointType="DPST-7-5" />
               <ComObject Id="%AID%_O-%TT%%CC%012" Name="KOp%C%Scene" Number="%K12%" Text="PM über Szene steuern" ObjectSize="1 Byte" FunctionText="PM %C%, Eingang" ReadFlag="Disabled" WriteFlag="Enabled" CommunicationFlag="Enabled" TransmitFlag="Disabled" UpdateFlag="Enabled" ReadOnInitFlag="Disabled" DatapointType="DPST-17-1" />
-              <ComObject Id="%AID%_O-%TT%%CC%013" Name="KOp%C%Output" Number="%K13%" Text="Schalten 1" ObjectSize="1 Bit" FunctionText="PM %C%, Ausgang 1" ReadFlag="Enabled" WriteFlag="Disabled" CommunicationFlag="Enabled" TransmitFlag="Enabled" UpdateFlag="Disabled" ReadOnInitFlag="Disabled" DatapointType="DPST-1-1" />
-              <ComObject Id="%AID%_O-%TT%%CC%014" Name="KOp%C%Output2" Number="%K14%" Text="Schalten 2" ObjectSize="1 Bit" FunctionText="PM %C%, Ausgang 2" ReadFlag="Enabled" WriteFlag="Disabled" CommunicationFlag="Enabled" TransmitFlag="Enabled" UpdateFlag="Disabled" ReadOnInitFlag="Disabled" DatapointType="DPST-1-1" />
+              <ComObject Id="%AID%_O-%TT%%CC%013" Name="KOp%C%Output" Number="%K13%" Text="Wert 1" ObjectSize="1 Byte" FunctionText="PM %C%, Ausgang 1" ReadFlag="Enabled" WriteFlag="Disabled" CommunicationFlag="Enabled" TransmitFlag="Enabled" UpdateFlag="Disabled" ReadOnInitFlag="Disabled" DatapointType="DPST-5-5" />
+              <ComObject Id="%AID%_O-%TT%%CC%014" Name="KOp%C%Output2" Number="%K14%" Text="Wert 2" ObjectSize="1 Byte" FunctionText="PM %C%, Ausgang 2" ReadFlag="Enabled" WriteFlag="Disabled" CommunicationFlag="Enabled" TransmitFlag="Enabled" UpdateFlag="Disabled" ReadOnInitFlag="Disabled" DatapointType="DPST-5-5" />
               <ComObject Id="%AID%_O-%TT%%CC%015" Name="KOp%C%IsManual" Number="%K15%" Text="Status Manuell(1)/Automatik(0)" ObjectSize="1 Bit" FunctionText="PM %C%, Ausgang" ReadFlag="Enabled" WriteFlag="Disabled" CommunicationFlag="Enabled" TransmitFlag="Enabled" UpdateFlag="Disabled" ReadOnInitFlag="Disabled" DatapointType="DPST-1-1" />
               <ComObject Id="%AID%_O-%TT%%CC%016" Name="KOp%C%ChangeDimRel" Number="%K16%" Text="Änderung relativ dimmen" ObjectSize="4 Bit" FunctionText="PM %C%, Eingang" ReadFlag="Disabled" WriteFlag="Enabled" CommunicationFlag="Enabled" TransmitFlag="Disabled" UpdateFlag="Disabled" ReadOnInitFlag="Disabled" DatapointType="DPST-3-7" />
               <ComObject Id="%AID%_O-%TT%%CC%017" Name="KOp%C%ChangeDimAbs" Number="%K17%" Text="Änderung absolut dimmen" ObjectSize="1 Byte" FunctionText="PM %C%, Eingang" ReadFlag="Disabled" WriteFlag="Enabled" CommunicationFlag="Enabled" TransmitFlag="Disabled" UpdateFlag="Disabled" ReadOnInitFlag="Disabled" DatapointType="DPST-5-1" />
@@ -1133,17 +1133,17 @@
                           <ParameterSeparator Id="%AID%_PS-nnn" Text="Im Folgenden werden weitere Einstellungen für Eingänge vorgenommen. Dazu gehört das Lesen von Eingangswerten nach einem Neustart und die interne Verknüpfung von Eingängen. Details bitte in der Applikationsbeschreibung nachlesen. " />
                           <ParameterBlock Id="%AID%_PB-%C%15" Name="Grid%C%IntInput" Inline="true" Layout="Grid" HelpContext="PM-Szenensteuerung">
                             <Rows>
-                              <Row Id="%AID%_PB-%C%15_R-1" Name="Row1" Text="1" />
-                              <Row Id="%AID%_PB-%C%15_R-2" Name="Row2" Text="2" />
-                              <Row Id="%AID%_PB-%C%15_R-3" Name="Row3" Text="3" />
-                              <Row Id="%AID%_PB-%C%15_R-4" Name="Row4" Text="4" />
-                              <Row Id="%AID%_PB-%C%15_R-5" Name="Row5" Text="5" />
-                              <Row Id="%AID%_PB-%C%15_R-6" Name="Row6" Text="6" />
-                              <Row Id="%AID%_PB-%C%15_R-7" Name="Row7" Text="7" />
-                              <Row Id="%AID%_PB-%C%15_R-8" Name="Row8" Text="8" />
-                              <Row Id="%AID%_PB-%C%15_R-9" Name="Row9" Text="9" />
-                              <Row Id="%AID%_PB-%C%15_R-10" Name="Row10" Text="10" />
-                              <Row Id="%AID%_PB-%C%15_R-11" Name="Row11" Text="11" />
+                              <Row Id="%AID%_PB-%C%15_R-1" Name="Row1" />
+                              <Row Id="%AID%_PB-%C%15_R-2" Name="Row2" />
+                              <Row Id="%AID%_PB-%C%15_R-3" Name="Row3" />
+                              <Row Id="%AID%_PB-%C%15_R-4" Name="Row4" />
+                              <Row Id="%AID%_PB-%C%15_R-5" Name="Row5" />
+                              <Row Id="%AID%_PB-%C%15_R-6" Name="Row6" />
+                              <Row Id="%AID%_PB-%C%15_R-7" Name="Row7" />
+                              <Row Id="%AID%_PB-%C%15_R-8" Name="Row8" />
+                              <Row Id="%AID%_PB-%C%15_R-9" Name="Row9" />
+                              <Row Id="%AID%_PB-%C%15_R-10" Name="Row10" />
+                              <Row Id="%AID%_PB-%C%15_R-11" Name="Row11" />
                             </Rows>
                             <Columns>
                               <Column Id="%AID%_PB-%C%15_C-1" Name="Col1" Width="40%" />

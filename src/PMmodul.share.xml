@@ -1,6 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <?xml-model href="../../Organization/knxprod-support/knx_project_14/knx-editor.xsd" type="application/xml" schematypens="http://www.w3.org/2001/XMLSchema"?>
 <KNX xmlns:op="http://github.com/OpenKNX/OpenKNXproducer" xmlns="http://knx.org/xml/project/14" CreatedBy="KNX MT" ToolVersion="5.1.255.16695">
+  <op:config name="%PM_NumChannelsDefault%" value="%N%" />
+
   <ManufacturerData>
     <Manufacturer RefId="M-00FA">
       <ApplicationPrograms>
@@ -11,7 +13,7 @@
               <ParameterType Id="%AID%_PT-PMNumChannels" Name="PMNumChannels">
                 <TypeNumber SizeInBit="8" Type="unsignedInt" minInclusive="1" maxInclusive="%N%" />
               </ParameterType>
-              <ParameterType Id="%AID%_PT-OffsetLuxPM" Name="OffsetLux">
+              <ParameterType Id="%AID%_PT-OffsetLuxPM" Name="OffsetLuxPM">
                 <TypeNumber SizeInBit="8" Type="signedInt" minInclusive="-120" maxInclusive="120" />
               </ParameterType>
               <ParameterType Id="%AID%_PT-AbsLux" Name="AbsLux">
@@ -63,12 +65,6 @@
                   <Enumeration Text="EIN und AUS" Value="3" Id="%ENID%" />
                 </TypeRestriction>
               </ParameterType>
-              <ParameterType Id="%AID%_PT-OutputSendPM" Name="OutputSendPM">
-                <TypeRestriction Base="Value" SizeInBit="1">
-                  <Enumeration Text="Nur bei Änderung" Value="0" Id="%ENID%" />
-                  <Enumeration Text="Bei jeder Bewegung" Value="1" Id="%ENID%" />
-                </TypeRestriction>
-              </ParameterType>
               <ParameterType Id="%AID%_PT-ChannelActive" Name="ChannelActive">
                 <TypeRestriction Base="Value" SizeInBit="2">
                   <Enumeration Text="Inaktiv" Value="0" Id="%ENID%" />
@@ -84,13 +80,13 @@
                   <Enumeration Text="aktiv über externes Objekt" Value="3" Id="%ENID%" />
                 </TypeRestriction>
               </ParameterType>
-              <ParameterType Id="%AID%_PT-StatusLEDPIR" Name="StatusLEDPIR">
+              <!-- <ParameterType Id="%AID%_PT-StatusLEDPIR" Name="StatusLEDPIR">
                 <TypeRestriction Base="Value" SizeInBit="2">
                   <Enumeration Text="nicht aktiv" Value="0" Id="%ENID%" />
                   <Enumeration Text="aktiv bei Bewegung" Value="1" Id="%ENID%" />
                   <Enumeration Text="aktiv über externes Objekt" Value="3" Id="%ENID%" />
                 </TypeRestriction>
-              </ParameterType>
+              </ParameterType> -->
               <ParameterType Id="%AID%_PT-PresenceInputs" Name="PresenceInputs">
                 <TypeRestriction Base="Value" SizeInBit="3">
                   <Enumeration Text="nicht aktiv" Value="0" Id="%ENID%" />
@@ -285,12 +281,12 @@
               <!-- Logic share parameters go from 0 to 29? We leave some space -->
               <!-- Here we start with non-multiplied parameters -->
               <!-- <Parameter Id="%AID%_P-%TT%00001" Name="PMChannels" ParameterType="%AID%_PT-PMChannels" Text="PM-Kanäle" Value="%N%" Access="Read"> -->
-                <!-- <Memory CodeSegment="%AID%_RS-04-00000" Offset="0" BitOffset="0" /> -->
+              <!-- <Memory CodeSegment="%AID%_RS-04-00000" Offset="0" BitOffset="0" /> -->
               <!-- </Parameter> -->
               <Union SizeInBit="24">
                 <Memory CodeSegment="%AID%_RS-04-00000" Offset="0" BitOffset="0" />
                 <!-- <Parameter Id="%AID%_UP-%TT%00002" Name="HardwarePM" Offset="0" BitOffset="0" ParameterType="%AID%_PT-CheckBox" Text="PM-Hardware ist vorhanden" Value="0" /> -->
-                <Parameter Id="%AID%_UP-%TT%00020" Name="VisibleChannels" ParameterType="%AID%_PT-PMNumChannels" Offset="0" BitOffset="0" Text="Verfügbare Kanäle" Value="%N%" SuffixText=" von %N%" />
+                <Parameter Id="%AID%_UP-%TT%00020" Name="VisibleChannels" ParameterType="%AID%_PT-PMNumChannels" Offset="0" BitOffset="0" Text="Verfügbare Kanäle" Value="%PM_NumChannelsDefault%" SuffixText=" von %N%" />
                 <Parameter Id="%AID%_UP-%TT%00003" Name="SendRAW" Offset="1" BitOffset="0" ParameterType="%AID%_PT-OnOffYesNo" Text="Präsenz-Rohdaten auf den Bus senden?" Value="0" />
                 <Parameter Id="%AID%_UP-%TT%00004" Name="LEDPresence" Offset="1" BitOffset="1" ParameterType="%AID%_PT-StatusLED" Text="LED Präsenz" Value="0" />
                 <Parameter Id="%AID%_UP-%TT%00005" Name="LEDMove" Offset="1" BitOffset="3" ParameterType="%AID%_PT-StatusLED" Text="LED Bewegung" Value="0" />
@@ -354,7 +350,7 @@
               <ComObject Id="%AID%_O-%TT%00001" Name="LuxOut" Text="Ausgang Helligkeitssensor" Number="20" FunctionText="Messwert in Lux" ObjectSize="2 Bytes" ReadFlag="Enabled" WriteFlag="Disabled" CommunicationFlag="Enabled" TransmitFlag="Enabled" UpdateFlag="Disabled" ReadOnInitFlag="Disabled" DatapointType="DPST-9-4" />
               <ComObject Id="%AID%_O-%TT%00005" Name="PresenceOut" Text="Ausgang Präsenz" Number="21" FunctionText="Status" ObjectSize="1 Bit" ReadFlag="Enabled" WriteFlag="Disabled" CommunicationFlag="Enabled" TransmitFlag="Enabled" UpdateFlag="Disabled" ReadOnInitFlag="Disabled" DatapointType="DPST-1-2" />
               <ComObject Id="%AID%_O-%TT%00002" Name="MoveOut" Text="Ausgang Bewegung (0=keine, 1=radial, 2=nähern, 3=entf.)" Number="22" FunctionText="Status" ObjectSize="1 Byte" ReadFlag="Enabled" WriteFlag="Disabled" CommunicationFlag="Enabled" TransmitFlag="Enabled" UpdateFlag="Disabled" ReadOnInitFlag="Disabled" DatapointType="DPST-5-5" />
-              <ComObject Id="%AID%_O-%TT%00006" Name="MoveSpeedOut" Text="Ausgang Bewegungsmoment" Number="23" FunctionText="Status" ObjectSize="1 Byte" ReadFlag="Enabled" WriteFlag="Disabled" CommunicationFlag="Enabled" TransmitFlag="Enabled" UpdateFlag="Disabled" ReadOnInitFlag="Disabled" DatapointType="DPST-5-1" />
+              <ComObject Id="%AID%_O-%TT%00006" Name="MoveSpeedOut" Text="Ausgang Entfernung" Number="23" FunctionText="Status" ObjectSize="4 Bytes" ReadFlag="Enabled" WriteFlag="Disabled" CommunicationFlag="Enabled" TransmitFlag="Enabled" UpdateFlag="Disabled" ReadOnInitFlag="Disabled" DatapointType="DPST-14-39" />
               <!-- Name="DistanceOut" -->
               <ComObject Id="%AID%_O-%TT%00003" Name="LEDPresence" Text="Eingang LED Präsenz" Number="24" FunctionText="Schalten/Status" ObjectSize="1 Bit" ReadFlag="Enabled" WriteFlag="Enabled" CommunicationFlag="Enabled" TransmitFlag="Disabled" UpdateFlag="Enabled" ReadOnInitFlag="Disabled" DatapointType="DPST-1-1" />
               <ComObject Id="%AID%_O-%TT%00004" Name="LEDMove" Text="Eingang LED Bewegung" Number="25" FunctionText="Schalten/Status" ObjectSize="1 Bit" ReadFlag="Enabled" WriteFlag="Enabled" CommunicationFlag="Enabled" TransmitFlag="Disabled" UpdateFlag="Enabled" ReadOnInitFlag="Disabled" DatapointType="DPST-1-1" />
@@ -370,8 +366,8 @@
               <ComObjectRef Id="%AID%_O-%TT%00003_R-%TT%0000301" RefId="%AID%_O-%TT%00003" />
               <ComObjectRef Id="%AID%_O-%TT%00004_R-%TT%0000401" RefId="%AID%_O-%TT%00004" />
               <ComObjectRef Id="%AID%_O-%TT%00005_R-%TT%0000501" RefId="%AID%_O-%TT%00005" />
-              <ComObjectRef Id="%AID%_O-%TT%00006_R-%TT%0000601" RefId="%AID%_O-%TT%00006" />
-              <ComObjectRef Id="%AID%_O-%TT%00006_R-%TT%0000602" RefId="%AID%_O-%TT%00006" Text="Ausgang Entfernung" FunctionText="Entfernung in Meter" ObjectSize="4 Bytes" DatapointType="DPST-14-39"/>
+              <ComObjectRef Id="%AID%_O-%TT%00006_R-%TT%0000601" RefId="%AID%_O-%TT%00006" Text="Ausgang Bewegungsmoment" FunctionText="Status" ObjectSize="1 Byte" DatapointType="DPST-5-1" />
+              <ComObjectRef Id="%AID%_O-%TT%00006_R-%TT%0000602" RefId="%AID%_O-%TT%00006" Text="Ausgang Entfernung" FunctionText="Status" ObjectSize="4 Bytes" DatapointType="DPST-14-39" />
               <ComObjectRef Id="%AID%_O-%TT%00007_R-%TT%0000701" RefId="%AID%_O-%TT%00007" />
               <ComObjectRef Id="%AID%_O-%TT%00008_R-%TT%0000801" RefId="%AID%_O-%TT%00008" />
               <ComObjectRef Id="%AID%_O-%TT%00009_R-%TT%0000901" RefId="%AID%_O-%TT%00009" />
@@ -380,15 +376,15 @@
             </ComObjectRefs>
           </Static>
           <Dynamic>
-            <Channel Id="%AID%_CH-%TT%" Name="PMChannels" Number="%TT%" Text="PM-Kanäle" Icon="panorama-sphere-outline" >
+            <Channel Id="%AID%_CH-%PREFIX%" Number="%PREFIX%" Name="Main" Text="PM-Kanäle" Icon="panorama-sphere-outline">
               <!-- <choose ParamRefId="%AID%_UP-%TT%00002_R-%TT%0000201"> -->
-                <!-- <when test="1"> -->
-              <ParameterBlock Id="%AID%_PB-3" Name="HardwarePM" Text="Basiseinstellung" Icon="cog-outline" HelpContext="PM-PM-Hardware">
-                <ParameterSeparator Id="%AID%_PS-nnn" Text="Version des VPM-Moduls: %ModuleVersion%" UIHint="Headline" />
+              <!-- <when test="1"> -->
+              <ParameterBlock Id="%AID%_PB-nnn" Name="Settings" Text="Einstellungen" Icon="cog-outline" ShowInComObjectTree="true" HelpContext="PM-PM-Hardware">
+                <ParameterSeparator Id="%AID%_PS-nnn" Text="Präsenzmodul Version %ModuleVersion%" UIHint="Headline" />
                 <ParameterSeparator Id="%AID%_PS-nnn" Text="" UIHint="HorizontalRuler" />
                 <ParameterSeparator Id="%AID%_PS-nnn" Text="Kanalauswahl" UIHint="Headline" />
                 <ParameterRefRef RefId="%AID%_UP-%TT%00020_R-%TT%0002001" HelpContext="BASE-Verfuegbare-Kanaele" IndentLevel="1" />
-                <ParameterSeparator Id="%AID%_PS-52" Text="" UIHint="HorizontalRuler" />
+                <ParameterSeparator Id="%AID%_PS-nnn" Text="" UIHint="HorizontalRuler" />
 
                 <!-- OR: Any hardware LED switched by KO -->
                 <ParameterRefRef RefId="%AID%_P-%TT%00009_R-%TT%0000901" />
@@ -496,27 +492,27 @@
                     <ParameterRefRef RefId="%AID%_UP-%TT%00004_R-%TT%0000401" IndentLevel="1" HelpContext="PM-LED-Dropdown" />
                     <ParameterRefRef RefId="%AID%_UP-%TT%00005_R-%TT%0000501" IndentLevel="1" HelpContext="PM-LED-Dropdown" />
                     <!-- KO für LED Präsenz einschalten -->
-                        <choose ParamRefId="%AID%_UP-%TT%00004_R-%TT%0000401">
-                          <when test="3">
+                    <choose ParamRefId="%AID%_UP-%TT%00004_R-%TT%0000401">
+                      <when test="3">
                         <ComObjectRefRef RefId="%AID%_O-%TT%00003_R-%TT%0000301" />
                         <Assign TargetParamRefRef="%AID%_P-%TT%00009_R-%TT%0000901" Value="1" />
-                          </when>
-                        </choose>
-                    <!-- KO für LED Bewegung einschalten -->
-                        <choose ParamRefId="%AID%_UP-%TT%00005_R-%TT%0000501">
-                          <when test="3">
-                        <ComObjectRefRef RefId="%AID%_O-%TT%00004_R-%TT%0000401" />
-                        <Assign TargetParamRefRef="%AID%_P-%TT%00009_R-%TT%0000901" Value="1" />
-                          </when>
-                        </choose>
-                        <choose ParamRefId="%AID%_P-%TT%00009_R-%TT%0000901">
-                          <when test="1">
-                        <ParameterRefRef RefId="%AID%_UP-%TT%00008_R-%TT%0000801" IndentLevel="1" HelpContext="PM-LEDs-nach-Neustart-lesen" />
-                          </when>
-                        </choose>
                       </when>
                     </choose>
-                  </ParameterBlock>
+                    <!-- KO für LED Bewegung einschalten -->
+                    <choose ParamRefId="%AID%_UP-%TT%00005_R-%TT%0000501">
+                      <when test="3">
+                        <ComObjectRefRef RefId="%AID%_O-%TT%00004_R-%TT%0000401" />
+                        <Assign TargetParamRefRef="%AID%_P-%TT%00009_R-%TT%0000901" Value="1" />
+                      </when>
+                    </choose>
+                    <choose ParamRefId="%AID%_P-%TT%00009_R-%TT%0000901">
+                      <when test="1">
+                        <ParameterRefRef RefId="%AID%_UP-%TT%00008_R-%TT%0000801" IndentLevel="1" HelpContext="PM-LEDs-nach-Neustart-lesen" />
+                      </when>
+                    </choose>
+                  </when>
+                </choose>
+              </ParameterBlock>
               <!-- </when> -->
               <!-- </choose> -->
               <op:include href="PMmodul.templ.xml" xpath="//Dynamic/ChannelIndependentBlock/*" type="template" prefix="PM" IsInner="true" />
