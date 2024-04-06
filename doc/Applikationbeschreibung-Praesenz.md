@@ -322,17 +322,22 @@ Da diese Applikation auch als virtueller Präsenzmelder fungieren kann, ist kein
 
 <kbd>![Präsenz-Hardware](pics/PraesenzHardware.png)</kbd>
 
-<!-- DOC HelpContext="Praesenz-Sensor" -->
-#### **Präsenz-Sensor**
+<!-- DOC -->
+#### **HF-Sensor**
 
 <!-- Das ist ein Kommentar -->
 
-Der vorhandene Präsenz-Sensor kann hier ausgewählt werden. Derzeit werden entweder ein PIR-Sensor oder der HF-Sensor MR24xxB1 unterstützt.
+Der vorhandene Hochfrequenz-Sensor kann hier ausgewählt werden. Derzeit werden entweder der HF-Sensor MR24xxB1 oder der HLK-LD2420 unterstützt.
 
 <!-- DOC -->
 #### **Helligkeits-Sensor**
 
 Der vorhandene Helligkeits-Sensor kann hier ausgewählt werden. Derzeit werden entweder der VEML7700 oder der OPT3001 unterstützt.
+
+<!-- DOC -->
+#### **PIR-Sensor**
+
+Der vorhandene Infrarot-Bewegungssensor kann hier ausgewählt werden. Derzeit wird sowohl ein analoger wie auch ein digitaler PIR-Sensor unterstützt. Beim analogen kann man noch die Empfindlichkeit einstellen.
 
 ### Einstellungen Präsenz-Hardware
 

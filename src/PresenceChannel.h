@@ -126,13 +126,18 @@
 #define VAL_PM_PI_PresenceMove 3
 #define VAL_PM_PI_PresencePresence 4
 
-// Presence Hardware
+// HF Sensor
 #define VAL_PM_PS_None 0
-#define VAL_PM_PS_Pir_Digital 1
+// #define VAL_PM_PS_Pir_Digital 1
 #define VAL_PM_PS_Hf_MR24xxB1 2
 #define VAL_PM_PS_Hf_HLKLD2420 3
-#define VAL_PM_PS_Hf_HLKLD2420_Pir_Digital 4
-#define VAL_PM_PS_Hf_HLKLD2420_Pir_Analog 5
+// #define VAL_PM_PS_Hf_HLKLD2420_Pir_Digital 4
+// #define VAL_PM_PS_Hf_HLKLD2420_Pir_Analog 5
+
+// PIR Sensor
+#define VAL_PM_PS_None 0
+#define VAL_PM_PS_Pir_Digital 1
+#define VAL_PM_PS_Pir_Analog 2
 
 // PIR Hardware
 #define VAL_PM_PIR_Analog_Trigger_Min 380

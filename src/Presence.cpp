@@ -179,14 +179,12 @@ void Presence::processInputKo(GroupObject &iKo)
             if (mHfSensitivity != lHfSensitivity)
             {
 #ifdef HF_POWER_PIN
-                switch (ParamPM_HWPresence)
+                switch (ParamPM_HfPresence)
                 {
                     case VAL_PM_PS_Hf_MR24xxB1:
                         static_cast<SensorMR24xxB1 *>(mPresenceSensor)->sendCommand(RadarCmd_WriteSensitivity, lHfSensitivity);
                         break;
                     case VAL_PM_PS_Hf_HLKLD2420:
-                    case VAL_PM_PS_Hf_HLKLD2420_Pir_Digital:
-                    case VAL_PM_PS_Hf_HLKLD2420_Pir_Analog:
                         static_cast<SensorHLKLD2420 *>(mPresenceSensor)->writeSensitivity(lHfSensitivity);
                         break;
                     default:
@@ -202,15 +200,10 @@ void Presence::processInputKo(GroupObject &iKo)
             if (mScenario != lScenario)
             {
 #ifdef HF_POWER_PIN
-                switch (ParamPM_HWPresence)
+                switch (ParamPM_HfPresence)
                 {
                     case VAL_PM_PS_Hf_MR24xxB1:
                         static_cast<SensorMR24xxB1 *>(mPresenceSensor)->sendCommand(RadarCmd_WriteScene, lScenario);
-                        break;
-                    case VAL_PM_PS_Hf_HLKLD2420:
-                    case VAL_PM_PS_Hf_HLKLD2420_Pir_Digital:
-                    case VAL_PM_PS_Hf_HLKLD2420_Pir_Analog:
-                        // scenarios not supported by this scanner
                         break;
                     default:
                         break;
@@ -255,7 +248,7 @@ bool Presence::getHardwareMove()
 void Presence::startSensors()
 {
 #ifdef HF_POWER_PIN
-    switch (ParamPM_HWPresence)
+    switch (ParamPM_HfPresence)
     {
         case VAL_PM_PS_Hf_MR24xxB1:
             logDebugP("Using HF sensor MR24xxB1");
@@ -264,21 +257,7 @@ void Presence::startSensors()
             static_cast<SensorMR24xxB1 *>(mPresenceSensor)->defaultSensorParameters(ParamPM_HfScenario - 1, ParamPM_HfSensitivity);
             break;
         case VAL_PM_PS_Hf_HLKLD2420:
-        case VAL_PM_PS_Hf_HLKLD2420_Pir_Digital:
-        case VAL_PM_PS_Hf_HLKLD2420_Pir_Analog:
             logDebugP("Using HF sensor HLKLD2420");
-            if (ParamPM_HWPresence == VAL_PM_PS_Hf_HLKLD2420_Pir_Digital)
-            {
-                logIndentUp();
-                logDebugP("with PIR (digital)");
-                logIndentDown();
-            }
-            else if (ParamPM_HWPresence == VAL_PM_PS_Hf_HLKLD2420_Pir_Analog)
-            {
-                logIndentUp();
-                logDebugP("with PIR (analog)");
-                logIndentDown();
-            }
 
             mPresenceSensor = openknxSensorDevicesModule.factory(SENS_HLKLD2420, MeasureType::Pres);
             static_cast<SensorHLKLD2420 *>(mPresenceSensor)->defaultSensorParameters(ParamPM_HfSensitivity, ParamPM_HfDelayTime, ParamPM_HfRangeGateMin, ParamPM_HfRangeGateMax);
@@ -287,9 +266,15 @@ void Presence::startSensors()
             break;
     }
 
-    if (ParamPM_HWPresence == VAL_PM_PS_Hf_HLKLD2420_Pir_Analog)
+    switch (ParamPM_PirPresence)
     {
-        mPirSensitivity = ParamPM_PirSensitivity;
+        case VAL_PM_PS_Pir_Digital:
+            logDebugP("Using PIR sensor (digital)");
+            break;
+        case VAL_PM_PS_Pir_Analog:
+            logDebugP("Using PIR sensor (analog)");
+            mPirSensitivity = ParamPM_PirSensitivity;
+            break;
     }
 #endif
 
@@ -311,7 +296,7 @@ void Presence::startSensors()
 void Presence::switchHfSensor(bool iOn)
 {
 #ifdef HF_POWER_PIN
-    switch (ParamPM_HWPresence)
+    switch (ParamPM_HfPresence)
     {
         case VAL_PM_PS_Hf_MR24xxB1:
             if (smartmf.hardwareRevision() == 1)
@@ -355,8 +340,6 @@ void Presence::switchHfSensor(bool iOn)
             digitalWrite(HF_POWER_PIN, iOn ? HIGH : LOW);
             break;
         case VAL_PM_PS_Hf_HLKLD2420:
-        case VAL_PM_PS_Hf_HLKLD2420_Pir_Digital:
-        case VAL_PM_PS_Hf_HLKLD2420_Pir_Analog:
             // HLK-LD2420 sensor does not always connect correctly after power cycle,
             // let's keep it always on for now
             break;
@@ -449,7 +432,7 @@ void Presence::processHardwarePresence()
     if (mPresenceSensor != 0)
     {
         float lValue = 0;
-        switch (ParamPM_HWPresence)
+        switch (ParamPM_HfPresence)
         {
             case VAL_PM_PS_Hf_MR24xxB1:
                 if (openknxSensorDevicesModule.measureValue(MeasureType::Pres, lValue) && lValue != mPresenceCombined)
@@ -505,8 +488,6 @@ void Presence::processHardwarePresence()
                 }
                 break;
             case VAL_PM_PS_Hf_HLKLD2420:
-            case VAL_PM_PS_Hf_HLKLD2420_Pir_Digital:
-            case VAL_PM_PS_Hf_HLKLD2420_Pir_Analog:
                 if (openknxSensorDevicesModule.measureValue(MeasureType::Pres, lValue) && lValue != mPresenceCombined)
                 {
                     mPresenceCombined = lValue;
@@ -546,13 +527,12 @@ void Presence::processHardwarePresence()
 #endif
 #ifdef PIR_PIN
     bool pirTriggered;
-    switch (ParamPM_HWPresence)
+    switch (ParamPM_PirPresence)
     {
         case VAL_PM_PS_Pir_Digital:
-        case VAL_PM_PS_Hf_HLKLD2420_Pir_Digital:
             pirTriggered = digitalRead(PIR_PIN) == PinStatus::HIGH;
             break;
-        case VAL_PM_PS_Hf_HLKLD2420_Pir_Analog:
+        case VAL_PM_PS_Pir_Analog:
             uint32_t threshold = VAL_PM_PIR_Analog_Trigger_Max - (VAL_PM_PIR_Analog_Trigger_Max - VAL_PM_PIR_Analog_Trigger_Min) * (mPirSensitivity / 10.0);
             pirTriggered = analogRead(PIR_PIN) > threshold;
             break;
@@ -673,15 +653,13 @@ void Presence::setup()
 #ifdef HF_POWER_PIN
         pinMode(HF_POWER_PIN, OUTPUT);
 
-        switch (ParamPM_HWPresence)
+        switch (ParamPM_HfPresence)
         {
             case VAL_PM_PS_Hf_MR24xxB1:
                 // at startup, we turn HF-Sensor off
                 digitalWrite(HF_POWER_PIN, LOW);
                 break;
             case VAL_PM_PS_Hf_HLKLD2420:
-            case VAL_PM_PS_Hf_HLKLD2420_Pir_Digital:
-            case VAL_PM_PS_Hf_HLKLD2420_Pir_Analog:
                 // at startup, we turn HF-Sensor on (at least for now)
                 digitalWrite(HF_POWER_PIN, HIGH);
 
@@ -715,7 +693,7 @@ void Presence::setup()
             mChannel[lIndex] = new PresenceChannel(lIndex);
             mChannel[lIndex]->setup();
         }
-        mDoPresenceHardwareCycle = (ParamPM_HWPresence > 0) || (ParamPM_HWLux > 0);
+        mDoPresenceHardwareCycle = (ParamPM_HfPresence > 0) || (ParamPM_HWLux > 0);
         if (mDoPresenceHardwareCycle)
             startPowercycleHfSensor();
         startSensors();
