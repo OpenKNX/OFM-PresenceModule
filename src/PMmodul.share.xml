@@ -358,7 +358,7 @@
               <ParameterRef Id="%AID%_P-%TT%00024_R-%TT%0002401" RefId="%AID%_P-%TT%00024" />
             </ParameterRefs>
             <ParameterCalculations>
-              <ParameterCalculation Id="%AID%_PC-%TT%00001" Language="JavaScript" Name="DistanceToMeterMin" LRTransformationFunc="distanceToMeter" RLTransformationFunc="meterToDistance">
+              <ParameterCalculation Id="%AID%_PC-%TT%00001" Language="JavaScript" Name="DistanceToMeterMin" LRTransformationFunc="PM_distanceToMeter" RLTransformationFunc="PM_meterToDistance">
                 <LParameters>
                   <ParameterRefRef RefId="%AID%_UP-%TT%00018_R-%TT%0001801" AliasName="Range" />
                 </LParameters>
@@ -366,7 +366,7 @@
                   <ParameterRefRef RefId="%AID%_P-%TT%00023_R-%TT%0002301" AliasName="Meter" />
                 </RParameters>
               </ParameterCalculation>
-              <ParameterCalculation Id="%AID%_PC-%TT%00002" Language="JavaScript" Name="DistanceToMeterMax" LRTransformationFunc="distanceToMeter" RLTransformationFunc="meterToDistance">
+              <ParameterCalculation Id="%AID%_PC-%TT%00002" Language="JavaScript" Name="DistanceToMeterMax" LRTransformationFunc="PM_distanceToMeter" RLTransformationFunc="PM_meterToDistance">
                 <LParameters>
                   <ParameterRefRef RefId="%AID%_UP-%TT%00019_R-%TT%0001901" AliasName="Range" />
                 </LParameters>
