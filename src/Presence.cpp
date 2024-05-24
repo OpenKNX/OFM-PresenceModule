@@ -83,6 +83,8 @@ void Presence::processAfterStartupDelay()
 
 void Presence::showHelp()
 {
+    if (!knx.configured())
+        return;
     openknx.console.printHelpLine("vpm hw", "print hardware move and presence signal");
     openknx.console.printHelpLine("vpm chNN pres", "return presence time info for channel NN");
     openknx.console.printHelpLine("vpm chNN leave", "return leave room info for channel NN");

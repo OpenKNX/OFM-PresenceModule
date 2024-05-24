@@ -377,16 +377,23 @@
                 <when test="&gt;=%C%">
                   <ParameterBlock Id="%AID%_PB-%C%1" Name="PM%C%Page" Text="PM %C%: {{0: ...}}" TextParameterRefId="%AID%_P-%TT%%CC%000_R-%TT%%CC%00001" Icon="sphere" HelpContext="Empty" ShowInComObjectTree="true">
                     <!-- hidden, but necessary -->
-                    <ParameterRefRef RefId="%AID%_P-%TT%%CC%084_R-%TT%%CC%08401" />
-                    <ParameterRefRef RefId="%AID%_P-%TT%%CC%085_R-%TT%%CC%08501" />
-                    <ParameterRefRef RefId="%AID%_P-%TT%%CC%096_R-%TT%%CC%09601" />
-                    <ParameterRefRef RefId="%AID%_P-%TT%%CC%001_R-%TT%%CC%00101" />
-                    <ParameterRefRef RefId="%AID%_P-%TT%%CC%002_R-%TT%%CC%00201" />
+                    <!-- Enable external brightness -->
+                    <!-- checked <ParameterRefRef RefId="%AID%_P-%TT%%CC%084_R-%TT%%CC%08401" /> -->
+                    <!-- Determine Tagespahase-KO or Tag/Nacht-KO -->
+                    <!-- checked <ParameterRefRef RefId="%AID%_P-%TT%%CC%085_R-%TT%%CC%08501" /> -->
+                    <!-- Leave Room variants -->
+                    <!-- checked <ParameterRefRef RefId="%AID%_P-%TT%%CC%096_R-%TT%%CC%09601" /> -->
+                    <!-- Move exists -->
+                    <!-- checked <ParameterRefRef RefId="%AID%_P-%TT%%CC%001_R-%TT%%CC%00101" /> -->
+                    <!-- Presence exists -->
+                    <!-- checked <ParameterRefRef RefId="%AID%_P-%TT%%CC%002_R-%TT%%CC%00201" /> -->
+                    <!-- checked Calculated leave room mode -->
                     <ParameterRefRef RefId="%AID%_P-%TT%%CC%003_R-%TT%%CC%00301" />
-                    <ParameterRefRef RefId="%AID%_P-%TT%%CC%010_R-%TT%%CC%01001" />
-                    <ParameterRefRef RefId="%AID%_P-%TT%%CC%011_R-%TT%%CC%01101" />
-                    <ParameterRefRef RefId="%AID%_P-%TT%%CC%020_R-%TT%%CC%02001" />
-                    <ParameterRefRef RefId="%AID%_P-%TT%%CC%021_R-%TT%%CC%02101" />
+                    <!-- move and presence calculation helper -->
+                    <!-- checked <ParameterRefRef RefId="%AID%_P-%TT%%CC%010_R-%TT%%CC%01001" /> -->
+                    <!-- checked <ParameterRefRef RefId="%AID%_P-%TT%%CC%011_R-%TT%%CC%01101" /> -->
+                    <!-- checked <ParameterRefRef RefId="%AID%_P-%TT%%CC%020_R-%TT%%CC%02001" /> -->
+                    <!-- checked <ParameterRefRef RefId="%AID%_P-%TT%%CC%021_R-%TT%%CC%02101" /> -->
                     <ParameterSeparator Id="%AID%_PS-nnn" Text="Kanaldefinition" UIHint="Headline" />
                     <!-- Channel name -->
                     <ParameterRefRef RefId="%AID%_P-%TT%%CC%000_R-%TT%%CC%00001" HelpContext="%DOC%" IndentLevel="1" />
@@ -451,7 +458,7 @@
                         <choose ParamRefId="%AID%_UP-%TT%%CC%009_R-%TT%%CC%00901">
                           <when test="0">
                             <!-- Reset external brightness -->
-                            <Assign TargetParamRefRef="%AID%_P-%TT%%CC%084_R-%TT%%CC%08401" Value="0" />
+                            <!-- <Assign TargetParamRefRef="%AID%_P-%TT%%CC%084_R-%TT%%CC%08401" Value="0" /> -->
                             <!-- is lux dependent -->
                             <ComObjectRefRef RefId="%AID%_O-%TT%%CC%010_R-%TT%%CC%01001" />
                             <!-- check for hardware lux -->
@@ -620,10 +627,10 @@
                           <when test="0">
                             <!-- without external PM, we check for PIR-Sensor to allow "Leave room" -->
                             <choose ParamRefId="%AID%_UP-%TT%%CC%036_R-%TT%%CC%03601">
-                              <when test="0">
-                                <!-- reset "leave room" -->
-                                <Assign TargetParamRefRef="%AID%_P-%TT%%CC%096_R-%TT%%CC%09601" Value="0" />
-                              </when>
+                              <!-- <when test="0"> -->
+                              <!-- reset "leave room" -->
+                              <!-- <Assign TargetParamRefRef="%AID%_P-%TT%%CC%096_R-%TT%%CC%09601" Value="0" /> -->
+                              <!-- </when> -->
                               <when test=">0">
                                 <!-- and allow "Leave room" wth mode all -->
                                 <Assign TargetParamRefRef="%AID%_P-%TT%%CC%096_R-%TT%%CC%09601" Value="3" />
@@ -631,10 +638,10 @@
                             </choose>
                             <!-- without external PM, we check for HF-Sensor to allow "Leave room" -->
                             <choose ParamRefId="%AID%_UP-%TT%%CC%035_R-%TT%%CC%03501">
-                              <when test="0">
-                                <!-- reset "leave room" -->
-                                <Assign TargetParamRefRef="%AID%_P-%TT%%CC%096_R-%TT%%CC%09601" Value="0" />
-                              </when>
+                              <!-- <when test="0"> -->
+                              <!-- reset "leave room" -->
+                              <!-- <Assign TargetParamRefRef="%AID%_P-%TT%%CC%096_R-%TT%%CC%09601" Value="0" /> -->
+                              <!-- </when> -->
                               <when test=">0">
                                 <!-- and allow "Leave room" wth mode move -->
                                 <Assign TargetParamRefRef="%AID%_P-%TT%%CC%096_R-%TT%%CC%09601" Value="2" />
@@ -672,10 +679,10 @@
                                 <!-- we allow "Leave room" wth mode reset -->
                                 <Assign TargetParamRefRef="%AID%_P-%TT%%CC%096_R-%TT%%CC%09601" Value="1" />
                               </when>
-                              <when test="0">
-                                <!-- else reset "Leave room" -->
-                                <Assign TargetParamRefRef="%AID%_P-%TT%%CC%096_R-%TT%%CC%09601" Value="0" />
-                              </when>
+                              <!-- <when test="0"> -->
+                              <!-- else reset "Leave room" -->
+                              <!-- <Assign TargetParamRefRef="%AID%_P-%TT%%CC%096_R-%TT%%CC%09601" Value="0" /> -->
+                              <!-- </when> -->
                               <!-- reset "leave room" -->
                               <!-- <Assign TargetParamRefRef="%AID%_P-%TT%%CC%096_R-%TT%%CC%09601" Value="0" /> -->
                             </choose>
@@ -683,52 +690,57 @@
                         </choose>
 
                         <!-- calculate, if move and presence signal is available -->
-                        <choose ParamRefId="%AID%_UP-%TT%00006_R-%TT%0000601">
+                        <!-- initialize -->
+                        <!-- <choose ParamRefId="%AID%_UP-%TT%00006_R-%TT%0000601">
                           <when default="true">
-                            <!-- initialize -->
                             <Assign TargetParamRefRef="%AID%_P-%TT%%CC%001_R-%TT%%CC%00101" Value="0" />
                             <Assign TargetParamRefRef="%AID%_P-%TT%%CC%002_R-%TT%%CC%00201" Value="0" />
                           </when>
-                        </choose>
+                        </choose> -->
                         <!-- if internal hf sensor is used, we take this into account -->
                         <choose ParamRefId="%AID%_UP-%TT%%CC%035_R-%TT%%CC%03501">
-                          <when test="0">
+                          <!-- <when test="0">
                             <Assign TargetParamRefRef="%AID%_P-%TT%%CC%020_R-%TT%%CC%02001" Value="0" />
                             <Assign TargetParamRefRef="%AID%_P-%TT%%CC%021_R-%TT%%CC%02101" Value="0" />
-                          </when>
-                          <when test="1">
-                            <Assign TargetParamRefRef="%AID%_P-%TT%%CC%020_R-%TT%%CC%02001" Value="1" />
-                            <Assign TargetParamRefRef="%AID%_P-%TT%%CC%021_R-%TT%%CC%02101" Value="0" />
-                          </when>
+                          </when> -->
                           <when test="2">
                             <Assign TargetParamRefRef="%AID%_P-%TT%%CC%020_R-%TT%%CC%02001" Value="1" />
+                            <Assign TargetParamRefRef="%AID%_P-%TT%%CC%021_R-%TT%%CC%02101" Value="1" />
+                          </when>
+                          <when test="3">
+                            <!-- <Assign TargetParamRefRef="%AID%_P-%TT%%CC%020_R-%TT%%CC%02001" Value="0" /> -->
                             <Assign TargetParamRefRef="%AID%_P-%TT%%CC%021_R-%TT%%CC%02101" Value="1" />
                           </when>
                         </choose>
                         <!-- if internal PIR sensor is used, we take this into account -->
                         <choose ParamRefId="%AID%_UP-%TT%%CC%036_R-%TT%%CC%03601">
-                          <when test="0">
+                          <!-- <when test="0">
                             <Assign TargetParamRefRef="%AID%_P-%TT%%CC%020_R-%TT%%CC%02001" Value="0" />
                             <Assign TargetParamRefRef="%AID%_P-%TT%%CC%021_R-%TT%%CC%02101" Value="0" />
-                          </when>
+                          </when> -->
                           <when test="1">
-                            <Assign TargetParamRefRef="%AID%_P-%TT%%CC%020_R-%TT%%CC%02001" Value="1" />
-                            <Assign TargetParamRefRef="%AID%_P-%TT%%CC%021_R-%TT%%CC%02101" Value="0" />
+                            <choose ParamRefId="%AID%_UP-%TT%%CC%035_R-%TT%%CC%03501">
+                              <when test="0">
+                                <!-- this case means: NOT 2 3 of hf sensor !!! (just a commend for future changes) -->
+                                <Assign TargetParamRefRef="%AID%_P-%TT%%CC%020_R-%TT%%CC%02001" Value="1" />
+                                <!-- <Assign TargetParamRefRef="%AID%_P-%TT%%CC%021_R-%TT%%CC%02101" Value="0" /> -->
+                              </when>
+                            </choose>
                           </when>
                         </choose>
                         <!-- if externals sensors are used, we take this into account -->
                         <choose ParamRefId="%AID%_UP-%TT%%CC%900_R-%TT%%CC%90001">
-                          <when test="0">
+                          <!-- <when test="0">
                             <Assign TargetParamRefRef="%AID%_P-%TT%%CC%010_R-%TT%%CC%01001" Value="0" />
                             <Assign TargetParamRefRef="%AID%_P-%TT%%CC%011_R-%TT%%CC%01101" Value="0" />
-                          </when>
+                          </when> -->
                           <when test="1 4">
-                            <Assign TargetParamRefRef="%AID%_P-%TT%%CC%010_R-%TT%%CC%01001" Value="0" />
+                            <!-- <Assign TargetParamRefRef="%AID%_P-%TT%%CC%010_R-%TT%%CC%01001" Value="0" /> -->
                             <Assign TargetParamRefRef="%AID%_P-%TT%%CC%011_R-%TT%%CC%01101" Value="1" />
                           </when>
                           <when test="2">
                             <Assign TargetParamRefRef="%AID%_P-%TT%%CC%010_R-%TT%%CC%01001" Value="1" />
-                            <Assign TargetParamRefRef="%AID%_P-%TT%%CC%011_R-%TT%%CC%01101" Value="0" />
+                            <!-- <Assign TargetParamRefRef="%AID%_P-%TT%%CC%011_R-%TT%%CC%01101" Value="0" /> -->
                           </when>
                           <when test="3">
                             <Assign TargetParamRefRef="%AID%_P-%TT%%CC%010_R-%TT%%CC%01001" Value="1" />
@@ -745,11 +757,16 @@
                         <!-- OR Move-Hardware -->
                         <choose ParamRefId="%AID%_P-%TT%%CC%020_R-%TT%%CC%02001">
                           <when test="1">
-                            <Assign TargetParamRefRef="%AID%_P-%TT%%CC%001_R-%TT%%CC%00101" Value="1" />
+                            <choose ParamRefId="%AID%_P-%TT%%CC%010_R-%TT%%CC%01001">
+                              <when test="1" />
+                              <when default="true">
+                                <Assign TargetParamRefRef="%AID%_P-%TT%%CC%001_R-%TT%%CC%00101" Value="1" />
+                              </when>
+                            </choose>
                           </when>
                         </choose>
                         <!-- reset Move-External -->
-                        <choose ParamRefId="%AID%_P-%TT%%CC%010_R-%TT%%CC%01001">
+                        <!-- <choose ParamRefId="%AID%_P-%TT%%CC%010_R-%TT%%CC%01001">
                           <when test="0">
                             <choose ParamRefId="%AID%_P-%TT%%CC%020_R-%TT%%CC%02001">
                               <when test="0">
@@ -757,7 +774,7 @@
                               </when>
                             </choose>
                           </when>
-                        </choose>
+                        </choose> -->
                         <!-- Presence-External -->
                         <choose ParamRefId="%AID%_P-%TT%%CC%011_R-%TT%%CC%01101">
                           <when test="1">
@@ -767,11 +784,15 @@
                         <!-- OR Presence-Hardware -->
                         <choose ParamRefId="%AID%_P-%TT%%CC%021_R-%TT%%CC%02101">
                           <when test="1">
-                            <Assign TargetParamRefRef="%AID%_P-%TT%%CC%002_R-%TT%%CC%00201" Value="1" />
+                            <choose ParamRefId="%AID%_P-%TT%%CC%011_R-%TT%%CC%01101">
+                              <when default="true">
+                                <Assign TargetParamRefRef="%AID%_P-%TT%%CC%002_R-%TT%%CC%00201" Value="1" />
+                              </when>
+                            </choose>
                           </when>
                         </choose>
                         <!-- reset Presence-Hardware -->
-                        <choose ParamRefId="%AID%_P-%TT%%CC%011_R-%TT%%CC%01101">
+                        <!-- <choose ParamRefId="%AID%_P-%TT%%CC%011_R-%TT%%CC%01101">
                           <when test="0">
                             <choose ParamRefId="%AID%_P-%TT%%CC%021_R-%TT%%CC%02101">
                               <when test="0">
@@ -779,7 +800,7 @@
                               </when>
                             </choose>
                           </when>
-                        </choose>
+                        </choose> -->
                         <!-- End of OR -->
 
                         <ParameterSeparator Id="%AID%_PS-nnn" Text="" UIHint="HorizontalRuler" />
@@ -903,9 +924,11 @@
                             <ParameterRefRef RefId="%AID%_UP-%TT%%CC%004_R-%TT%%CC%00401" HelpContext="PM-Tag-Nacht-Objekt" IndentLevel="1" />
                             <choose ParamRefId="%AID%_UP-%TT%%CC%004_R-%TT%%CC%00401">
                               <when test="0">
+                                <!-- Tagesphasen-KO -->
                                 <Assign TargetParamRefRef="%AID%_P-%TT%%CC%085_R-%TT%%CC%08501" Value="1" />
                               </when>
                               <when test="1">
+                                <!-- Tag/Nacht-KO -->
                                 <Assign TargetParamRefRef="%AID%_P-%TT%%CC%085_R-%TT%%CC%08501" Value="2" />
                               </when>
                             </choose>
@@ -958,7 +981,7 @@
                             </ParameterBlock>
                           </when>
                           <when test=">1">
-                            <!-- 3 oder mehr Phasen -->
+                            <!-- 3 oder mehr Phasen -> Tagesphase-KO -->
                             <Assign TargetParamRefRef="%AID%_P-%TT%%CC%085_R-%TT%%CC%08501" Value="1" />
                           </when>
                           <when test="2">
@@ -1039,9 +1062,11 @@
                             <!-- only if not internally connected -->
                             <choose ParamRefId="%AID%_P-%TT%%CC%085_R-%TT%%CC%08501">
                               <when test="1">
+                                <!-- Tagesphase -->
                                 <ComObjectRefRef RefId="%AID%_O-%TT%%CC%009_R-%TT%%CC%00901" />
                               </when>
                               <when test="2">
+                                <!-- Tag/Nacht -->
                                 <ComObjectRefRef RefId="%AID%_O-%TT%%CC%009_R-%TT%%CC%00902" />
                               </when>
                             </choose>
@@ -1230,11 +1255,6 @@
                             <ParameterSeparator Id="%AID%_PS-nnn" Text=" 1.015" Cell="9,5" />
 
                             <choose ParamRefId="%AID%_P-%TT%%CC%085_R-%TT%%CC%08501">
-                              <when test="0">
-                                <!-- inaktiv -->
-                                <ParameterSeparator Id="%AID%_PS-nnn" Text="Eingang deaktiviert" Cell="10,3" />
-                                <ParameterSeparator Id="%AID%_PS-nnn" Text="  Tagesphase" Cell="10,1" />
-                              </when>
                               <when test="1">
                                 <!-- Tagesphase -->
                                 <ParameterSeparator Id="%AID%_PS-nnn" Text="  Tagesphase" Cell="10,1" />
@@ -1247,6 +1267,11 @@
                               </when>
                               <when test=">0">
                                 <ParameterRefRef RefId="%AID%_UP-%TT%%CC%080_R-%TT%%CC%08001" Cell="10,3" HelpContext="%DOC%" />
+                              </when>
+                              <when default="true">
+                                <!-- inaktiv -->
+                                <ParameterSeparator Id="%AID%_PS-nnn" Text="Eingang deaktiviert" Cell="10,3" />
+                                <ParameterSeparator Id="%AID%_PS-nnn" Text="  Tagesphase" Cell="10,1" />
                               </when>
                             </choose>
 

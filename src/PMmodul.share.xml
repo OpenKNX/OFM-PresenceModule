@@ -411,7 +411,7 @@
             <Channel Id="%AID%_CH-%PREFIX%" Number="%PREFIX%" Name="Main" Text="PM-Kanäle" Icon="panorama-sphere-outline">
               <!-- <choose ParamRefId="%AID%_UP-%TT%00002_R-%TT%0000201"> -->
               <!-- <when test="1"> -->
-              <ParameterBlock Id="%AID%_PB-nnn" Name="Settings" Text="Einstellungen" Icon="cog-outline" ShowInComObjectTree="true" HelpContext="PM-PM-Hardware">
+              <ParameterBlock Id="%AID%_PB-nnn" Name="Settings" Text="Allgemein" Icon="cog-outline" ShowInComObjectTree="true" HelpContext="PM-PM-Hardware">
                 <ParameterSeparator Id="%AID%_PS-nnn" Text="Präsenzmodul Version %ModuleVersion%" UIHint="Headline" />
                 <ParameterSeparator Id="%AID%_PS-nnn" Text="" UIHint="HorizontalRuler" />
                 <ParameterSeparator Id="%AID%_PS-nnn" Text="Kanalauswahl" UIHint="Headline" />
@@ -419,7 +419,7 @@
                 <ParameterSeparator Id="%AID%_PS-nnn" Text="" UIHint="HorizontalRuler" />
 
                 <!-- OR: Any hardware LED switched by KO -->
-                <ParameterRefRef RefId="%AID%_P-%TT%00009_R-%TT%0000901" />
+                <!-- <ParameterRefRef RefId="%AID%_P-%TT%00009_R-%TT%0000901" /> -->
                 <ParameterSeparator Id="%AID%_PS-nnn" Text="Präsenz-Hardware" UIHint="Headline" />
                 <!-- HF-Sensor -->
                 <ParameterRefRef RefId="%AID%_UP-%TT%00006_R-%TT%0000601" IndentLevel="1" HelpContext="%DOC%" />
@@ -541,7 +541,11 @@
                 <choose ParamRefId="%AID%_UP-%TT%00005_R-%TT%0000501">
                   <when test="3">
                     <ComObjectRefRef RefId="%AID%_O-%TT%00004_R-%TT%0000401" />
-                    <Assign TargetParamRefRef="%AID%_P-%TT%00009_R-%TT%0000901" Value="1" />
+                    <choose ParamRefId="%AID%_UP-%TT%00004_R-%TT%0000401">
+                      <when test="!=3">
+                        <Assign TargetParamRefRef="%AID%_P-%TT%00009_R-%TT%0000901" Value="1" />
+                      </when>
+                    </choose>
                   </when>
                 </choose>
                 <choose ParamRefId="%AID%_P-%TT%00009_R-%TT%0000901">
