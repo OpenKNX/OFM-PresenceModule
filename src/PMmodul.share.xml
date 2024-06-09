@@ -303,7 +303,7 @@
                 <Parameter Id="%AID%_UP-%TT%00006" Name="HfPresence" Offset="2" BitOffset="0" ParameterType="%AID%_PT-HfSensor" Text="HF-Sensor" Value="0" />
                 <Parameter Id="%AID%_UP-%TT%00015" Name="HfScenario" ParameterType="%AID%_PT-HfScenario" Offset="2" BitOffset="3" Text="Detektions-Szenario" Value="0" />
                 <Parameter Id="%AID%_UP-%TT%00007" Name="HWLux" Offset="2" BitOffset="6" ParameterType="%AID%_PT-LuxSensor" Text="Helligkeits-Sensor" Value="0" />
-                <Parameter Id="%AID%_UP-%TT%00016" Name="HfSensitivity" ParameterType="%AID%_PT-Sensitivity" Offset="3" BitOffset="0" Text="Hf-Empfindlichkeit" Value="0" />
+                <Parameter Id="%AID%_UP-%TT%00016" Name="HfSensitivity" ParameterType="%AID%_PT-Sensitivity" Offset="3" BitOffset="0" Text="HF-Empfindlichkeit" Value="0" />
                 <Parameter Id="%AID%_UP-%TT%00003" Name="SendRAW" Offset="3" BitOffset="4" ParameterType="%AID%_PT-OnOffYesNo" Text="Präsenz-Rohdaten auf den Bus senden?" Value="0" />
                 <Parameter Id="%AID%_UP-%TT%00008" Name="ReadLed" Offset="3" BitOffset="5" ParameterType="%AID%_PT-OnOffYesNo" Text="Wert nach einem Neustart lesen?" Value="0" />
                 <Parameter Id="%AID%_UP-%TT%00022" Name="PirPresence" Offset="3" BitOffset="6" ParameterType="%AID%_PT-PirSensor" Text="PIR-Sensor" Value="0" />
@@ -384,9 +384,9 @@
               <ComObject Id="%AID%_O-%TT%00003" Name="LEDPresence" Text="Eingang LED Präsenz" Number="24" FunctionText="Schalten/Status" ObjectSize="1 Bit" ReadFlag="Enabled" WriteFlag="Enabled" CommunicationFlag="Enabled" TransmitFlag="Disabled" UpdateFlag="Enabled" ReadOnInitFlag="Disabled" DatapointType="DPST-1-1" />
               <ComObject Id="%AID%_O-%TT%00004" Name="LEDMove" Text="Eingang LED Bewegung" Number="25" FunctionText="Schalten/Status" ObjectSize="1 Bit" ReadFlag="Enabled" WriteFlag="Enabled" CommunicationFlag="Enabled" TransmitFlag="Disabled" UpdateFlag="Enabled" ReadOnInitFlag="Disabled" DatapointType="DPST-1-1" />
               <ComObject Id="%AID%_O-%TT%00007" Name="Scenario" Text="Eingang Szenario" Number="26" FunctionText="Wert/Status" ObjectSize="1 Byte" ReadFlag="Enabled" WriteFlag="Enabled" CommunicationFlag="Enabled" TransmitFlag="Disabled" UpdateFlag="Disabled" ReadOnInitFlag="Disabled" DatapointType="DPST-5-5" />
-              <ComObject Id="%AID%_O-%TT%00008" Name="HfSensitivity" Text="Eingang Hf-Empfindlichkeit" Number="27" FunctionText="Wert/Status" ObjectSize="1 Byte" ReadFlag="Enabled" WriteFlag="Enabled" CommunicationFlag="Enabled" TransmitFlag="Disabled" UpdateFlag="Disabled" ReadOnInitFlag="Disabled" DatapointType="DPST-5-5" />
+              <ComObject Id="%AID%_O-%TT%00008" Name="HfSensitivity" Text="Hf-Empfindlichkeit" Number="27" FunctionText="Wert/Status" ObjectSize="1 Byte" ReadFlag="Enabled" WriteFlag="Enabled" CommunicationFlag="Enabled" TransmitFlag="Disabled" UpdateFlag="Disabled" ReadOnInitFlag="Disabled" DatapointType="DPST-5-5" />
               <ComObject Id="%AID%_O-%TT%00009" Name="HfReset" Text="Reset HF-Sensor" Number="28" FunctionText="Trigger" ObjectSize="1 Bit" ReadFlag="Disabled" WriteFlag="Enabled" CommunicationFlag="Enabled" TransmitFlag="Disabled" UpdateFlag="Disabled" ReadOnInitFlag="Disabled" DatapointType="DPST-1-1" />
-              <ComObject Id="%AID%_O-%TT%00011" Name="PirSensitivity" Text="Eingang Pir-Empfindlichkeit" Number="29" FunctionText="Wert/Status" ObjectSize="1 Byte" ReadFlag="Enabled" WriteFlag="Enabled" CommunicationFlag="Enabled" TransmitFlag="Disabled" UpdateFlag="Disabled" ReadOnInitFlag="Disabled" DatapointType="DPST-5-5" />
+              <ComObject Id="%AID%_O-%TT%00011" Name="PirSensitivity" Text="PIR-Empfindlichkeit" Number="29" FunctionText="Wert/Status" ObjectSize="1 Byte" ReadFlag="Enabled" WriteFlag="Enabled" CommunicationFlag="Enabled" TransmitFlag="Disabled" UpdateFlag="Disabled" ReadOnInitFlag="Disabled" DatapointType="DPST-5-5" />
             </ComObjectTable>
             <ComObjectRefs>
               <ComObjectRef Id="%AID%_O-%TT%00001_R-%TT%0000101" RefId="%AID%_O-%TT%00001" />
