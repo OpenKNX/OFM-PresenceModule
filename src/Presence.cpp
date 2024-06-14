@@ -528,7 +528,7 @@ void Presence::processHardwarePresence()
     }
 #endif
 #ifdef PIR_PIN
-    bool pirTriggered;
+    bool pirTriggered = false;
     switch (ParamPM_PirPresence)
     {
         case VAL_PM_PS_Pir_Digital:
