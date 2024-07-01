@@ -511,20 +511,25 @@
                         <ParameterSeparator Id="%AID%_PS-nnn" Text="" UIHint="HorizontalRuler" />
                         <!-- Presence input settings -->
                         <ParameterSeparator Id="%AID%_PS-nnn" Text="Präsenzeingänge" UIHint="Headline" />
-                        <!-- is there also presence hardware -->
+                        <!-- is there also HF presence hardware -->
                         <choose ParamRefId="%AID%_UP-%TT%00006_R-%TT%0000601">
-                          <when test="1">
-                            <ParameterRefRef RefId="%AID%_UP-%TT%%CC%036_R-%TT%%CC%03601" HelpContext="%DOC%" IndentLevel="1" />
-                            <choose ParamRefId="%AID%_UP-%TT%%CC%036_R-%TT%%CC%03601">
-                              <when test=">0">
-                                <Assign TargetParamRefRef="%AID%_P-%TT%%CC%095_R-%TT%%CC%09501" Value="1" />
+                          <when test="0">
+                            <!-- is there also PIR presence hardware -->
+                            <choose ParamRefId="%AID%_UP-%TT%00022_R-%TT%0002201">
+                              <when test="&gt;0">
+                                <ParameterRefRef RefId="%AID%_UP-%TT%%CC%036_R-%TT%%CC%03601" HelpContext="%DOC%" IndentLevel="1" />
+                                <choose ParamRefId="%AID%_UP-%TT%%CC%036_R-%TT%%CC%03601">
+                                  <when test="!=0">
+                                    <Assign TargetParamRefRef="%AID%_P-%TT%%CC%095_R-%TT%%CC%09501" Value="1" />
+                                  </when>
+                                </choose>
                               </when>
                             </choose>
                           </when>
-                          <when test="2">
+                          <when test="!=0">
                             <ParameterRefRef RefId="%AID%_UP-%TT%%CC%035_R-%TT%%CC%03501" HelpContext="%DOC%" IndentLevel="1" />
                             <choose ParamRefId="%AID%_UP-%TT%%CC%035_R-%TT%%CC%03501">
-                              <when test=">0">
+                              <when test="&gt;0">
                                 <Assign TargetParamRefRef="%AID%_P-%TT%%CC%095_R-%TT%%CC%09501" Value="1" />
                               </when>
                             </choose>

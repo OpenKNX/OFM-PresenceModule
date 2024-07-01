@@ -711,7 +711,7 @@ bool PresenceChannel::getHardwarePresence(bool iJustMove /* false */)
 {
     // if hardware presence sensor is available, we evaluate its value
     bool lPresence = false;
-    if (ParamPM_pPresenceUsage == VAL_PM_PresenceUsageMove)
+    if (ParamPM_pPresenceUsage >= VAL_PM_PresenceUsageMove)
         lPresence = openknxPresenceModule.getHardwareMove();
     if (!iJustMove && !lPresence && ParamPM_pPresenceUsage == VAL_PM_PresenceUsagePresence)
         lPresence = openknxPresenceModule.getHardwarePresence();
@@ -732,7 +732,7 @@ void PresenceChannel::startHardwarePresence()
     // we have to eval Hardware move if required
     bool lValue = false;
     bool lTrigger = false;
-    if (ParamPM_pPresenceUsage == VAL_PM_PresenceUsageMove)
+    if (ParamPM_pPresenceUsage >= VAL_PM_PresenceUsageMove)
     {
         lValue = openknxPresenceModule.getHardwareMove();
         if (mHardwareMove != lValue)
