@@ -216,7 +216,20 @@ void Presence::processInputKo(GroupObject &iKo)
         }
         case PM_KoHfReset:
             // mPresenceSensor->sendCommand(RadarCmd_ResetSensor);
-            startPowercycleHfSensor();
+            switch (ParamPM_HfPresence)
+            {
+                case VAL_PM_PS_Hf_MR24xxB1:
+                    logDebugP("Do power cycle for MR24xxB1");
+                    startPowercycleHfSensor();
+                    break;
+                case VAL_PM_PS_Hf_HLKLD2420:
+                    logDebugP("Start calibration for HLKLD2420");
+                    static_cast<SensorHLKLD2420 *>(mPresenceSensor)->forceCalibration();
+                    break;
+                default:
+                    break;
+            }
+
             break;
         case PM_KoLEDMove:
             processLED(iKo.value(getDPT(VAL_DPT_1)), CallerKnxMove);
