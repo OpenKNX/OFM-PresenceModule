@@ -158,6 +158,7 @@ Auch wenn im Folgenden immer von Präsenzmelder gesprochen wird, so hängt diese
 
 Die Idee zu dieser Applikation ist bei der Verwendung vom True Presence Präsenzmelder entstanden. Dieser hat eine gute bis sehr gute Präsenzerkennung, einen mittelmäßigen Helligkeitssensor und eine schlechte Applikation. In Verbindung mit dieser (virtuellen) Applikation funktioniert er wesentlich besser und kann dann sogar zusätzliche Funktionen wie Kurzzeit-Präsenz.
 
+<!-- DOC HelpContext="Einleitung" -->
 Diese Präsenzmelder-Applikation implementiert folgende Funktionen:
 
 * "Klassischer Präsenzmelder" mit
