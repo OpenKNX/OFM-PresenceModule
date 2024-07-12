@@ -450,7 +450,7 @@ void PresenceChannel::sendReadRequest(uint8_t iKoIndex)
     GroupObject *lKo = getKo(iKoIndex);
     // we handle input KO and we send only read requests, if KO is uninitialized
     // in case the KO is transmitting (as in input), we know that an read request was already sent by someone else
-    if (lKo->commFlag() == ComFlag::Uninitialized)
+    if (!lKo->initialized())
         lKo->requestObjectRead();
     // else if (lKo->commFlag() != ComFlag::Transmitting)
     // {

@@ -408,10 +408,10 @@
             </Script>
           </Static>
           <Dynamic>
-            <Channel Id="%AID%_CH-%PREFIX%" Number="%PREFIX%" Name="Main" Text="Präsenzmelder" Icon="panorama-sphere-outline" HelpContext="PM-Einleitung" >
+            <Channel Id="%AID%_CH-%PREFIX%" Number="%PREFIX%" Name="Main" Text="Präsenzmelder" Icon="panorama-sphere-outline" HelpContext="PM-Dokumentation" >
               <!-- <choose ParamRefId="%AID%_UP-%TT%00002_R-%TT%0000201"> -->
               <!-- <when test="1"> -->
-              <ParameterBlock Id="%AID%_PB-nnn" Name="Settings" Text="Allgemein" Icon="cog-outline" ShowInComObjectTree="true" HelpContext="PM-Einleitung" >
+              <ParameterBlock Id="%AID%_PB-nnn" Name="Settings" Text="Allgemein" Icon="cog-outline" ShowInComObjectTree="true" HelpContext="PM-Dokumentation" >
                 <ParameterSeparator Id="%AID%_PS-nnn" Text="Präsenzmelder" UIHint="Headline" />
                 <ParameterSeparator Id="%AID%_PS-nnn" Text="Version: %ModuleVersion%" />
                 <ParameterSeparator Id="%AID%_PS-nnn" Text="" UIHint="HorizontalRuler" />

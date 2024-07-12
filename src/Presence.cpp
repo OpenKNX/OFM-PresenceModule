@@ -215,7 +215,7 @@ void Presence::processInputKo(GroupObject &iKo)
             break;
         }
         case PM_KoHfReset:
-            // mPresenceSensor->sendCommand(RadarCmd_ResetSensor);
+#ifdef HF_POWER_PIN
             switch (ParamPM_HfPresence)
             {
                 case VAL_PM_PS_Hf_MR24xxB1:
@@ -229,7 +229,7 @@ void Presence::processInputKo(GroupObject &iKo)
                 default:
                     break;
             }
-
+#endif
             break;
         case PM_KoLEDMove:
             processLED(iKo.value(getDPT(VAL_DPT_1)), CallerKnxMove);

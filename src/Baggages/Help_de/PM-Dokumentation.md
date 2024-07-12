@@ -1,11 +1,11 @@
-﻿### Einleitung
+﻿### Dokumentation
 
 
 Eine vollständige Applikationsbeschreibung ist unter folgendem Link verfügbar: https://github.com/OpenKNX/OFM-PresenceModule/blob/v1/doc/Applikationsbeschreibung-Praesenz.md
 
 Weitere Produktinformationen sind in unserem Wiki verfügbar: https://github.com/OpenKNX/OpenKNX/wiki/Produktinfo-Pr%C3%A4senzmodul
 
-Diese Präsenzmelder-Applikation implementiert folgende Funktionen:
+Dieses Präsenzmelder-Modul implementiert folgende Funktionen:
 
 * "Klassischer Präsenzmelder" mit
   * schalten bei Bewegung
@@ -38,7 +38,7 @@ Diese Präsenzmelder-Applikation implementiert folgende Funktionen:
 
 * Innovative "Raum verlassen"-Funktion
   * Erlaubt dem Melder die Unterscheidung zwischen "Licht aus und im Raum bleiben" und "Licht aus und Raum verlassen".
-  * Schaltet damit Licht genau erneut dann ein, wenn man es benötigt
+  * Schaltet damit Licht genau dann erneut ein, wenn man es benötigt
 
 * Viele Parameter über GA modifizierbar
   * aktuelle Helligkeitsschwelle
@@ -46,13 +46,10 @@ Diese Präsenzmelder-Applikation implementiert folgende Funktionen:
   * aktuelle Tagesphase
   * Sensibilität des HF-Sensors
   * Szenario für HF-Sensor
+  * Sensibilität des PIR-Sensors
 
 * Erweiterte Steuerungsmöglichkeiten
   * alle Melderfunktionen sind über Szenen steuerbar
   * Jeder Eingang kann bei Busspannungswiederkehr Werte lesen
   * KO können auch intern verknüpft werden (Interne KO) und so die Buslast vermindern
-
-* Logikmodul mit vielen weiteren Funktionen
-  * mit dem integrierten Logikmodul können weitere Funktionen in den PM integriert werden
-  * Interne KO können auch zwischen PM und Logik verwendet werden 
 
