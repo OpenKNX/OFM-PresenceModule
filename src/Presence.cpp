@@ -656,9 +656,9 @@ void Presence::loop()
         }
     }
     if (lChannelsProcessed < mChannelsToProcess)
-        logInfoP("PM did not process %i channels during loop as expected, just %i channels", mChannelsToProcess, lChannelsProcessed);
+        logDebugP("PM did not process %i channels during loop as expected, just %i channels", mChannelsToProcess, lChannelsProcessed);
     if (millis() - sLoopTime > 3)
-        logInfoP("PM LoopTime: %i", millis() - sLoopTime);
+        logDebugP("PM LoopTime: %i", millis() - sLoopTime);
 }
 
 void Presence::setup()
