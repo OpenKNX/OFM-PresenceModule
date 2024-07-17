@@ -9,7 +9,7 @@
             <op:param name="%ParamOffset%" value="58" increment="20" />
             <op:param name="%Pl%" value="0" asLetter="true" increment="1" />
             <op:param name="%Pn%" value="1" increment="1" />
-            <op:param name="%PPP%" value="100" increment="100" />
+            <op:param name="%PPP%" value="100" increment="100" digits="3" />
             <op:param name="%TRef%" value="26" increment="1" digits="2" />
           </op:part>
           <!-- <op:part href="PMModul.parts.xml" name="PHASE-1">
