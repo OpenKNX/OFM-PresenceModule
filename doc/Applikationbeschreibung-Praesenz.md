@@ -84,6 +84,10 @@ Alle Logikkanäle sind in der [Applikation Logik](https://github.com/OpenKNX/OAM
 
 Im folgenden werden Änderungen an dem Dokument erfasst, damit man nicht immer das Gesamtdokument lesen muss, um Neuerungen zu erfahren.
 
+18.07.2024: Firmware 3.1, Applikation 3.1
+
+* NEU: Der Präsenzmelder enthält jetzt auch 30 virtuelle Taster (auf Benutzerwunsch)
+
 12.07.2024: Firmware 3.0, Applikation 3.0
 
 >**Wichtig**: Die Version 3.0 der Firmware ist nur für PresenceModule-Big und PresenceModule-IP verfügbar. Für PresenceModule-Release wird es eine Migrationsunterstützung auf die PresenceModule-Big geben, sofern man RP2040-basierte Hardware verwendet.
@@ -193,6 +197,12 @@ Der Konfigurationstransfer erlaubt einen
 * Zurücksetzen der Konfiguration eines OpenKNX-Modulkanals auf Standardwerte
 
 Die Funktionen vom Konfigurationstransfer-Modul sind unter [Applikationsbeschreibung-ConfigTransfer](https://github.com/OpenKNX/OFM-ConfigTransfer/blob/v1/doc/Applikationsbeschreibung-ConfigTransfer.md) beschrieben.
+
+### **Virtuelle Taster**
+
+Die Präsenzmelder-Applikation enthält auch virtuelle Taster.
+
+Die Funktionen des VirtualButton-Moduls sind unter [Applikationsbeschreibung-Taster](https://github.com/OpenKNX/OFM-VirtualButton/blob/v1/doc/Applikationsbeschreibung-Taster.md) beschrieben.
 
 ### **Logiken**
 
