@@ -74,7 +74,7 @@ GroupObject *PresenceChannel::getKo(uint8_t iKoIndex)
             lParamIndex = 0;
             break;
     }
-    if (lParamIndex)
+    if (lParamIndex && paramBit(lParamIndex, 0x80))
         lKoNumber = paramWord(lParamIndex) & 0x7FFF;
     else
         lKoNumber = calcKoNumber(iKoIndex);
