@@ -85,11 +85,17 @@ void Presence::showHelp()
 {
     if (!knx.configured())
         return;
-    openknx.console.printHelpLine("vpm hw", "print hardware move and presence signal");
-    openknx.console.printHelpLine("vpm chNN pres", "return presence time info for channel NN");
-    openknx.console.printHelpLine("vpm chNN leave", "return leave room info for channel NN");
-    openknx.console.printHelpLine("vpm chNN state", "return state flags for channel NN");
-    openknx.console.printHelpLine("vpm chNN all", "exec all channel commands for channel NN");
+
+    openknx.console.printHelpLine("vpm hw", "Print hardware move and presence signal");
+    openknx.console.printHelpLine("vpm chNN pres", "Print presence time info for channel NN");
+    openknx.console.printHelpLine("vpm chNN leave", "Print leave room info for channel NN");
+    openknx.console.printHelpLine("vpm chNN state", "Print state flags for channel NN");
+    openknx.console.printHelpLine("vpm chNN all", "Exec all channel commands for channel NN");
+
+#ifdef HF_POWER_PIN
+    if (ParamPM_HfPresence == VAL_PM_PS_Hf_HLKLD2420)
+        static_cast<SensorHLKLD2420 *>(mPresenceSensor)->showHelp();
+#endif
 }
 
 bool Presence::processCommand(const std::string iCmd, bool iDebugKo)
@@ -99,54 +105,65 @@ bool Presence::processCommand(const std::string iCmd, bool iDebugKo)
     if (!knx.configured())
         return lResult;
 
-    if (iCmd.substr(0, 3) != "vpm" || iCmd.length() < 5)
+    if (iCmd.length() < 5)
         return lResult;
 
-    if (iCmd.length() == 5 && iCmd.substr(4, 1) == "h")
+    if (iCmd.substr(0, 3) == "vpm")
     {
-        // Command help
-        openknx.console.writeDiagenoseKo("-> hw");
-        openknx.console.writeDiagenoseKo("");
-        openknx.console.writeDiagenoseKo("-> chNN pres");
-        openknx.console.writeDiagenoseKo("");
-        openknx.console.writeDiagenoseKo("-> chNN leave");
-        openknx.console.writeDiagenoseKo("");
-        openknx.console.writeDiagenoseKo("-> chNN state");
-        openknx.console.writeDiagenoseKo("");
-        openknx.console.writeDiagenoseKo("-> chNN all");
-        openknx.console.writeDiagenoseKo("");
-    }
-    else if (iCmd.length() >= 8 || iCmd.substr(4, 2) == "ch")
-    {
-        // Command ch<nn>:
-        // find channel and dispatch
-        uint16_t lIndex = std::stoi(iCmd.substr(6, 2)) - 1;
-        if (lIndex < mNumChannels)
+        if (iCmd.length() == 5 && iCmd.substr(4, 1) == "h")
         {
-            // this is a channel request
-            lResult = mChannel[lIndex]->processCommand(iCmd, iDebugKo);
+            // Command help
+            openknx.console.writeDiagenoseKo("-> hw");
+            openknx.console.writeDiagenoseKo("");
+            openknx.console.writeDiagenoseKo("-> chNN pres");
+            openknx.console.writeDiagenoseKo("");
+            openknx.console.writeDiagenoseKo("-> chNN leave");
+            openknx.console.writeDiagenoseKo("");
+            openknx.console.writeDiagenoseKo("-> chNN state");
+            openknx.console.writeDiagenoseKo("");
+            openknx.console.writeDiagenoseKo("-> chNN all");
+            openknx.console.writeDiagenoseKo("");
+        }
+        else if (iCmd.length() >= 8 || iCmd.substr(4, 2) == "ch")
+        {
+            // Command ch<nn>:
+            // find channel and dispatch
+            uint16_t lIndex = std::stoi(iCmd.substr(6, 2)) - 1;
+            if (lIndex < mNumChannels)
+            {
+                // this is a channel request
+                lResult = mChannel[lIndex]->processCommand(iCmd, iDebugKo);
+            }
+        }
+        else if (iCmd.length() == 6 || iCmd.substr(4, 2) == "hw")
+        {
+            // output hardware move/presence state
+            logInfoP("Move %d, Presence %d", mMove, mPresence);
+            if (iDebugKo)
+            {
+                openknx.console.writeDiagenoseKo("Move %d, Pres %d", mMove, mPresence);
+            }
+            lResult = true;
+        }
+        else
+        {
+            // Commands starting with vpm are presence diagnose commands
+            logInfoP("VPM command with bad args");
+            if (iDebugKo)
+            {
+                openknx.console.writeDiagenoseKo("VPM: bad args");
+            }
+            lResult = true;
         }
     }
-    else if (iCmd.length() == 6 || iCmd.substr(4, 2) == "hw")
+    else if (iCmd.substr(0, 3) == "hlk")
     {
-        // output hardware move/presence state
-        logInfoP("Move %d, Presence %d", mMove, mPresence);
-        if (iDebugKo)
-        {
-            openknx.console.writeDiagenoseKo("Move %d, Pres %d", mMove, mPresence);
-        }
-        lResult = true;
+#ifdef HF_POWER_PIN
+        if (ParamPM_HfPresence == VAL_PM_PS_Hf_HLKLD2420)
+            lResult = static_cast<SensorHLKLD2420 *>(mPresenceSensor)->processCommand(iCmd, iDebugKo);
+#endif
     }
-    else
-    {
-        // Commands starting with vpm are presence diagnose commands
-        logInfoP("VPM command with bad args");
-        if (iDebugKo)
-        {
-            openknx.console.writeDiagenoseKo("VPM: bad args");
-        }
-        lResult = true;
-    }
+
     return lResult;
 }
 
