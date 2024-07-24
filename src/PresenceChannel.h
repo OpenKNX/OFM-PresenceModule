@@ -141,7 +141,7 @@
 
 // PIR Hardware
 #define VAL_PM_PIR_Analog_Trigger_Min 390
-#define VAL_PM_PIR_Analog_Trigger_Max 740
+#define VAL_PM_PIR_Analog_Trigger_Max 940
 
 // Brightness Hardware
 #define VAL_PM_LUX_None 0
