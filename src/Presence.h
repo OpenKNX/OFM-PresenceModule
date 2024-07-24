@@ -68,6 +68,7 @@ class Presence : public OpenKNX::Module
     uint8_t mMove = 0;
     float mMoveSpeed = 0;
     uint32_t mPresenceDelay = 0;
+    uint32_t mPresenceStartupDelay = 1;
     bool mPresenceLedOn = false;
     bool mInfoLedOn = false;
     bool mPresenceChanged = false;

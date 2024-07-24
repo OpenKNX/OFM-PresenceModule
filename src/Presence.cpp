@@ -569,7 +569,9 @@ void Presence::processHardwarePresence()
             pirTriggered = analogRead(PIR_PIN) > threshold;
             break;
     }
-
+    if (delayCheck(mPresenceStartupDelay, 30000))
+        mPresenceStartupDelay = 0;
+    pirTriggered = pirTriggered && mPresenceStartupDelay == 0;
     if (pirTriggered)
     {
         if (mMove == 0)
@@ -712,6 +714,7 @@ void Presence::setup()
 
 #ifdef PIR_PIN
         pinMode(PIR_PIN, INPUT_PULLDOWN);
+        mPresenceStartupDelay = delayTimerInit();
 #endif
 
         // setup channels, not possible in constructor, because knx is not configured there

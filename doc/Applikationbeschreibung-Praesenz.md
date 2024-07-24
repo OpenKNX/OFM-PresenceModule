@@ -84,9 +84,13 @@ Alle Logikkanäle sind in der [Applikation Logik](https://github.com/OpenKNX/OAM
 
 Im folgenden werden Änderungen an dem Dokument erfasst, damit man nicht immer das Gesamtdokument lesen muss, um Neuerungen zu erfahren.
 
-22.07.2024: Firmware 3.2, Applikation 3.2
+22.07.2024: Firmware 3.2, Applikation 3.2.1
 
 * FIX: Wenn mit ConfigTransfer die VPM-Basiskonfiguration von einer älteren VPM-Version auf die aktuelle übertragen wurde, konnte das interne KO-Referenzen auf falsche KO zeigen lassen.
+* FIX: Der PIR-Sensor hat beim Neustart fälschlicherweise Präsenz-Signale ausgegeben
+* NEU: Kalibrierung für den HLK-Sensor wurde komplett neu entwickelt
+* NEU: Diagnose für den HKL-Sensor ist komplett neu implementiert
+* FIX: Empfindlichkeitskurve für den PIR-Sensor wurden leicht angepasst
 
 18.07.2024: Firmware 3.1, Applikation 3.1
 
