@@ -1,6 +1,6 @@
 {
     "name": "OFM-PresenceModule",
-    "version": "3.2.1",
+    "version": "3.2.2",
     "dependencies": {
         "adafruit/Adafruit VEML7700 Library": "2.1.0",
         "adafruit/Adafruit BusIO": "^1.14.1"
