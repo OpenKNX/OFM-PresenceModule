@@ -457,8 +457,6 @@
                         <ParameterRefRef RefId="%AID%_UP-%TT%%CC%009_R-%TT%%CC%00901" HelpContext="%DOC%" IndentLevel="1" />
                         <choose ParamRefId="%AID%_UP-%TT%%CC%009_R-%TT%%CC%00901">
                           <when test="0">
-                            <!-- Reset external brightness -->
-                            <!-- <Assign TargetParamRefRef="%AID%_P-%TT%%CC%084_R-%TT%%CC%08401" Value="0" /> -->
                             <!-- is lux dependent -->
                             <ComObjectRefRef RefId="%AID%_O-%TT%%CC%010_R-%TT%%CC%01001" />
                             <!-- check for hardware lux -->
@@ -473,6 +471,10 @@
                                   <when test="0">
                                     <!-- the user don't want to use hardware sensor, we use external brightness -->
                                     <Assign TargetParamRefRef="%AID%_P-%TT%%CC%084_R-%TT%%CC%08401" Value="1" />
+                                  </when>
+                                  <when test="!=0">
+                                    <!-- Reset external brightness -->
+                                    <Assign TargetParamRefRef="%AID%_P-%TT%%CC%084_R-%TT%%CC%08401" Value="0" />
                                   </when>
                                 </choose>
                               </when>
