@@ -35,6 +35,24 @@ const std::string Presence::version()
     return MODULE_PresenceModule_Version;
 }
 
+void Presence::savePower()
+{
+#ifdef HF_POWER_PIN
+    if (ParamPM_HfPresence == VAL_PM_PS_Hf_HLKLD2420)
+        static_cast<SensorHLKLD2420 *>(mPresenceSensor)->switchPower(false);
+#endif
+}
+
+bool Presence::restorePower()
+{
+#ifdef HF_POWER_PIN
+    if (ParamPM_HfPresence == VAL_PM_PS_Hf_HLKLD2420)
+        static_cast<SensorHLKLD2420 *>(mPresenceSensor)->switchPower(true);
+#endif
+
+    return true;
+}
+
 void Presence::addKoMap(uint16_t iKoNumber, uint8_t iChannelId, uint8_t iKoIndex)
 {
     // first implementation, in future we use sorted insert

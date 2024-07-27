@@ -56,6 +56,8 @@ class Presence : public OpenKNX::Module
     bool mapKO(uint16_t iKoNumber, sKoMap **iKoMap);
     const std::string name() override;
     const std::string version() override;
+    void savePower() override;
+    bool restorePower() override;
 
   private:
     static const uint16_t cCountKoMap = PM_ChannelCount * 6;
