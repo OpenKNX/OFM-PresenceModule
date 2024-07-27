@@ -587,7 +587,9 @@ void Presence::processHardwarePresence()
             pirTriggered = analogRead(PIR_PIN) > threshold;
             break;
     }
-
+    if (delayCheck(mPresenceStartupDelay, 30000))
+        mPresenceStartupDelay = 0;
+    pirTriggered = pirTriggered && mPresenceStartupDelay == 0;
     if (pirTriggered)
     {
         if (mMove == 0)
@@ -691,9 +693,9 @@ void Presence::loop()
         }
     }
     if (lChannelsProcessed < mChannelsToProcess)
-        logInfoP("PM did not process %i channels during loop as expected, just %i channels", mChannelsToProcess, lChannelsProcessed);
+        logDebugP("PM did not process %i channels during loop as expected, just %i channels", mChannelsToProcess, lChannelsProcessed);
     if (millis() - sLoopTime > 3)
-        logInfoP("PM LoopTime: %i", millis() - sLoopTime);
+        logDebugP("PM LoopTime: %i", millis() - sLoopTime);
 }
 
 void Presence::setup()
@@ -730,6 +732,7 @@ void Presence::setup()
 
 #ifdef PIR_PIN
         pinMode(PIR_PIN, INPUT_PULLDOWN);
+        mPresenceStartupDelay = delayTimerInit();
 #endif
 
         // setup channels, not possible in constructor, because knx is not configured there
