@@ -712,7 +712,7 @@ void Presence::setup()
                 digitalWrite(HF_POWER_PIN, LOW);
                 break;
             case VAL_PM_PS_Hf_HLKLD2420:
-                // at startup, we turn HF-Sensor on (at least for now)
+                // at startup, we turn HF-Sensor on
                 digitalWrite(HF_POWER_PIN, HIGH);
 
                 // ensure no data lost even for sensor raw data
@@ -733,6 +733,9 @@ void Presence::setup()
 #ifdef PIR_PIN
         pinMode(PIR_PIN, INPUT_PULLDOWN);
         mPresenceStartupDelay = delayTimerInit();
+
+        if (ParamPM_PirPresence != VAL_PM_PS_None)
+            digitalWrite(HF_POWER_PIN, HIGH);
 #endif
 
         // setup channels, not possible in constructor, because knx is not configured there
