@@ -713,7 +713,9 @@ void Presence::setup()
                 break;
             case VAL_PM_PS_Hf_HLKLD2420:
                 // at startup, we turn HF-Sensor on
+#ifndef HF_POWER_BCU
                 digitalWrite(HF_POWER_PIN, HIGH);
+#endif
 
                 // ensure no data lost even for sensor raw data
                 // up to 1288 bytes are send by the sensor at once
