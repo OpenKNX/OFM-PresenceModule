@@ -133,6 +133,7 @@
 #define VAL_PM_PS_Hf_HLKLD2420 3
 // #define VAL_PM_PS_Hf_HLKLD2420_Pir_Digital 4
 // #define VAL_PM_PS_Hf_HLKLD2420_Pir_Analog 5
+#define VAL_PM_PS_Hf_XenD107H 6
 
 // PIR Sensor
 #define VAL_PM_PS_None 0

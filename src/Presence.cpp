@@ -5,6 +5,7 @@
 #include "Sensor.h"
 #include "SensorDevices.h"
 #include "SensorHLKLD2420.h"
+#include "SensorXenD107H.h"
 #include "SensorMR24xxB1.h"
 #include "SensorOPT300x.h"
 #include "SensorVEML7700.h"
@@ -40,6 +41,8 @@ void Presence::savePower()
 #ifdef HF_POWER_PIN
     if (ParamPM_HfPresence == VAL_PM_PS_Hf_HLKLD2420)
         static_cast<SensorHLKLD2420 *>(mPresenceSensor)->switchPower(false);
+    else if (ParamPM_HfPresence == VAL_PM_PS_Hf_XenD107H)
+        static_cast<SensorXenD107H *>(mPresenceSensor)->switchPower(false);
 #endif
 }
 
@@ -48,6 +51,8 @@ bool Presence::restorePower()
 #ifdef HF_POWER_PIN
     if (ParamPM_HfPresence == VAL_PM_PS_Hf_HLKLD2420)
         static_cast<SensorHLKLD2420 *>(mPresenceSensor)->switchPower(true);
+    else if (ParamPM_HfPresence == VAL_PM_PS_Hf_XenD107H)
+        static_cast<SensorXenD107H *>(mPresenceSensor)->switchPower(true);
 #endif
 
     return true;
@@ -113,6 +118,8 @@ void Presence::showHelp()
 #ifdef HF_POWER_PIN
     if (ParamPM_HfPresence == VAL_PM_PS_Hf_HLKLD2420)
         static_cast<SensorHLKLD2420 *>(mPresenceSensor)->showHelp();
+    else if (ParamPM_HfPresence == VAL_PM_PS_Hf_XenD107H)
+        static_cast<SensorXenD107H *>(mPresenceSensor)->showHelp();
 #endif
 }
 
@@ -179,6 +186,8 @@ bool Presence::processCommand(const std::string iCmd, bool iDebugKo)
 #ifdef HF_POWER_PIN
         if (ParamPM_HfPresence == VAL_PM_PS_Hf_HLKLD2420)
             lResult = static_cast<SensorHLKLD2420 *>(mPresenceSensor)->processCommand(iCmd, iDebugKo);
+        else if (ParamPM_HfPresence == VAL_PM_PS_Hf_XenD107H)
+            static_cast<SensorXenD107H *>(mPresenceSensor)->processCommand(iCmd, iDebugKo);
 #endif
     }
 
@@ -224,6 +233,9 @@ void Presence::processInputKo(GroupObject &iKo)
                     case VAL_PM_PS_Hf_HLKLD2420:
                         static_cast<SensorHLKLD2420 *>(mPresenceSensor)->writeSensitivity(lHfSensitivity);
                         break;
+                    case VAL_PM_PS_Hf_XenD107H:
+                        static_cast<SensorXenD107H *>(mPresenceSensor)->writeSensitivity(lHfSensitivity);
+                        break;
                     default:
                         break;
                 }
@@ -260,6 +272,10 @@ void Presence::processInputKo(GroupObject &iKo)
                 case VAL_PM_PS_Hf_HLKLD2420:
                     logDebugP("Start calibration for HLKLD2420");
                     static_cast<SensorHLKLD2420 *>(mPresenceSensor)->forceCalibration();
+                    break;
+                case VAL_PM_PS_Hf_XenD107H:
+                    logDebugP("Start calibration for XenD107H");
+                    static_cast<SensorXenD107H *>(mPresenceSensor)->forceCalibration();
                     break;
                 default:
                     break;
@@ -311,6 +327,12 @@ void Presence::startSensors()
 
             mPresenceSensor = openknxSensorDevicesModule.factory(SENS_HLKLD2420, MeasureType::Pres);
             static_cast<SensorHLKLD2420 *>(mPresenceSensor)->defaultSensorParameters(ParamPM_HfSensitivity, ParamPM_HfDelayTime, ParamPM_HfRangeGateMin, ParamPM_HfRangeGateMax);
+            break;
+        case VAL_PM_PS_Hf_XenD107H:
+            logDebugP("Using HF sensor XenD107H");
+
+            mPresenceSensor = openknxSensorDevicesModule.factory(SENS_XEND107H, MeasureType::Pres);
+            static_cast<SensorXenD107H *>(mPresenceSensor)->defaultSensorParameters(ParamPM_HfSensitivity, ParamPM_HfDelayTime, ParamPM_HfRangeGateMin, ParamPM_HfRangeGateMax);
             break;
         default:
             break;
@@ -390,7 +412,8 @@ void Presence::switchHfSensor(bool iOn)
             digitalWrite(HF_POWER_PIN, iOn ? HIGH : LOW);
             break;
         case VAL_PM_PS_Hf_HLKLD2420:
-            // HLK-LD2420 sensor does not always connect correctly after power cycle,
+        case VAL_PM_PS_Hf_XenD107H:
+            // sensor does not always connect correctly after power cycle,
             // let's keep it always on for now
             break;
         default:
@@ -570,6 +593,45 @@ void Presence::processHardwarePresence()
                     }
                 }
                 break;
+            case VAL_PM_PS_Hf_XenD107H:
+                if (openknxSensorDevicesModule.measureValue(MeasureType::Pres, lValue) && lValue != mPresenceCombined)
+                {
+                    mPresenceCombined = lValue;
+                    bool lPresence = lValue == 1;
+                    if (lPresence != mPresence)
+                    {
+                        mPresence = lPresence;
+                        processLED(mPresence, CallerPresence);
+                        knx.getGroupObject(PM_KoPresenceOut).value(mPresence, getDPT(VAL_DPT_1));
+                        if (mPresence)
+                            PresenceTrigger = true;
+                    }
+                }
+                if (openknxSensorDevicesModule.measureValue(MeasureType::Speed, lValue))
+                {
+                    GroupObject &lKo = knx.getGroupObject(PM_KoMoveSpeedOut);
+                    if ((uint8_t)lKo.value(getDPT(VAL_DPT_5001)) != (uint8_t)lValue)
+                        lKo.value(lValue, getDPT(VAL_DPT_5001));
+                }
+                if (openknxSensorDevicesModule.measureValue(MeasureType::Sensitivity, lValue))
+                {
+                    if (mHfSensitivity != (int8_t)lValue)
+                    {
+                        mHfSensitivity = (int8_t)lValue;
+                        GroupObject &lKo = knx.getGroupObject(PM_KoHfSensitivity);
+                        lKo.value(mHfSensitivity, getDPT(VAL_DPT_5));
+                    }
+                }
+                if (openknxSensorDevicesModule.measureValue(MeasureType::Distance, lValue))
+                {
+                    if (mDistance != lValue)
+                    {
+                        mDistance = lValue;
+                        GroupObject &lKo = knx.getGroupObject(PM_KoMoveSpeedOut);
+                        lKo.value(mDistance, getDPT(VAL_DPT_14));
+                    }
+                }
+                break;
             default:
                 break;
         }
@@ -712,6 +774,7 @@ void Presence::setup()
                 digitalWrite(HF_POWER_PIN, LOW);
                 break;
             case VAL_PM_PS_Hf_HLKLD2420:
+            case VAL_PM_PS_Hf_XenD107H:
                 // at startup, we turn HF-Sensor on
 #ifndef HF_POWER_BCU
                 digitalWrite(HF_POWER_PIN, HIGH);
@@ -719,7 +782,7 @@ void Presence::setup()
 
                 // ensure no data lost even for sensor raw data
                 // up to 1288 bytes are send by the sensor at once
-                HF_SERIAL.setFIFOSize(1300);
+                HF_SERIAL.setFIFOSize(13000);
                 break;
             default:
                 break;
@@ -729,7 +792,18 @@ void Presence::setup()
         HF_SERIAL.setTX(HF_UART_TX_PIN);
         pinMode(PRESENCE_LED_PIN, OUTPUT);
         pinMode(MOVE_LED_PIN, OUTPUT);
-        HF_SERIAL.begin(HF_SERIAL_SPEED);
+
+        switch (ParamPM_HfPresence)
+        {
+            case VAL_PM_PS_Hf_MR24xxB1:
+            case VAL_PM_PS_Hf_HLKLD2420:
+                HF_SERIAL.begin(115200);
+                break;
+            case VAL_PM_PS_Hf_XenD107H:
+                HF_SERIAL.begin(921600);
+                break;
+        }
+
 #endif
 
 #ifdef PIR_PIN

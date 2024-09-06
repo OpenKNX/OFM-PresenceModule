@@ -42,6 +42,7 @@
                   <Enumeration Text="HLK-LD2420" Value="3" Id="%ENID%" />
                   <!-- <Enumeration Text="HLK-LD2420 + PIR (digital)" Value="4" Id="%ENID%" /> -->
                   <!-- <Enumeration Text="HLK-LD2420 + PIR (analog)" Value="5" Id="%ENID%" /> -->
+                  <Enumeration Text="XenD107H" Value="6" Id="%ENID%" />
                 </TypeRestriction>
               </ParameterType>
               <ParameterType Id="%AID%_PT-PirSensor" Name="PirSensor">
@@ -428,10 +429,10 @@
                   <when test="2">
                     <ParameterRefRef RefId="%AID%_UP-%TT%00015_R-%TT%0001501" IndentLevel="2" HelpContext="%DOC%" />
                   </when>
-                  <when test="2 3">
+                  <when test="2 3 6">
                     <ParameterRefRef RefId="%AID%_UP-%TT%00016_R-%TT%0001601" IndentLevel="2" />
                   </when>
-                  <when test="3">
+                  <when test="3 6">
                     <ParameterRefRef RefId="%AID%_UP-%TT%00017_R-%TT%0001701" IndentLevel="2" />
                     <ParameterBlock Id="%AID%_PB-nnn" Inline="true" Layout="Grid">
                       <Rows>
@@ -560,7 +561,7 @@
                   <when test="!=0">
                     <ComObjectRefRef RefId="%AID%_O-%TT%00005_R-%TT%0000501" />
                     <choose ParamRefId="%AID%_UP-%TT%00006_R-%TT%0000601">
-                      <when test="2 3">
+                      <when test="2 3 6">
                         <ComObjectRefRef RefId="%AID%_O-%TT%00008_R-%TT%0000801" />
                         <ComObjectRefRef RefId="%AID%_O-%TT%00009_R-%TT%0000901" />
                       </when>
@@ -569,7 +570,7 @@
                         <ComObjectRefRef RefId="%AID%_O-%TT%00006_R-%TT%0000601" />
                         <ComObjectRefRef RefId="%AID%_O-%TT%00007_R-%TT%0000701" />
                       </when>
-                      <when test="3">
+                      <when test="3 6">
                         <ComObjectRefRef RefId="%AID%_O-%TT%00002_R-%TT%0000202" />
                         <ComObjectRefRef RefId="%AID%_O-%TT%00006_R-%TT%0000602" />
                       </when>
