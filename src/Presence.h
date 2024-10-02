@@ -58,6 +58,7 @@ class Presence : public OpenKNX::Module
     const std::string version() override;
     void savePower() override;
     bool restorePower() override;
+    bool processFunctionProperty(uint8_t objectIndex, uint8_t propertyId, uint8_t length, uint8_t *data, uint8_t *resultData, uint8_t &resultLength) override;
 
   private:
     static const uint16_t cCountKoMap = PM_ChannelCount * 6;

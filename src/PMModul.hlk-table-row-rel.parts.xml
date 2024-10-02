@@ -1,0 +1,254 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml-model href="../../../../Organization/knxprod-support/knx_project_20/knx-editor.xsd" type="application/xml" schematypens="http://www.w3.org/2001/XMLSchema"?>
+<KNX xmlns:op="http://github.com/OpenKNX/OpenKNXproducer" xmlns="http://knx.org/xml/project/20" CreatedBy="KNX MT" ToolVersion="5.1.255.16695">
+  <ManufacturerData>
+    <Manufacturer RefId="M-00FA">
+      <ApplicationPrograms>
+        <ApplicationProgram Id="%AID%" ApplicationNumber="110" ApplicationVersion="1" ProgramType="ApplicationProgram" MaskVersion="MV-07B0" Name="WP-PM-Logic" LoadProcedureStyle="MergedProcedure" PeiType="0" DefaultLanguage="de" DynamicTableManagement="false" Linkable="true" MinEtsVersion="4.0">
+          <op:partParams name="HLK-ROW-REL">
+            <!-- this ist just for documentation reasons, as an example for the caller -->
+            <op:param name="%ParamOffset%" value="12" />
+            <op:param name="%PPP%" value="0" />
+            <op:param name="%AbsPPP%" value="0" />
+            <op:param name="%RefPPP%" value="0" />
+            <op:param name="%RowName%" value="HoldDelta" />
+            <op:param name="%RowText%" value="Delta Hold" />
+          </op:partParams>
+          <Static>
+            <Parameters>
+              <!-- HLK-HF-Sensor management (extended steup page) -->
+              <Union SizeInBit="256">
+                <Memory CodeSegment="%AID%_RS-04-00000" Offset="%ParamOffset%" BitOffset="0" />
+                <Parameter Id="%AID%_UP-%TT%99%PPP+00%" Name="%RowName%00" ParameterType="%AID%_PT-dBValueDelta" Offset="0" BitOffset="0" Text="%RowText% 00" Value="0" />
+                <Parameter Id="%AID%_UP-%TT%99%PPP+01%" Name="%RowName%01" ParameterType="%AID%_PT-dBValueDelta" Offset="2" BitOffset="0" Text="%RowText% 01" Value="0" />
+                <Parameter Id="%AID%_UP-%TT%99%PPP+02%" Name="%RowName%02" ParameterType="%AID%_PT-dBValueDelta" Offset="4" BitOffset="0" Text="%RowText% 02" Value="0" />
+                <Parameter Id="%AID%_UP-%TT%99%PPP+03%" Name="%RowName%03" ParameterType="%AID%_PT-dBValueDelta" Offset="6" BitOffset="0" Text="%RowText% 03" Value="0" />
+                <Parameter Id="%AID%_UP-%TT%99%PPP+04%" Name="%RowName%04" ParameterType="%AID%_PT-dBValueDelta" Offset="8" BitOffset="0" Text="%RowText% 04" Value="0" />
+                <Parameter Id="%AID%_UP-%TT%99%PPP+05%" Name="%RowName%05" ParameterType="%AID%_PT-dBValueDelta" Offset="10" BitOffset="0" Text="%RowText% 05" Value="0" />
+                <Parameter Id="%AID%_UP-%TT%99%PPP+06%" Name="%RowName%06" ParameterType="%AID%_PT-dBValueDelta" Offset="12" BitOffset="0" Text="%RowText% 06" Value="0" />
+                <Parameter Id="%AID%_UP-%TT%99%PPP+07%" Name="%RowName%07" ParameterType="%AID%_PT-dBValueDelta" Offset="14" BitOffset="0" Text="%RowText% 07" Value="0" />
+                <Parameter Id="%AID%_UP-%TT%99%PPP+08%" Name="%RowName%08" ParameterType="%AID%_PT-dBValueDelta" Offset="16" BitOffset="0" Text="%RowText% 08" Value="0" />
+                <Parameter Id="%AID%_UP-%TT%99%PPP+09%" Name="%RowName%09" ParameterType="%AID%_PT-dBValueDelta" Offset="18" BitOffset="0" Text="%RowText% 09" Value="0" />
+                <Parameter Id="%AID%_UP-%TT%99%PPP+10%" Name="%RowName%10" ParameterType="%AID%_PT-dBValueDelta" Offset="20" BitOffset="0" Text="%RowText% 10" Value="0" />
+                <Parameter Id="%AID%_UP-%TT%99%PPP+11%" Name="%RowName%11" ParameterType="%AID%_PT-dBValueDelta" Offset="22" BitOffset="0" Text="%RowText% 11" Value="0" />
+                <Parameter Id="%AID%_UP-%TT%99%PPP+12%" Name="%RowName%12" ParameterType="%AID%_PT-dBValueDelta" Offset="24" BitOffset="0" Text="%RowText% 12" Value="0" />
+                <Parameter Id="%AID%_UP-%TT%99%PPP+13%" Name="%RowName%13" ParameterType="%AID%_PT-dBValueDelta" Offset="26" BitOffset="0" Text="%RowText% 13" Value="0" />
+                <Parameter Id="%AID%_UP-%TT%99%PPP+14%" Name="%RowName%14" ParameterType="%AID%_PT-dBValueDelta" Offset="28" BitOffset="0" Text="%RowText% 14" Value="0" />
+                <Parameter Id="%AID%_UP-%TT%99%PPP+15%" Name="%RowName%15" ParameterType="%AID%_PT-dBValueDelta" Offset="30" BitOffset="0" Text="%RowText% 15" Value="0" />
+              </Union>
+            </Parameters>
+            <ParameterRefs>
+              <ParameterRef Id="%AID%_UP-%TT%99%PPP+00%_R-%TT%99%PPP+00%01" RefId="%AID%_UP-%TT%99%PPP+00%" />
+              <ParameterRef Id="%AID%_UP-%TT%99%PPP+01%_R-%TT%99%PPP+01%01" RefId="%AID%_UP-%TT%99%PPP+01%" />
+              <ParameterRef Id="%AID%_UP-%TT%99%PPP+02%_R-%TT%99%PPP+02%01" RefId="%AID%_UP-%TT%99%PPP+02%" />
+              <ParameterRef Id="%AID%_UP-%TT%99%PPP+03%_R-%TT%99%PPP+03%01" RefId="%AID%_UP-%TT%99%PPP+03%" />
+              <ParameterRef Id="%AID%_UP-%TT%99%PPP+04%_R-%TT%99%PPP+04%01" RefId="%AID%_UP-%TT%99%PPP+04%" />
+              <ParameterRef Id="%AID%_UP-%TT%99%PPP+05%_R-%TT%99%PPP+05%01" RefId="%AID%_UP-%TT%99%PPP+05%" />
+              <ParameterRef Id="%AID%_UP-%TT%99%PPP+06%_R-%TT%99%PPP+06%01" RefId="%AID%_UP-%TT%99%PPP+06%" />
+              <ParameterRef Id="%AID%_UP-%TT%99%PPP+07%_R-%TT%99%PPP+07%01" RefId="%AID%_UP-%TT%99%PPP+07%" />
+              <ParameterRef Id="%AID%_UP-%TT%99%PPP+08%_R-%TT%99%PPP+08%01" RefId="%AID%_UP-%TT%99%PPP+08%" />
+              <ParameterRef Id="%AID%_UP-%TT%99%PPP+09%_R-%TT%99%PPP+09%01" RefId="%AID%_UP-%TT%99%PPP+09%" />
+              <ParameterRef Id="%AID%_UP-%TT%99%PPP+10%_R-%TT%99%PPP+10%01" RefId="%AID%_UP-%TT%99%PPP+10%" />
+              <ParameterRef Id="%AID%_UP-%TT%99%PPP+11%_R-%TT%99%PPP+11%01" RefId="%AID%_UP-%TT%99%PPP+11%" />
+              <ParameterRef Id="%AID%_UP-%TT%99%PPP+12%_R-%TT%99%PPP+12%01" RefId="%AID%_UP-%TT%99%PPP+12%" />
+              <ParameterRef Id="%AID%_UP-%TT%99%PPP+13%_R-%TT%99%PPP+13%01" RefId="%AID%_UP-%TT%99%PPP+13%" />
+              <ParameterRef Id="%AID%_UP-%TT%99%PPP+14%_R-%TT%99%PPP+14%01" RefId="%AID%_UP-%TT%99%PPP+14%" />
+              <ParameterRef Id="%AID%_UP-%TT%99%PPP+15%_R-%TT%99%PPP+15%01" RefId="%AID%_UP-%TT%99%PPP+15%" />
+            </ParameterRefs>
+            <ParameterCalculations>
+              <ParameterCalculation Id="%AID%_PC-%TT%99%PPP+00%" Language="JavaScript" Name="%RowName%DeltaCalc00" LRTransformationFunc="PM_hlkDeltaRelToAbs" RLTransformationFunc="PM_hlkDeltaAbsToRel">
+                <LParameters>
+                  <ParameterRefRef RefId="%AID%_UP-%TT%99%PPP+00%_R-%TT%99%PPP+00%01" AliasName="Rel" />
+                </LParameters>
+                <RParameters>
+                  <ParameterRefRef RefId="%AID%_UP-%TT%99%AbsPPP+00%_R-%TT%99%AbsPPP+00%01" AliasName="Abs" />
+                  <ParameterRefRef RefId="%AID%_UP-%TT%99%RefPPP+00%_R-%TT%99%RefPPP+00%01" AliasName="Ref" />
+                </RParameters>
+              </ParameterCalculation>
+              <ParameterCalculation Id="%AID%_PC-%TT%99%PPP+01%" Language="JavaScript" Name="%RowName%DeltaCalc01" LRTransformationFunc="PM_hlkDeltaRelToAbs" RLTransformationFunc="PM_hlkDeltaAbsToRel">
+                <LParameters>
+                  <ParameterRefRef RefId="%AID%_UP-%TT%99%PPP+01%_R-%TT%99%PPP+01%01" AliasName="Rel" />
+                </LParameters>
+                <RParameters>
+                  <ParameterRefRef RefId="%AID%_UP-%TT%99%AbsPPP+01%_R-%TT%99%AbsPPP+01%01" AliasName="Abs" />
+                  <ParameterRefRef RefId="%AID%_UP-%TT%99%RefPPP+01%_R-%TT%99%RefPPP+01%01" AliasName="Ref" />
+                </RParameters>
+              </ParameterCalculation>
+              <ParameterCalculation Id="%AID%_PC-%TT%99%PPP+02%" Language="JavaScript" Name="%RowName%DeltaCalc02" LRTransformationFunc="PM_hlkDeltaRelToAbs" RLTransformationFunc="PM_hlkDeltaAbsToRel">
+                <LParameters>
+                  <ParameterRefRef RefId="%AID%_UP-%TT%99%PPP+02%_R-%TT%99%PPP+02%01" AliasName="Rel" />
+                </LParameters>
+                <RParameters>
+                  <ParameterRefRef RefId="%AID%_UP-%TT%99%AbsPPP+02%_R-%TT%99%AbsPPP+02%01" AliasName="Abs" />
+                  <ParameterRefRef RefId="%AID%_UP-%TT%99%RefPPP+02%_R-%TT%99%RefPPP+02%01" AliasName="Ref" />
+                </RParameters>
+              </ParameterCalculation>
+              <ParameterCalculation Id="%AID%_PC-%TT%99%PPP+03%" Language="JavaScript" Name="%RowName%DeltaCalc03" LRTransformationFunc="PM_hlkDeltaRelToAbs" RLTransformationFunc="PM_hlkDeltaAbsToRel">
+                <LParameters>
+                  <ParameterRefRef RefId="%AID%_UP-%TT%99%PPP+03%_R-%TT%99%PPP+03%01" AliasName="Rel" />
+                </LParameters>
+                <RParameters>
+                  <ParameterRefRef RefId="%AID%_UP-%TT%99%AbsPPP+03%_R-%TT%99%AbsPPP+03%01" AliasName="Abs" />
+                  <ParameterRefRef RefId="%AID%_UP-%TT%99%RefPPP+03%_R-%TT%99%RefPPP+03%01" AliasName="Ref" />
+                </RParameters>
+              </ParameterCalculation>
+              <ParameterCalculation Id="%AID%_PC-%TT%99%PPP+04%" Language="JavaScript" Name="%RowName%DeltaCalc04" LRTransformationFunc="PM_hlkDeltaRelToAbs" RLTransformationFunc="PM_hlkDeltaAbsToRel">
+                <LParameters>
+                  <ParameterRefRef RefId="%AID%_UP-%TT%99%PPP+04%_R-%TT%99%PPP+04%01" AliasName="Rel" />
+                </LParameters>
+                <RParameters>
+                  <ParameterRefRef RefId="%AID%_UP-%TT%99%AbsPPP+04%_R-%TT%99%AbsPPP+04%01" AliasName="Abs" />
+                  <ParameterRefRef RefId="%AID%_UP-%TT%99%RefPPP+04%_R-%TT%99%RefPPP+04%01" AliasName="Ref" />
+                </RParameters>
+              </ParameterCalculation>
+              <ParameterCalculation Id="%AID%_PC-%TT%99%PPP+05%" Language="JavaScript" Name="%RowName%DeltaCalc05" LRTransformationFunc="PM_hlkDeltaRelToAbs" RLTransformationFunc="PM_hlkDeltaAbsToRel">
+                <LParameters>
+                  <ParameterRefRef RefId="%AID%_UP-%TT%99%PPP+05%_R-%TT%99%PPP+05%01" AliasName="Rel" />
+                </LParameters>
+                <RParameters>
+                  <ParameterRefRef RefId="%AID%_UP-%TT%99%AbsPPP+05%_R-%TT%99%AbsPPP+05%01" AliasName="Abs" />
+                  <ParameterRefRef RefId="%AID%_UP-%TT%99%RefPPP+05%_R-%TT%99%RefPPP+05%01" AliasName="Ref" />
+                </RParameters>
+              </ParameterCalculation>
+              <ParameterCalculation Id="%AID%_PC-%TT%99%PPP+06%" Language="JavaScript" Name="%RowName%DeltaCalc06" LRTransformationFunc="PM_hlkDeltaRelToAbs" RLTransformationFunc="PM_hlkDeltaAbsToRel">
+                <LParameters>
+                  <ParameterRefRef RefId="%AID%_UP-%TT%99%PPP+06%_R-%TT%99%PPP+06%01" AliasName="Rel" />
+                </LParameters>
+                <RParameters>
+                  <ParameterRefRef RefId="%AID%_UP-%TT%99%AbsPPP+06%_R-%TT%99%AbsPPP+06%01" AliasName="Abs" />
+                  <ParameterRefRef RefId="%AID%_UP-%TT%99%RefPPP+06%_R-%TT%99%RefPPP+06%01" AliasName="Ref" />
+                </RParameters>
+              </ParameterCalculation>
+              <ParameterCalculation Id="%AID%_PC-%TT%99%PPP+07%" Language="JavaScript" Name="%RowName%DeltaCalc07" LRTransformationFunc="PM_hlkDeltaRelToAbs" RLTransformationFunc="PM_hlkDeltaAbsToRel">
+                <LParameters>
+                  <ParameterRefRef RefId="%AID%_UP-%TT%99%PPP+07%_R-%TT%99%PPP+07%01" AliasName="Rel" />
+                </LParameters>
+                <RParameters>
+                  <ParameterRefRef RefId="%AID%_UP-%TT%99%AbsPPP+07%_R-%TT%99%AbsPPP+07%01" AliasName="Abs" />
+                  <ParameterRefRef RefId="%AID%_UP-%TT%99%RefPPP+07%_R-%TT%99%RefPPP+07%01" AliasName="Ref" />
+                </RParameters>
+              </ParameterCalculation>
+              <ParameterCalculation Id="%AID%_PC-%TT%99%PPP+08%" Language="JavaScript" Name="%RowName%DeltaCalc08" LRTransformationFunc="PM_hlkDeltaRelToAbs" RLTransformationFunc="PM_hlkDeltaAbsToRel">
+                <LParameters>
+                  <ParameterRefRef RefId="%AID%_UP-%TT%99%PPP+08%_R-%TT%99%PPP+08%01" AliasName="Rel" />
+                </LParameters>
+                <RParameters>
+                  <ParameterRefRef RefId="%AID%_UP-%TT%99%AbsPPP+08%_R-%TT%99%AbsPPP+08%01" AliasName="Abs" />
+                  <ParameterRefRef RefId="%AID%_UP-%TT%99%RefPPP+08%_R-%TT%99%RefPPP+08%01" AliasName="Ref" />
+                </RParameters>
+              </ParameterCalculation>
+              <ParameterCalculation Id="%AID%_PC-%TT%99%PPP+09%" Language="JavaScript" Name="%RowName%DeltaCalc09" LRTransformationFunc="PM_hlkDeltaRelToAbs" RLTransformationFunc="PM_hlkDeltaAbsToRel">
+                <LParameters>
+                  <ParameterRefRef RefId="%AID%_UP-%TT%99%PPP+09%_R-%TT%99%PPP+09%01" AliasName="Rel" />
+                </LParameters>
+                <RParameters>
+                  <ParameterRefRef RefId="%AID%_UP-%TT%99%AbsPPP+09%_R-%TT%99%AbsPPP+09%01" AliasName="Abs" />
+                  <ParameterRefRef RefId="%AID%_UP-%TT%99%RefPPP+09%_R-%TT%99%RefPPP+09%01" AliasName="Ref" />
+                </RParameters>
+              </ParameterCalculation>
+              <ParameterCalculation Id="%AID%_PC-%TT%99%PPP+10%" Language="JavaScript" Name="%RowName%DeltaCalc10" LRTransformationFunc="PM_hlkDeltaRelToAbs" RLTransformationFunc="PM_hlkDeltaAbsToRel">
+                <LParameters>
+                  <ParameterRefRef RefId="%AID%_UP-%TT%99%PPP+10%_R-%TT%99%PPP+10%01" AliasName="Rel" />
+                </LParameters>
+                <RParameters>
+                  <ParameterRefRef RefId="%AID%_UP-%TT%99%AbsPPP+10%_R-%TT%99%AbsPPP+10%01" AliasName="Abs" />
+                  <ParameterRefRef RefId="%AID%_UP-%TT%99%RefPPP+10%_R-%TT%99%RefPPP+10%01" AliasName="Ref" />
+                </RParameters>
+              </ParameterCalculation>
+              <ParameterCalculation Id="%AID%_PC-%TT%99%PPP+11%" Language="JavaScript" Name="%RowName%DeltaCalc11" LRTransformationFunc="PM_hlkDeltaRelToAbs" RLTransformationFunc="PM_hlkDeltaAbsToRel">
+                <LParameters>
+                  <ParameterRefRef RefId="%AID%_UP-%TT%99%PPP+11%_R-%TT%99%PPP+11%01" AliasName="Rel" />
+                </LParameters>
+                <RParameters>
+                  <ParameterRefRef RefId="%AID%_UP-%TT%99%AbsPPP+11%_R-%TT%99%AbsPPP+11%01" AliasName="Abs" />
+                  <ParameterRefRef RefId="%AID%_UP-%TT%99%RefPPP+11%_R-%TT%99%RefPPP+11%01" AliasName="Ref" />
+                </RParameters>
+              </ParameterCalculation>
+              <ParameterCalculation Id="%AID%_PC-%TT%99%PPP+12%" Language="JavaScript" Name="%RowName%DeltaCalc12" LRTransformationFunc="PM_hlkDeltaRelToAbs" RLTransformationFunc="PM_hlkDeltaAbsToRel">
+                <LParameters>
+                  <ParameterRefRef RefId="%AID%_UP-%TT%99%PPP+12%_R-%TT%99%PPP+12%01" AliasName="Rel" />
+                </LParameters>
+                <RParameters>
+                  <ParameterRefRef RefId="%AID%_UP-%TT%99%AbsPPP+12%_R-%TT%99%AbsPPP+12%01" AliasName="Abs" />
+                  <ParameterRefRef RefId="%AID%_UP-%TT%99%RefPPP+12%_R-%TT%99%RefPPP+12%01" AliasName="Ref" />
+                </RParameters>
+              </ParameterCalculation>
+              <ParameterCalculation Id="%AID%_PC-%TT%99%PPP+13%" Language="JavaScript" Name="%RowName%DeltaCalc13" LRTransformationFunc="PM_hlkDeltaRelToAbs" RLTransformationFunc="PM_hlkDeltaAbsToRel">
+                <LParameters>
+                  <ParameterRefRef RefId="%AID%_UP-%TT%99%PPP+13%_R-%TT%99%PPP+13%01" AliasName="Rel" />
+                </LParameters>
+                <RParameters>
+                  <ParameterRefRef RefId="%AID%_UP-%TT%99%AbsPPP+13%_R-%TT%99%AbsPPP+13%01" AliasName="Abs" />
+                  <ParameterRefRef RefId="%AID%_UP-%TT%99%RefPPP+13%_R-%TT%99%RefPPP+13%01" AliasName="Ref" />
+                </RParameters>
+              </ParameterCalculation>
+              <ParameterCalculation Id="%AID%_PC-%TT%99%PPP+14%" Language="JavaScript" Name="%RowName%DeltaCalc14" LRTransformationFunc="PM_hlkDeltaRelToAbs" RLTransformationFunc="PM_hlkDeltaAbsToRel">
+                <LParameters>
+                  <ParameterRefRef RefId="%AID%_UP-%TT%99%PPP+14%_R-%TT%99%PPP+14%01" AliasName="Rel" />
+                </LParameters>
+                <RParameters>
+                  <ParameterRefRef RefId="%AID%_UP-%TT%99%AbsPPP+14%_R-%TT%99%AbsPPP+14%01" AliasName="Abs" />
+                  <ParameterRefRef RefId="%AID%_UP-%TT%99%RefPPP+14%_R-%TT%99%RefPPP+14%01" AliasName="Ref" />
+                </RParameters>
+              </ParameterCalculation>
+              <ParameterCalculation Id="%AID%_PC-%TT%99%PPP+15%" Language="JavaScript" Name="%RowName%DeltaCalc15" LRTransformationFunc="PM_hlkDeltaRelToAbs" RLTransformationFunc="PM_hlkDeltaAbsToRel">
+                <LParameters>
+                  <ParameterRefRef RefId="%AID%_UP-%TT%99%PPP+15%_R-%TT%99%PPP+15%01" AliasName="Rel" />
+                </LParameters>
+                <RParameters>
+                  <ParameterRefRef RefId="%AID%_UP-%TT%99%AbsPPP+15%_R-%TT%99%AbsPPP+15%01" AliasName="Abs" />
+                  <ParameterRefRef RefId="%AID%_UP-%TT%99%RefPPP+15%_R-%TT%99%RefPPP+15%01" AliasName="Ref" />
+                </RParameters>
+              </ParameterCalculation>
+            </ParameterCalculations>
+          </Static>
+          <Dynamic>
+            <ChannelIndependentBlock>
+              <ParameterBlock Id="%AID%_PB-nnn" Inline="true" Layout="Grid" >
+                <Rows>
+                  <Row Id="%AID%_PB-nnn_R-1" />
+                </Rows>
+                <Columns>
+                  <Column Id="%AID%_PB-nnn_C-1"  Width="%PM_ColWidthHlkDescription%" />
+                  <Column Id="%AID%_PB-nnn_C-2"  Width="%PM_ColWidthHlkCell%" />
+                  <Column Id="%AID%_PB-nnn_C-3"  Width="%PM_ColWidthHlkCell%" />
+                  <Column Id="%AID%_PB-nnn_C-4"  Width="%PM_ColWidthHlkCell%" />
+                  <Column Id="%AID%_PB-nnn_C-5"  Width="%PM_ColWidthHlkCell%" />
+                  <Column Id="%AID%_PB-nnn_C-6"  Width="%PM_ColWidthHlkCell%" />
+                  <Column Id="%AID%_PB-nnn_C-7"  Width="%PM_ColWidthHlkCell%" />
+                  <Column Id="%AID%_PB-nnn_C-8"  Width="%PM_ColWidthHlkCell%" />
+                  <Column Id="%AID%_PB-nnn_C-9"  Width="%PM_ColWidthHlkCell%" />
+                  <Column Id="%AID%_PB-nnn_C-10" Width="%PM_ColWidthHlkCell%" />
+                  <Column Id="%AID%_PB-nnn_C-11" Width="%PM_ColWidthHlkCell%" />
+                  <Column Id="%AID%_PB-nnn_C-12" Width="%PM_ColWidthHlkCell%" />
+                  <Column Id="%AID%_PB-nnn_C-13" Width="%PM_ColWidthHlkCell%" />
+                  <Column Id="%AID%_PB-nnn_C-14" Width="%PM_ColWidthHlkCell%" />
+                  <Column Id="%AID%_PB-nnn_C-15" Width="%PM_ColWidthHlkCell%" />
+                  <Column Id="%AID%_PB-nnn_C-16" Width="%PM_ColWidthHlkCell%" />
+                  <Column Id="%AID%_PB-nnn_C-17" Width="%PM_ColWidthHlkCell%" />
+                </Columns>
+                <ParameterSeparator Id="%AID%_PS-nnn" Text="%RowText%" Cell="1,1" />
+                <ParameterRefRef RefId="%AID%_UP-%TT%99%PPP+00%_R-%TT%99%PPP+00%01" Cell="1,2" />
+                <ParameterRefRef RefId="%AID%_UP-%TT%99%PPP+01%_R-%TT%99%PPP+01%01" Cell="1,3" />
+                <ParameterRefRef RefId="%AID%_UP-%TT%99%PPP+02%_R-%TT%99%PPP+02%01" Cell="1,4" />
+                <ParameterRefRef RefId="%AID%_UP-%TT%99%PPP+03%_R-%TT%99%PPP+03%01" Cell="1,5" />
+                <ParameterRefRef RefId="%AID%_UP-%TT%99%PPP+04%_R-%TT%99%PPP+04%01" Cell="1,6" />
+                <ParameterRefRef RefId="%AID%_UP-%TT%99%PPP+05%_R-%TT%99%PPP+05%01" Cell="1,7" />
+                <ParameterRefRef RefId="%AID%_UP-%TT%99%PPP+06%_R-%TT%99%PPP+06%01" Cell="1,8" />
+                <ParameterRefRef RefId="%AID%_UP-%TT%99%PPP+07%_R-%TT%99%PPP+07%01" Cell="1,9" />
+                <ParameterRefRef RefId="%AID%_UP-%TT%99%PPP+08%_R-%TT%99%PPP+08%01" Cell="1,10" />
+                <ParameterRefRef RefId="%AID%_UP-%TT%99%PPP+09%_R-%TT%99%PPP+09%01" Cell="1,11" />
+                <ParameterRefRef RefId="%AID%_UP-%TT%99%PPP+10%_R-%TT%99%PPP+10%01" Cell="1,12" />
+                <ParameterRefRef RefId="%AID%_UP-%TT%99%PPP+11%_R-%TT%99%PPP+11%01" Cell="1,13" />
+                <ParameterRefRef RefId="%AID%_UP-%TT%99%PPP+12%_R-%TT%99%PPP+12%01" Cell="1,14" />
+                <ParameterRefRef RefId="%AID%_UP-%TT%99%PPP+13%_R-%TT%99%PPP+13%01" Cell="1,15" />
+                <ParameterRefRef RefId="%AID%_UP-%TT%99%PPP+14%_R-%TT%99%PPP+14%01" Cell="1,16" />
+                <ParameterRefRef RefId="%AID%_UP-%TT%99%PPP+15%_R-%TT%99%PPP+15%01" Cell="1,17" />
+              </ParameterBlock>
+            </ChannelIndependentBlock>
+          </Dynamic>
+        </ApplicationProgram>
+      </ApplicationPrograms>
+    </Manufacturer>
+  </ManufacturerData>
+</KNX>

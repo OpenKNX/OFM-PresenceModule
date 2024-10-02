@@ -1,0 +1,78 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml-model href="../../../../Organization/knxprod-support/knx_project_20/knx-editor.xsd" type="application/xml" schematypens="http://www.w3.org/2001/XMLSchema"?>
+<KNX xmlns:op="http://github.com/OpenKNX/OpenKNXproducer" xmlns="http://knx.org/xml/project/20" CreatedBy="KNX MT" ToolVersion="5.1.255.16695">
+  <ManufacturerData>
+    <Manufacturer RefId="M-00FA">
+      <ApplicationPrograms>
+        <ApplicationProgram Id="%AID%" ApplicationNumber="110" ApplicationVersion="1" ProgramType="ApplicationProgram" MaskVersion="MV-07B0" Name="WP-PM-Logic" LoadProcedureStyle="MergedProcedure" PeiType="0" DefaultLanguage="de" DynamicTableManagement="false" Linkable="true" MinEtsVersion="4.0">
+          <op:partParams name="HLK-MEMORY">
+            <!-- this ist just for documentation reasons, as an example for the caller -->
+            <op:param name="%PPP%" value="0" />
+            <op:param name="%MemName%" value="M1HoldDelta" />
+          </op:partParams>
+          <Static>
+            <Parameters>
+              <!-- HLK-HF-Sensor management (memory) -->
+              <Parameter Id="%AID%_P-%TT%99%PPP+00%" Name="%MemName%00" ParameterType="%AID%_PT-dBValueDelta" Text="%MemName% 00" Value="0" Access="None" />
+              <Parameter Id="%AID%_P-%TT%99%PPP+01%" Name="%MemName%01" ParameterType="%AID%_PT-dBValueDelta" Text="%MemName% 01" Value="0" Access="None" />
+              <Parameter Id="%AID%_P-%TT%99%PPP+02%" Name="%MemName%02" ParameterType="%AID%_PT-dBValueDelta" Text="%MemName% 02" Value="0" Access="None" />
+              <Parameter Id="%AID%_P-%TT%99%PPP+03%" Name="%MemName%03" ParameterType="%AID%_PT-dBValueDelta" Text="%MemName% 03" Value="0" Access="None" />
+              <Parameter Id="%AID%_P-%TT%99%PPP+04%" Name="%MemName%04" ParameterType="%AID%_PT-dBValueDelta" Text="%MemName% 04" Value="0" Access="None" />
+              <Parameter Id="%AID%_P-%TT%99%PPP+05%" Name="%MemName%05" ParameterType="%AID%_PT-dBValueDelta" Text="%MemName% 05" Value="0" Access="None" />
+              <Parameter Id="%AID%_P-%TT%99%PPP+06%" Name="%MemName%06" ParameterType="%AID%_PT-dBValueDelta" Text="%MemName% 06" Value="0" Access="None" />
+              <Parameter Id="%AID%_P-%TT%99%PPP+07%" Name="%MemName%07" ParameterType="%AID%_PT-dBValueDelta" Text="%MemName% 07" Value="0" Access="None" />
+              <Parameter Id="%AID%_P-%TT%99%PPP+08%" Name="%MemName%08" ParameterType="%AID%_PT-dBValueDelta" Text="%MemName% 08" Value="0" Access="None" />
+              <Parameter Id="%AID%_P-%TT%99%PPP+09%" Name="%MemName%09" ParameterType="%AID%_PT-dBValueDelta" Text="%MemName% 09" Value="0" Access="None" />
+              <Parameter Id="%AID%_P-%TT%99%PPP+10%" Name="%MemName%10" ParameterType="%AID%_PT-dBValueDelta" Text="%MemName% 10" Value="0" Access="None" />
+              <Parameter Id="%AID%_P-%TT%99%PPP+11%" Name="%MemName%11" ParameterType="%AID%_PT-dBValueDelta" Text="%MemName% 11" Value="0" Access="None" />
+              <Parameter Id="%AID%_P-%TT%99%PPP+12%" Name="%MemName%12" ParameterType="%AID%_PT-dBValueDelta" Text="%MemName% 12" Value="0" Access="None" />
+              <Parameter Id="%AID%_P-%TT%99%PPP+13%" Name="%MemName%13" ParameterType="%AID%_PT-dBValueDelta" Text="%MemName% 13" Value="0" Access="None" />
+              <Parameter Id="%AID%_P-%TT%99%PPP+14%" Name="%MemName%14" ParameterType="%AID%_PT-dBValueDelta" Text="%MemName% 14" Value="0" Access="None" />
+              <Parameter Id="%AID%_P-%TT%99%PPP+15%" Name="%MemName%15" ParameterType="%AID%_PT-dBValueDelta" Text="%MemName% 15" Value="0" Access="None" />
+            </Parameters>
+            <ParameterRefs>
+              <ParameterRef Id="%AID%_P-%TT%99%PPP+00%_R-%TT%99%PPP+00%01" RefId="%AID%_P-%TT%99%PPP+00%" />
+              <ParameterRef Id="%AID%_P-%TT%99%PPP+01%_R-%TT%99%PPP+01%01" RefId="%AID%_P-%TT%99%PPP+01%" />
+              <ParameterRef Id="%AID%_P-%TT%99%PPP+02%_R-%TT%99%PPP+02%01" RefId="%AID%_P-%TT%99%PPP+02%" />
+              <ParameterRef Id="%AID%_P-%TT%99%PPP+03%_R-%TT%99%PPP+03%01" RefId="%AID%_P-%TT%99%PPP+03%" />
+              <ParameterRef Id="%AID%_P-%TT%99%PPP+04%_R-%TT%99%PPP+04%01" RefId="%AID%_P-%TT%99%PPP+04%" />
+              <ParameterRef Id="%AID%_P-%TT%99%PPP+05%_R-%TT%99%PPP+05%01" RefId="%AID%_P-%TT%99%PPP+05%" />
+              <ParameterRef Id="%AID%_P-%TT%99%PPP+06%_R-%TT%99%PPP+06%01" RefId="%AID%_P-%TT%99%PPP+06%" />
+              <ParameterRef Id="%AID%_P-%TT%99%PPP+07%_R-%TT%99%PPP+07%01" RefId="%AID%_P-%TT%99%PPP+07%" />
+              <ParameterRef Id="%AID%_P-%TT%99%PPP+08%_R-%TT%99%PPP+08%01" RefId="%AID%_P-%TT%99%PPP+08%" />
+              <ParameterRef Id="%AID%_P-%TT%99%PPP+09%_R-%TT%99%PPP+09%01" RefId="%AID%_P-%TT%99%PPP+09%" />
+              <ParameterRef Id="%AID%_P-%TT%99%PPP+10%_R-%TT%99%PPP+10%01" RefId="%AID%_P-%TT%99%PPP+10%" />
+              <ParameterRef Id="%AID%_P-%TT%99%PPP+11%_R-%TT%99%PPP+11%01" RefId="%AID%_P-%TT%99%PPP+11%" />
+              <ParameterRef Id="%AID%_P-%TT%99%PPP+12%_R-%TT%99%PPP+12%01" RefId="%AID%_P-%TT%99%PPP+12%" />
+              <ParameterRef Id="%AID%_P-%TT%99%PPP+13%_R-%TT%99%PPP+13%01" RefId="%AID%_P-%TT%99%PPP+13%" />
+              <ParameterRef Id="%AID%_P-%TT%99%PPP+14%_R-%TT%99%PPP+14%01" RefId="%AID%_P-%TT%99%PPP+14%" />
+              <ParameterRef Id="%AID%_P-%TT%99%PPP+15%_R-%TT%99%PPP+15%01" RefId="%AID%_P-%TT%99%PPP+15%" />
+            </ParameterRefs>
+          </Static>
+          <Dynamic>
+            <ChannelIndependentBlock>
+              <ParameterBlock Id="%AID%_PB-nnn">
+                <ParameterRefRef RefId="%AID%_P-%TT%99%PPP+00%_R-%TT%99%PPP+00%01" Cell="1,2" />
+                <ParameterRefRef RefId="%AID%_P-%TT%99%PPP+01%_R-%TT%99%PPP+01%01" Cell="1,3" />
+                <ParameterRefRef RefId="%AID%_P-%TT%99%PPP+02%_R-%TT%99%PPP+02%01" Cell="1,4" />
+                <ParameterRefRef RefId="%AID%_P-%TT%99%PPP+03%_R-%TT%99%PPP+03%01" Cell="1,5" />
+                <ParameterRefRef RefId="%AID%_P-%TT%99%PPP+04%_R-%TT%99%PPP+04%01" Cell="1,6" />
+                <ParameterRefRef RefId="%AID%_P-%TT%99%PPP+05%_R-%TT%99%PPP+05%01" Cell="1,7" />
+                <ParameterRefRef RefId="%AID%_P-%TT%99%PPP+06%_R-%TT%99%PPP+06%01" Cell="1,8" />
+                <ParameterRefRef RefId="%AID%_P-%TT%99%PPP+07%_R-%TT%99%PPP+07%01" Cell="1,9" />
+                <ParameterRefRef RefId="%AID%_P-%TT%99%PPP+08%_R-%TT%99%PPP+08%01" Cell="1,10" />
+                <ParameterRefRef RefId="%AID%_P-%TT%99%PPP+09%_R-%TT%99%PPP+09%01" Cell="1,11" />
+                <ParameterRefRef RefId="%AID%_P-%TT%99%PPP+10%_R-%TT%99%PPP+10%01" Cell="1,12" />
+                <ParameterRefRef RefId="%AID%_P-%TT%99%PPP+11%_R-%TT%99%PPP+11%01" Cell="1,13" />
+                <ParameterRefRef RefId="%AID%_P-%TT%99%PPP+12%_R-%TT%99%PPP+12%01" Cell="1,14" />
+                <ParameterRefRef RefId="%AID%_P-%TT%99%PPP+13%_R-%TT%99%PPP+13%01" Cell="1,15" />
+                <ParameterRefRef RefId="%AID%_P-%TT%99%PPP+14%_R-%TT%99%PPP+14%01" Cell="1,16" />
+                <ParameterRefRef RefId="%AID%_P-%TT%99%PPP+15%_R-%TT%99%PPP+15%01" Cell="1,17" />
+              </ParameterBlock>
+            </ChannelIndependentBlock>
+          </Dynamic>
+        </ApplicationProgram>
+      </ApplicationPrograms>
+    </Manufacturer>
+  </ManufacturerData>
+</KNX>

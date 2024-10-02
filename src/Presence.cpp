@@ -755,3 +755,23 @@ void Presence::setup()
         startSensors();
     }
 }
+
+bool Presence::processFunctionProperty(uint8_t objectIndex, uint8_t propertyId, uint8_t length, uint8_t *data, uint8_t *resultData, uint8_t &resultLength)
+{
+    if (!knx.configured() || objectIndex != 160 || propertyId != 6)
+        return false;
+
+    switch (data[0])
+    {
+#ifdef HF_POWER_PIN
+        case 1:
+        case 2:
+        case 3:
+            if (ParamPM_HfPresence == VAL_PM_PS_Hf_HLKLD2420)
+                return static_cast<SensorHLKLD2420 *>(mPresenceSensor)->handleFunctionProperty(data, resultData, resultLength);
+#endif
+        default:
+            return false;
+    }
+    return false;
+}
