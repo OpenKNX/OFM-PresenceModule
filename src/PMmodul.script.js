@@ -29,9 +29,13 @@ function PM_getCalibrationData(device, online, progress, context) {
     if (context.dataKind < 1 && context.dataKind > 8) return;
 
     progress.setText("PM: Lese Daten zu '" + PM_dataKindText[context.dataKind] + "' ...");
+    progress.setProgress(20);
     online.connect();
+    progress.setProgress(50);
     PM_processCalibrationData(device, online, progress, context.dataKind, context.parName);
+    progress.setProgress(80);
     online.disconnect();
+    progress.setProgress(100);
 }
 
 function PM_getCalibrationDataSet(device, online, progress, context) {
@@ -165,7 +169,6 @@ function PM_sleep(milliseconds) {
     while (currentTime + milliseconds >= new Date().getTime()) {
     }
 }
-
 function PM_startCalibration(device, online, progress, context) {
     // Start calibration, wait until finished and get data afterwards
     // context.dataKind = 1: Calibration
@@ -201,3 +204,83 @@ function PM_startCalibration(device, online, progress, context) {
     online.disconnect();
 
 }
+
+var PM_log10Values = [0.0, 0.0, 0.30102999566398119521373889472449, 0.47712125471966243729502790325512, 0.60205999132796239042747778944899, 0.69897000433601880478626110527551, 0.77815125038364363250876679797961, 0.84509804001425683071221625859264, 0.90308998699194358564121668417348, 0.95424250943932487459005580651023, 1.0];
+
+function PM_executeFunction(device, online, progress, context) {
+    // we derive the correct function from according parameters
+    var parFunction = device.getParameterByName("PM_HlkFormula");
+    var parTarget = device.getParameterByName("PM_HlkFormulaTarget");
+    var parSensitivity = device.getParameterByName("PM_HlkFormulaSensitivity");
+    var parOffset = device.getParameterByName("PM_HlkFormulaOffset");
+    var result;
+    var paramSourceName;
+    var parGridCell;
+    var paramTargetName;
+
+    info("parFunction: " + parFunction.value + ", parTarget: " + parTarget.value + ", parSensitivity: " + parSensitivity.value + ", parOffset: " + parOffset.value);
+    for (var i = 0; i < 16; i++) {
+        switch (parFunction.value) {
+            case 1:
+                // Standardformel
+                if (parTarget.value == 0) {
+                    // standard formula for trigger
+                    result = 6 / PM_log10Values[parSensitivity.value / 10] * 100;
+                } else {
+                    // standard formula for hold
+                    result = (3 * (1 / PM_log10Values[parSensitivity.value / 10]) - 1.5) * 100;
+                }
+                paramTargetName = "Delta";
+                break;
+            case 2:
+                // Aktuelle Standardabweichung + Offset
+                paramSourceName = PM_calcParamName("CurStd", i);
+                paramTargetName = "Delta";
+                break;
+            case 3:
+                // Aktueller Max + Offset
+                paramSourceName = PM_calcParamName("CurMax", i);
+                paramTargetName = "Abs";
+                break;
+            case 4:
+                // Kalibrierung-Standardabweichung + Offset
+                paramSourceName = PM_calcParamName("CalStd", i);
+                paramTargetName = "Delta";
+                break;
+            case 5:
+                // Kalibrierung-Max + Offset
+                paramSourceName = PM_calcParamName("CalMax", i);
+                paramTargetName = "Abs";
+                break;
+            case 6:
+                // Aktueller Range + Offset
+                paramSourceName = "Offset";
+                paramTargetName = "Delta";
+                result = parOffset.value;
+                break;
+            case 7:
+                // Kalibrierung-Range + Offset
+                paramSourceName = "Offset";
+                paramTargetName = "Delta";
+                result = parOffset.value;
+                break;
+            default:
+                break;
+        }
+        if (parFunction.value > 1 && parFunction.value < 6) {
+            parGridCell = device.getParameterByName(paramSourceName);
+            result = parGridCell.value + parOffset.value;
+        }
+        if (parTarget.value == 0) {
+            // trigger
+            paramTargetName = "Trigger" + paramTargetName;
+        } else {
+            // hold
+            paramTargetName = "Hold" + paramTargetName;
+        }
+        paramTargetName = PM_calcParamName(paramTargetName, i);
+        info("Using " + paramSourceName + " to calculate " + paramTargetName + " with value " + result);
+        device.getParameterByName(paramTargetName).value = result;
+    }
+}
+

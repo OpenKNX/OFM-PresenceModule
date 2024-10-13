@@ -302,6 +302,35 @@
                   <Enumeration Text="6 - Hotelzimmer (Wandmontage, 66 m²)" Value="7" Id="%ENID%" />
                 </TypeRestriction>
               </ParameterType>
+              <ParameterType Id="%AID%_PT-HlkSettings" Name="HlkSettings">
+                <TypeRestriction Base="Value" SizeInBit="1" UIHint="DropDown">
+                  <Enumeration Text="Einfach - über Empfindlichkeit" Value="0" Id="%ENID%" />
+                  <Enumeration Text="Detailiert - über Erweitert-Seite" Value="1" Id="%ENID%" />
+                </TypeRestriction>
+              </ParameterType>
+              <ParameterType Id="%AID%_PT-HlkFormula" Name="HlkFormula">
+                <TypeRestriction Base="Value" SizeInBit="4" UIHint="DropDown">
+                  <Enumeration Text="Standardformel und der Empfindlichkeit" Value="1" Id="%ENID%" />
+                  <Enumeration Text="Aktueller Standardabweichung + Offset" Value="2" Id="%ENID%" />
+                  <Enumeration Text="Aktuellem Maximalwert + Offset" Value="3" Id="%ENID%" />
+                  <Enumeration Text="Aktuellem Range + Offset" Value="6" Id="%ENID%" />
+                  <Enumeration Text="Kalibrier-Standardabweichung + Offset" Value="4" Id="%ENID%" />
+                  <Enumeration Text="Kalibrier-Maximalwert + Offset" Value="5" Id="%ENID%" />
+                  <Enumeration Text="Kalibrier-Range + Offset" Value="7" Id="%ENID%" />
+                </TypeRestriction>
+              </ParameterType>
+              <ParameterType Id="%AID%_PT-HlkFormulaTarget" Name="HlkFormulaTarget">
+                <TypeRestriction Base="Value" SizeInBit="1" UIHint="DropDown">
+                  <Enumeration Text="Trigger mit" Value="0" Id="%ENID%" />
+                  <Enumeration Text="Halten mit" Value="1" Id="%ENID%" />
+                </TypeRestriction>
+              </ParameterType>
+              <ParameterType Id="%AID%_PT-HlkFormulaOffset" Name="HlkFormulaOffset">
+                <TypeNumber SizeInBit="16" Type="signedInt" minInclusive="-9600" maxInclusive="9600" />
+              </ParameterType>
+              <ParameterType Id="%AID%_PT-Sensitivity2" Name="Sensitivity2">
+                <TypeNumber SizeInBit="8" Type="unsignedInt" minInclusive="10" maxInclusive="100" Increment="10" />
+              </ParameterType>
               <ParameterType Id="%AID%_PT-Sensitivity" Name="Sensitivity">
                 <TypeRestriction Base="Value" SizeInBit="4">
                   <Enumeration Text="Letzter gesetzter Wert" Value="0" Id="%ENID%" />
@@ -340,6 +369,7 @@
                 <Parameter Id="%AID%_UP-%TT%00021" Name="PirSensitivity" ParameterType="%AID%_PT-Sensitivity" Offset="1" BitOffset="4" Text="PIR-Empfindlichkeit" Value="0" />
                 <Parameter Id="%AID%_UP-%TT%00006" Name="HfPresence" Offset="2" BitOffset="0" ParameterType="%AID%_PT-HfSensor" Text="HF-Sensor" Value="0" />
                 <Parameter Id="%AID%_UP-%TT%00015" Name="HfScenario" ParameterType="%AID%_PT-HfScenario" Offset="2" BitOffset="3" Text="Detektions-Szenario" Value="0" />
+                <Parameter Id="%AID%_UP-%TT%00025" Name="HlkSettings" ParameterType="%AID%_PT-HlkSettings" Offset="2" BitOffset="3" Text="HF-Einstellungen" Value="0" />
                 <Parameter Id="%AID%_UP-%TT%00007" Name="HWLux" Offset="2" BitOffset="6" ParameterType="%AID%_PT-LuxSensor" Text="Helligkeits-Sensor" Value="0" />
                 <Parameter Id="%AID%_UP-%TT%00016" Name="HfSensitivity" ParameterType="%AID%_PT-Sensitivity" Offset="3" BitOffset="0" Text="HF-Empfindlichkeit" Value="0" />
                 <Parameter Id="%AID%_UP-%TT%00003" Name="SendRAW" Offset="3" BitOffset="4" ParameterType="%AID%_PT-OnOffYesNo" Text="Präsenz-Rohdaten auf den Bus senden?" Value="0" />
@@ -377,6 +407,10 @@
               <Parameter Id="%AID%_P-%TT%99905" Name="M2Name" ParameterType="%AID%_PT-Text40Byte" Text="Name von Zwischenspeicher M2" Value="M2" />
               <Parameter Id="%AID%_P-%TT%99906" Name="M2Trigger" ParameterType="%AID%_PT-CheckBox" Text="M2 enthält Trigger-Daten" Value="0" Access="Read" />
               <Parameter Id="%AID%_P-%TT%99907" Name="M2Hold" ParameterType="%AID%_PT-CheckBox" Text="M2 enthält Halten-Daten" Value="0" Access="Read" />
+              <Parameter Id="%AID%_P-%TT%99920" Name="HlkFormula" ParameterType="%AID%_PT-HlkFormula" Text="Formel" Value="1" />
+              <Parameter Id="%AID%_P-%TT%99921" Name="HlkFormulaTarget" ParameterType="%AID%_PT-HlkFormulaTarget" Text="Ziel" Value="0" />
+              <Parameter Id="%AID%_P-%TT%99922" Name="HlkFormulaSensitivity" ParameterType="%AID%_PT-Sensitivity2" Text="Empfindlichkeit" Value="100" />
+              <Parameter Id="%AID%_P-%TT%99923" Name="HlkFormulaOffset" ParameterType="%AID%_PT-HlkFormulaOffset" Text="Offset" Value="100" />
             </Parameters>
             <ParameterRefs>
               <!-- <ParameterRef Id="%AID%_P-%TT%00001_R-%TT%%AID%_UP-%TT%000210000101" RefId="%AID%_P-%TT%00001" /> -->
@@ -404,6 +438,7 @@
               <ParameterRef Id="%AID%_UP-%TT%00022_R-%TT%0002201" RefId="%AID%_UP-%TT%00022" />
               <ParameterRef Id="%AID%_P-%TT%00023_R-%TT%0002301" RefId="%AID%_P-%TT%00023" />
               <ParameterRef Id="%AID%_P-%TT%00024_R-%TT%0002401" RefId="%AID%_P-%TT%00024" />
+              <ParameterRef Id="%AID%_UP-%TT%00025_R-%TT%0002501" RefId="%AID%_UP-%TT%00025" />
               <!-- HLK-HF-Sensor management is using %AID%_UP-%TT%99000 and up -->
               <op:usePart name="HLK-ROW-ABS" xpath="//Static/ParameterRefs/*" />
               <op:usePart name="HLK-ROW-REL" xpath="//Static/ParameterRefs/*" />
@@ -414,6 +449,10 @@
               <ParameterRef Id="%AID%_P-%TT%99905_R-%TT%9990501" RefId="%AID%_P-%TT%99905" />
               <ParameterRef Id="%AID%_P-%TT%99906_R-%TT%9990601" RefId="%AID%_P-%TT%99906" />
               <ParameterRef Id="%AID%_P-%TT%99907_R-%TT%9990701" RefId="%AID%_P-%TT%99907" />
+              <ParameterRef Id="%AID%_P-%TT%99920_R-%TT%9992001" RefId="%AID%_P-%TT%99920" />
+              <ParameterRef Id="%AID%_P-%TT%99921_R-%TT%9992101" RefId="%AID%_P-%TT%99921" />
+              <ParameterRef Id="%AID%_P-%TT%99922_R-%TT%9992201" RefId="%AID%_P-%TT%99922" />
+              <ParameterRef Id="%AID%_P-%TT%99923_R-%TT%9992301" RefId="%AID%_P-%TT%99923" />
             </ParameterRefs>
             <ParameterCalculations>
               <ParameterCalculation Id="%AID%_PC-%TT%00001" Language="JavaScript" Name="DistanceToMeterMin" LRTransformationFunc="PM_distanceToMeter" RLTransformationFunc="PM_meterToDistance">
@@ -486,12 +525,32 @@
                 <ParameterRefRef RefId="%AID%_UP-%TT%00006_R-%TT%0000601" IndentLevel="1" HelpContext="%DOC%" />
                 <choose ParamRefId="%AID%_UP-%TT%00006_R-%TT%0000601">
                   <when test="2">
+                    <!-- Masifi-Sensor -->
                     <ParameterRefRef RefId="%AID%_UP-%TT%00015_R-%TT%0001501" IndentLevel="2" HelpContext="%DOC%" />
-                  </when>
-                  <when test="2 3">
                     <ParameterRefRef RefId="%AID%_UP-%TT%00016_R-%TT%0001601" IndentLevel="2" />
                   </when>
                   <when test="3">
+                    <!-- HLK-LD2420 -->
+                    <ParameterRefRef RefId="%AID%_UP-%TT%00025_R-%TT%0002501" IndentLevel="2" />
+                    <choose ParamRefId="%AID%_UP-%TT%00025_R-%TT%0002501">
+                      <when test="0">
+                        <!-- Empfindlichkeit und Kalibrieren nur im Einfach-Modus -->
+                        <ParameterBlock Id="%AID%_PB-nnn" Inline="true" Layout="Grid">
+                          <Rows>
+                            <Row Id="%AID%_PB-nnn_R-1" />
+                          </Rows>
+                          <Columns>
+                            <Column Id="%AID%_PB-nnn_C-1" Width="4%" />
+                            <Column Id="%AID%_PB-nnn_C-2" Width="41%" />
+                            <Column Id="%AID%_PB-nnn_C-3" Width="33%" />
+                            <Column Id="%AID%_PB-nnn_C-4" Width="24%" />
+                          </Columns>
+                          <ParameterSeparator Id="%AID%_PS-nnn" Text="HF-Empfindlichkeit" Cell="1,2"/>
+                          <ParameterRefRef RefId="%AID%_UP-%TT%00016_R-%TT%0001601" Cell="1,3" />
+                          <Button Id="%AID%_B-%TT%00003" Text="Sensor kalibrieren" Cell="1,4" EventHandler="PM_startCalibration" EventHandlerParameters="{ &quot;dataKind&quot;:1, &quot;parName&quot;:&quot;Cal&quot; }" EventHandlerOnline="ConnectionOriented" />
+                        </ParameterBlock>
+                      </when>
+                    </choose>
                     <ParameterRefRef RefId="%AID%_UP-%TT%00017_R-%TT%0001701" IndentLevel="2" />
                     <ParameterBlock Id="%AID%_PB-nnn" Inline="true" Layout="Grid">
                       <Rows>
@@ -621,17 +680,22 @@
                     <ComObjectRefRef RefId="%AID%_O-%TT%00005_R-%TT%0000501" />
                     <choose ParamRefId="%AID%_UP-%TT%00006_R-%TT%0000601">
                       <when test="2 3">
-                        <ComObjectRefRef RefId="%AID%_O-%TT%00008_R-%TT%0000801" />
                         <ComObjectRefRef RefId="%AID%_O-%TT%00009_R-%TT%0000901" />
                       </when>
                       <when test="2">
                         <ComObjectRefRef RefId="%AID%_O-%TT%00002_R-%TT%0000201" />
                         <ComObjectRefRef RefId="%AID%_O-%TT%00006_R-%TT%0000601" />
                         <ComObjectRefRef RefId="%AID%_O-%TT%00007_R-%TT%0000701" />
+                        <ComObjectRefRef RefId="%AID%_O-%TT%00008_R-%TT%0000801" />
                       </when>
                       <when test="3">
                         <ComObjectRefRef RefId="%AID%_O-%TT%00002_R-%TT%0000202" />
                         <ComObjectRefRef RefId="%AID%_O-%TT%00006_R-%TT%0000602" />
+                        <choose ParamRefId="%AID%_UP-%TT%00025_R-%TT%0002501">
+                          <when test="0">
+                            <ComObjectRefRef RefId="%AID%_O-%TT%00008_R-%TT%0000801" />
+                          </when>
+                        </choose>
                       </when>
                     </choose>
                     <choose ParamRefId="%AID%_UP-%TT%00022_R-%TT%0002201">
@@ -641,11 +705,12 @@
                     </choose>
                   </when>
                 </choose>
-                <choose ParamRefId="%AID%_UP-%TT%00006_R-%TT%0000601">
-                  <when test="3">
-                    <ParameterBlock Id="%AID%_PB-nnn" Name="ExtendedParameters" Text="Erweitert">
+                <choose ParamRefId="%AID%_UP-%TT%00025_R-%TT%0002501">
+                  <when test="1">
+                    <ParameterBlock Id="%AID%_PB-nnn" Name="ExtendedParameters" Text="Erweitert" Icon="format-list-text">
                       <ParameterSeparator Id="%AID%_PS-nnn" Text="Erweiterte Einstellungen für den HLK2420-HF-Sensor" UIHint="Headline" />
                       <ParameterSeparator Id="%AID%_PS-nnn" Text="In diesem Bereich können detaillierte Einstellungen für den HLK-HF-Sensor vorgenommen werden. Es gibt 2 benennbare Zwischenspeicher M1 und M2, in den Einstellungen zwischengespeichert werden können." />
+                      <!-- Memory section -->
                       <op:usePart name="HLK-MEMORY" xpath="//Dynamic/ChannelIndependentBlock/ParameterBlock/*" />
                       <ParameterBlock Id="%AID%_PB-nnn" Inline="true" Layout="Grid">
                         <Rows>
@@ -722,7 +787,7 @@
                         </choose>
                         <choose ParamRefId="%AID%_P-%TT%99907_R-%TT%9990701">
                           <when test="0">
-                            <ParameterSeparator Id="%AID%_PS-nnn" Text="_" Cell="3,4" UIHint="Headline" Icon="checkbox-blank-outline"  />
+                            <ParameterSeparator Id="%AID%_PS-nnn" Text="_" Cell="3,4" UIHint="Headline" Icon="checkbox-blank-outline" />
                           </when>
                           <when test="1">
                             <ParameterSeparator Id="%AID%_PS-nnn" Text="X" Cell="3,4" UIHint="Headline" Icon="checkbox-outline" />
@@ -733,8 +798,40 @@
                         </choose>
                       </ParameterBlock>
 
+                      <!-- Formula section -->
                       <ParameterSeparator Id="%AID%_PS-nnn" Text=" " />
+                      <ParameterSeparator Id="%AID%_PS-nnn" Text="Hilfsfunktionen zum füllen der Schwellwerte" UIHint="Headline" />
+                      <ParameterBlock Id="%AID%_PB-nnn" Inline="true" Layout="Grid">
+                        <Rows>
+                          <Row Id="%AID%_PB-nnn_R-1" />
+                        </Rows>
+                        <Columns>
+                          <Column Id="%AID%_PB-nnn_C-1" Width="20%" />
+                          <Column Id="%AID%_PB-nnn_C-2" Width="50%" />
+                          <Column Id="%AID%_PB-nnn_C-3" Width="15%" />
+                          <Column Id="%AID%_PB-nnn_C-4" Width="25%" />
+                        </Columns>
+                        <!-- <ParameterSeparator Id="%AID%_PS-nnn" Cell="1,1" Text="Funktion" UIHint="Headline" />
+                        <ParameterSeparator Id="%AID%_PS-nnn" Cell="1,2" Text="Ziel" UIHint="Headline" />
+                        <ParameterSeparator Id="%AID%_PS-nnn" Cell="1,3" Text="Parameter" UIHint="Headline" />
+                        <ParameterSeparator Id="%AID%_PS-nnn" Cell="1,4" Text="Aktion" UIHint="Headline" /> -->
+                        <ParameterRefRef RefId="%AID%_P-%TT%99920_R-%TT%9992001" Cell="1,2" />
+                        <ParameterRefRef RefId="%AID%_P-%TT%99921_R-%TT%9992101" Cell="1,1" />
+                        <choose ParamRefId="%AID%_P-%TT%99920_R-%TT%9992001">
+                          <when test="1">
+                            <ParameterRefRef RefId="%AID%_P-%TT%99922_R-%TT%9992201" Cell="1,3" />
+                          </when>
+                          <when test=">1">
+                            <ParameterRefRef RefId="%AID%_P-%TT%99923_R-%TT%9992301" Cell="1,3" />
+                          </when>
+                          <when test="!=0">
+                            <Button Id="%AID%_B-%TT%00004" Text="füllen" Cell="1,4" EventHandler="PM_executeFunction" EventHandlerParameters="{ &quot;dataKind&quot;:8, &quot;parName&quot;:&quot;TriggerDelta&quot; }" />
+                          </when>
+                        </choose>
+                      </ParameterBlock>
 
+                      <!-- Editor section -->
+                      <ParameterSeparator Id="%AID%_PS-nnn" Text=" " />
                       <!-- Headline -->
                       <ParameterBlock Id="%AID%_PB-nnn" Inline="true" Layout="Grid">
                         <Rows>
@@ -820,8 +917,8 @@
                           <Column Id="%AID%_PB-nnn_C-5" Width="%PM_ColWidthHlkButtonCell%" />
                         </Columns>
                         <ParameterSeparator Id="%AID%_PS-nnn" Text="Triggerschwellen" Cell="1,1" />
-                        <Button Id="%AID%_B-%TT%00009" Text="Trigger lesen" Cell="1,2" EventHandler="PM_getCalibrationData" EventHandlerParameters="{ &quot;dataKind&quot;:8, &quot;parName&quot;:&quot;TriggerAbs&quot; }" EventHandlerOnline="ConnectionOriented" />
-                        <Button Id="%AID%_B-%TT%00019" Text="Trigger schreiben" Cell="1,3" EventHandler="PM_setCalibrationData" EventHandlerParameters="{ &quot;dataKind&quot;:8, &quot;parName&quot;:&quot;TriggerAbs&quot; }" EventHandlerOnline="ConnectionOriented" />
+                        <Button Id="%AID%_B-%TT%00009" Text="Trigger lesen" Cell="1,2" EventHandler="PM_getCalibrationData" EventHandlerParameters="{ &quot;dataKind&quot;:8, &quot;parName&quot;:&quot;TriggerDelta&quot; }" EventHandlerOnline="ConnectionOriented" />
+                        <Button Id="%AID%_B-%TT%00019" Text="Trigger schreiben" Cell="1,3" EventHandler="PM_setCalibrationData" EventHandlerParameters="{ &quot;dataKind&quot;:8, &quot;parName&quot;:&quot;TriggerDelta&quot; }" EventHandlerOnline="ConnectionOriented" />
                         <Button Id="%AID%_B-%TT%00029" Text="Trigger -> M1" Cell="1,4" EventHandler="PM_setMemoryData" EventHandlerParameters="{ &quot;dataSource&quot;:&quot;Trigger&quot;, &quot;dataTarget&quot;:&quot;M1Trigger&quot; }"  />
                         <Button Id="%AID%_B-%TT%00027" Text="Trigger -> M2" Cell="1,5" EventHandler="PM_setMemoryData" EventHandlerParameters="{ &quot;dataSource&quot;:&quot;Trigger&quot;, &quot;dataTarget&quot;:&quot;M2Trigger&quot; }"  />
                       </ParameterBlock>
@@ -841,8 +938,8 @@
                           <Column Id="%AID%_PB-nnn_C-5" Width="%PM_ColWidthHlkButtonCell%" />
                         </Columns>
                         <ParameterSeparator Id="%AID%_PS-nnn" Text="Halteschwellen" Cell="1,1" />
-                        <Button Id="%AID%_B-%TT%00008" Text="Halten lesen" Cell="1,2" EventHandler="PM_getCalibrationData" EventHandlerParameters="{ &quot;dataKind&quot;:7, &quot;parName&quot;:&quot;HoldAbs&quot; }" EventHandlerOnline="ConnectionOriented" />
-                        <Button Id="%AID%_B-%TT%00018" Text="Halten schreiben" Cell="1,3" EventHandler="PM_setCalibrationData" EventHandlerParameters="{ &quot;dataKind&quot;:7, &quot;parName&quot;:&quot;HoldAbs&quot; }" EventHandlerOnline="ConnectionOriented" />
+                        <Button Id="%AID%_B-%TT%00008" Text="Halten lesen" Cell="1,2" EventHandler="PM_getCalibrationData" EventHandlerParameters="{ &quot;dataKind&quot;:7, &quot;parName&quot;:&quot;HoldDelta&quot; }" EventHandlerOnline="ConnectionOriented" />
+                        <Button Id="%AID%_B-%TT%00018" Text="Halten schreiben" Cell="1,3" EventHandler="PM_setCalibrationData" EventHandlerParameters="{ &quot;dataKind&quot;:7, &quot;parName&quot;:&quot;HoldDelta&quot; }" EventHandlerOnline="ConnectionOriented" />
                         <Button Id="%AID%_B-%TT%00028" Text="Halten -> M1" Cell="1,4" EventHandler="PM_setMemoryData" EventHandlerParameters="{ &quot;dataSource&quot;:&quot;Hold&quot;, &quot;dataTarget&quot;:&quot;M1Hold&quot; }"  />
                         <Button Id="%AID%_B-%TT%00026" Text="Halten -> M2" Cell="1,5" EventHandler="PM_setMemoryData" EventHandlerParameters="{ &quot;dataSource&quot;:&quot;Hold&quot;, &quot;dataTarget&quot;:&quot;M2Hold&quot; }"  />
                       </ParameterBlock>
@@ -862,7 +959,7 @@
                           <Column Id="%AID%_PB-nnn_C-5" Width="%PM_ColWidthHlkButtonCell%" />
                         </Columns>
                         <ParameterSeparator Id="%AID%_PS-nnn" Text="Aktuelle Sensorwerte" Cell="1,1" />
-                        <Button Id="%AID%_B-%TT%00005" Text="Werte lesen" Cell="1,2" EventHandler="PM_startCalibration" EventHandlerParameters="{ &quot;dataKind&quot;:4, &quot;parName&quot;:&quot;Cal&quot; }" EventHandlerOnline="ConnectionOriented" />
+                        <Button Id="%AID%_B-%TT%00005" Text="Werte lesen" Cell="1,2" EventHandler="PM_startCalibration" EventHandlerParameters="{ &quot;dataKind&quot;:4, &quot;parName&quot;:&quot;Cur&quot; }" EventHandlerOnline="ConnectionOriented" />
                       </ParameterBlock>
                       <op:usePart name="HLK-ROW-ABS" xpath="//Dynamic/ChannelIndependentBlock/*" instanceFrom="3" instanceTo="5" />
                       <ParameterSeparator Id="%AID%_PS-nnn" Text="" UIHint="Headline" />
