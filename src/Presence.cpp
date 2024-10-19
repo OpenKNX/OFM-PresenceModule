@@ -37,7 +37,7 @@ const std::string Presence::version()
 
 void Presence::savePower()
 {
-#ifdef HF_POWER_PIN
+#ifdef HLK_SERIAL
     if (ParamPM_HfPresence == VAL_PM_PS_Hf_HLKLD2420)
         static_cast<SensorHLKLD2420 *>(mPresenceSensor)->switchPower(false);
 #endif
@@ -45,7 +45,7 @@ void Presence::savePower()
 
 bool Presence::restorePower()
 {
-#ifdef HF_POWER_PIN
+#ifdef HLK_SERIAL
     if (ParamPM_HfPresence == VAL_PM_PS_Hf_HLKLD2420)
         static_cast<SensorHLKLD2420 *>(mPresenceSensor)->switchPower(true);
 #endif
@@ -110,7 +110,7 @@ void Presence::showHelp()
     openknx.console.printHelpLine("vpm chNN state", "Print state flags for channel NN");
     openknx.console.printHelpLine("vpm chNN all", "Exec all channel commands for channel NN");
 
-#ifdef HF_POWER_PIN
+#ifdef HLK_SERIAL
     if (ParamPM_HfPresence == VAL_PM_PS_Hf_HLKLD2420)
         static_cast<SensorHLKLD2420 *>(mPresenceSensor)->showHelp();
 #endif
@@ -176,7 +176,7 @@ bool Presence::processCommand(const std::string iCmd, bool iDebugKo)
     }
     else if (iCmd.substr(0, 3) == "hlk")
     {
-#ifdef HF_POWER_PIN
+#ifdef HLK_SERIAL
         if (ParamPM_HfPresence == VAL_PM_PS_Hf_HLKLD2420)
             lResult = static_cast<SensorHLKLD2420 *>(mPresenceSensor)->processCommand(iCmd, iDebugKo);
 #endif
@@ -215,19 +215,21 @@ void Presence::processInputKo(GroupObject &iKo)
             int8_t lHfSensitivity = iKo.value(getDPT(VAL_DPT_5));
             if (mHfSensitivity != lHfSensitivity)
             {
-#ifdef HF_POWER_PIN
                 switch (ParamPM_HfPresence)
                 {
+#ifdef HF_SERIAL                    
                     case VAL_PM_PS_Hf_MR24xxB1:
                         static_cast<SensorMR24xxB1 *>(mPresenceSensor)->sendCommand(RadarCmd_WriteSensitivity, lHfSensitivity);
                         break;
+#endif
+#ifdef HLK_SERIAL                        
                     case VAL_PM_PS_Hf_HLKLD2420:
                         static_cast<SensorHLKLD2420 *>(mPresenceSensor)->writeSensitivity(lHfSensitivity);
                         break;
+#endif
                     default:
                         break;
                 }
-#endif
             }
             break;
         }
@@ -236,7 +238,7 @@ void Presence::processInputKo(GroupObject &iKo)
             int8_t lScenario = iKo.value(getDPT(VAL_DPT_5));
             if (mScenario != lScenario)
             {
-#ifdef HF_POWER_PIN
+#ifdef HF_SERIAL
                 switch (ParamPM_HfPresence)
                 {
                     case VAL_PM_PS_Hf_MR24xxB1:
@@ -250,21 +252,23 @@ void Presence::processInputKo(GroupObject &iKo)
             break;
         }
         case PM_KoHfReset:
-#ifdef HF_POWER_PIN
             switch (ParamPM_HfPresence)
             {
+#ifdef HF_SERIAL
                 case VAL_PM_PS_Hf_MR24xxB1:
                     logDebugP("Do power cycle for MR24xxB1");
                     startPowercycleHfSensor();
                     break;
+#endif
+#ifdef HLK_SERIAL
                 case VAL_PM_PS_Hf_HLKLD2420:
                     logDebugP("Start calibration for HLKLD2420");
                     static_cast<SensorHLKLD2420 *>(mPresenceSensor)->forceCalibration();
                     break;
+#endif
                 default:
                     break;
             }
-#endif
             break;
         case PM_KoLEDMove:
             processLED(iKo.value(getDPT(VAL_DPT_1)), CallerKnxMove);
@@ -297,21 +301,24 @@ bool Presence::getHardwareMove()
 // Starting all required sensors, this call may be blocking (with delay)
 void Presence::startSensors()
 {
-#ifdef HF_POWER_PIN
     switch (ParamPM_HfPresence)
     {
+#ifdef HF_SERIAL
         case VAL_PM_PS_Hf_MR24xxB1:
             logDebugP("Using HF sensor MR24xxB1");
 
             mPresenceSensor = openknxSensorDevicesModule.factory(SENS_MR24xxB1, MeasureType::Pres);
             static_cast<SensorMR24xxB1 *>(mPresenceSensor)->defaultSensorParameters(ParamPM_HfScenario - 1, ParamPM_HfSensitivity);
             break;
+#endif
+#ifdef HLK_SERIAL
         case VAL_PM_PS_Hf_HLKLD2420:
             logDebugP("Using HF sensor HLKLD2420");
 
             mPresenceSensor = openknxSensorDevicesModule.factory(SENS_HLKLD2420, MeasureType::Pres);
             static_cast<SensorHLKLD2420 *>(mPresenceSensor)->defaultSensorParameters(ParamPM_HfSensitivity, ParamPM_HfDelayTime, ParamPM_HfRangeGateMin, ParamPM_HfRangeGateMax);
             break;
+#endif
         default:
             break;
     }
@@ -326,7 +333,6 @@ void Presence::startSensors()
             mPirSensitivity = ParamPM_PirSensitivity;
             break;
     }
-#endif
 
     switch (ParamPM_HWLux)
     {
@@ -478,12 +484,12 @@ void Presence::processLED(bool iOn, LedCaller iCaller)
 
 void Presence::processHardwarePresence()
 {
-#ifdef HF_POWER_PIN
     if (mPresenceSensor != 0)
     {
         float lValue = 0;
         switch (ParamPM_HfPresence)
         {
+#ifdef HF_SERIAL
             case VAL_PM_PS_Hf_MR24xxB1:
                 if (openknxSensorDevicesModule.measureValue(MeasureType::Pres, lValue) && lValue != mPresenceCombined)
                 {
@@ -537,6 +543,8 @@ void Presence::processHardwarePresence()
                     }
                 }
                 break;
+#endif
+#ifdef HLK_SERIAL
             case VAL_PM_PS_Hf_HLKLD2420:
                 if (openknxSensorDevicesModule.measureValue(MeasureType::Pres, lValue) && lValue != mPresenceCombined)
                 {
@@ -570,11 +578,11 @@ void Presence::processHardwarePresence()
                     }
                 }
                 break;
+#endif
             default:
                 break;
         }
     }
-#endif
 #ifdef PIR_PIN
     bool pirTriggered = false;
     switch (ParamPM_PirPresence)
@@ -717,17 +725,24 @@ void Presence::setup()
 
                 // ensure no data lost even for sensor raw data
                 // up to 1288 bytes are send by the sensor at once
-                HF_SERIAL.setFIFOSize(1300);
+                #ifndef HF_USE_SERIALPIO
+                HLK_SERIAL.setFIFOSize(1300);
+                #endif
                 break;
             default:
                 break;
         }
 
-        HF_SERIAL.setRX(HF_UART_RX_PIN);
-        HF_SERIAL.setTX(HF_UART_TX_PIN);
         pinMode(PRESENCE_LED_PIN, OUTPUT);
         pinMode(MOVE_LED_PIN, OUTPUT);
+    #ifdef HF_SERIAL
+        HF_SERIAL.setRX(HF_UART_RX_PIN);
+        HF_SERIAL.setTX(HF_UART_TX_PIN);
         HF_SERIAL.begin(HF_SERIAL_SPEED);
+    #endif
+    #ifdef HLK_SERIAL
+        HLK_SERIAL.begin(HF_SERIAL_SPEED);
+    #endif
 #endif
 
 #ifdef PIR_PIN
@@ -763,7 +778,7 @@ bool Presence::processFunctionProperty(uint8_t objectIndex, uint8_t propertyId, 
 
     switch (data[0])
     {
-#ifdef HF_POWER_PIN
+#ifdef HLK_SERIAL
         case 1:
         case 2:
         case 3:
