@@ -484,6 +484,7 @@ void Presence::processLED(bool iOn, LedCaller iCaller)
 
 void Presence::processHardwarePresence()
 {
+#if defined(HF_SERIAL) || defined(HLK_SERIAL)
     if (mPresenceSensor != 0)
     {
         float lValue = 0;
@@ -583,6 +584,7 @@ void Presence::processHardwarePresence()
                 break;
         }
     }
+#endif
 #ifdef PIR_PIN
     bool pirTriggered = false;
     switch (ParamPM_PirPresence)
