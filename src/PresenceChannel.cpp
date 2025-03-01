@@ -556,7 +556,7 @@ void PresenceChannel::startRunning()
     uint8_t lDayPhase = 0;
 
     lKo = getKo(PM_KoKOpDayPhase);
-    if (!lKo->initialized())
+    if (lKo->initialized())
         lDayPhase = getDayPhaseFromKO();
     onDayPhase(lDayPhase, false);
     pCurrentState |= STATE_RUNNING;
@@ -1283,14 +1283,14 @@ void PresenceChannel::onLock(bool iLockOn, uint8_t iLockOnSend, uint8_t iLockOff
 
     if (iLockOn)
     {
-        pCurrentState |= STATE_LOCK;
-        pLockDelayTime = delayTimerInit();
         // should we send something?
         if (iLockOnSend)
         {
             startOutput(iLockOnSend == VAL_PM_LockOutputOn);
             forceOutput(true);
         }
+        pCurrentState |= STATE_LOCK;
+        pLockDelayTime = delayTimerInit();
     }
     else if (pCurrentState & STATE_LOCK)
     {
@@ -1615,14 +1615,15 @@ void PresenceChannel::processOutput()
     uint8_t lOutput = 0;
     if (!(pCurrentState & STATE_LOCK))
     {
-        // check for send because of output state change
-        uint8_t lValue = pCurrentValue & (PM_BIT_OUTPUT_SET | PM_BIT_OUTPUT_WRITTEN);
-        if (lValue > 0 && lValue < (PM_BIT_OUTPUT_SET | PM_BIT_OUTPUT_WRITTEN))
+        if (pCurrentValue & PM_BIT_OUTPUT_FORCE)
+        {
             lOutput = 3;
-    }
-    if (pCurrentValue & PM_BIT_OUTPUT_FORCE)
-    {
-        lOutput = 3;
+        } else {
+            // check for send because of output state change
+            uint8_t lValue = pCurrentValue & (PM_BIT_OUTPUT_SET | PM_BIT_OUTPUT_WRITTEN);
+            if (lValue > 0 && lValue < (PM_BIT_OUTPUT_SET | PM_BIT_OUTPUT_WRITTEN))
+                lOutput = 3;
+        }
     }
     if (lOutput)
     {
