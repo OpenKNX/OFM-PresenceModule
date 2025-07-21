@@ -6,7 +6,7 @@
 #define STATE_STARTUP 0x00000001          // startup delay for each channel
 #define STATE_RUNNING 0x00000002          // this channel is running
 #define STATE_MANUAL 0x00000004           // manual mode on
-#define STATE_AUTO 0x00000008             // manual mode on
+#define STATE_AUTO 0x00000008             // automatic mode on
 #define STATE_PRESENCE 0x00000010         // there is presence
 #define STATE_PRESENCE_SHORT 0x00000020   // short presence evaluation
 #define STATE_LOCK 0x00000040             // lock state

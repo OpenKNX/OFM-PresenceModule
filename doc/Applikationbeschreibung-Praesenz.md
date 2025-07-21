@@ -85,6 +85,10 @@ Alle Logikkanäle sind in der [Applikation Logik](https://github.com/OpenKNX/OAM
 
 Im folgenden werden Änderungen an dem Dokument erfasst, damit man nicht immer das Gesamtdokument lesen muss, um Neuerungen zu erfahren.
 
+17.07.2025: Firmware 3.7, Applikation 3.7
+
+* NEU: "Ausschalten über Helligkeit" kann durch manuelle Aktionen (Automatik übersteuern, Manuell übersteuern) deaktiviert werden. 
+
 19.02.2025: Firmware 3.6.4, Applikation 3.6
 
 * FIX: Beim Wechsel der Tagesphase während einer Sperre wird jetzt nicht mehr geschaltet
@@ -1544,6 +1548,15 @@ Hier kann eine Zeit eingegeben werden, um die das Ausschalten nach dem Übersche
 Der Hintergrund ist, dass an wolkigen Tagen nicht jeder kurze Sonnenstrahl, der mal durch die Wolken bricht, gleich das gesamte Lichtambiente abschaltet.
 
 Wird in der Zeit die Ausschaltschwelle wieder unterschritten, wird natürlich nicht abgeschaltet und der Timer zurückgesetzt.
+
+<!-- DOC -->
+### **Manuelles Schalten verhindert Ausschalten über Helligkeit**
+
+Hat man das Licht manuell eingeschaltet, hier explizit durch "Manuell übersteuern", kann Ausschalten über Helligkeit unerwünscht sein. Mit dieser Einstellung kann man das gewünschte Verhalten einstellen.
+
+Wählt man "Nein", wird auch nach einer manuellen Aktion das Licht bei gestiegener Helligkeit ausgeschaltet.
+Wählt man "Ja", wird bei manuellen Aktionen das Ausschalten über Helligkeit deaktiviert.
+
 
 ## Präsenzeinstellungen
 

@@ -27,10 +27,11 @@
                 <Parameter Id="%AID%_UP-%TT%%CC%%PPP+37%" Name="p%Pl%%C%PresenceShortNoSwitch" Offset="1" BitOffset="1" ParameterType="%AID%_PT-OnOffYesNo" Text="Erst nach der Kurzzeitpräsenz schalten&#10;(z.B. Durchgangsraum)" Value="0" />
                 <Parameter Id="%AID%_UP-%TT%%CC%%PPP+38%" Name="p%Pl%%C%PresenceShortCalculation" Offset="1" BitOffset="2" ParameterType="%AID%_PT-PresenceShortCalculation" Text="Kurzzeitpräsenz wird ermittelt anhand vom" Value="0" />
                 <Parameter Id="%AID%_UP-%TT%%CC%%PPP+39%" Name="p%Pl%%C%DayPhaseFunction" Offset="1" BitOffset="3" ParameterType="%AID%_PT-DayPhaseFunction" Text="Funktion der Tagesphase" Value="0" />
+                <Parameter Id="%AID%_UP-%TT%%CC%%PPP+40%" Name="p%Pl%%C%BrightnessSuppress" Offset="1" BitOffset="4" ParameterType="%AID%_PT-OnOffYesNo" Text="Manuelles Schalten verhindert&#10;Ausschalten über Helligkeit" Value="0" />
+                <!-- 2 Bit free -->
                 <!-- <Parameter Id="%AID%_UP-%TT%%CC%%PPP+02%" Name="p%Pl%%C%Output1Send" Offset="0" BitOffset="3" ParameterType="%AID%_PT-OutputSendPM" Text="Ausgang sendet" Value="0" /> -->
                 <!-- <Parameter Id="%AID%_UP-%TT%%CC%%PPP+03%" Name="p%Pl%%C%Output2Send" Offset="0" BitOffset="4" ParameterType="%AID%_PT-OutputSendPM" Text="Ausgang sendet" Value="0" /> -->
                 <!-- <Parameter Id="%AID%_UP-%TT%%CC%%PPP+04%" Name="p%Pl%%C%BrightnessRead" Offset="1" BitOffset="3" ParameterType="%AID%_PT-OnOffYesNo" Text="Nach Totzeit Lesetelegramm senden?" Value="0" /> -->
-                <!-- 3 Bit free -->
               </Union>
               <Union SizeInBit="80">
                 <!-- Delay pattern: Presence Delay (per day phase) -->
@@ -120,11 +121,12 @@
               <ParameterRef Id="%AID%_UP-%TT%%CC%%PPP+37%_R-%TT%%CC%%PPP+37%01" RefId="%AID%_UP-%TT%%CC%%PPP+37%" />
               <ParameterRef Id="%AID%_UP-%TT%%CC%%PPP+38%_R-%TT%%CC%%PPP+38%01" RefId="%AID%_UP-%TT%%CC%%PPP+38%" />
               <ParameterRef Id="%AID%_UP-%TT%%CC%%PPP+39%_R-%TT%%CC%%PPP+39%01" RefId="%AID%_UP-%TT%%CC%%PPP+39%" />
+              <ParameterRef Id="%AID%_UP-%TT%%CC%%PPP+40%_R-%TT%%CC%%PPP+40%01" RefId="%AID%_UP-%TT%%CC%%PPP+40%" />
             </ParameterRefs>
           </Static>
           <Dynamic>
             <ChannelIndependentBlock>
-              <ParameterBlock Id="%AID%_PB-%C%11" Name="PM%C%Phase%Pn%" Text="Phase %Pn%: {{0: ...}}" TextParameterRefId="%AID%_P-%TT%%CC%0%TRef%_R-%TT%%CC%0%TRef+0%01" Icon="roman-numeral-%Pn%" HelpContext="PM-Tagesphase">
+              <ParameterBlock Id="%AID%_PB-nnn" Text="Phase %Pn%: {{0: ...}}" TextParameterRefId="%AID%_P-%TT%%CC%0%TRef%_R-%TT%%CC%0%TRef+0%01" Icon="roman-numeral-%Pn%" HelpContext="PM-Tagesphase">
                 <!-- Phase function -->
                 <ParameterSeparator Id="%AID%_PS-nnn" Text="Funktion" UIHint="Headline" />
                 <ParameterRefRef RefId="%AID%_UP-%TT%%CC%%PPP+39%_R-%TT%%CC%%PPP+39%01" HelpContext="%DOC%" IndentLevel="1" />
@@ -137,11 +139,11 @@
                         <ParameterRefRef RefId="%AID%_UP-%TT%%CC%%PPP+15%_R-%TT%%CC%%PPP+15%01" HelpContext="%DOC%" IndentLevel="1" />
                       </when>
                       <when test="0 1">
-                        <ParameterSeparator Id="%AID%_PS-nnn" Text="Hier kann man wählen, ob und wann das Licht ausgeht, wenn es im Raum heller wird (z.B. durch Sonneneinstrahlung)" />
+                        <ParameterSeparator Id="%AID%_PS-nnn" Text="  Hier kann man wählen, ob und wann das Licht ausgeht, wenn es im Raum heller wird&#10;  (z.B. durch Sonneneinstrahlung)" />
                         <ParameterRefRef RefId="%AID%_UP-%TT%%CC%%PPP+00%_R-%TT%%CC%%PPP+00%01" HelpContext="%DOC%" IndentLevel="1" />
                         <choose ParamRefId="%AID%_UP-%TT%%CC%%PPP+00%_R-%TT%%CC%%PPP+00%01">
                           <when test="1">
-                            <ParameterSeparator Id="%AID%_PS-nnn" Text="Die Ausschaltschwelle sollte so gewählt werden, dass sie höher ist als die Gesamthelligkeit aller Lichtquellen, da sonst das Licht bei weiteren zugeschalteten Quellen ausgehen würde." />
+                            <ParameterSeparator Id="%AID%_PS-nnn" Text="  Die Ausschaltschwelle sollte so gewählt werden, dass sie höher ist als die Gesamthelligkeit aller&#10;  Lichtquellen, da sonst das Licht bei weiteren zugeschalteten Quellen ausgehen würde." />
                             <choose ParamRefId="%AID%_UP-%TT%%CC%%PPP+39%_R-%TT%%CC%%PPP+39%01">
                               <when test="0">
                                 <ParameterRefRef RefId="%AID%_UP-%TT%%CC%%PPP+16%_R-%TT%%CC%%PPP+16%01" HelpContext="%DOC%" IndentLevel="1" />
@@ -152,7 +154,7 @@
                             </choose>
                           </when>
                           <when test="2">
-                            <ParameterSeparator Id="%AID%_PS-nnn" Text="Die Ausschaltschwelle wird hier für jede zugeschaltete Lichtquelle neu berechnet, so dass dieser Wert wesentlich geringer gewählt werden kann." />
+                            <ParameterSeparator Id="%AID%_PS-nnn" Text="  Die Ausschaltschwelle wird hier für jede zugeschaltete Lichtquelle neu berechnet, so dass dieser&#10;  Wert wesentlich geringer gewählt werden kann." />
                             <choose ParamRefId="%AID%_UP-%TT%%CC%%PPP+39%_R-%TT%%CC%%PPP+39%01">
                               <when test="0">
                                 <ParameterRefRef RefId="%AID%_UP-%TT%%CC%%PPP+16%_R-%TT%%CC%%PPP+16%02" HelpContext="%DOC%" IndentLevel="1" />
@@ -163,7 +165,7 @@
                             </choose>
                           </when>
                           <when test=">0">
-                            <ParameterSeparator Id="%AID%_PS-nnn" Text="Es wird nicht sofort abgeschaltet, sobald die Ausschaltschwelle überschritten wird. Man kann eine Verzögerung angeben, um kurzfristige Sonnenereignisse zu überbrücken." />
+                            <ParameterSeparator Id="%AID%_PS-nnn" Text="  Es wird nicht sofort abgeschaltet, sobald die Ausschaltschwelle überschritten wird. Man kann&#10;  eine Verzögerung angeben, um kurzfristige Sonnenereignisse zu überbrücken." />
                             <!-- Delay pattern brightness off -->
                             <ParameterBlock Id="%AID%_PB-nnn" Name="p%C%BrightnessOffDelay%Pn%" Inline="true" Layout="Grid" HelpContext="PM-Ausschalten-verzoegern-um">
                               <Rows>
@@ -173,13 +175,14 @@
                                 <Column Id="%AID%_PB-nnn_C-1" Name="Col1" Width="1%" />
                                 <Column Id="%AID%_PB-nnn_C-2" Name="Col2" Width="44%" />
                                 <Column Id="%AID%_PB-nnn_C-3" Name="Col3" Width="15%" />
-                                <Column Id="%AID%_PB-nnn_C-4" Name="Col4" Width="20%" />
+                                <Column Id="%AID%_PB-nnn_C-4" Name="Col4" Width="25%" />
                               </Columns>
                               <ParameterSeparator Id="%AID%_PS-nnn" Text=" Ausschalten verzögern um" Cell="1,2" />
                               <ParameterRefRef RefId="%AID%_UP-%TT%%CC%%PPP+14%_R-%TT%%CC%%PPP+14%01" Cell="1,3" HelpContext="%DOC%" />
                               <ParameterRefRef RefId="%AID%_UP-%TT%%CC%%PPP+13%_R-%TT%%CC%%PPP+13%01" Cell="1,4" HelpContext="%DOC%" />
                             </ParameterBlock>
                             <!-- end of delay pattern -->
+                            <ParameterRefRef RefId="%AID%_UP-%TT%%CC%%PPP+40%_R-%TT%%CC%%PPP+40%01" HelpContext="%DOC%" IndentLevel="1" />
                           </when>
                         </choose>
                       </when>

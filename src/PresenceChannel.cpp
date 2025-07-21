@@ -254,7 +254,7 @@ bool PresenceChannel::processCommand(const std::string iCmd, bool iDebugKo)
             lOutput[lIndex++] = ' ';
             lOutput[lIndex++] = (pCurrentState & STATE_LOCK) ? 'L' : '-';
             lOutput[lIndex++] = (pCurrentState & STATE_ADAPTIVE) ? 'H' : '-';
-            lOutput[lIndex++] = (pCurrentValue & PM_BIT_DISABLE_BRIGHTNESS) ? 'X' : '-';
+            lOutput[lIndex++] = (pCurrentValue & PM_BIT_DISABLE_BRIGHTNESS) ? 'X' : ((pCurrentState & STATE_AUTO) && paramBit(PM_pABrightnessSuppress, PM_pABrightnessSuppressMask, true)) ? 'M' : '-';
             lOutput[lIndex++] = (pCurrentState & STATE_LEAVE_ROOM) ? 'R' : '-';
             lOutput[lIndex++] = (pCurrentState & STATE_DOWNTIME) ? 'T' : '-';
             // 3 char free
@@ -1474,7 +1474,8 @@ void PresenceChannel::startBrightness()
     if (lEvalBrightness && lBrightness != NO_NUM)
     {
         // but only, if we are not calculating a new off value
-        if (!(pCurrentState & STATE_ADAPTIVE) && lBrightness >= (float)getKo(PM_KoKOpLuxOff)->value(getDPT(VAL_DPT_9)))
+        // and only, if the switch "manual actions suppress brightness off" is not set
+        if (!(pCurrentState & STATE_ADAPTIVE) && lBrightness >= (float)getKo(PM_KoKOpLuxOff)->value(getDPT(VAL_DPT_9)) && (!((pCurrentState & STATE_AUTO) && paramBit(PM_pABrightnessSuppress, PM_pABrightnessSuppressMask, true))))
         {
             // we start timer off delay
             if (pBrightnessOffDelayTime == 0 && paramByte(PM_pABrightnessAuto, PM_pABrightnessAutoMask, PM_pABrightnessAutoShift, true) > 0)
