@@ -1396,7 +1396,7 @@
                         <!-- Scenes -->
                         <ParameterBlock Id="%AID%_PB-nnn" Name="PM%C%Scenes" Text="Szenensteuerung" Icon="movie-open-outline" HelpContext="PM-Szenensteuerung">
                           <ParameterSeparator Id="%AID%_PS-nnn" Text="Szenensteuerung" UIHint="Headline" />
-                          <ParameterSeparator Id="%AID%_PS-nnn" Text="Viele Funktionen, für die ein Kommunikaitonsobjekt zur Verfügung steht, können auch über Szenen gesteuert werden." />
+                          <ParameterSeparator Id="%AID%_PS-nnn" Text="Viele Funktionen, für die ein Kommunikationsobjekt zur Verfügung steht, können auch über Szenen gesteuert werden." />
                           <ParameterSeparator Id="%AID%_PS-nnn" Text="Im folgenden können diese Funktionen mit entsprechenden Szenen verknüpft werden." />
                           <ParameterBlock Id="%AID%_PB-%C%13" Name="Table%C%Scenes" Text="#" Inline="true" Layout="Table"  HelpContext="PM-Szenensteuerung" >
                             <Rows>
