@@ -4,7 +4,7 @@ cSpell:words Präsenzmelder Präsenzkanäle Präsenzerkennung Präsenzinformatio
 cSpell:words Helligkeitsgesteuert Helligkeitsunabhängig helligkeitsbasierte Luxwert helligkeitsbezogenen Helligkeitsabhängig helligkeitsverändernden
 cSpell:words Szenennutzung Szenensteuerung szenensteuerung
 cSpell:words Dimmwert Dimmadressen Dimmstatus Dimmaktor Dimmvorgänge Aktorstatus Aktorstatuswechsel Detektions
-cSpell:words Moduswechsel Manuellmodus Tagesphasenabhängig Kommunikaitonsobjekte Melderkanal priorität erwartungskonform VEML Eingaenge
+cSpell:words Moduswechsel Manuellmodus Tagesphasenabhängig Kommunikationsobjekte Melderkanal priorität erwartungskonform VEML Eingaenge
 -->
 
 # Applikationsbeschreibung Präsenz
@@ -987,7 +987,7 @@ Hier kann man einen PM-Kanal aktivieren.
 
 #### **Inaktiv**
 
-Dieser Kanal ist inaktiv. Alle Einstellungen und alle Kommunikaitonsobjekte sind ausgeblendet.
+Dieser Kanal ist inaktiv. Alle Einstellungen und alle Kommunikationsobjekte sind ausgeblendet.
 
 #### **Aktiv**
 
