@@ -1392,7 +1392,7 @@ void PresenceChannel::startActorState()
 
 void PresenceChannel::processActorState()
 {
-    // change of actor state always influences the PM behaviour,
+    // change of actor state always influences the PM behaviour
     // if the actor state is different to current PM state
     GroupObject *lKo = getKo(PM_KoKOpAktorState);
     bool lValue = lKo->value(getDPT(VAL_DPT_1));

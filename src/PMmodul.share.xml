@@ -605,7 +605,7 @@
             <ComObjectRefs>
               <ComObjectRef Id="%AID%_O-%TT%00001_R-%TT%0000101" RefId="%AID%_O-%TT%00001" />
               <ComObjectRef Id="%AID%_O-%TT%00002_R-%TT%0000201" RefId="%AID%_O-%TT%00002" />
-              <ComObjectRef Id="%AID%_O-%TT%00002_R-%TT%0000202" RefId="%AID%_O-%TT%00002" Text="Bewegung" ObjectSize="1 Bit" DatapointType="DPST-1-1" />
+              <ComObjectRef Id="%AID%_O-%TT%00002_R-%TT%0000202" RefId="%AID%_O-%TT%00002" Text="Ausgang Bewegung" ObjectSize="1 Bit" DatapointType="DPST-1-1" />
               <ComObjectRef Id="%AID%_O-%TT%00003_R-%TT%0000301" RefId="%AID%_O-%TT%00003" />
               <ComObjectRef Id="%AID%_O-%TT%00004_R-%TT%0000401" RefId="%AID%_O-%TT%00004" />
               <ComObjectRef Id="%AID%_O-%TT%00005_R-%TT%0000501" RefId="%AID%_O-%TT%00005" />
