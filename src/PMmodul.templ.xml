@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-model href="../../Organization/knxprod-support/knx_project_14/knx-editor.xsd" type="application/xml" schematypens="http://www.w3.org/2001/XMLSchema"?>
+<?xml-model href="../../../../Organization/knxprod-support/knx_project_14/knx-editor.xsd" type="application/xml" schematypens="http://www.w3.org/2001/XMLSchema"?>
 <KNX xmlns:op="http://github.com/OpenKNX/OpenKNXproducer" xmlns="http://knx.org/xml/project/14" CreatedBy="KNX MT" ToolVersion="5.1.255.16695">
   <ManufacturerData>
     <Manufacturer RefId="M-00FA">
       <ApplicationPrograms>
         <ApplicationProgram Id="%AID%" ProgramType="ApplicationProgram" MaskVersion="MV-07B0" Name="WP-Presence-Logic-Develop" LoadProcedureStyle="MergedProcedure" PeiType="0" DefaultLanguage="de" DynamicTableManagement="false" Linkable="true" MinEtsVersion="4.0" ApplicationNumber="0" ApplicationVersion="0" ReplacesVersions="0">
           <op:part href="PMModul.parts.xml" name="PHASE" instances="4">
-            <op:param name="%ParamOffset%" value="58" increment="20" />
+            <op:param name="%ParamOffset%" value="59" increment="20" />
             <op:param name="%Pl%" value="0" asLetter="true" increment="1" />
             <op:param name="%Pn%" value="1" increment="1" />
             <op:param name="%PPP%" value="100" increment="100" digits="3" />
@@ -44,7 +44,7 @@
             <Parameters>
               <Parameter Id="%AID%_P-%TT%%CC%000" Name="p%C%Name" ParameterType="%AID%_PT-Text40Byte" Text="Beschreibung des PM" Value="" />
               <!-- Bitfield settings (once per channel) -->
-              <Union SizeInBit="48">
+              <Union SizeInBit="56">
                 <Memory CodeSegment="%AID%_RS-04-00000" Offset="0" BitOffset="0" />
                 <Parameter Id="%AID%_UP-%TT%%CC%900" Name="p%C%PresenceInputs" Offset="0" BitOffset="0" ParameterType="%AID%_PT-PresenceInputs" Text="Eingänge für externen Melder" Value="0" />
                 <Parameter Id="%AID%_UP-%TT%%CC%901" Name="p%C%PresenceType" Offset="0" BitOffset="3" ParameterType="%AID%_PT-PresenceType" Text="Eingang Präsenz" Value="0" />
@@ -83,11 +83,17 @@
                 <Parameter Id="%AID%_UP-%TT%%CC%903" Name="p%C%PresenceKeepAlive" Offset="5" BitOffset="5" ParameterType="%AID%_PT-CheckBox" Text="    Eingang kann nicht einschalten,&#10;    aber bestehende Präsenz verlängern" Value="0" />
                 <Parameter Id="%AID%_UP-%TT%%CC%904" Name="p%C%MoveKeepAlive" Offset="5" BitOffset="6" ParameterType="%AID%_PT-CheckBox" Text="    Eingang kann nicht einschalten,&#10;    aber bestehende Präsenz verlängern" Value="0" />
                 <!-- 1 Bit free -->
+                <Parameter Id="%AID%_UP-%TT%%CC%905" Name="p%C%Output1SendBy" Offset="6" BitOffset="0" ParameterType="%AID%_PT-OutputSendBy" Text="Ausgang sendet bei" Value="0" />
+                <Parameter Id="%AID%_UP-%TT%%CC%908" Name="p%C%Output1SendDayPhase" Offset="6" BitOffset="1" ParameterType="%AID%_PT-OutputSendDayPhase" Text="Bei Tagesphasenwechsel" Value="1" />
+                <Parameter Id="%AID%_UP-%TT%%CC%906" Name="p%C%Output2SendBy" Offset="6" BitOffset="2" ParameterType="%AID%_PT-OutputSendBy" Text="Ausgang sendet bei" Value="0" />
+                <Parameter Id="%AID%_UP-%TT%%CC%909" Name="p%C%Output2SendDayPhase" Offset="6" BitOffset="3" ParameterType="%AID%_PT-OutputSendDayPhase" Text="Bei Tagesphasenwechsel" Value="1" />
+                <Parameter Id="%AID%_UP-%TT%%CC%907" Name="p%C%ActorState" Offset="6" BitOffset="4" ParameterType="%AID%_PT-ActorState" Text="Aktorstatus AUS bedeutet" Value="0" />
+                <!-- 2 Bit free -->
               </Union>
               <!-- Delay patterns (once per channel) -->
               <Union SizeInBit="64">
                 <!-- Channel Delay -->
-                <Memory CodeSegment="%AID%_RS-04-00000" Offset="6" BitOffset="0" />
+                <Memory CodeSegment="%AID%_RS-04-00000" Offset="7" BitOffset="0" />
                 <Parameter Id="%AID%_UP-%TT%%CC%018" Name="p%C%ChannelDelayBase" ParameterType="%AID%_PT-DelayBase" Offset="0" BitOffset="0" Text="Startverzögerung für diesen Kanal" Value="0" />
                 <Parameter Id="%AID%_UP-%TT%%CC%019" Name="p%C%ChannelDelayTime" ParameterType="%AID%_PT-DelayTime" Offset="0" BitOffset="2" Text="Startverzögerung für diesen Kanal" Value="1" />
                 <!-- Lock Fallback Delay -->
@@ -110,7 +116,7 @@
               <Parameter Id="%AID%_P-%TT%%CC%029" Name="p%C%Phase4Name" ParameterType="%AID%_PT-Text40Byte" Text="Name" Value="Abend" />
               <Union SizeInBit="32">
                 <!-- keep them always in one unit in ordered sequence-->
-                <Memory CodeSegment="%AID%_RS-04-00000" Offset="14" BitOffset="0" />
+                <Memory CodeSegment="%AID%_RS-04-00000" Offset="15" BitOffset="0" />
                 <Parameter Id="%AID%_UP-%TT%%CC%030" Name="p%C%Phase1Scene" Offset="0" BitOffset="0" ParameterType="%AID%_PT-ValueSceneOut" Text="Szene Phase 1" Value="1" />
                 <Parameter Id="%AID%_UP-%TT%%CC%031" Name="p%C%Phase2Scene" Offset="1" BitOffset="0" ParameterType="%AID%_PT-ValueSceneOut" Text="Szene Phase 2" Value="2" />
                 <Parameter Id="%AID%_UP-%TT%%CC%032" Name="p%C%Phase3Scene" Offset="2" BitOffset="0" ParameterType="%AID%_PT-ValueSceneOut" Text="Szene Phase 3" Value="3" />
@@ -118,7 +124,7 @@
               </Union>
               <Union SizeInBit="160">
                 <!-- Scene definitions-->
-                <Memory CodeSegment="%AID%_RS-04-00000" Offset="18" BitOffset="0" />
+                <Memory CodeSegment="%AID%_RS-04-00000" Offset="19" BitOffset="0" />
                 <Parameter Id="%AID%_UP-%TT%%CC%040" Name="p%C%Scene0" Offset="0" BitOffset="0" ParameterType="%AID%_PT-ValueSceneIn" Text="Szene0" Value="0" />
                 <Parameter Id="%AID%_UP-%TT%%CC%041" Name="p%C%Scene1" Offset="1" BitOffset="0" ParameterType="%AID%_PT-ValueSceneIn" Text="Szene1" Value="0" />
                 <Parameter Id="%AID%_UP-%TT%%CC%042" Name="p%C%Scene2" Offset="2" BitOffset="0" ParameterType="%AID%_PT-ValueSceneIn" Text="Szene2" Value="0" />
@@ -144,7 +150,7 @@
               <!-- there is a dependancy in the order of internal input parameters and KO enabled for internal input -->
               <!-- any changes here should be also included in coding!!!! -->
               <Union SizeInBit="160">
-                <Memory CodeSegment="%AID%_RS-04-00000" Offset="38" BitOffset="0" />
+                <Memory CodeSegment="%AID%_RS-04-00000" Offset="39" BitOffset="0" />
                 <Parameter Id="%AID%_UP-%TT%%CC%064" Name="p%C%IntLux" ParameterType="%AID%_PT-KOInput" Offset="0" BitOffset="0" Text="Neues oder internes KO" Value="0" />
                 <Parameter Id="%AID%_UP-%TT%%CC%065" Name="p%C%NumLux" ParameterType="%AID%_PT-KONumber" Offset="0" BitOffset="1" Text="Nummer vom internen KO" Value="%K0%" />
                 <Parameter Id="%AID%_UP-%TT%%CC%066" Name="p%C%IntPresence1" ParameterType="%AID%_PT-KOInput" Offset="2" BitOffset="0" Text="Neues oder internes KO" Value="0" />
@@ -305,6 +311,11 @@
               <ParameterRef Id="%AID%_UP-%TT%%CC%902_R-%TT%%CC%90202" RefId="%AID%_UP-%TT%%CC%902" Text="Eingang weitere Präsenz" />
               <ParameterRef Id="%AID%_UP-%TT%%CC%903_R-%TT%%CC%90301" RefId="%AID%_UP-%TT%%CC%903" />
               <ParameterRef Id="%AID%_UP-%TT%%CC%904_R-%TT%%CC%90401" RefId="%AID%_UP-%TT%%CC%904" />
+              <ParameterRef Id="%AID%_UP-%TT%%CC%905_R-%TT%%CC%90501" RefId="%AID%_UP-%TT%%CC%905" />
+              <ParameterRef Id="%AID%_UP-%TT%%CC%906_R-%TT%%CC%90601" RefId="%AID%_UP-%TT%%CC%906" />
+              <ParameterRef Id="%AID%_UP-%TT%%CC%907_R-%TT%%CC%90701" RefId="%AID%_UP-%TT%%CC%907" />
+              <ParameterRef Id="%AID%_UP-%TT%%CC%908_R-%TT%%CC%90801" RefId="%AID%_UP-%TT%%CC%908" />
+              <ParameterRef Id="%AID%_UP-%TT%%CC%909_R-%TT%%CC%90901" RefId="%AID%_UP-%TT%%CC%909" />
               <!-- Phase 1 -->
               <op:usePart name="PHASE" xpath="//ParameterRefs/*" instanceFrom="1" instanceTo="4" />
               <!-- Phase 2 -->
@@ -811,11 +822,22 @@
                         <!-- End of OR -->
 
                         <ParameterSeparator Id="%AID%_PS-nnn" Text="" UIHint="HorizontalRuler" />
+                        <!-- Verhalten vom Aktorstatus  -->
+                        <ParameterSeparator Id="%AID%_PS-nnn" Text="Aktorstatuseingang" UIHint="Headline" />
+                        <ParameterSeparator Id="%AID%_PS-nnn" Text="Wie verhält sich der PM, wenn der Aktorstatus den Wert AUS bekommt, obwohl der PM noch im EIN-Zustand ist?" />
+                        <ParameterRefRef RefId="%AID%_UP-%TT%%CC%907_R-%TT%%CC%90701" HelpContext="%DOC%" IndentLevel="2" />
+
+
+                        <ParameterSeparator Id="%AID%_PS-nnn" Text="" UIHint="HorizontalRuler" />
                         <!-- General output settings -->
                         <ParameterSeparator Id="%AID%_PS-nnn" Text="Ausgänge" UIHint="Headline" />
                         <ParameterSeparator Id="%AID%_PS-nnn" Text="Hier erfolgen die allgemeinen Einstellungen zu den Ausgängen. In den Tagesphasen wird eingestellt, welche konkreten Werte gesendet werden. " />
                         <ParameterRefRef RefId="%AID%_UP-%TT%%CC%006_R-%TT%%CC%00601" HelpContext="PM-Ausgang-ist-vom-Typ" IndentLevel="1" />
                         <choose ParamRefId="%AID%_UP-%TT%%CC%006_R-%TT%%CC%00601">
+                          <when test="!=0">
+                            <ParameterRefRef RefId="%AID%_UP-%TT%%CC%905_R-%TT%%CC%90501" HelpContext="PM-Ausgang-sendet-bei" IndentLevel="2" />
+                            <ParameterRefRef RefId="%AID%_UP-%TT%%CC%908_R-%TT%%CC%90801" HelpContext="PM-Bei-Tagesphasenwechsel" IndentLevel="2" />
+                          </when>
                           <when test="1">
                             <ComObjectRefRef RefId="%AID%_O-%TT%%CC%013_R-%TT%%CC%01301" />
                           </when>
@@ -831,6 +853,10 @@
                         </choose>
                         <ParameterRefRef RefId="%AID%_UP-%TT%%CC%007_R-%TT%%CC%00701" HelpContext="PM-Ausgang-ist-vom-Typ" IndentLevel="1" />
                         <choose ParamRefId="%AID%_UP-%TT%%CC%007_R-%TT%%CC%00701">
+                          <when test="!=0">
+                            <ParameterRefRef RefId="%AID%_UP-%TT%%CC%906_R-%TT%%CC%90601" HelpContext="PM-Ausgang-sendet-bei" IndentLevel="2" />
+                            <ParameterRefRef RefId="%AID%_UP-%TT%%CC%909_R-%TT%%CC%90901" HelpContext="PM-Bei-Tagesphasenwechsel" IndentLevel="2" />
+                          </when>
                           <when test="1">
                             <ComObjectRefRef RefId="%AID%_O-%TT%%CC%014_R-%TT%%CC%01401" />
                           </when>

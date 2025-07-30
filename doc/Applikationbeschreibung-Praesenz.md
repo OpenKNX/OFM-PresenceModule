@@ -1148,6 +1148,32 @@ Wird dieser Wert in der Auswahlbox gewählt, kann der externe PM mit einem EIN-S
 Wird dieser Wert in der Auswahlbox gewählt, kann der externe PM mit einem 
 AUS-Signal zurückgesetzt werden. Der VPM schickt zu gegebener Zeit einen AUS-Trigger an den externen PM.
 
+## **Aktorstatuseingang**
+
+Das KO Aktorstatus ist ein Eingang, der mit dem Statusobjekt des Aktors verbunden werden sollte, der vom PM gestartet wird. Der PM erwartet, dass eine Schaltaktion vom PM entsprechend vom Aktor bestätigt wird. Ein EIN wird also als EIN zurückgemeldet, ein AUS als AUS.
+
+Wird während der PM in Zustand AUS ist, ein EIN als Aktorstatus empfangen, geht der PM auch in den Zustand EIN und startet die Nachlaufzeit. Damit kann das Licht extern eingeschaltet werden und man hat die Nachlaufzeit, um den Raum zu betreten und so eine Präsenz auszulösen. Falls dies nicht passiert, geht das Licht nach der Nachlaufzeit aus.
+
+Wird während der PM im Zustand EIN ist, ein AUS als Aktorstatus empfangen, ist nicht klar, was der PM in diesem Fall machen soll. Durch die folgende Auswahl wird das Verhalten bestimmt.
+
+<!-- DOC -->
+### **Aktorstatus AUS bedeutet**
+
+Hier wird ausgewählt, was geschehen soll, wenn ein Aktorstatus AUS empfangen wird, während der PM im EIN Zustand ist.
+
+#### **Erneut einschalten**
+
+Der PM ist in diesem Fall die kontrollierende Instanz und hat Vorrang vor dem Aktorstatus. Mit dem nächsten Ereignis, dass eine interne Verarbeitung im PM auslöst, wird der Aktor erneut eingeschaltet.
+
+#### **Automatik übersteuern AUS**
+
+Der PM verhält sich so, als wenn man auf das KO Automatik übersteuern ein AUS geschickt hätte.
+
+#### **Raum verlassen**
+
+Der PM verhält sich so, als ob Raum verlassen aufgerufen worden wäre.
+
+
 ## **Ausgänge**
 
 Hier definiert man die Ausgänge für diesen Kanal.
@@ -1180,6 +1206,32 @@ Der Ausgang sendet eine Szene.
 #### **Dimmen absolut (DPT 5.001)**
 
 Der Ausgang sendet einen Dimmwert 0%..100%.
+
+<!-- DOC -->
+### **Ausgang sendet bei**
+
+Im folgenden wird eingestellt, wann der Ausgang sendet.
+
+#### **Änderung vom zu sendenden Wert**
+
+Immer wenn sich der Ausgangswert ändert, wird dieser gesendet. 
+
+#### **Änderung vom internen Schaltzustand**
+
+Nur wenn sich der interne Schaltzustand des PM geändert hat, wir der Wert gesendet. Der interne Schaltzustand ist immer EIN oder AUS, auch wenn man z.B. Dimmwerte oder Szenen sendet. Es wird also nur gesendet, wenn der Melder intern von EIN auf AUS geht oder umgekehrt.
+
+<!-- DOC -->
+### **Bei Tagesphasenwechsel**
+
+Hier kann man einstellen, ob der PM bei einem Tagesphasenwechsel seinen Zustand senden soll. Dies ist vor allem bei Szenen sinnvoll.
+
+#### **nicht senden**
+
+Beim Tagesphasenwechsel wird der aktuelle Schaltzustand nicht erneut gesendet.
+
+#### **auch senden**
+
+Beim Tagesphasenwechsel wird der aktuelle Schaltzustand gesendet.
 
 ## Sperre
 

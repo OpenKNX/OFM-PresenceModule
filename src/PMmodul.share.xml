@@ -187,6 +187,25 @@
                   <Enumeration Text="Dimmen absolut (DPT 5.001)" Value="4" Id="%ENID%" />
                 </TypeRestriction>
               </ParameterType>
+              <ParameterType Id="%AID%_PT-OutputSendBy" Name="OutputSendBy">
+                <TypeRestriction Base="Value" SizeInBit="1" UIHint="DropDown">
+                  <Enumeration Text="Änderung vom zu sendenden Wert" Value="0" Id="%ENID%" />
+                  <Enumeration Text="Änderung vom internen Schaltzustand" Value="1" Id="%ENID%" />
+                </TypeRestriction>
+              </ParameterType>
+              <ParameterType Id="%AID%_PT-OutputSendDayPhase" Name="OutputSendDayPhase">
+                <TypeRestriction Base="Value" SizeInBit="1" UIHint="DropDown">
+                  <Enumeration Text="nicht senden" Value="0" Id="%ENID%" />
+                  <Enumeration Text="auch senden" Value="1" Id="%ENID%" />
+                </TypeRestriction>
+              </ParameterType>
+              <ParameterType Id="%AID%_PT-ActorState" Name="ActorState">
+                <TypeRestriction Base="Value" SizeInBit="2">
+                  <Enumeration Text="Erneut Einschalten" Value="0" Id="%ENID%" />
+                  <Enumeration Text="Automatik übersteuern AUS" Value="1" Id="%ENID%" />
+                  <Enumeration Text="Raum verlassen" Value="2" Id="%ENID%" />
+                </TypeRestriction>
+              </ParameterType>
               <ParameterType Id="%AID%_PT-OutputFilterPM" Name="OutputFilterPM">
                 <TypeRestriction Base="Value" SizeInBit="2">
                   <Enumeration Text="nichts" Value="0" Id="%ENID%" />
