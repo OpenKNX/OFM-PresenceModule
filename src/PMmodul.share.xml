@@ -187,16 +187,12 @@
                   <Enumeration Text="Dimmen absolut (DPT 5.001)" Value="4" Id="%ENID%" />
                 </TypeRestriction>
               </ParameterType>
-              <ParameterType Id="%AID%_PT-OutputSendBy" Name="OutputSendBy">
-                <TypeRestriction Base="Value" SizeInBit="1" UIHint="DropDown">
-                  <Enumeration Text="Änderung vom zu sendenden Wert" Value="0" Id="%ENID%" />
-                  <Enumeration Text="Änderung vom internen Schaltzustand" Value="1" Id="%ENID%" />
-                </TypeRestriction>
-              </ParameterType>
-              <ParameterType Id="%AID%_PT-OutputSendDayPhase" Name="OutputSendDayPhase">
-                <TypeRestriction Base="Value" SizeInBit="1" UIHint="DropDown">
-                  <Enumeration Text="nicht senden" Value="0" Id="%ENID%" />
-                  <Enumeration Text="auch senden" Value="1" Id="%ENID%" />
+              <ParameterType Id="%AID%_PT-OutputSendAdditional" Name="OutputSendAdditional">
+                <TypeRestriction Base="Value" SizeInBit="2" UIHint="DropDown">
+                  <Enumeration Text="nichts" Value="0" Id="%ENID%" />
+                  <Enumeration Text="bei Tagesphasenänderung" Value="1" Id="%ENID%" />
+                  <Enumeration Text="bei externer Änderung" Value="2" Id="%ENID%" />
+                  <Enumeration Text="bei Tagesphasen- oder externer Änderung" Value="3" Id="%ENID%" />
                 </TypeRestriction>
               </ParameterType>
               <ParameterType Id="%AID%_PT-ActorState" Name="ActorState">

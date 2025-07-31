@@ -668,7 +668,7 @@ void PresenceChannel::onDayPhase(uint8_t iPhase, bool iIsStartup /* = false */)
 
     // day phase change should resend except on startup
     if (!iIsStartup)
-        forceOutput(true);
+        forceOutput(ParamPM_pOutput1SendAdditional & 1);
 
     // day phase change should also trigger presence processing
     startPresence(false, false);
@@ -1141,7 +1141,7 @@ void PresenceChannel::startAuto(bool iOn, bool iSuppressOutput)
         if (iSuppressOutput)
             syncOutput();
         else
-            forceOutput(true);
+            forceOutput(ParamPM_pOutput1SendAdditional > 1);
     }
 }
 
@@ -1182,7 +1182,7 @@ void PresenceChannel::startManual(bool iOn, bool iSuppressOutput)
     if (iSuppressOutput)
         syncOutput();
     else
-        forceOutput(true);
+        forceOutput(ParamPM_pOutput1SendAdditional > 1);
 }
 
 void PresenceChannel::processManual()
@@ -1406,14 +1406,27 @@ void PresenceChannel::processActorState()
     // in case of actor change we behave like Auto-On (light should go out after delay time)
     if (lValue)
         startAuto(lValue, true);
-    else
+    else if (ParamPM_pActorState == VAL_PM_AS_None)
+    {
         startLeaveRoom(true);
-    // but we do not send anything to the knx bus
-    // syncOutput();
-    // but we do not enter Auto state
-    pCurrentState &= ~STATE_AUTO;
-    // and we do not disable brightness handling
-    pCurrentValue &= ~PM_BIT_DISABLE_BRIGHTNESS;
+
+        // but we do not send anything to the knx bus
+        // syncOutput();
+        // but we do not enter Auto state
+        pCurrentState &= ~STATE_AUTO;
+        // and we do not disable brightness handling
+        pCurrentValue &= ~PM_BIT_DISABLE_BRIGHTNESS;
+    }
+    else if (ParamPM_pActorState == VAL_PM_AS_AutoOff)
+    {
+        // if actor state is manual, we start manual mode
+        startAuto(false, true);
+    }
+    else if (ParamPM_pActorState == VAL_PM_AS_LeaveRoom)
+    {
+        // if actor state is auto, we start auto mode
+        startLeaveRoom(true);
+    }
 }
 
 void PresenceChannel::startBrightnessOff()
@@ -1657,21 +1670,33 @@ void PresenceChannel::onOutput(bool iOutputIndex, bool iOn)
     uint8_t lFilter = iOutputIndex ? paramByte(PM_pAOutput2Filter, PM_pAOutput2FilterMask, PM_pAOutput2FilterShift, true) : paramByte(PM_pAOutput1Filter, PM_pAOutput1FilterMask, PM_pAOutput1FilterShift, true);
     // get correct value to send
     uint8_t lValue;
+    bool lSend = false;
     if (iOn && (lFilter & 1))
     {
         // send on value if allowed
         lValue = iOutputIndex ? paramByte(PM_pAOutput2On, true) : paramByte(PM_pAOutput1On, true);
-        if (sTypeToDpt[lType] == VAL_DPT_17)
-            lValue--;
-        getKo(iOutputIndex ? PM_KoKOpOutput2 : PM_KoKOpOutput)->value(lValue, getDPT(sTypeToDpt[lType]));
+        lSend = true;
     }
     else if (!iOn && (lFilter & 2))
     {
         // send off value if allowed
         lValue = iOutputIndex ? paramByte(PM_pAOutput2Off, true) : paramByte(PM_pAOutput1Off, true);
-        if (sTypeToDpt[lType] == VAL_DPT_17)
-            lValue--;
-        getKo(iOutputIndex ? PM_KoKOpOutput2 : PM_KoKOpOutput)->value(lValue, getDPT(sTypeToDpt[lType]));
+        lSend = true;
+    }
+    if (lSend) 
+    {
+        if (sTypeToDpt[lType] == VAL_DPT_17) lValue--;
+        GroupObject* lKo = getKo(iOutputIndex ? PM_KoKOpOutput2 : PM_KoKOpOutput);
+        // startup fix: the very fist Telegram should not be sent, because it turns light on or off after startup, which is not intended
+        if (lKo->initialized())
+        {
+            lKo->value(lValue, getDPT(sTypeToDpt[lType]));
+        }
+        else
+        {
+            // we do not send the telegram, but we set the value
+            lKo->valueNoSend(lValue, getDPT(sTypeToDpt[lType]));
+        }
     }
 }
 

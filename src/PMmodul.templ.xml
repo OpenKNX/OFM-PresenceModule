@@ -83,10 +83,8 @@
                 <Parameter Id="%AID%_UP-%TT%%CC%903" Name="p%C%PresenceKeepAlive" Offset="5" BitOffset="5" ParameterType="%AID%_PT-CheckBox" Text="    Eingang kann nicht einschalten,&#10;    aber bestehende Präsenz verlängern" Value="0" />
                 <Parameter Id="%AID%_UP-%TT%%CC%904" Name="p%C%MoveKeepAlive" Offset="5" BitOffset="6" ParameterType="%AID%_PT-CheckBox" Text="    Eingang kann nicht einschalten,&#10;    aber bestehende Präsenz verlängern" Value="0" />
                 <!-- 1 Bit free -->
-                <Parameter Id="%AID%_UP-%TT%%CC%905" Name="p%C%Output1SendBy" Offset="6" BitOffset="0" ParameterType="%AID%_PT-OutputSendBy" Text="Ausgang sendet bei" Value="0" />
-                <Parameter Id="%AID%_UP-%TT%%CC%908" Name="p%C%Output1SendDayPhase" Offset="6" BitOffset="1" ParameterType="%AID%_PT-OutputSendDayPhase" Text="Bei Tagesphasenwechsel" Value="1" />
-                <Parameter Id="%AID%_UP-%TT%%CC%906" Name="p%C%Output2SendBy" Offset="6" BitOffset="2" ParameterType="%AID%_PT-OutputSendBy" Text="Ausgang sendet bei" Value="0" />
-                <Parameter Id="%AID%_UP-%TT%%CC%909" Name="p%C%Output2SendDayPhase" Offset="6" BitOffset="3" ParameterType="%AID%_PT-OutputSendDayPhase" Text="Bei Tagesphasenwechsel" Value="1" />
+                <Parameter Id="%AID%_UP-%TT%%CC%905" Name="p%C%Output1SendAdditional" Offset="6" BitOffset="0" ParameterType="%AID%_PT-OutputSendAdditional" Text="Ausgang sendet zusätzlich" Value="3" />
+                <Parameter Id="%AID%_UP-%TT%%CC%906" Name="p%C%Output2SendAdditional" Offset="6" BitOffset="2" ParameterType="%AID%_PT-OutputSendAdditional" Text="Ausgang sendet zusätzlich" Value="3" />
                 <Parameter Id="%AID%_UP-%TT%%CC%907" Name="p%C%ActorState" Offset="6" BitOffset="4" ParameterType="%AID%_PT-ActorState" Text="Aktorstatus AUS bedeutet" Value="0" />
                 <!-- 2 Bit free -->
               </Union>
@@ -314,8 +312,6 @@
               <ParameterRef Id="%AID%_UP-%TT%%CC%905_R-%TT%%CC%90501" RefId="%AID%_UP-%TT%%CC%905" />
               <ParameterRef Id="%AID%_UP-%TT%%CC%906_R-%TT%%CC%90601" RefId="%AID%_UP-%TT%%CC%906" />
               <ParameterRef Id="%AID%_UP-%TT%%CC%907_R-%TT%%CC%90701" RefId="%AID%_UP-%TT%%CC%907" />
-              <ParameterRef Id="%AID%_UP-%TT%%CC%908_R-%TT%%CC%90801" RefId="%AID%_UP-%TT%%CC%908" />
-              <ParameterRef Id="%AID%_UP-%TT%%CC%909_R-%TT%%CC%90901" RefId="%AID%_UP-%TT%%CC%909" />
               <!-- Phase 1 -->
               <op:usePart name="PHASE" xpath="//ParameterRefs/*" instanceFrom="1" instanceTo="4" />
               <!-- Phase 2 -->
@@ -835,8 +831,7 @@
                         <ParameterRefRef RefId="%AID%_UP-%TT%%CC%006_R-%TT%%CC%00601" HelpContext="PM-Ausgang-ist-vom-Typ" IndentLevel="1" />
                         <choose ParamRefId="%AID%_UP-%TT%%CC%006_R-%TT%%CC%00601">
                           <when test="!=0">
-                            <ParameterRefRef RefId="%AID%_UP-%TT%%CC%905_R-%TT%%CC%90501" HelpContext="PM-Ausgang-sendet-bei" IndentLevel="2" />
-                            <ParameterRefRef RefId="%AID%_UP-%TT%%CC%908_R-%TT%%CC%90801" HelpContext="PM-Bei-Tagesphasenwechsel" IndentLevel="2" />
+                            <ParameterRefRef RefId="%AID%_UP-%TT%%CC%905_R-%TT%%CC%90501" HelpContext="%DOC%" IndentLevel="2" />
                           </when>
                           <when test="1">
                             <ComObjectRefRef RefId="%AID%_O-%TT%%CC%013_R-%TT%%CC%01301" />
@@ -854,8 +849,7 @@
                         <ParameterRefRef RefId="%AID%_UP-%TT%%CC%007_R-%TT%%CC%00701" HelpContext="PM-Ausgang-ist-vom-Typ" IndentLevel="1" />
                         <choose ParamRefId="%AID%_UP-%TT%%CC%007_R-%TT%%CC%00701">
                           <when test="!=0">
-                            <ParameterRefRef RefId="%AID%_UP-%TT%%CC%906_R-%TT%%CC%90601" HelpContext="PM-Ausgang-sendet-bei" IndentLevel="2" />
-                            <ParameterRefRef RefId="%AID%_UP-%TT%%CC%909_R-%TT%%CC%90901" HelpContext="PM-Bei-Tagesphasenwechsel" IndentLevel="2" />
+                            <ParameterRefRef RefId="%AID%_UP-%TT%%CC%906_R-%TT%%CC%90601" HelpContext="%DOC%" IndentLevel="2" />
                           </when>
                           <when test="1">
                             <ComObjectRefRef RefId="%AID%_O-%TT%%CC%014_R-%TT%%CC%01401" />

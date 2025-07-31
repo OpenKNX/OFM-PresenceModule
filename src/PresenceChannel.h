@@ -67,6 +67,12 @@
 #define VAL_PM_Scene 2
 #define VAL_PM_Dim 3
 
+// output additional send
+#define VAL_PM_OutputSendNone 0
+#define VAL_PM_OutputSendDayPhase 1
+#define VAL_PM_OutputSendExtern 2
+#define VAL_PM_OutputSendBoth 3
+
 // lock type
 #define VAL_PM_LockTypeNone 0
 #define VAL_PM_LockTypePriority 1
@@ -152,6 +158,11 @@
 #define VAL_PM_PHASE_FULL 0
 #define VAL_PM_PHASE_HALF_ON 1
 #define VAL_PM_PHASE_HALF_OFF 2
+
+// Actor state reaction on OFF
+#define VAL_PM_AS_None 0
+#define VAL_PM_AS_AutoOff 1
+#define VAL_PM_AS_LeaveRoom 2
 
 // forward declaration
 class Presence;

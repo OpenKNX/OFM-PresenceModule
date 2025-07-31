@@ -1208,30 +1208,25 @@ Der Ausgang sendet eine Szene.
 Der Ausgang sendet einen Dimmwert 0%..100%.
 
 <!-- DOC -->
-### **Ausgang sendet bei**
+### **Ausgang sendet zusätzlich**
 
-Im folgenden wird eingestellt, wann der Ausgang sendet.
+Ein Ausgang vom PM sendet immer bei einer Änderung des internen Zustands. Wenn also der PM intern vom EIN auf AUS geht oder umgekehrt, wird gesendet. Es gibt Situationen, bei denen dieses Verhalten nicht ausreicht. Bei Szenen will man z.B. für externe Änderungen (Manuell Übersteuern oder Automatik Übersteuern) eventuell ein erneutes Senden des Zustandes bewirken, ohne dass sich dieser geändert hat. Im folgenden können die zusätzlichen Sendebedingungen definiert werden.
 
-#### **Änderung vom zu sendenden Wert**
+#### **nichts**
 
-Immer wenn sich der Ausgangswert ändert, wird dieser gesendet. 
+Es wird immer nur bei Zustandsänderungen gesendet.
 
-#### **Änderung vom internen Schaltzustand**
+#### **bei Tagesphasenänderung**
 
-Nur wenn sich der interne Schaltzustand des PM geändert hat, wir der Wert gesendet. Der interne Schaltzustand ist immer EIN oder AUS, auch wenn man z.B. Dimmwerte oder Szenen sendet. Es wird also nur gesendet, wenn der Melder intern von EIN auf AUS geht oder umgekehrt.
+Wird die Tagesphase geändert, sendet der PM nochmal den aktuellen Ausgangszustand auf den Bus.
 
-<!-- DOC -->
-### **Bei Tagesphasenwechsel**
+#### **bei externer Änderung**
 
-Hier kann man einstellen, ob der PM bei einem Tagesphasenwechsel seinen Zustand senden soll. Dies ist vor allem bei Szenen sinnvoll.
+Wird über "Manuell Übersteuern" oder "Automatik Übersteuern" der Melder in seinem Verhalten extern geändert, wird der aktuelle Ausgangszustand auf den Bus gesendet.
 
-#### **nicht senden**
+#### **Bei Tagesphasen- oder externer Änderung**
 
-Beim Tagesphasenwechsel wird der aktuelle Schaltzustand nicht erneut gesendet.
-
-#### **auch senden**
-
-Beim Tagesphasenwechsel wird der aktuelle Schaltzustand gesendet.
+Der aktuelle Ausgangszustand wird auf den Bus gesendet, sobald sich die Tagesphase ändert oder das Verhalten vom Melder über "Manuell Übersteuern" bzw. "Automatik übersteuern" extern geändert wird.
 
 ## Sperre
 
