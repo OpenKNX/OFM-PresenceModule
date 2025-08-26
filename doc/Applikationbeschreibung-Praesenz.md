@@ -85,6 +85,11 @@ Alle Logikkanäle sind in der [Applikation Logik](https://github.com/OpenKNX/OAM
 
 Im folgenden werden Änderungen an dem Dokument erfasst, damit man nicht immer das Gesamtdokument lesen muss, um Neuerungen zu erfahren.
 
+04.08.2025: Firmware 3.8, Applikation 3.8
+
+* NEU: Beim Ausgang kann man jetzt das Sendeverhalten beeinflussen und explizit angeben, wann Telegramme wiederholt werden sollen, siehe [Ausgang sendet zusätzlich](#ausgang-sendet-zusätzlich)
+* NEU: Die Reaktion des PM auf eine unerwartete Änderung vom Aktorstatus kann jetzt explizit angegeben werden, siehe [Aktorstatus AUS bedeutet](#aktorstatus-aus-bedeutet)
+
 17.07.2025: Firmware 3.7, Applikation 3.7
 
 * NEU: "Ausschalten über Helligkeit" kann durch manuelle Aktionen (Automatik übersteuern, Manuell übersteuern) deaktiviert werden. 
