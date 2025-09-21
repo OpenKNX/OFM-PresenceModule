@@ -56,8 +56,6 @@ class Presence : public OpenKNX::Module
     bool mapKO(uint16_t iKoNumber, sKoMap **iKoMap);
     const std::string name() override;
     const std::string version() override;
-    void savePower() override;
-    bool restorePower() override;
     bool processFunctionProperty(uint8_t objectIndex, uint8_t propertyId, uint8_t length, uint8_t *data, uint8_t *resultData, uint8_t &resultLength) override;
 
   private:

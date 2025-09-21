@@ -35,24 +35,6 @@ const std::string Presence::version()
     return MODULE_PresenceModule_Version;
 }
 
-void Presence::savePower()
-{
-#ifdef HF_POWER_PIN
-    if (ParamPM_HfPresence == VAL_PM_PS_Hf_HLKLD2420)
-        static_cast<SensorHLKLD2420 *>(mPresenceSensor)->switchPower(false);
-#endif
-}
-
-bool Presence::restorePower()
-{
-#ifdef HF_POWER_PIN
-    if (ParamPM_HfPresence == VAL_PM_PS_Hf_HLKLD2420)
-        static_cast<SensorHLKLD2420 *>(mPresenceSensor)->switchPower(true);
-#endif
-
-    return true;
-}
-
 void Presence::addKoMap(uint16_t iKoNumber, uint8_t iChannelId, uint8_t iKoIndex)
 {
     // first implementation, in future we use sorted insert
@@ -110,10 +92,10 @@ void Presence::showHelp()
     openknx.console.printHelpLine("vpm chNN state", "Print state flags for channel NN");
     openknx.console.printHelpLine("vpm chNN all", "Exec all channel commands for channel NN");
 
-#ifdef HF_POWER_PIN
-    if (ParamPM_HfPresence == VAL_PM_PS_Hf_HLKLD2420)
-        static_cast<SensorHLKLD2420 *>(mPresenceSensor)->showHelp();
-#endif
+// #ifdef HF_POWER_PIN
+//     if (ParamPM_HfPresence == VAL_PM_PS_Hf_HLKLD2420)
+//         static_cast<SensorHLKLD2420 *>(mPresenceSensor)->showHelp();
+// #endif
 }
 
 bool Presence::processCommand(const std::string iCmd, bool iDebugKo)
@@ -179,10 +161,10 @@ bool Presence::processCommand(const std::string iCmd, bool iDebugKo)
     }
     else if (iCmd.substr(0, 3) == "hlk")
     {
-#ifdef HF_POWER_PIN
-        if (ParamPM_HfPresence == VAL_PM_PS_Hf_HLKLD2420)
-            lResult = static_cast<SensorHLKLD2420 *>(mPresenceSensor)->processCommand(iCmd, iDebugKo);
-#endif
+// #ifdef HF_POWER_PIN
+//         if (ParamPM_HfPresence == VAL_PM_PS_Hf_HLKLD2420)
+//             lResult = static_cast<SensorHLKLD2420 *>(mPresenceSensor)->processCommand(iCmd, iDebugKo);
+// #endif
     }
 
     return lResult;
