@@ -15,22 +15,22 @@
           <Static>
             <Parameters>
               <!-- HLK-HF-Sensor management (extended steup page) -->
-                <Parameter Id="%AID%_P-%TT%99%PPP+00%" Name="%RowName%00" ParameterType="%AID%_PT-dBValue" Text="%RowText%" Value="0" Access="%Access%" />
-                <Parameter Id="%AID%_P-%TT%99%PPP+01%" Name="%RowName%01" ParameterType="%AID%_PT-dBValue" Text="%RowText%" Value="0" Access="%Access%" />
-                <Parameter Id="%AID%_P-%TT%99%PPP+02%" Name="%RowName%02" ParameterType="%AID%_PT-dBValue" Text="%RowText%" Value="0" Access="%Access%" />
-                <Parameter Id="%AID%_P-%TT%99%PPP+03%" Name="%RowName%03" ParameterType="%AID%_PT-dBValue" Text="%RowText%" Value="0" Access="%Access%" />
-                <Parameter Id="%AID%_P-%TT%99%PPP+04%" Name="%RowName%04" ParameterType="%AID%_PT-dBValue" Text="%RowText%" Value="0" Access="%Access%" />
-                <Parameter Id="%AID%_P-%TT%99%PPP+05%" Name="%RowName%05" ParameterType="%AID%_PT-dBValue" Text="%RowText%" Value="0" Access="%Access%" />
-                <Parameter Id="%AID%_P-%TT%99%PPP+06%" Name="%RowName%06" ParameterType="%AID%_PT-dBValue" Text="%RowText%" Value="0" Access="%Access%" />
-                <Parameter Id="%AID%_P-%TT%99%PPP+07%" Name="%RowName%07" ParameterType="%AID%_PT-dBValue" Text="%RowText%" Value="0" Access="%Access%" />
-                <Parameter Id="%AID%_P-%TT%99%PPP+08%" Name="%RowName%08" ParameterType="%AID%_PT-dBValue" Text="%RowText%" Value="0" Access="%Access%" />
-                <Parameter Id="%AID%_P-%TT%99%PPP+09%" Name="%RowName%09" ParameterType="%AID%_PT-dBValue" Text="%RowText%" Value="0" Access="%Access%" />
-                <Parameter Id="%AID%_P-%TT%99%PPP+10%" Name="%RowName%10" ParameterType="%AID%_PT-dBValue" Text="%RowText%" Value="0" Access="%Access%" />
-                <Parameter Id="%AID%_P-%TT%99%PPP+11%" Name="%RowName%11" ParameterType="%AID%_PT-dBValue" Text="%RowText%" Value="0" Access="%Access%" />
-                <Parameter Id="%AID%_P-%TT%99%PPP+12%" Name="%RowName%12" ParameterType="%AID%_PT-dBValue" Text="%RowText%" Value="0" Access="%Access%" />
-                <Parameter Id="%AID%_P-%TT%99%PPP+13%" Name="%RowName%13" ParameterType="%AID%_PT-dBValue" Text="%RowText%" Value="0" Access="%Access%" />
-                <Parameter Id="%AID%_P-%TT%99%PPP+14%" Name="%RowName%14" ParameterType="%AID%_PT-dBValue" Text="%RowText%" Value="0" Access="%Access%" />
-                <Parameter Id="%AID%_P-%TT%99%PPP+15%" Name="%RowName%15" ParameterType="%AID%_PT-dBValue" Text="%RowText%" Value="0" Access="%Access%" />
+                <Parameter Id="%AID%_P-%TT%99%PPP+00%" Name="%RowName%00" ParameterType="%AID%_PT-dBValue" Text="%RowText%" Value="100" Access="%Access%" />
+                <Parameter Id="%AID%_P-%TT%99%PPP+01%" Name="%RowName%01" ParameterType="%AID%_PT-dBValue" Text="%RowText%" Value="100" Access="%Access%" />
+                <Parameter Id="%AID%_P-%TT%99%PPP+02%" Name="%RowName%02" ParameterType="%AID%_PT-dBValue" Text="%RowText%" Value="100" Access="%Access%" />
+                <Parameter Id="%AID%_P-%TT%99%PPP+03%" Name="%RowName%03" ParameterType="%AID%_PT-dBValue" Text="%RowText%" Value="100" Access="%Access%" />
+                <Parameter Id="%AID%_P-%TT%99%PPP+04%" Name="%RowName%04" ParameterType="%AID%_PT-dBValue" Text="%RowText%" Value="100" Access="%Access%" />
+                <Parameter Id="%AID%_P-%TT%99%PPP+05%" Name="%RowName%05" ParameterType="%AID%_PT-dBValue" Text="%RowText%" Value="100" Access="%Access%" />
+                <Parameter Id="%AID%_P-%TT%99%PPP+06%" Name="%RowName%06" ParameterType="%AID%_PT-dBValue" Text="%RowText%" Value="100" Access="%Access%" />
+                <Parameter Id="%AID%_P-%TT%99%PPP+07%" Name="%RowName%07" ParameterType="%AID%_PT-dBValue" Text="%RowText%" Value="100" Access="%Access%" />
+                <Parameter Id="%AID%_P-%TT%99%PPP+08%" Name="%RowName%08" ParameterType="%AID%_PT-dBValue" Text="%RowText%" Value="100" Access="%Access%" />
+                <Parameter Id="%AID%_P-%TT%99%PPP+09%" Name="%RowName%09" ParameterType="%AID%_PT-dBValue" Text="%RowText%" Value="100" Access="%Access%" />
+                <Parameter Id="%AID%_P-%TT%99%PPP+10%" Name="%RowName%10" ParameterType="%AID%_PT-dBValue" Text="%RowText%" Value="100" Access="%Access%" />
+                <Parameter Id="%AID%_P-%TT%99%PPP+11%" Name="%RowName%11" ParameterType="%AID%_PT-dBValue" Text="%RowText%" Value="100" Access="%Access%" />
+                <Parameter Id="%AID%_P-%TT%99%PPP+12%" Name="%RowName%12" ParameterType="%AID%_PT-dBValue" Text="%RowText%" Value="100" Access="%Access%" />
+                <Parameter Id="%AID%_P-%TT%99%PPP+13%" Name="%RowName%13" ParameterType="%AID%_PT-dBValue" Text="%RowText%" Value="100" Access="%Access%" />
+                <Parameter Id="%AID%_P-%TT%99%PPP+14%" Name="%RowName%14" ParameterType="%AID%_PT-dBValue" Text="%RowText%" Value="100" Access="%Access%" />
+                <Parameter Id="%AID%_P-%TT%99%PPP+15%" Name="%RowName%15" ParameterType="%AID%_PT-dBValue" Text="%RowText%" Value="100" Access="%Access%" />
             </Parameters>
             <ParameterRefs>
               <ParameterRef Id="%AID%_P-%TT%99%PPP+00%_R-%TT%99%PPP+00%01" RefId="%AID%_P-%TT%99%PPP+00%" />

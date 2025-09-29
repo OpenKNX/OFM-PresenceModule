@@ -85,6 +85,12 @@ Alle Logikkanäle sind in der [Applikation Logik](https://github.com/OpenKNX/OAM
 
 Im folgenden werden Änderungen an dem Dokument erfasst, damit man nicht immer das Gesamtdokument lesen muss, um Neuerungen zu erfahren.
 
+
+27.09.2025: Firmware 3.9, Applikation 3.9
+
+* FIX: Der untere Wert für die HLK-Werte Trigger und Halten sind jetzt auf 100 erhöht, da Werte kleiner 100 beim Neustart vom PM zu Problemen führen konnten (sehr selten)
+* FIX: Der Neustart vom HLK-Sensor wurde robuster gestaltet
+
 04.08.2025: Firmware 3.8, Applikation 3.8
 
 * NEU: Beim Ausgang kann man jetzt das Sendeverhalten beeinflussen und explizit angeben, wann Telegramme wiederholt werden sollen, siehe [Ausgang sendet zusätzlich](#ausgang-sendet-zusätzlich)

@@ -85,7 +85,7 @@
                 <TypeText SizeInBit="120" />
               </ParameterType>
               <ParameterType Id="%AID%_PT-dBValue" Name="dBValue">
-                <TypeNumber SizeInBit="16" Type="unsignedInt" minInclusive="0" maxInclusive="9332" />
+                <TypeNumber SizeInBit="16" Type="unsignedInt" minInclusive="100" maxInclusive="9332" />
               </ParameterType>
               <ParameterType Id="%AID%_PT-dBValueDelta" Name="dBValueDelta">
                 <TypeNumber SizeInBit="16" Type="signedInt" minInclusive="-9332" maxInclusive="9332" />
