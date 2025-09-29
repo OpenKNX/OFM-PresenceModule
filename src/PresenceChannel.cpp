@@ -615,7 +615,7 @@ void PresenceChannel::startDayPhase(uint8_t iPhase, bool iForce /* = false*/)
     if (iForce || ParamPM_pPhaseChange)
     {
         // we change immediately
-        onDayPhase(mNextDayPhase);
+        onDayPhase(mNextDayPhase, false);
     }
     else
     {
@@ -634,7 +634,7 @@ void PresenceChannel::processDayPhase()
         // first check, if day phase is valid and if it really changed
         if (mNextDayPhase < 0 || mCurrentDayPhase == mNextDayPhase)
             return;
-        onDayPhase(mNextDayPhase);
+        onDayPhase(mNextDayPhase, false);
     }
 }
 
@@ -668,7 +668,7 @@ void PresenceChannel::onDayPhase(uint8_t iPhase, bool iIsStartup /* = false */)
 
     // day phase change should resend except on startup
     if (!iIsStartup)
-        forceOutput(ParamPM_pOutput1SendAdditional & 1);
+        forceOutput((ParamPM_pOutput1SendAdditional & VAL_PM_SendAdd_DayPhase) || (ParamPM_pOutput2SendAdditional & VAL_PM_SendAdd_DayPhase));
 
     // day phase change should also trigger presence processing
     startPresence(false, false);
@@ -1141,7 +1141,7 @@ void PresenceChannel::startAuto(bool iOn, bool iSuppressOutput)
         if (iSuppressOutput)
             syncOutput();
         else
-            forceOutput(ParamPM_pOutput1SendAdditional > 1);
+            forceOutput((ParamPM_pOutput1SendAdditional & VAL_PM_SendAdd_ActorState) || (ParamPM_pOutput2SendAdditional & VAL_PM_SendAdd_ActorState));
     }
 }
 
@@ -1182,7 +1182,7 @@ void PresenceChannel::startManual(bool iOn, bool iSuppressOutput)
     if (iSuppressOutput)
         syncOutput();
     else
-        forceOutput(ParamPM_pOutput1SendAdditional > 1);
+        forceOutput((ParamPM_pOutput1SendAdditional & VAL_PM_SendAdd_ActorState) || (ParamPM_pOutput2SendAdditional & VAL_PM_SendAdd_ActorState));
 }
 
 void PresenceChannel::processManual()

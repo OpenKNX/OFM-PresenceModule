@@ -164,6 +164,13 @@
 #define VAL_PM_AS_AutoOff 1
 #define VAL_PM_AS_LeaveRoom 2
 
+// send additional output value
+#define VAL_PM_SendAdd_None 0
+#define VAL_PM_SendAdd_DayPhase 1
+#define VAL_PM_SendAdd_ActorState 2
+#define VAL_PM_SendAdd_Both 3
+
+
 // forward declaration
 class Presence;
 
