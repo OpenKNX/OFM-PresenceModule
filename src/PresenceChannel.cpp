@@ -1799,6 +1799,10 @@ void PresenceChannel::prepareInternalKo()
 
 void PresenceChannel::setup()
 {
+    // Skip setup if Channel is not active
+    if (ParamPM_pChannelActive != PM_VAL_ActiveYes)
+        return;
+
     prepareInternalKo();
     onDayPhase(0, false);
 
