@@ -1687,16 +1687,18 @@ void PresenceChannel::onOutput(bool iOutputIndex, bool iOn)
     {
         if (sTypeToDpt[lType] == VAL_DPT_17) lValue--;
         GroupObject* lKo = getKo(iOutputIndex ? PM_KoKOpOutput2 : PM_KoKOpOutput);
-        // startup fix: the very fist Telegram should not be sent, because it turns light on or off after startup, which is not intended
-        if (lKo->initialized())
-        {
-            lKo->value(lValue, getDPT(sTypeToDpt[lType]));
-        }
-        else
-        {
-            // we do not send the telegram, but we set the value
-            lKo->valueNoSend(lValue, getDPT(sTypeToDpt[lType]));
-        }
+        lKo->value(lValue, getDPT(sTypeToDpt[lType]));
+        // seems to have side effects, currently disabled
+        // // startup fix: the very fist Telegram should not be sent, because it turns light on or off after startup, which is not intended
+        // if (lKo->initialized())
+        // {
+        //     lKo->value(lValue, getDPT(sTypeToDpt[lType]));
+        // }
+        // else
+        // {
+        //     // we do not send the telegram, but we set the value
+        //     lKo->valueNoSend(lValue, getDPT(sTypeToDpt[lType]));
+        // }
     }
 }
 

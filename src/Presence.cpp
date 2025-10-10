@@ -552,20 +552,21 @@ void Presence::processHardwarePresence()
                 // }
                 if (openknxSensorDevicesModule.measureValue(MeasureType::Distance, lValue))
                 {
+                    bool lMove = false;
                     if (mDistance != lValue)
                     {
                         mDistance = lValue;
+                        lMove = (mDistance > 0.0);
                         GroupObject &lKo = knx.getGroupObject(PM_KoMoveSpeedOut);
                         lKo.value(mDistance, getDPT(VAL_DPT_14));
-                        if (((mDistance <= 0.0) && (mMove > 0)) || ((mMove > 0) != (mDistance > 0.0) && delayCheck(mPresenceDelay, 500))) {
-                            mMove = (mDistance > 0.0);
-                            if (mMove > 0) 
-                            {
-                                MoveTrigger = true;
-                                mPresenceDelay = millis();
-                            }
-                            knx.getGroupObject(PM_KoMoveOut).value(mMove, getDPT(VAL_DPT_1));
-                        }
+                    }
+                    if (delayCheck(mPresenceDelay, 500) && lMove != mMove) {
+                        mMove = lMove;
+                        mPresenceDelay = millis();
+                        processLED(mMove > 0, CallerMove);
+                        knx.getGroupObject(PM_KoMoveOut).value(mMove, getDPT(VAL_DPT_1));
+                        if (mMove > 0) 
+                            MoveTrigger = true;
                     }
                 }
                 break;

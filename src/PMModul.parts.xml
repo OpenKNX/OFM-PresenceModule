@@ -24,7 +24,7 @@
                 <Parameter Id="%AID%_UP-%TT%%CC%%PPP+05%" Name="p%Pl%%C%Output1Filter" Offset="0" BitOffset="4" ParameterType="%AID%_PT-OutputFilterPM" Text="Ausgang 1 sendet" Value="3" />
                 <Parameter Id="%AID%_UP-%TT%%CC%%PPP+06%" Name="p%Pl%%C%Output2Filter" Offset="0" BitOffset="6" ParameterType="%AID%_PT-OutputFilterPM" Text="Ausgang 2 sendet" Value="3" />
                 <Parameter Id="%AID%_UP-%TT%%CC%%PPP+35%" Name="p%Pl%%C%ManualWithPresence" Offset="1" BitOffset="0" ParameterType="%AID%_PT-OnOffYesNo" Text="Manueller Modus ist präsenzabhängig?" Value="0" />
-                <Parameter Id="%AID%_UP-%TT%%CC%%PPP+37%" Name="p%Pl%%C%PresenceShortNoSwitch" Offset="1" BitOffset="1" ParameterType="%AID%_PT-OnOffYesNo" Text="Erst nach der Kurzzeitpräsenz schalten&#10;(z.B. Durchgangsraum)" Value="0" />
+                <Parameter Id="%AID%_UP-%TT%%CC%%PPP+37%" Name="p%Pl%%C%PresenceShortNoSwitch" Offset="1" BitOffset="1" ParameterType="%AID%_PT-OnOffYesNo" Text="Erst nach Kurzzeitpräsenz schalten&#10;(z.B. Durchgangsraum)" Value="0" />
                 <Parameter Id="%AID%_UP-%TT%%CC%%PPP+38%" Name="p%Pl%%C%PresenceShortCalculation" Offset="1" BitOffset="2" ParameterType="%AID%_PT-PresenceShortCalculation" Text="Kurzzeitpräsenz wird ermittelt anhand vom" Value="0" />
                 <Parameter Id="%AID%_UP-%TT%%CC%%PPP+39%" Name="p%Pl%%C%DayPhaseFunction" Offset="1" BitOffset="3" ParameterType="%AID%_PT-DayPhaseFunction" Text="Funktion der Tagesphase" Value="0" />
                 <Parameter Id="%AID%_UP-%TT%%CC%%PPP+40%" Name="p%Pl%%C%BrightnessSuppress" Offset="1" BitOffset="5" ParameterType="%AID%_PT-OnOffYesNo" Text="Manuelles Schalten verhindert&#10;Ausschalten über Helligkeit" Value="0" />
@@ -254,7 +254,7 @@
                           <ParameterRefRef RefId="%AID%_UP-%TT%%CC%%PPP+11%_R-%TT%%CC%%PPP+11%01" Cell="1,4" HelpContext="%DOC%" />
                         </ParameterBlock>
                         <!-- end of delay pattern -->
-                        <ParameterRefRef RefId="%AID%_UP-%TT%%CC%%PPP+37%_R-%TT%%CC%%PPP+37%01" HelpContext="PM-Erst-nach-der-Kurzzeitpraesenz-schalten" />
+                        <ParameterRefRef RefId="%AID%_UP-%TT%%CC%%PPP+37%_R-%TT%%CC%%PPP+37%01" HelpContext="PM-Erst-nach-der-Kurzzeitpraesenz-schalten" IndentLevel="1" />
                       </when>
                     </choose>
                     <choose ParamRefId="%AID%_UP-%TT%%CC%035_R-%TT%%CC%03501">
