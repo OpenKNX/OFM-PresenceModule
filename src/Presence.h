@@ -80,8 +80,8 @@ class Presence : public OpenKNX::Module
 // brightness is missing
 #ifdef HF_POWER_PIN
     Sensor *mPresenceSensor;
-#endif
     Sensor *mBrightnessSensor;
+#endif
     uint32_t mBrightnessDelay = 0;
     uint32_t mBrightnessProcess = 0;
     float mLux = NO_NUM;

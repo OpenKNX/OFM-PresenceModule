@@ -314,8 +314,7 @@ void Presence::startSensors()
             mPirSensitivity = ParamPM_PirSensitivity;
             break;
     }
-#endif
-
+    
     switch (ParamPM_HWLux)
     {
         case VAL_PM_LUX_VEML:
@@ -329,6 +328,7 @@ void Presence::startSensors()
     }
     // now start all sensors at the correct speed
     openknxSensorDevicesModule.beginSensors();
+#endif
 }
 
 void Presence::switchHfSensor(bool iOn)
@@ -620,6 +620,7 @@ void Presence::processHardwarePresence()
 
 void Presence::processHardwareLux()
 {
+#ifdef HF_POWER_PIN
     if (mBrightnessSensor != 0)
     {
         float lValue = 0;
@@ -653,6 +654,7 @@ void Presence::processHardwareLux()
             }
         }
     }
+#endif
 }
 
 float Presence::getHardwareBrightness()
