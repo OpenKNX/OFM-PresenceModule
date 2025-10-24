@@ -668,7 +668,7 @@ void PresenceChannel::onDayPhase(uint8_t iPhase, bool iIsStartup /* = false */)
 
     // day phase change should resend except on startup
     if (!iIsStartup)
-        forceOutput((ParamPM_pOutput1SendAdditional & VAL_PM_SendAdd_DayPhase) || (ParamPM_pOutput2SendAdditional & VAL_PM_SendAdd_DayPhase));
+        forceOutput((ParamPM_pOutput1SendAdditional & VAL_PM_Force_DayPhase) || (ParamPM_pOutput2SendAdditional & VAL_PM_Force_DayPhase), VAL_PM_Force_DayPhase);
 
     // day phase change should also trigger presence processing
     startPresence(false, false);
@@ -1141,7 +1141,7 @@ void PresenceChannel::startAuto(bool iOn, bool iSuppressOutput)
         if (iSuppressOutput)
             syncOutput();
         else
-            forceOutput((ParamPM_pOutput1SendAdditional & VAL_PM_SendAdd_ActorState) || (ParamPM_pOutput2SendAdditional & VAL_PM_SendAdd_ActorState));
+            forceOutput((ParamPM_pOutput1SendAdditional & VAL_PM_Force_ActorState) || (ParamPM_pOutput2SendAdditional & VAL_PM_Force_ActorState), VAL_PM_Force_ActorState);
     }
 }
 
@@ -1182,7 +1182,7 @@ void PresenceChannel::startManual(bool iOn, bool iSuppressOutput)
     if (iSuppressOutput)
         syncOutput();
     else
-        forceOutput((ParamPM_pOutput1SendAdditional & VAL_PM_SendAdd_ActorState) || (ParamPM_pOutput2SendAdditional & VAL_PM_SendAdd_ActorState));
+        forceOutput((ParamPM_pOutput1SendAdditional & VAL_PM_Force_ActorState) || (ParamPM_pOutput2SendAdditional & VAL_PM_Force_ActorState), VAL_PM_Force_ActorState);
 }
 
 void PresenceChannel::processManual()
@@ -1607,12 +1607,12 @@ void PresenceChannel::startOutput(bool iOn)
         pCurrentValue &= ~PM_BIT_OUTPUT_SET;
 }
 
-void PresenceChannel::forceOutput(bool iOn)
+void PresenceChannel::forceOutput(bool iOn, uint32_t iForceFilter)
 {
-    if (iOn)
-        pCurrentValue |= PM_BIT_OUTPUT_FORCE;
+    if (iOn) 
+        pCurrentValue |= (PM_BIT_OUTPUT_FORCE | (iForceFilter << PM_VAL_OUTPUT_FORCE_SHIFT));
     else
-        pCurrentValue &= ~PM_BIT_OUTPUT_FORCE;
+        pCurrentValue &= ~(PM_BIT_OUTPUT_FORCE | PM_VAL_OUTPUT_FORCE_MASK);
 }
 
 void PresenceChannel::syncOutput()
@@ -1631,7 +1631,14 @@ void PresenceChannel::processOutput()
     {
         if (pCurrentValue & PM_BIT_OUTPUT_FORCE)
         {
-            lOutput = 3;
+            // eval according force filter
+            uint8_t lFilter = (pCurrentValue & PM_VAL_OUTPUT_FORCE_MASK) >> PM_VAL_OUTPUT_FORCE_SHIFT;
+            if (lFilter == VAL_PM_Force_Both || lFilter == VAL_PM_Force_None)
+                lOutput = 3;
+            else { 
+                if (lFilter & ParamPM_pOutput1SendAdditional) lOutput = 1;
+                if (lFilter & ParamPM_pOutput2SendAdditional) lOutput |= 2;
+            }
         } else {
             // check for send because of output state change
             uint8_t lValue = pCurrentValue & (PM_BIT_OUTPUT_SET | PM_BIT_OUTPUT_WRITTEN);

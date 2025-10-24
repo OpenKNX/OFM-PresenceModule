@@ -30,12 +30,17 @@
 #define STATE_KO_CHANGE_STATE 0x08000000
 
 // Value marker (BITFIELD)
-#define PM_BIT_OUTPUT_SET 1         // output value to send
-#define PM_BIT_OUTPUT_WRITTEN 2     // output value sent
-#define PM_BIT_OUTPUT_FORCE 4       // output value sent
-#define PM_BIT_DISABLE_BRIGHTNESS 8 // Brightness off temporarily disabled
+#define PM_BIT_OUTPUT_SET 1                // output value to send
+#define PM_BIT_OUTPUT_WRITTEN 2            // output value sent
+#define PM_BIT_OUTPUT_FORCE 4              // output value sent
+#define PM_BIT_DISABLE_BRIGHTNESS 8        // Brightness off temporarily disabled
+#define PM_BIT_OUTPUT_FORCE_DAYPHASE 16    // force send value on dayphase change
+#define PM_BIT_OUTPUT_FORCE_ACTORSTATE 32  // forde send value on actorstate change
 
 #define PM_VAL_OUTPUT_MASK (PM_BIT_OUTPUT_SET | PM_BIT_OUTPUT_WRITTEN)
+#define PM_VAL_OUTPUT_FORCE_MASK (PM_BIT_OUTPUT_FORCE_DAYPHASE | PM_BIT_OUTPUT_FORCE_ACTORSTATE)
+#define PM_VAL_OUTPUT_FORCE_SHIFT 4
+
 
 #define PM_VAL_ActiveNo 0
 #define PM_VAL_ActiveYes 1
@@ -165,10 +170,10 @@
 #define VAL_PM_AS_LeaveRoom 2
 
 // send additional output value
-#define VAL_PM_SendAdd_None 0
-#define VAL_PM_SendAdd_DayPhase 1
-#define VAL_PM_SendAdd_ActorState 2
-#define VAL_PM_SendAdd_Both 3
+#define VAL_PM_Force_None 0
+#define VAL_PM_Force_DayPhase 1
+#define VAL_PM_Force_ActorState 2
+#define VAL_PM_Force_Both 3
 
 
 // forward declaration
@@ -267,7 +272,7 @@ class PresenceChannel : public OpenKNX::Channel
     void onDayPhase(uint8_t iPhase, bool iIsStartup = false);
 
     void startOutput(bool iOn);
-    void forceOutput(bool iOn);
+    void forceOutput(bool iOn, uint32_t iForceFilter = VAL_PM_Force_None);
     void syncOutput();
     void processOutput();
     void onOutput(bool iOutputIndex, bool iOn);
