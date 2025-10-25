@@ -260,6 +260,13 @@
                   <Enumeration Text="Bewegung" Value="1" Id="%ENID%" />
                 </TypeRestriction>
               </ParameterType>
+              <ParameterType Id="%AID%_PT-MoveUsage" Name="MoveUsage">
+                <TypeRestriction Base="Value" SizeInBit="2" UIHint="DropDown">
+                  <Enumeration Text="vom HF-Sensor und PIR" Value="0" Id="%ENID%" />
+                  <Enumeration Text="nur vom HF-Sensor" Value="1" Id="%ENID%" />
+                  <Enumeration Text="nur vom PIR" Value="2" Id="%ENID%" />
+                </TypeRestriction>
+              </ParameterType>
               <ParameterType Id="%AID%_PT-PresenceShortCalculation" Name="PresenceShortCalculation">
                 <TypeRestriction Base="Value" SizeInBit="1" UIHint="DropDown">
                   <Enumeration Text="Bewegungssignal" Value="0" Id="%ENID%" />

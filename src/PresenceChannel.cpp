@@ -707,12 +707,23 @@ float PresenceChannel::getRawBrightness()
     return lResult;
 }
 
+bool PresenceChannel::getHardwareMove()
+{
+    bool lPresence = false;
+    if (ParamPM_pMoveUsage == VAL_PM_MoveUsageBoth || ParamPM_pMoveUsage == VAL_PM_MoveUsageHF)
+        lPresence = openknxPresenceModule.getHardwareMoveHF();
+    if (!lPresence && (ParamPM_pMoveUsage == VAL_PM_MoveUsageBoth || ParamPM_pMoveUsage == VAL_PM_MoveUsagePIR))
+        lPresence = openknxPresenceModule.getHardwareMovePIR();
+    return lPresence;
+}
+
 bool PresenceChannel::getHardwarePresence(bool iJustMove /* false */)
 {
     // if hardware presence sensor is available, we evaluate its value
     bool lPresence = false;
-    if (ParamPM_pPresenceUsage >= VAL_PM_PresenceUsageMove)
-        lPresence = openknxPresenceModule.getHardwareMove();
+    if (ParamPM_pPresenceUsage >= VAL_PM_PresenceUsageMove) {
+        getHardwareMove();
+    }
     if (!iJustMove && !lPresence && ParamPM_pPresenceUsage == VAL_PM_PresenceUsagePresence)
         lPresence = openknxPresenceModule.getHardwarePresence();
     return lPresence;
@@ -734,7 +745,7 @@ void PresenceChannel::startHardwarePresence()
     bool lTrigger = false;
     if (ParamPM_pPresenceUsage >= VAL_PM_PresenceUsageMove)
     {
-        lValue = openknxPresenceModule.getHardwareMove();
+        lValue = getHardwareMove();
         if (mHardwareMove != lValue)
         {
             mHardwareMove = lValue;
@@ -1813,7 +1824,7 @@ void PresenceChannel::setup()
         return;
 
     prepareInternalKo();
-    onDayPhase(0, false);
+    onDayPhase(0, true);
 
     // init output
     startOutput(false);

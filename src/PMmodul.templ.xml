@@ -86,7 +86,7 @@
                 <Parameter Id="%AID%_UP-%TT%%CC%905" Name="p%C%Output1SendAdditional" Offset="6" BitOffset="0" ParameterType="%AID%_PT-OutputSendAdditional" Text="Ausgang sendet zusätzlich" Value="3" />
                 <Parameter Id="%AID%_UP-%TT%%CC%906" Name="p%C%Output2SendAdditional" Offset="6" BitOffset="2" ParameterType="%AID%_PT-OutputSendAdditional" Text="Ausgang sendet zusätzlich" Value="3" />
                 <Parameter Id="%AID%_UP-%TT%%CC%907" Name="p%C%ActorState" Offset="6" BitOffset="4" ParameterType="%AID%_PT-ActorState" Text="Aktorstatus AUS bedeutet" Value="0" />
-                <!-- 2 Bit free -->
+                <Parameter Id="%AID%_UP-%TT%%CC%908" Name="p%C%MoveUsage" Offset="6" BitOffset="6" ParameterType="%AID%_PT-MoveUsage" Text="Bewegungssignal auswerten" Value="0" />
               </Union>
               <!-- Delay patterns (once per channel) -->
               <Union SizeInBit="64">
@@ -312,6 +312,7 @@
               <ParameterRef Id="%AID%_UP-%TT%%CC%905_R-%TT%%CC%90501" RefId="%AID%_UP-%TT%%CC%905" />
               <ParameterRef Id="%AID%_UP-%TT%%CC%906_R-%TT%%CC%90601" RefId="%AID%_UP-%TT%%CC%906" />
               <ParameterRef Id="%AID%_UP-%TT%%CC%907_R-%TT%%CC%90701" RefId="%AID%_UP-%TT%%CC%907" />
+              <ParameterRef Id="%AID%_UP-%TT%%CC%908_R-%TT%%CC%90801" RefId="%AID%_UP-%TT%%CC%908" />
               <!-- Phase 1 -->
               <op:usePart name="PHASE" xpath="//ParameterRefs/*" instanceFrom="1" instanceTo="4" />
               <!-- Phase 2 -->
@@ -523,7 +524,7 @@
                         <!-- is there also HF presence hardware -->
                         <choose ParamRefId="%AID%_UP-%TT%00006_R-%TT%0000601">
                           <when test="0">
-                            <!-- is there also PIR presence hardware -->
+                            <!-- no HF, is there also PIR presence hardware -->
                             <choose ParamRefId="%AID%_UP-%TT%00022_R-%TT%0002201">
                               <when test="&gt;0">
                                 <ParameterRefRef RefId="%AID%_UP-%TT%%CC%036_R-%TT%%CC%03601" HelpContext="%DOC%" IndentLevel="1" />
@@ -536,10 +537,17 @@
                             </choose>
                           </when>
                           <when test="!=0">
+                            <!-- there is HF, we ask für presence or move -->
                             <ParameterRefRef RefId="%AID%_UP-%TT%%CC%035_R-%TT%%CC%03501" HelpContext="%DOC%" IndentLevel="1" />
                             <choose ParamRefId="%AID%_UP-%TT%%CC%035_R-%TT%%CC%03501">
                               <when test="&gt;0">
                                 <Assign TargetParamRefRef="%AID%_P-%TT%%CC%095_R-%TT%%CC%09501" Value="1" />
+                                <!-- is there also PIR presence hardware -->
+                                <choose ParamRefId="%AID%_UP-%TT%00022_R-%TT%0002201">
+                                  <when test="&gt;0">
+                                    <ParameterRefRef RefId="%AID%_UP-%TT%%CC%908_R-%TT%%CC%90801" HelpContext="%DOC%" IndentLevel="2" />
+                                  </when>
+                                </choose>
                               </when>
                             </choose>
                           </when>

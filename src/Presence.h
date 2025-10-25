@@ -39,10 +39,12 @@ class Presence : public OpenKNX::Module
 
     // instance
     bool PresenceTrigger = false;
-    bool MoveTrigger = false;
+    bool MoveTriggerPIR = false;
+    bool MoveTriggerHF = false;
     bool getHardwarePresence();
     float getHardwareBrightness();
-    bool getHardwareMove();
+    bool getHardwareMovePIR();
+    bool getHardwareMoveHF();
     void processLED(bool iOn, LedCaller iCaller);
     void processReadRequests();
     void processInputKo(GroupObject &iKo);

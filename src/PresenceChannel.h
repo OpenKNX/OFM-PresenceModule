@@ -62,6 +62,11 @@
 #define VAL_PM_PresenceUsageMove 1
 #define VAL_PM_PresenceUsagePresence 2
 
+// presence usage
+#define VAL_PM_MoveUsageBoth 0
+#define VAL_PM_MoveUsageHF 1
+#define VAL_PM_MoveUsagePIR 2
+
 // output index, there are 2 outputs
 #define VAL_PM_Output1Index 0
 #define VAL_PM_Output2Index 1
@@ -210,6 +215,7 @@ class PresenceChannel : public OpenKNX::Channel
 
     bool getRawPresence(bool iJustMove = false);
     bool getHardwarePresence(bool iJustMove = false);
+    bool getHardwareMove();
     void startHardwarePresence();
     void startPresencePrepare(uint32_t iState);
     void processPresencePrepare(uint32_t iState);

@@ -276,10 +276,16 @@ bool Presence::getHardwarePresence()
     return mPresence;
 }
 
-bool Presence::getHardwareMove()
+bool Presence::getHardwareMovePIR()
 {
     // return mMove;
-    return MoveTrigger;
+    return MoveTriggerPIR;
+}
+
+bool Presence::getHardwareMoveHF()
+{
+    // return mMove;
+    return MoveTriggerHF;
 }
 
 // Starting all required sensors, this call may be blocking (with delay)
@@ -498,7 +504,7 @@ void Presence::processHardwarePresence()
                             processLED(mMove > 0, CallerMove);
                             knx.getGroupObject(PM_KoMoveOut).value(mMove, getDPT(VAL_DPT_5));
                             if (mMove)
-                                MoveTrigger = true;
+                                MoveTriggerHF = true;
                         }
                     }
                 }
@@ -566,7 +572,7 @@ void Presence::processHardwarePresence()
                         processLED(mMove > 0, CallerMove);
                         knx.getGroupObject(PM_KoMoveOut).value(mMove, getDPT(VAL_DPT_1));
                         if (mMove > 0) 
-                            MoveTrigger = true;
+                            MoveTriggerHF = true;
                     }
                 }
                 break;
@@ -597,7 +603,7 @@ void Presence::processHardwarePresence()
             mPresenceDelay = millis();
             mMove = 1;
             mPresenceChanged = true;
-            MoveTrigger = true;
+            MoveTriggerPIR = true;
         }
     }
     else
@@ -692,7 +698,8 @@ void Presence::loop()
             mChannelIterator = 0;
             // here we do actions which happen after all channels are iterated
             PresenceTrigger = false;
-            MoveTrigger = false;
+            MoveTriggerPIR = false;
+            MoveTriggerHF = false;
         }
     }
     if (lChannelsProcessed < mChannelsToProcess)
