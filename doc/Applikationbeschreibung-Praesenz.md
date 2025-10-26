@@ -606,7 +606,7 @@ Durch ein erneutes Programmieren kann das Problem gelöst werden.
 <!-- DOC -->
 ### **Informationen zum Sensor**
 
-Die Seite versucht, die möglichen Einstellungen verfügbar zu machen. Um sinnvoll Einstellungen vornehmen und den Sensor an die eigenen Bedürfnisse anpassen zu können, muss man aber dass Messprinzip verstehen.
+Die Seite versucht, die möglichen Einstellungen verfügbar zu machen. Um sinnvoll Einstellungen vornehmen und den Sensor an die eigenen Bedürfnisse anpassen zu können, muss man aber das Messprinzip verstehen.
 
 Der HLK misst in 16 verschiedenen Entfernungsbereichen (vom Hersteller Ranges genannt) um seinen Einbauort "herum". Eine Range ist immer 70 cm. Die folgende Abbildung zeigt die ersten Ranges um den installierten Sensor (in der Bildmitte). Da der innere Range im Durchmesser 70 cm ist (blaue Linen), wir aber immer die Entfernungen vom Sensor zur Person betrachten, wirkt sich der erste Range nur in einer Entfernung von 35 cm aus (grüne Linie), alle folgenden Ranges dann mit 70 cm (braune Linien).
 
@@ -635,7 +635,7 @@ Ferner will man nicht, dass ein kurzer Abfall des Reflexionswertes unter den Hal
 
 Als letzten Punkt muss es noch die Möglichkeit geben, die Ranges abzuschalten, aus den man keine Reflexionen messen will, weil diese Bereiche einen nicht interessieren. In einem Raum mit 5 m Durchmesser, bei dem der Sensor in der Mitte hängt, will man sicher nicht Entfernungen von mehr als 3 m berücksichtigen.
 
-Mit den obigen Erklärungen sind die Begriffe auf dem oberen Teil des Einstellungen für den HLK eingeführt. Bei einer neuen Applikation sind die Werte für den Sensor mit den Standardeinstellungen des Herstellers ausgefüllt und können direkt so programmiert werden. Diese Einstellungen können funktionieren, müssen aber nicht.
+Mit den obigen Erklärungen sind die Begriffe auf dem oberen Teil der Einstellungen für den HLK eingeführt. Bei einer neuen Applikation sind die Werte für den Sensor mit den Standardeinstellungen des Herstellers ausgefüllt und können direkt so programmiert werden. Diese Einstellungen können funktionieren, müssen aber nicht.
 
 
 <!-- DOC Skip="1" -->
@@ -795,7 +795,7 @@ Der Bereich Speicher erlaubt es, die gerade eingestellten Werte für Trigger und
 
 <kbd>![Speicher](pics/HLK-Speicher.png)</kbd>
 
-Es gibt 2 gleichwertige Speicher, es wir nur eine beschrieben. Der 2. verhält sich analog.
+Es gibt 2 gleichwertige Speicher, es wird nur einer beschrieben. Der 2. verhält sich analog.
 
 <!-- DOC -->
 #### **Name** 
@@ -837,7 +837,7 @@ Für alle Verfahren sollte man folgendes Vorbereiten:
 
 * Das Gerät muss eine PA haben und programmiert sein.
 * Die Funktion "Präsenz-Rohdaten auf den Bus senden" sollte aktiviert sein.
-* KO 21 (Ausgang Präsenz) und KO 23 (Ausgang Entfernung) sollten mit einer GA verknüpft sein
+* KO 21 (Ausgang Präsenz) und KO 23 (Ausgang Entfernung) sollten mit einer GA verknüpft sein.
 * Die GA Prasenz und Entfernung sollten im Gruppenmonitor beobachtet werden. Noch besser direkt auf dem Handy, z.B. über die App "EasyKNX", die kann in der Kostenlos-Version 3 GA nutzen.
 
 
@@ -847,16 +847,16 @@ Dieses Verfahren führt sehr schnell zu guten Erfolgen, ist aber nicht dazu geei
 
 Das Vorgehen ist folgendermaßen:
 
-1. Mit der ETS eine Stichprobe im leeren Raum nehmen.
+1. Mit der ETS eine Stichprobe im leeren Raum nehmen
 2. Trigger mit einer Hilfsfunktion ermitteln (s.u.)
 3. Halten mit einer Hilfsfunktion ermitteln (s.u.)
-4. "Werte Testen"-Button betätigen.
+4. "Werte Testen"-Button betätigen
 5. Raum betreten, Zeit bis zum Einschalten beobachten über GA Präsenz
 6. Raum verlassen, Zeit bis zum Ausschalten beobachten über GA Präsenz
 7. Falls man nicht zufrieden ist, ab Punkt 2. mit anderen Werten erneut versuchen
-8. Falls man zufrieden ist, das Gerät normal über die ETS programmieren.
+8. Falls man zufrieden ist, das Gerät normal über die ETS programmieren
 
-Man kann auch nach mehreren Tagen nachkorrigieren, auch einzelne Werte Ändern usw. Die besten Ergebnisse erreicht man, indem man seine Gewohnheiten und die diesbezüglichen Reaktion des Sensors beobachtet und dann passend nachjustiert.
+Man kann auch nach mehreren Tagen nachkorrigieren, auch einzelne Werte ändern usw. Die besten Ergebnisse erreicht man, indem man seine Gewohnheiten und die diesbezüglichen Reaktion des Sensors beobachtet und dann passend nachjustiert.
 
 ##### **Trigger ermitteln**
 
@@ -866,7 +866,7 @@ Je höher der Wert, desto größer muss die Bewegung sein, damit ein Einschalten
 
 Vorgehen:
 
-1. In der Auswahlbox "Anzeige" (oben links auf der Seite in der ETS) den Wert "Mit Hilfsfunktionen" oder "Alles" auswählen.
+1. In der Auswahlbox "Anzeige" (oben rechts auf der Seite in der ETS) den Wert "Mit Hilfsfunktionen" oder "Alles" auswählen.
 2. Kopiere "Stichprobe 1: Maximum" auswählen
 3. In das Offset-Feld 500 eintragen
 4. Als Ziel "nach Trigger" auswählen
@@ -884,7 +884,7 @@ Die Bestimmung des Schwellwertes für Halten ist der schwierigere Part, denn die
 
 Vorgehen:
 
-1. In der Auswahlbox "Anzeige" (oben links auf der Seite in der ETS) den Wert "Mit Hilfsfunktionen" oder "Alles" auswählen.
+1. In der Auswahlbox "Anzeige" (oben rechts auf der Seite in der ETS) den Wert "Mit Hilfsfunktionen" oder "Alles" auswählen.
 2. Kopiere "Stichprobe 1: Standardabweichung" (bei langer Haltezeit) bzw. "Stichprobe 1: Durchschnitt" (bei kurzer Haltezeit) auswählen
 3. In das Offset-Feld 0 eintragen
 4. Als Ziel "nach Halten" auswählen
@@ -897,8 +897,8 @@ Im folgenden sind noch einige potentiell kritische Räume aufgeführt, für die 
 
 * Uhr mit Pendel - hier wird Dauerbewegung erzeugt, das dürfte den Sensor stark triggern und sollte mit einem hohen Trigger-Wert ausgeblendet werden. Mangels einer solchen Uhr nicht getestet, diesbezügliches Feedback gewünscht.
 * Kochtöpfe auf dem Herd - da diese aus Metall sind und gut reflektieren, könnten die zur Dauerpräsenz führen. Hier hat es geholfen, eine Stichprobe mit Töpfen auf allen 4 Kochplatten zu nehmen und mit diesen Werten den Halten-Wert zu ermitteln.
-* Ventilator im Raum - Ungetestet, fall dieser beweglich ist, dürfte das ein unlösbares Problem sein 
-* Waschmaschine - Ungetestet, sollte mit einem höheren Trigger- und Halten-Wert gut beherrschbar sein
+* Ventilator im Raum - Ungetestet, falls dieser beweglich ist, dürfte das ein unlösbares Problem sein. 
+* Waschmaschine - Ungetestet, sollte mit einem höheren Trigger- und Halten-Wert gut beherrschbar sein.
 * Metallmöbel - Unproblematisch. Ein Umstellen der Möbel in andere Range-Bereiche könnte aber zu Dauerpräsenz führen, dann müsste man neue Halten-Werte ermitteln.
 * Wasserbett - Getestet und unproblematisch, allerdings werden auch kleine Bewegungen des Wasserbetts als Präsenz erkannt. Falls man also ein unberuhigtes Wasserbett hat, dass lange nachschwingt, dann wird für die Dauer des Nachschwingens Präsenz erkannt. 
 
