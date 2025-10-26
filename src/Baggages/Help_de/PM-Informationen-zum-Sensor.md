@@ -1,6 +1,6 @@
 ﻿### Informationen zum Sensor
 
-Die Seite versucht, die möglichen Einstellungen verfügbar zu machen. Um sinnvoll Einstellungen vornehmen und den Sensor an die eigenen Bedürfnisse anpassen zu können, muss man aber dass Messprinzip verstehen.
+Die Seite versucht, die möglichen Einstellungen verfügbar zu machen. Um sinnvoll Einstellungen vornehmen und den Sensor an die eigenen Bedürfnisse anpassen zu können, muss man aber das Messprinzip verstehen.
 
 Der HLK misst in 16 verschiedenen Entfernungsbereichen (vom Hersteller Ranges genannt) um seinen Einbauort "herum". Eine Range ist immer 70 cm. Die folgende Abbildung zeigt die ersten Ranges um den installierten Sensor (in der Bildmitte). Da der innere Range im Durchmesser 70 cm ist (blaue Linen), wir aber immer die Entfernungen vom Sensor zur Person betrachten, wirkt sich der erste Range nur in einer Entfernung von 35 cm aus (grüne Linie), alle folgenden Ranges dann mit 70 cm (braune Linien).
 
@@ -25,7 +25,7 @@ Ferner will man nicht, dass ein kurzer Abfall des Reflexionswertes unter den Hal
 
 Als letzten Punkt muss es noch die Möglichkeit geben, die Ranges abzuschalten, aus den man keine Reflexionen messen will, weil diese Bereiche einen nicht interessieren. In einem Raum mit 5 m Durchmesser, bei dem der Sensor in der Mitte hängt, will man sicher nicht Entfernungen von mehr als 3 m berücksichtigen.
 
-Mit den obigen Erklärungen sind die Begriffe auf dem oberen Teil des Einstellungen für den HLK eingeführt. Bei einer neuen Applikation sind die Werte für den Sensor mit den Standardeinstellungen des Herstellers ausgefüllt und können direkt so programmiert werden. Diese Einstellungen können funktionieren, müssen aber nicht.
+Mit den obigen Erklärungen sind die Begriffe auf dem oberen Teil der Einstellungen für den HLK eingeführt. Bei einer neuen Applikation sind die Werte für den Sensor mit den Standardeinstellungen des Herstellers ausgefüllt und können direkt so programmiert werden. Diese Einstellungen können funktionieren, müssen aber nicht.
 
 
 
