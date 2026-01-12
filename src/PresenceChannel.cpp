@@ -937,7 +937,7 @@ void PresenceChannel::processPresenceShort()
                 // in case of passageway we turn on ouput after short presence
                 bool lPassageway = paramBit(PM_pAPresenceShortNoSwitch, PM_pAPresenceShortNoSwitchMask, true);
                 if (lPassageway)
-                    onPresenceChange(true);
+                    onPresenceBrightnessChange(true);
             }
         }
     }
@@ -1550,8 +1550,12 @@ void PresenceChannel::disableBrightness(bool iOn)
             bool lDisable1 = iOn && (lBrightness >= (float)getKo(PM_KoKOpLuxOff)->value(getDPT(VAL_DPT_9)));
             // turn off even though it is too dark
             bool lDisable2 = !iOn && (lBrightness <= (float)getKo(PM_KoKOpLuxOff)->value(getDPT(VAL_DPT_9)));
-            if (lDisable1 || lDisable2)
+            if (lDisable1 || lDisable2) 
+            {
                 pCurrentValue |= PM_BIT_DISABLE_BRIGHTNESS;
+                // deactivate any pending brightness off
+                pBrightnessOffDelayTime = 0;
+            }
             else
                 pCurrentValue &= ~PM_BIT_DISABLE_BRIGHTNESS;
         }
