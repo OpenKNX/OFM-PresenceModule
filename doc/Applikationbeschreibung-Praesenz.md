@@ -85,6 +85,10 @@ Alle Logikkanäle sind in der [Applikation Logik](https://github.com/OpenKNX/OAM
 
 Im folgenden werden Änderungen an dem Dokument erfasst, damit man nicht immer das Gesamtdokument lesen muss, um Neuerungen zu erfahren.
 
+19.01.2026: Firmware 3.9.1, Applikation 3.9:
+
+* FIX: Im Durchgangsmodus ("Erst nach Kurzzeitpräsenz schalten") wird jetzt Helligkeitsabhängig geschaltet
+* FIX: "Manuelles schalten verhindert Ausschalten über Helligkeit" funktioniert jetzt auch direkt nach einem Neustart des Gerätes
 
 27.09.2025: Firmware 3.9, Applikation 3.9
 
