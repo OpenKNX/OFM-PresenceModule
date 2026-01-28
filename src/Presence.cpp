@@ -739,10 +739,14 @@ void Presence::setup()
 
         HF_SERIAL.setRX(HF_UART_RX_PIN);
         HF_SERIAL.setTX(HF_UART_TX_PIN);
+#ifdef PRESENCE_LED_PIN
         pinMode(PRESENCE_LED_PIN, OUTPUT);
-        pinMode(MOVE_LED_PIN, OUTPUT);
         digitalWrite(PRESENCE_LED_PIN, !PRESENCE_LED_PIN_ACTIVE_ON);
+#endif
+#ifdef MOVE_LED_PIN 
+        pinMode(MOVE_LED_PIN, OUTPUT);
         digitalWrite(MOVE_LED_PIN, !MOVE_LED_PIN_ACTIVE_ON);
+#endif
         HF_SERIAL.begin(HF_SERIAL_SPEED);
 #endif
 
