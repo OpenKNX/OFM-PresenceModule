@@ -85,6 +85,10 @@ Alle Logikkanäle sind in der [Applikation Logik](https://github.com/OpenKNX/OAM
 
 Im folgenden werden Änderungen an dem Dokument erfasst, damit man nicht immer das Gesamtdokument lesen muss, um Neuerungen zu erfahren.
 
+30.01.2026: Firmware 3.9.3, Applikation 3.9:
+
+* FIX: Wird eine Tagesphase über eine Szene aufgerufen, die keiner Tagesphase zugeordnet war, wurde fälschlicherweise eine nicht existierende Tagesphase 0 angenommen. Jetzt wird ein solcher Aufruf ignoriert.
+
 19.01.2026: Firmware 3.9.1, Applikation 3.9:
 
 * FIX: Im Durchgangsmodus ("Erst nach Kurzzeitpräsenz schalten") wird jetzt Helligkeitsabhängig geschaltet
