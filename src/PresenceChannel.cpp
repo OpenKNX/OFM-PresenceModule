@@ -558,6 +558,8 @@ void PresenceChannel::startRunning()
     lKo = getKo(PM_KoKOpDayPhase);
     if (lKo->initialized())
         lDayPhase = getDayPhaseFromKO();
+    if (lDayPhase == 255) // invalid phase
+        lDayPhase = 0;
     onDayPhase(lDayPhase, false);
     pCurrentState |= STATE_RUNNING;
 }
@@ -599,8 +601,13 @@ void PresenceChannel::processDayPhasePrepare()
 void PresenceChannel::startDayPhase(uint8_t iPhase, bool iForce /* = false*/)
 {
     // derive day phase from scene number or from parameter
-    if (iPhase == 255)
-        mNextDayPhase = getDayPhaseFromKO();
+    if (iPhase == 255) 
+    {
+        int8_t lDayPhase = getDayPhaseFromKO();
+        if (lDayPhase < 0) // invalid phase-KO, do nothing
+            return; 
+        mNextDayPhase = lDayPhase;
+    }
     else
         mNextDayPhase = iPhase;
 
