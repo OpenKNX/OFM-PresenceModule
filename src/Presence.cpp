@@ -72,13 +72,13 @@ void Presence::processAfterStartupDelay()
 {
     logInfoP("afterStartupDelay");
 
-    if (ParamPM_ReadLed)
-    {
-        if (ParamPM_LEDPresence == VAL_PM_LedKnx)
-            KoPM_LEDPresence.requestObjectRead();
-        if (ParamPM_LEDMove == VAL_PM_LedKnx)
-            KoPM_LEDMove.requestObjectRead();
-    }
+    // if (ParamPM_ReadLed)
+    // {
+    //     if (ParamPM_LEDPresence == VAL_PM_LedKnx)
+    //         KoPM_LEDPresence.requestObjectRead();
+    //     if (ParamPM_LEDMove == VAL_PM_LedKnx)
+    //         KoPM_LEDMove.requestObjectRead();
+    // }
 }
 
 void Presence::showHelp()
@@ -253,12 +253,12 @@ void Presence::processInputKo(GroupObject &iKo)
             }
 #endif
             break;
-        case PM_KoLEDMove:
-            processLED(iKo.value(getDPT(VAL_DPT_1)), CallerKnxMove);
-            break;
-        case PM_KoLEDPresence:
-            processLED(iKo.value(getDPT(VAL_DPT_1)), CallerKnxPresence);
-            break;
+        // case PM_KoLEDMove:
+        //     processLED(iKo.value(getDPT(VAL_DPT_1)), CallerKnxMove);
+        //     break;
+        // case PM_KoLEDPresence:
+        //     processLED(iKo.value(getDPT(VAL_DPT_1)), CallerKnxPresence);
+        //     break;
         default:
             if (lAsap >= PM_KoOffset && lAsap < PM_KoOffset + mNumChannels * PM_KoBlockSize)
             {
@@ -424,36 +424,23 @@ void Presence::processLED(bool iOn, LedCaller iCaller)
 
     bool lLedMove = sLedMove;
     bool lLedPresence = sLedPresence;
-    uint8_t lMoveLedParam = ParamPM_LEDMove;
-    uint8_t lPresenceLedParam = ParamPM_LEDPresence;
+    // uint8_t lMoveLedParam = ParamPM_LEDMove;
+    // uint8_t lPresenceLedParam = ParamPM_LEDPresence;
     // we implement all led cases in one method
     switch (iCaller)
     {
         case CallerLock:
+            // multiple locks are counted, we remove lock only if all channels unlock the leds
             sLedsLocked += (iOn) ? 1 : -1;
             // LEDs will keep the old values
             if (sLedsLocked <= 0)
                 sLedsLocked = 0;
             break;
         case CallerMove:
-            if (lMoveLedParam == VAL_PM_LedMove)
-                lLedMove = iOn;
-            if (lPresenceLedParam == VAL_PM_LedMove)
-                lLedPresence = iOn;
+            lLedMove = iOn;
             break;
         case CallerPresence:
-            if (lMoveLedParam == VAL_PM_LedPresence)
-                lLedMove = iOn;
-            if (lPresenceLedParam == VAL_PM_LedPresence)
-                lLedPresence = iOn;
-            break;
-        case CallerKnxMove:
-            if (lMoveLedParam == VAL_PM_LedKnx)
-                lLedMove = iOn;
-            break;
-        case CallerKnxPresence:
-            if (lMoveLedParam == VAL_PM_LedKnx)
-                lLedPresence = iOn;
+            lLedPresence = iOn;
             break;
         default:
             // both LEDs are switched
@@ -461,12 +448,31 @@ void Presence::processLED(bool iOn, LedCaller iCaller)
             lLedPresence = iOn;
             break;
     }
-#ifdef MOVE_LED_PIN
-    digitalWrite(MOVE_LED_PIN, MOVE_LED_PIN_ACTIVE_ON == (lLedMove && sLedsLocked == 0));
-#endif
-#ifdef PRESENCE_LED_PIN
-    digitalWrite(PRESENCE_LED_PIN, PRESENCE_LED_PIN_ACTIVE_ON == (lLedPresence && sLedsLocked == 0));
-#endif
+// #ifdef MOVE_LED_PIN
+//     digitalWrite(MOVE_LED_PIN, MOVE_LED_PIN_ACTIVE_ON == (lLedMove && sLedsLocked == 0));
+// #endif
+// #ifdef PRESENCE_LED_PIN
+//     digitalWrite(PRESENCE_LED_PIN, PRESENCE_LED_PIN_ACTIVE_ON == (lLedPresence && sLedsLocked == 0));
+// #endif
+    // we provide PM states for generic LED handling
+    // <Enumeration Text="PM Präsenz" Value="100" Id="%ENID%" />
+    // <Enumeration Text="PM Bewegung" Value="101" Id="%ENID%" />
+    // <Enumeration Text="PM Bewegung+Präsenz" Value="102" Id="%ENID%" />
+    OpenKNX::Led::FunctionGroup *lStatePresence = openknx.ledFunctions.get(100);
+    if (lStatePresence->active()) {
+        lStatePresence->color(0x000033); // blue
+        lStatePresence->on(lLedPresence && sLedsLocked == 0);
+    }
+    OpenKNX::Led::FunctionGroup *lStateMove = openknx.ledFunctions.get(101);
+    if (lStateMove->active()) {
+        lStateMove->color(0x222200); //yellow
+        lStateMove->on(lLedMove && sLedsLocked == 0);
+    }
+    OpenKNX::Led::FunctionGroup *lStateBoth = openknx.ledFunctions.get(102);
+    if (lStateBoth->active()) {
+        lStateBoth->color(lLedMove ? 0x222200 : 0x000033);    
+        lStateBoth->on((lLedMove || lLedPresence) && sLedsLocked == 0);
+    }
     // store the current values in memory
     sLedMove = lLedMove;
     sLedPresence = lLedPresence;
@@ -737,16 +743,23 @@ void Presence::setup()
                 break;
         }
 
+        // #ifdef PRESENCE_LED_PIN
+        //         pinMode(PRESENCE_LED_PIN, OUTPUT);
+        //         digitalWrite(PRESENCE_LED_PIN, !PRESENCE_LED_PIN_ACTIVE_ON);
+        // #endif
+        // #ifdef MOVE_LED_PIN 
+        //         pinMode(MOVE_LED_PIN, OUTPUT);
+        //         digitalWrite(MOVE_LED_PIN, !MOVE_LED_PIN_ACTIVE_ON);
+        // #endif
+        // OpenKNX::Led::Base *lLed = openknx.leds.getLed(10);
+        // if (lLed->isColor()) {
+        //     openknx.ledFunctions.assignLed2Function(lLed, 100);
+        //     openknx.ledFunctions.assignLed2Function(lLed, 101);
+        //     openknx.ledFunctions.assignLed2Function(lLed, 102);
+        // }
+
         HF_SERIAL.setRX(HF_UART_RX_PIN);
         HF_SERIAL.setTX(HF_UART_TX_PIN);
-#ifdef PRESENCE_LED_PIN
-        pinMode(PRESENCE_LED_PIN, OUTPUT);
-        digitalWrite(PRESENCE_LED_PIN, !PRESENCE_LED_PIN_ACTIVE_ON);
-#endif
-#ifdef MOVE_LED_PIN 
-        pinMode(MOVE_LED_PIN, OUTPUT);
-        digitalWrite(MOVE_LED_PIN, !MOVE_LED_PIN_ACTIVE_ON);
-#endif
         HF_SERIAL.begin(HF_SERIAL_SPEED);
 #endif
 
@@ -769,8 +782,8 @@ void Presence::setup()
             mChannel[lIndex] = new PresenceChannel(lIndex);
             mChannel[lIndex]->setup();
         }
-        mDoPresenceHardwareCycle = (ParamPM_HfPresence > 0) || (ParamPM_HWLux > 0);
-        if (mDoPresenceHardwareCycle)
+        mDoPresenceHardwareCycle = (ParamPM_HfPresence > 0) || (ParamPM_HWLux > 0) || (ParamPM_PirPresence > 0);
+        if (ParamPM_HfPresence > 0)
             startPowercycleHfSensor();
         startSensors();
     }

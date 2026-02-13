@@ -85,6 +85,11 @@ Alle Logikkanäle sind in der [Applikation Logik](https://github.com/OpenKNX/OAM
 
 Im folgenden werden Änderungen an dem Dokument erfasst, damit man nicht immer das Gesamtdokument lesen muss, um Neuerungen zu erfahren.
 
+13.02.2026: Firmware 3.10, Applikation 3.10:
+
+- NEU: Die LEDs für Präsenz und Bewegung werden jetzt vom StatusLED-Modul gesteuert. Die KO für LED-Präsenz und LED-Bewegung wurden entfernt. Vor einem Update müssen eventuelle GA von diesen beiden KO entfernt werden!
+- FIX: Jetzt kann nur der PIR-Sensor verwendet werden (ohne HF-Sensor). Durch einen Bug war das vorher nicht möglich. Das KO Bewegung wird für diesen Fall jetzt statt KO Präsenz angezeigt. Vor einem Update müssen eventuelle GA von diesem KO entfernt werden.
+
 30.01.2026: Firmware 3.9.3, Applikation 3.9:
 
 * FIX: Wird eine Tagesphase über eine Szene aufgerufen, die keiner Tagesphase zugeordnet war, wurde fälschlicherweise eine nicht existierende Tagesphase 0 angenommen. Jetzt wird ein solcher Aufruf ignoriert.
