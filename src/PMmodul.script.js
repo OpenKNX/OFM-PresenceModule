@@ -103,7 +103,7 @@ function PM_processCalibrationData(device, online, progress, dataKind, parName) 
             var paramValue = resp[arrayIndex] << 8 | resp[arrayIndex + 1];
             info("read paramName: " + paramName + ",  paramValue: " + paramValue);
             parGridCell = device.getParameterByName(paramName);
-            parGridCell.value = paramValue;
+            parGridCell.value = paramValue > 100 ? paramValue : 100;
         }
     }
     else {
