@@ -163,7 +163,7 @@
                   <Enumeration Text="Stichprobe 2: Durchschnitt" Value="7" Id="%ENID%" />
                 </TypeRestriction>
               </ParameterType>
-              <ParameterType Id="%AID%_PT-HfView" Name="HfView">
+              <ParameterType Id="%AID%_PT-HfView" Name="HfView" op:headerExport="none">
                 <TypeRestriction Base="Value" SizeInBit="2">
                   <Enumeration Text="Kompakt" Value="0" Id="%ENID%" />
                   <Enumeration Text="Mit Hilfsfunktionen" Value="1" Id="%ENID%" />
@@ -171,7 +171,7 @@
                   <Enumeration Text="Alles" Value="3" Id="%ENID%" />
                 </TypeRestriction>
               </ParameterType>
-              <ParameterType Id="%AID%_PT-PirSensor" Name="PirSensor">
+              <ParameterType Id="%AID%_PT-PirSensor" Name="PirSensor" op:headerExport="enum">
                 <TypeRestriction Base="Value" SizeInBit="2">
                   <Enumeration Text="kein Sensor" Value="0" Id="%ENID%" />
                   <Enumeration Text="digital" Value="1" Id="%ENID%" />
@@ -185,13 +185,13 @@
                   <Enumeration Text="OPT3001" Value="2" Id="%ENID%" />
                 </TypeRestriction>
               </ParameterType>
-              <ParameterType Id="%AID%_PT-OutputType" Name="OutputType">
+              <ParameterType Id="%AID%_PT-OutputType" Name="OutputType" op:headerExport="enum">
                 <TypeRestriction Base="Value" SizeInBit="3">
-                  <Enumeration Text="nicht aktiv" Value="0" Id="%ENID%" />
-                  <Enumeration Text="Schalten (DPT 1.x)" Value="1" Id="%ENID%" />
-                  <Enumeration Text="Wert (DPT 5.x)" Value="2" Id="%ENID%" />
-                  <Enumeration Text="Szene (DPT 17.001)" Value="3" Id="%ENID%" />
-                  <Enumeration Text="Dimmen absolut (DPT 5.001)" Value="4" Id="%ENID%" />
+                  <Enumeration Text="nicht aktiv" Value="0" Id="%ENID%" op:headerName="Inaktiv" />
+                  <Enumeration Text="Schalten (DPT 1.x)" Value="1" Id="%ENID%" op:headerName="Schalten" />
+                  <Enumeration Text="Wert (DPT 5.x)" Value="2" Id="%ENID%" op:headerName="Wert" />
+                  <Enumeration Text="Szene (DPT 17.001)" Value="3" Id="%ENID%" op:headerName="Szene" />
+                  <Enumeration Text="Dimmen absolut (DPT 5.001)" Value="4" Id="%ENID%" op:headerName="Dimmen" />
                 </TypeRestriction>
               </ParameterType>
               <ParameterType Id="%AID%_PT-OutputSendAdditional" Name="OutputSendAdditional">
@@ -209,7 +209,7 @@
                   <Enumeration Text="Raum verlassen" Value="2" Id="%ENID%" />
                 </TypeRestriction>
               </ParameterType>
-              <ParameterType Id="%AID%_PT-OutputFilterPM" Name="OutputFilterPM">
+              <ParameterType Id="%AID%_PT-OutputFilterPM" Name="OutputFilterPM" op:headerExport="enum">
                 <TypeRestriction Base="Value" SizeInBit="2">
                   <Enumeration Text="nichts" Value="0" Id="%ENID%" />
                   <Enumeration Text="nur EIN" Value="1" Id="%ENID%" />
@@ -217,21 +217,21 @@
                   <Enumeration Text="EIN und AUS" Value="3" Id="%ENID%" />
                 </TypeRestriction>
               </ParameterType>
-              <ParameterType Id="%AID%_PT-ChannelActive" Name="ChannelActive">
+              <ParameterType Id="%AID%_PT-ChannelActive" Name="ChannelActive" op:headerExport="enum">
                 <TypeRestriction Base="Value" SizeInBit="2">
                   <Enumeration Text="Inaktiv" Value="0" Id="%ENID%" />
                   <Enumeration Text="Aktiv" Value="1" Id="%ENID%" />
                   <Enumeration Text="Funktionslos" Value="2" Id="%ENID%" />
                 </TypeRestriction>
               </ParameterType>
-              <ParameterType Id="%AID%_PT-StatusLED" Name="StatusLED">
+              <!-- <ParameterType Id="%AID%_PT-StatusLED" Name="StatusLED">
                 <TypeRestriction Base="Value" SizeInBit="2">
                   <Enumeration Text="nicht aktiv" Value="0" Id="%ENID%" />
                   <Enumeration Text="aktiv bei Bewegung" Value="1" Id="%ENID%" />
                   <Enumeration Text="aktiv bei Präsenz" Value="2" Id="%ENID%" />
                   <Enumeration Text="aktiv über externes Objekt" Value="3" Id="%ENID%" />
                 </TypeRestriction>
-              </ParameterType>
+              </ParameterType> -->
               <!-- <ParameterType Id="%AID%_PT-StatusLEDPIR" Name="StatusLEDPIR">
                 <TypeRestriction Base="Value" SizeInBit="2">
                   <Enumeration Text="nicht aktiv" Value="0" Id="%ENID%" />
@@ -314,7 +314,7 @@
                   <Enumeration Text="gesperrt (0) / nicht gesperrt (1)" Value="1" Id="%ENID%" />
                 </TypeRestriction>
               </ParameterType>
-              <ParameterType Id="%AID%_PT-LockOn" Name="LockOn">
+              <ParameterType Id="%AID%_PT-LockOn" Name="LockOn" op:headerExport="base" op:headerName="PMLock">
                 <TypeRestriction Base="Value" SizeInBit="2">
                   <Enumeration Text="nichts gesendet" Value="0" Id="%ENID%" />
                   <Enumeration Text="AUS gesendet" Value="1" Id="%ENID%" />
@@ -322,7 +322,7 @@
                   <!-- <Enumeration Text="Aktueller Zustand eingefroren (nichts gesendet)" Value="3" Id="%ENID%" /> -->
                 </TypeRestriction>
               </ParameterType>
-              <ParameterType Id="%AID%_PT-LockOff" Name="LockOff">
+              <ParameterType Id="%AID%_PT-LockOff" Name="LockOff" op:headerExport="enum" op:headerName="PMLock">
                 <TypeRestriction Base="Value" SizeInBit="2">
                   <Enumeration Text="nichts gesendet" Value="0" Id="%ENID%" />
                   <Enumeration Text="AUS gesendet" Value="1" Id="%ENID%" />
@@ -330,7 +330,7 @@
                   <Enumeration Text="Aktueller Zustand gesendet" Value="3" Id="%ENID%" />
                 </TypeRestriction>
               </ParameterType>
-              <ParameterType Id="%AID%_PT-SceneAction" Name="SceneAction">
+              <ParameterType Id="%AID%_PT-SceneAction" Name="SceneAction" op:headerExport="enum">
                 <TypeRestriction Base="Value" SizeInBit="8">
                   <Enumeration Text="keine Aktion" Value="0" Id="%ENID%" />
                   <Enumeration Text="ändert Helligkeit im Raum" Value="1" Id="%ENID%" />
@@ -360,13 +360,13 @@
                   <Enumeration Text="Zur Tagesphase 4 sofort wechseln" Value="23" Id="%ENID%" />
                 </TypeRestriction>
               </ParameterType>
-              <ParameterType Id="%AID%_PT-KeyCount" Name="KeyCount">
+              <ParameterType Id="%AID%_PT-KeyCount" Name="KeyCount" op:headerExport="enum">
                 <TypeRestriction Base="Value" SizeInBit="1">
                   <Enumeration Text="Eintastenbedienung" Value="0" Id="%ENID%" />
                   <Enumeration Text="Zweitastenbedienung" Value="1" Id="%ENID%" />
                 </TypeRestriction>
               </ParameterType>
-              <ParameterType Id="%AID%_PT-LeaveRoomModeAll" Name="LeaveRoomModeAll">
+              <ParameterType Id="%AID%_PT-LeaveRoomModeAll" Name="LeaveRoomModeAll" op:headerExport="enum" op:headerName="LeaveRoomMode">
                 <TypeRestriction Base="Value" SizeInBit="3">
                   <Enumeration Text="Raum verlassen inaktiv" Value="0" Id="%ENID%" />
                   <Enumeration Text="Totzeit" Value="1" Id="%ENID%" />
@@ -375,14 +375,14 @@
                   <Enumeration Text="Bewegung + Totzeit + Reset" Value="4" Id="%ENID%" />
                 </TypeRestriction>
               </ParameterType>
-              <ParameterType Id="%AID%_PT-LeaveRoomModeMove" Name="LeaveRoomModeMove">
+              <ParameterType Id="%AID%_PT-LeaveRoomModeMove" Name="LeaveRoomModeMove" op:headerExport="base" op:headerName="LeaveRoomMode">
                 <TypeRestriction Base="Value" SizeInBit="3">
                   <Enumeration Text="Raum verlassen inaktiv" Value="0" Id="%ENID%" />
                   <Enumeration Text="Totzeit" Value="1" Id="%ENID%" />
                   <Enumeration Text="Bewegung + Totzeit" Value="3" Id="%ENID%" />
                 </TypeRestriction>
               </ParameterType>
-              <ParameterType Id="%AID%_PT-LeaveRoomModeReset" Name="LeaveRoomModeReset">
+              <ParameterType Id="%AID%_PT-LeaveRoomModeReset" Name="LeaveRoomModeReset" op:headerExport="base" op:headerName="LeaveRoomMode">
                 <TypeRestriction Base="Value" SizeInBit="3">
                   <Enumeration Text="Raum verlassen inaktiv" Value="0" Id="%ENID%" />
                   <Enumeration Text="Totzeit + Reset" Value="2" Id="%ENID%" />
@@ -480,8 +480,8 @@
                 <Parameter Id="%AID%_UP-%TT%00020" Name="VisibleChannels" ParameterType="%AID%_PT-PMNumChannels" Offset="0" BitOffset="0" Text="Verfügbare Kanäle" Value="%PM_NumChannelsDefault%" SuffixText=" von %N%" />
                 <Parameter Id="%AID%_UP-%TT%00021" Name="PirSensitivity" ParameterType="%AID%_PT-Sensitivity" Offset="1" BitOffset="4" Text="PIR-Empfindlichkeit" Value="0" />
                 <Parameter Id="%AID%_UP-%TT%00006" Name="HfPresence" Offset="2" BitOffset="0" ParameterType="%AID%_PT-HfSensor" Text="HF-Sensor" Value="0" />
-                <Parameter Id="%AID%_UP-%TT%00015" Name="HfScenario" ParameterType="%AID%_PT-HfScenario" Offset="2" BitOffset="3" Text="Detektions-Szenario" Value="0" />
-                <Parameter Id="%AID%_UP-%TT%00025" Name="HlkSettings" ParameterType="%AID%_PT-HlkSettings" Offset="2" BitOffset="3" Text="HF-Einstellungen" Value="1" Access="None" />
+                <Parameter Id="%AID%_UP-%TT%00015" Name="HfScenario" ParameterType="%AID%_PT-HfScenario" Offset="2" BitOffset="3" Text="Detektions-Szenario" Value="0" op:nowarn="true" />
+                <Parameter Id="%AID%_UP-%TT%00025" Name="HlkSettings" ParameterType="%AID%_PT-HlkSettings" Offset="2" BitOffset="3" Text="HF-Einstellungen" Value="1" Access="None" op:nowarn="true" />
                 <Parameter Id="%AID%_UP-%TT%00007" Name="HWLux" Offset="2" BitOffset="6" ParameterType="%AID%_PT-LuxSensor" Text="Helligkeits-Sensor" Value="0" />
                 <Parameter Id="%AID%_UP-%TT%00016" Name="HfSensitivity" ParameterType="%AID%_PT-Sensitivity" Offset="3" BitOffset="0" Text="HF-Empfindlichkeit" Value="0" />
                 <Parameter Id="%AID%_UP-%TT%00003" Name="SendRAW" Offset="3" BitOffset="4" ParameterType="%AID%_PT-OnOffYesNo" Text="Präsenz-Rohdaten auf den Bus senden?" Value="0" />

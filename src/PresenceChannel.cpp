@@ -1,8 +1,5 @@
 #include "PresenceChannel.h"
 #include "Presence.h"
-// #include "OpenKNX/Helper.h"
-#include "KnxHelper.h"
-// #include "IncludeManager.h"
 
 uint8_t PresenceChannel::sDayPhaseParameterSize = 0;
 
@@ -108,7 +105,10 @@ uint32_t PresenceChannel::paramInt(uint16_t iParamIndex, bool iWithPhase /* = fa
 
 uint32_t PresenceChannel::paramTimeDelay(uint16_t iParamIndex, bool iWithPhase /* = false */, bool iAsSeconds /* = false */)
 {
-    return getDelayPattern(calcParamIndex(iParamIndex, iWithPhase), iAsSeconds);
+    uint32_t lTime = paramWord(iParamIndex, iWithPhase);
+    lTime = paramDelay(lTime);
+    lTime = iAsSeconds ? lTime / 1000 : lTime;
+    return lTime;
 }
 
 bool PresenceChannel::processCommand(const std::string iCmd, bool iDebugKo)
@@ -127,7 +127,7 @@ bool PresenceChannel::processCommand(const std::string iCmd, bool iDebugKo)
             if (pCurrentState & STATE_PRESENCE)
             {
                 // we present both, long and short presence
-                lPresence = getKo(PM_KoKOpPresenceDelay)->value(getDPT(VAL_DPT_7));
+                lPresence = getKo(PM_KoKOpPresenceDelay)->value(DPT_Value_2_Ucount);
                 if (pPresenceDelayTime > 0)
                     lPresence = lPresence - (uint16_t)((millis() - pPresenceDelayTime) / 1000);
 
@@ -188,9 +188,9 @@ bool PresenceChannel::processCommand(const std::string iCmd, bool iDebugKo)
                 // we present leave room mode
                 lOutput[lIndex++] = 'L';
                 lOutput[lIndex++] = ' ';
-                uint8_t lLeaveRoomMode = ParamPM_pLeaveRoomModeAll;
+                PT_LeaveRoomMode lLeaveRoomMode = ParamPM_pLeaveRoomModeAll;
                 for (uint8_t lCount = 0; lCount < 3; lCount++)
-                    lOutput[lIndex++] = lModes[(lLeaveRoomMode * 3 + lCount)];
+                    lOutput[lIndex++] = lModes[((uint8_t)lLeaveRoomMode * 3 + lCount)];
                 lOutput[lIndex++] = ' ';
                 lOutput[lIndex] = 0; // do not increment lIndex here
                 if (pDowntimeDelayTime > 0)
@@ -331,7 +331,7 @@ void PresenceChannel::startSceneCommand()
 {
     if (pCurrentState & STATE_KO_SCENE)
     {
-        uint8_t lValue = getKo(PM_KoKOpScene)->value(getDPT(VAL_DPT_1));
+        uint8_t lValue = getKo(PM_KoKOpScene)->value(DPT_Bool);
         logInfoP("CH %i: Zu viele Szenen direkt aufeinanderfolgend!\n", channelIndex() + 1);
         logInfoP("   Die Szene %i wurde per KO gesetzt, ohne dass die vorhergehende Szene ausgeführt werden konnte!\n", lValue + 1);
     }
@@ -342,80 +342,86 @@ void PresenceChannel::processSceneCommand()
 {
     pCurrentState &= ~STATE_KO_SCENE;
     // get scene number
-    uint8_t lSceneFromKo = (uint8_t)getKo(PM_KoKOpScene)->value(getDPT(VAL_DPT_17)) + 1;
+    uint8_t lSceneFromKo = (uint8_t)getKo(PM_KoKOpScene)->value(DPT_SceneNumber) + 1;
     // check if scene is used
     for (uint8_t lIndex = 0; lIndex < 10; lIndex++)
     {
         uint8_t lSceneFromParam = paramByte(PM_pScene0 + lIndex);
         if (lSceneFromParam == lSceneFromKo)
         {
-            uint8_t lAction = paramByte(PM_pSceneAction0 + lIndex);
+            PT_SceneAction lAction = (PT_SceneAction)paramByte(PM_pSceneAction0 + lIndex);
             switch (lAction)
             {
-                case VAL_PM_SA_ChangeBrightness:
+                case PT_SceneAction::aendert_Helligkeit_im_Raum:
                     startAdaptiveBrightness();
                     break;
-                case VAL_PM_SA_AutoOff:
+                case PT_SceneAction::Automatik_uebersteuern_mit_AUS:
                     startAuto(false, false);
                     break;
-                case VAL_PM_SA_AutoOn:
+                case PT_SceneAction::Automatik_uebersteuern_mit_EIN:
                     startAuto(true, false);
                     break;
-                case VAL_PM_SA_ManualOff:
+                case PT_SceneAction::Manuell_uebersteuern_mit_AUS:
                     startManual(false, false);
                     break;
-                case VAL_PM_SA_ManualOn:
+                case PT_SceneAction::Manuell_uebersteuern_mit_EIN:
                     startManual(true, false);
                     break;
-                case VAL_PM_SA_ManualActive:
+                case PT_SceneAction::Manuell_aktivieren:
                     startManual(pCurrentValue & PM_BIT_OUTPUT_SET, true);
                     break;
-                case VAL_PM_SA_ManualInactive:
+                case PT_SceneAction::Manuell_deaktivieren:
                     startAuto(pCurrentValue & PM_BIT_OUTPUT_SET, true);
                     break;
-                case VAL_PM_SA_LockOff:
-                    onLock(true, VAL_PM_LockOutputOff, 0);
+                case PT_SceneAction::Sperren_und_AUS_senden:
+                    onLock(true, PT_PMLock::AUS_gesendet, PT_PMLock::nichts_gesendet);
                     break;
-                case VAL_PM_SA_LockOn:
-                    onLock(true, VAL_PM_LockOutputOn, 0);
+                case PT_SceneAction::Sperren_und_EIN_senden:
+                    onLock(true, PT_PMLock::EIN_gesendet, PT_PMLock::nichts_gesendet);
                     break;
-                case VAL_PM_SA_Lock:
-                    onLock(true, 0, 0);
+                case PT_SceneAction::Sperren_und_nichts_senden:
+                    onLock(true, PT_PMLock::nichts_gesendet, PT_PMLock::nichts_gesendet);
                     break;
-                case VAL_PM_SA_UnlockWithState:
-                    onLock(false, 0, VAL_PM_LockOutputCurrent);
+                case PT_SceneAction::Sperre_aufheben_und_Zustand_senden:
+                    onLock(false, PT_PMLock::nichts_gesendet, PT_PMLock::Aktueller_Zustand_gesendet);
                     break;
-                case VAL_PM_SA_Unlock:
-                    onLock(false, 0, 0);
+                case PT_SceneAction::Sperre_aufheben_und_nichts_senden:
+                    onLock(false, PT_PMLock::nichts_gesendet, PT_PMLock::nichts_gesendet);
                     break;
-                case VAL_PM_SA_LeaveRoom:
+                case PT_SceneAction::Sperre_aufheben_und_AUS_senden:
+                    onLock(false, PT_PMLock::nichts_gesendet, PT_PMLock::AUS_gesendet);
+                    break;
+                case PT_SceneAction::Sperre_aufheben_und_EIN_senden:
+                    onLock(false, PT_PMLock::nichts_gesendet, PT_PMLock::EIN_gesendet);
+                    break;
+                case PT_SceneAction::Raum_verlassen:
                     startLeaveRoom(false);
                     break;
-                case VAL_PM_SA_Reset:
+                case PT_SceneAction::Reset_ausloesen:
                     onReset();
                     break;
-                case VAL_PM_SA_Phase1:
+                case PT_SceneAction::Zur_Tagesphase_1_wechseln:
                     startDayPhase(0);
                     break;
-                case VAL_PM_SA_Phase2:
+                case PT_SceneAction::Zur_Tagesphase_2_wechseln:
                     startDayPhase(1);
                     break;
-                case VAL_PM_SA_Phase3:
+                case PT_SceneAction::Zur_Tagesphase_3_wechseln:
                     startDayPhase(2);
                     break;
-                case VAL_PM_SA_Phase4:
+                case PT_SceneAction::Zur_Tagesphase_4_wechseln:
                     startDayPhase(3);
                     break;
-                case VAL_PM_SA_ForcePhase1:
+                case PT_SceneAction::Zur_Tagesphase_1_sofort_wechseln:
                     startDayPhase(0, true);
                     break;
-                case VAL_PM_SA_ForcePhase2:
+                case PT_SceneAction::Zur_Tagesphase_2_sofort_wechseln:
                     startDayPhase(1, true);
                     break;
-                case VAL_PM_SA_ForcePhase3:
+                case PT_SceneAction::Zur_Tagesphase_3_sofort_wechseln:
                     startDayPhase(2, true);
                     break;
-                case VAL_PM_SA_ForcePhase4:
+                case PT_SceneAction::Zur_Tagesphase_4_sofort_wechseln:
                     startDayPhase(3, true);
                     break;
                 default:
@@ -439,7 +445,7 @@ void PresenceChannel::processStartupDelay()
         // we waited enough, remove State marker
         pCurrentState &= ~STATE_STARTUP;
         // set running state if the channel is active
-        if (ParamPM_pChannelActive == PM_VAL_ActiveYes)
+        if (ParamPM_pChannelActive == PT_ChannelActive::Aktiv)
             startReadRequests();
         pOnDelay = 0;
     }
@@ -523,28 +529,28 @@ void PresenceChannel::startRunning()
     GroupObject *lKo = getKo(PM_KoKOpLux);
     // external brightness is 0 (dark, pm works also in fallback mode)
     if (!lKo->initialized())
-        lKo->value(0.0f, getDPT(VAL_DPT_9));
+        lKo->value(0.0f, DPT_Value_Lux);
     // presence and move are false
     lKo = getKo(PM_KoKOpPresence1);
     if (!lKo->initialized())
-        lKo->value(false, getDPT(VAL_DPT_1));
+        lKo->value(false, DPT_Bool);
     lKo = getKo(PM_KoKOpPresence2);
     if (!lKo->initialized())
-        lKo->value(false, getDPT(VAL_DPT_1));
+        lKo->value(false, DPT_Bool);
     // actor state has to be handled in ProcessActorState !!!
     lKo = getKo(PM_KoKOpIsManual);
     if (!lKo->initialized())
-        lKo->value(false, getDPT(VAL_DPT_1));
+        lKo->value(false, DPT_Bool);
 
     lKo = getKo(PM_KoKOpLock);
     if (!lKo->initialized())
         switch (ParamPM_pLockType)
         {
             case VAL_PM_LockTypePriority:
-                lKo->value((uint8_t)0, getDPT(VAL_DPT_2));
+                lKo->value((uint8_t)0, DPT_Switch_Control);
                 break;
             case VAL_PM_LockTypeLock:
-                lKo->value((uint8_t)0, getDPT(VAL_DPT_1));
+                lKo->value((uint8_t)0, DPT_Bool);
                 break;
             default:
                 // do nothing
@@ -570,11 +576,11 @@ int8_t PresenceChannel::getDayPhaseFromKO()
     int8_t lPhaseCount = ParamPM_pPhaseCount;
     if (lPhaseCount == 1 && ParamPM_pPhaseBool) // PhaseCount is zero based (0 = 1 Phase)
     {
-        lPhaseCount = (uint8_t)getKo(PM_KoKOpDayPhase)->value(getDPT(VAL_DPT_1));
+        lPhaseCount = (uint8_t)getKo(PM_KoKOpDayPhase)->value(DPT_Bool);
     }
     else if (lPhaseCount >= 1) // no calculation if only one phase defined
     {
-        uint8_t lScene = (uint8_t)getKo(PM_KoKOpDayPhase)->value(getDPT(VAL_DPT_17)) + 1;
+        uint8_t lScene = (uint8_t)getKo(PM_KoKOpDayPhase)->value(DPT_SceneNumber) + 1;
         for (; lPhaseCount >= 0; lPhaseCount--)
             if (paramByte(PM_pPhase1Scene + lPhaseCount) == lScene)
                 break;
@@ -663,10 +669,10 @@ void PresenceChannel::onDayPhase(uint8_t iPhase, bool iIsStartup /* = false */)
     // with according parameters from day phase.
     // presence delay
     uint32_t lPresenceDelay = paramTimeDelay(PM_pAPresenceDelayBase, true, true);
-    getKo(PM_KoKOpPresenceDelay)->value(lPresenceDelay, getDPT(VAL_DPT_7));
+    getKo(PM_KoKOpPresenceDelay)->value(lPresenceDelay, DPT_Value_2_Ucount);
     // brightness to turn on light
     uint32_t lBrightness = paramWord(PM_pABrightnessOn, true);
-    getKo(PM_KoKOpLuxOn)->value(lBrightness, getDPT(VAL_DPT_9));
+    getKo(PM_KoKOpLuxOn)->value(lBrightness, DPT_Value_Lux);
     // brightness to turn off light
     processBrightnessOff();
     // if short presence is off, we stop a potential running short presence from other phase
@@ -689,9 +695,9 @@ bool PresenceChannel::getRawPresence(bool iJustMove /* false */)
     // are external inputs offering presence and move?
     if (ParamPM_pPresenceInputs == VAL_PM_PI_PresenceMove)
         lJustMove = iJustMove;
-    bool lPresence = getKo(PM_KoKOpPresence2)->value(getDPT(VAL_DPT_1));
+    bool lPresence = getKo(PM_KoKOpPresence2)->value(DPT_Bool);
     if (!lPresence && !lJustMove)
-        lPresence = getKo(PM_KoKOpPresence1)->value(getDPT(VAL_DPT_1));
+        lPresence = getKo(PM_KoKOpPresence1)->value(DPT_Bool);
     // if hardware presence sensor is available, we evaluate its value
     if (!lPresence)
         lPresence = getHardwarePresence(iJustMove); // for internal sensors, we use iJustMove !!!
@@ -708,7 +714,7 @@ float PresenceChannel::getRawBrightness()
         GroupObject *lKo = getKo(PM_KoKOpLux);
         ComFlag lComFlag = lKo->commFlag();
         if (lComFlag != ComFlag::Uninitialized && lComFlag != ComFlag::Transmitting)
-            lResult = lKo->value(getDPT(VAL_DPT_9));
+            lResult = lKo->value(DPT_Value_Lux);
     }
     // returns NO_NUM if brightness-ko was never set
     return lResult;
@@ -819,7 +825,7 @@ void PresenceChannel::processPresencePrepare(uint32_t iState)
 // helper entry point for presence calculation initiated by a KO
 void PresenceChannel::startPresence(bool iIsTrigger, bool iIsKeepAlive, GroupObject *iKo)
 {
-    bool lPresenceValue = iKo->value(getDPT(VAL_DPT_1));
+    bool lPresenceValue = iKo->value(DPT_Bool);
     bool lAllowStartPresence = !iIsKeepAlive || (pCurrentState & STATE_PRESENCE);
     // we ignore explicitly OFF telegrams of triggered input
     if (iIsTrigger && !lPresenceValue)
@@ -835,7 +841,7 @@ void PresenceChannel::startPresence(bool iIsTrigger, bool iIsKeepAlive, GroupObj
     if (iIsTrigger && lPresenceValue)
     {
         // triggered input sent a 1, we immediately set it to 0
-        iKo->value(false, getDPT(VAL_DPT_1));
+        iKo->value(false, DPT_Bool);
         // afterwards we call ourself to evaluate 0 action
         if (lAllowStartPresence)
             startPresence(false, false);
@@ -887,7 +893,7 @@ void PresenceChannel::processPresence()
     // we just do something if timer is really running
     if (pPresenceDelayTime > 0)
     {
-        uint32_t lPresenceDelay = (uint32_t)getKo(PM_KoKOpPresenceDelay)->value(getDPT(VAL_DPT_7)) * 1000;
+        uint32_t lPresenceDelay = (uint32_t)getKo(PM_KoKOpPresenceDelay)->value(DPT_Value_2_Ucount) * 1000;
         if (delayCheck(pPresenceDelayTime, lPresenceDelay))
         {
             // time is over, we turn everything off
@@ -970,7 +976,7 @@ void PresenceChannel::onPresenceBrightnessChange(bool iOn)
         if (lBrightness != NO_NUM)
         {
             // check brightness in case of turning on
-            if ((uint32_t)lBrightness < (uint32_t)getKo(PM_KoKOpLuxOn)->value(getDPT(VAL_DPT_9)))
+            if ((uint32_t)lBrightness < (uint32_t)getKo(PM_KoKOpLuxOn)->value(DPT_Value_Lux))
                 onPresenceChange(iOn);
         }
     }
@@ -1007,16 +1013,16 @@ void PresenceChannel::startLeaveRoom(bool iSuppressOutput)
     bool lIsLeaveRoom = false;
     switch (pLeaveRoomMode)
     {
-        case VAL_PM_LRM_Downtime:
-        case VAL_PM_LRM_DowntimeReset:
+        case PT_LeaveRoomMode::Totzeit:
+        case PT_LeaveRoomMode::Totzeit_Reset:
             // in this case we just wait until downtime passed and afterwards we wait for the first Move
             startDowntime(); // has to be first to set correct state
             lIsLeaveRoom = true;
             onManualChange(false);
             endPresence(lSend);
             break;
-        case VAL_PM_LRM_MoveDowntime:
-        case VAL_PM_LRM_MoveDowntimeReset:
+        case PT_LeaveRoomMode::Bewegung_Totzeit:
+        case PT_LeaveRoomMode::Bewegung_Totzeit_Reset:
             // dispatch to process handler
             pCurrentState |= STATE_LEAVE_ROOM;
             lIsLeaveRoom = true;
@@ -1046,7 +1052,7 @@ void PresenceChannel::processLeaveRoom()
 {
     switch (pLeaveRoomMode)
     {
-        case VAL_PM_LRM_Downtime:
+        case PT_LeaveRoomMode::Totzeit:
             // we wait for the next move, which also starts new presence cycle
             if (getRawPresence(true))
             {
@@ -1057,23 +1063,23 @@ void PresenceChannel::processLeaveRoom()
             if (!getRawPresence())
                 endLeaveRoom();
             break;
-        case VAL_PM_LRM_DowntimeReset:
+        case PT_LeaveRoomMode::Totzeit_Reset:
         {
             // we send a reset to external PM and go to normal mode
             uint8_t lResetTrigger = ParamPM_pExternalSupportsReset;
             if (lResetTrigger)
-                getKo(PM_KoKOpResetExternalPM)->value((lResetTrigger == 1), getDPT(VAL_DPT_1));
+                getKo(PM_KoKOpResetExternalPM)->value((lResetTrigger == 1), DPT_Bool);
             // TODO: reset internal PIR, as soon as implemented
             endLeaveRoom();
         }
         break;
-        case VAL_PM_LRM_MoveDowntime:
-        case VAL_PM_LRM_MoveDowntimeReset:
+        case PT_LeaveRoomMode::Bewegung_Totzeit:
+        case PT_LeaveRoomMode::Bewegung_Totzeit_Reset:
             // we wait until current move gets inactive
             if (!getRawPresence(true))
             {
                 // from now on it is the same like downtime processing
-                pLeaveRoomMode = (pLeaveRoomMode == VAL_PM_LRM_MoveDowntime) ? VAL_PM_LRM_Downtime : VAL_PM_LRM_DowntimeReset;
+                pLeaveRoomMode = (pLeaveRoomMode == PT_LeaveRoomMode::Bewegung_Totzeit) ? PT_LeaveRoomMode::Totzeit : PT_LeaveRoomMode::Totzeit_Reset;
                 pCurrentState &= ~STATE_LEAVE_ROOM;
                 startDowntime();
             }
@@ -1124,7 +1130,7 @@ void PresenceChannel::startAutoPrepare()
 void PresenceChannel::processAutoPrepare()
 {
     // Automatic mode
-    bool lValue = getKo(PM_KoKOpSetAuto)->value(getDPT(VAL_DPT_1));
+    bool lValue = getKo(PM_KoKOpSetAuto)->value(DPT_Bool);
     pCurrentState &= ~STATE_KO_SET_AUTO;
     startAuto(lValue, false);
 }
@@ -1138,8 +1144,8 @@ void PresenceChannel::startAuto(bool iOn, bool iSuppressOutput)
     // check if we have to go to leave room
     bool lAutoOffIsLeave = ParamPM_pAutoOffIsLeave;
     // here we have to use a local variable, not pLeaveRoomMode!
-    uint8_t lLeaveRoomMode = ParamPM_pLeaveRoomModeAll;
-    if (!iOn && lAutoOffIsLeave && lLeaveRoomMode > VAL_PM_LRM_None)
+    PT_LeaveRoomMode lLeaveRoomMode = ParamPM_pLeaveRoomModeAll;
+    if (!iOn && lAutoOffIsLeave && lLeaveRoomMode > PT_LeaveRoomMode::Raum_verlassen_inaktiv)
         startLeaveRoom(iSuppressOutput);
     else
     {
@@ -1175,7 +1181,7 @@ void PresenceChannel::startManualPrepare()
 void PresenceChannel::processManualPrepare()
 {
     // Manual mode
-    bool lValue = getKo(PM_KoKOpSetManual)->value(getDPT(VAL_DPT_1));
+    bool lValue = getKo(PM_KoKOpSetManual)->value(DPT_Bool);
     pCurrentState &= ~STATE_KO_SET_MANUAL;
     // check for two button mode
     if (paramBit(PM_pManualModeKeyCount, PM_pManualModeKeyCountMask))
@@ -1237,8 +1243,8 @@ void PresenceChannel::onManualChange(bool iOn)
         pManualFallbackTime = 0;
     }
     // set StateKO
-    if ((bool)(getKo(PM_KoKOpIsManual)->value(getDPT(VAL_DPT_1))) != iOn)
-        getKo(PM_KoKOpIsManual)->value(iOn, getDPT(VAL_DPT_1));
+    if ((bool)(getKo(PM_KoKOpIsManual)->value(DPT_Bool)) != iOn)
+        getKo(PM_KoKOpIsManual)->value(iOn, DPT_Bool);
 }
 
 void PresenceChannel::startLock()
@@ -1253,20 +1259,20 @@ void PresenceChannel::processLockPrepare()
     uint8_t lLockType = ParamPM_pLockType;
     if (lLockType == VAL_PM_LockTypePriority)
     {
-        uint8_t lPriority = getKo(PM_KoKOpLock)->value(getDPT(VAL_DPT_5));
+        uint8_t lPriority = getKo(PM_KoKOpLock)->value(DPT_Value_1_Ucount);
         bool lValue = (lPriority & 2);
-        uint8_t lLockSend = (lPriority & 1) + 1;
+        PT_PMLock lLockSend = (PT_PMLock)((lPriority & 1) + 1);
         onLock(lValue, lLockSend, lLockSend);
     }
     else if (lLockType == VAL_PM_LockTypeLock)
     {
         // simple lock
-        bool lValue = getKo(PM_KoKOpLock)->value(getDPT(VAL_DPT_1));
+        bool lValue = getKo(PM_KoKOpLock)->value(DPT_Bool);
         bool lInvert = ParamPM_pLockActive;
         if (lInvert)
             lValue = !lValue;
-        uint8_t lLockOnSend = ParamPM_pLockOn;
-        uint8_t lLockOffSend = ParamPM_pLockOff;
+        PT_PMLock lLockOnSend = ParamPM_pLockOn;
+        PT_PMLock lLockOffSend = ParamPM_pLockOff;
         onLock(lValue, lLockOnSend, lLockOffSend);
     }
 }
@@ -1284,27 +1290,27 @@ void PresenceChannel::processLock()
             if (lLockType == VAL_PM_LockTypePriority)
             {
                 // priority
-                onLock(false, VAL_PM_LockOutputOff, VAL_PM_LockOutputOff);
+                onLock(false, PT_PMLock::AUS_gesendet, PT_PMLock::AUS_gesendet);
             }
             else if (lLockType == VAL_PM_LockTypeLock)
             {
                 // simple lock
-                uint8_t lLockOffSend = ParamPM_pLockOff;
+                PT_PMLock lLockOffSend = ParamPM_pLockOff;
                 onLock(false, lLockOffSend, lLockOffSend);
             }
         }
     }
 }
 
-void PresenceChannel::onLock(bool iLockOn, uint8_t iLockOnSend, uint8_t iLockOffSend)
+void PresenceChannel::onLock(bool iLockOn, PT_PMLock iLockOnSend, PT_PMLock iLockOffSend)
 {
 
     if (iLockOn)
     {
         // should we send something?
-        if (iLockOnSend)
+        if (iLockOnSend > PT_PMLock::nichts_gesendet)
         {
-            startOutput(iLockOnSend == VAL_PM_LockOutputOn);
+            startOutput(iLockOnSend == PT_PMLock::EIN_gesendet);
             forceOutput(true);
         }
         pCurrentState |= STATE_LOCK;
@@ -1317,19 +1323,19 @@ void PresenceChannel::onLock(bool iLockOn, uint8_t iLockOnSend, uint8_t iLockOff
         uint32_t lPresenceDelayTime;
         switch (iLockOffSend)
         {
-            case VAL_PM_LockOutputNone:
+            case PT_PMLock::nichts_gesendet:
                 // nothing should be send, so we set the output state to current state
                 syncOutput();
                 break;
-            case VAL_PM_LockOutputOff:
+            case PT_PMLock::AUS_gesendet:
                 startAuto(false, false);
                 forceOutput(true);
                 break;
-            case VAL_PM_LockOutputOn:
+            case PT_PMLock::EIN_gesendet:
                 startAuto(true, false);
                 forceOutput(true);
                 break;
-            case VAL_PM_LockOutputCurrent:
+            case PT_PMLock::Aktueller_Zustand_gesendet:
                 // we send current state by reevaluation
                 lPresenceDelayTime = pPresenceDelayTime;
                 startPresence(false, false);
@@ -1343,31 +1349,31 @@ void PresenceChannel::onLock(bool iLockOn, uint8_t iLockOnSend, uint8_t iLockOff
     // we have to sync KO according to lock state
     uint8_t lLockType = ParamPM_pLockType;
     uint8_t lLockValue = (iLockOn << 1);
-    uint8_t lLockSend = lLockValue ? iLockOnSend : iLockOffSend;
-    uint8_t lDpt = 255;
+    PT_PMLock lLockSend = lLockValue ? iLockOnSend : iLockOffSend;
+    Dpt lDpt = DPT_Value_Temp;
     switch (lLockType)
     {
         case VAL_PM_LockTypePriority:
-            if (lLockSend == VAL_PM_LockOutputNone || lLockSend == VAL_PM_LockOutputCurrent)
+            if (lLockSend == PT_PMLock::nichts_gesendet || lLockSend == PT_PMLock::Aktueller_Zustand_gesendet)
                 lLockValue |= ((pCurrentValue & PM_BIT_OUTPUT_SET) > 0);
             else
-                lLockValue |= (lLockSend == VAL_PM_LockOutputOn);
-            lDpt = VAL_DPT_5;
+                lLockValue |= (lLockSend == PT_PMLock::EIN_gesendet);
+            lDpt = DPT_Value_1_Ucount;
             break;
         case VAL_PM_LockTypeLock:
             lLockValue = iLockOn;
-            lDpt = VAL_DPT_1;
+            lDpt = DPT_Bool;
             break;
         default:
             // do nothing
             break;
     }
-    if (lDpt < 255)
+    if (lDpt != DPT_Value_Temp)
     {
         // send new state only if lock state changed
         if (lLockValue != pLastLockState)
         {
-            getKo(PM_KoKOpLock)->value(lLockValue, getDPT(lDpt));
+            getKo(PM_KoKOpLock)->value(lLockValue, lDpt);
             pLastLockState = lLockValue;
         }
     }
@@ -1382,7 +1388,7 @@ void PresenceChannel::processReset()
 {
     pCurrentState &= ~STATE_KO_RESET;
     // reset PM, we just react on ON-telegrams
-    bool lValue = getKo(PM_KoKOpReset)->value(getDPT(VAL_DPT_1));
+    bool lValue = getKo(PM_KoKOpReset)->value(DPT_Bool);
     if (lValue)
         onReset();
 }
@@ -1413,7 +1419,7 @@ void PresenceChannel::processActorState()
     // change of actor state always influences the PM behaviour
     // if the actor state is different to current PM state
     GroupObject *lKo = getKo(PM_KoKOpAktorState);
-    bool lValue = lKo->value(getDPT(VAL_DPT_1));
+    bool lValue = lKo->value(DPT_Bool);
 
     pCurrentState &= ~STATE_KO_SET_ACTOR_STATE;
 
@@ -1467,9 +1473,9 @@ void PresenceChannel::processBrightnessOff()
             break;
         case VAL_PM_LuxAbsoluteOff:
             // for absolute off we simply add the offset to current on limit
-            lBrightness = getKo(PM_KoKOpLuxOn)->value(getDPT(VAL_DPT_9));
+            lBrightness = getKo(PM_KoKOpLuxOn)->value(DPT_Value_Lux);
             lBrightness += paramWord(PM_pABrightnessDelta, true);
-            getKo(PM_KoKOpLuxOff)->value(lBrightness, getDPT(VAL_DPT_9));
+            getKo(PM_KoKOpLuxOff)->value(lBrightness, DPT_Value_Lux);
             break;
         default:
             // do nothing
@@ -1506,7 +1512,7 @@ void PresenceChannel::startBrightness()
     {
         // but only, if we are not calculating a new off value
         // and only, if the switch "manual actions suppress brightness off" is not set
-        if (!(pCurrentState & STATE_ADAPTIVE) && lBrightness >= (float)getKo(PM_KoKOpLuxOff)->value(getDPT(VAL_DPT_9)) && (!((pCurrentState & STATE_AUTO) && paramBit(PM_pABrightnessSuppress, PM_pABrightnessSuppressMask, true))))
+        if (!(pCurrentState & STATE_ADAPTIVE) && lBrightness >= (float)getKo(PM_KoKOpLuxOff)->value(DPT_Value_Lux) && (!((pCurrentState & STATE_AUTO) && paramBit(PM_pABrightnessSuppress, PM_pABrightnessSuppressMask, true))))
         {
             // we start timer off delay
             if (pBrightnessOffDelayTime == 0 && paramByte(PM_pABrightnessAuto, PM_pABrightnessAutoMask, PM_pABrightnessAutoShift, true) > 0)
@@ -1518,7 +1524,7 @@ void PresenceChannel::startBrightness()
             pBrightnessOffDelayTime = 0;
         }
         // now check lower value, if below, turn light on
-        if ((float)lBrightness < (float)getKo(PM_KoKOpLuxOn)->value(getDPT(VAL_DPT_9)))
+        if ((float)lBrightness < (float)getKo(PM_KoKOpLuxOn)->value(DPT_Value_Lux))
         {
             // its getting dark, if we are in presence state, we turn light on
             // except we are in auto state (technically here it is Auto-Off), we should not turn on
@@ -1554,9 +1560,9 @@ void PresenceChannel::disableBrightness(bool iOn)
         {
             // we disable brightness handling according to current brightness and current output state
             // turn on even though there is enough light
-            bool lDisable1 = iOn && (lBrightness >= (float)getKo(PM_KoKOpLuxOff)->value(getDPT(VAL_DPT_9)));
+            bool lDisable1 = iOn && (lBrightness >= (float)getKo(PM_KoKOpLuxOff)->value(DPT_Value_Lux));
             // turn off even though it is too dark
-            bool lDisable2 = !iOn && (lBrightness <= (float)getKo(PM_KoKOpLuxOff)->value(getDPT(VAL_DPT_9)));
+            bool lDisable2 = !iOn && (lBrightness <= (float)getKo(PM_KoKOpLuxOff)->value(DPT_Value_Lux));
             if (lDisable1 || lDisable2) 
             {
                 pCurrentValue |= PM_BIT_DISABLE_BRIGHTNESS;
@@ -1614,7 +1620,7 @@ void PresenceChannel::processAdaptiveBrightness()
             uint32_t lBrightnessOff = MAX((uint32_t)getRawBrightness(), (uint32_t)(paramWord(PM_pABrightnessOn, true)));
             // add adaptive offset and set it as new off limit
             lBrightnessOff += paramWord(PM_pABrightnessDelta, true);
-            getKo(PM_KoKOpLuxOff)->value(lBrightnessOff, getDPT(VAL_DPT_9));
+            getKo(PM_KoKOpLuxOff)->value(lBrightnessOff, DPT_Value_Lux);
             // and we stop adaptive calculation
             pCurrentState &= ~(STATE_ADAPTIVE | STATE_ADAPTIVE_READ);
         }
@@ -1689,12 +1695,12 @@ void PresenceChannel::processOutput()
 
 void PresenceChannel::onOutput(bool iOutputIndex, bool iOn)
 {
-    static uint8_t sTypeToDpt[5] = {0, VAL_DPT_1, VAL_DPT_5, VAL_DPT_17, VAL_DPT_5001};
+    static Dpt sTypeToDpt[5] = {DPT_Value_TemperatureDifference, DPT_Bool, DPT_Value_1_Ucount, DPT_SceneNumber, DPT_Scaling};
 
     // first check, if output is active
     // get output DPT
-    uint8_t lType = iOutputIndex ? ParamPM_pOutput2Type : ParamPM_pOutput1Type;
-    if (lType == 0)
+    PT_OutputType lType = iOutputIndex ? ParamPM_pOutput2Type : ParamPM_pOutput1Type;
+    if (lType == PT_OutputType::Inaktiv)
         return;
     uint8_t lFilter = iOutputIndex ? paramByte(PM_pAOutput2Filter, PM_pAOutput2FilterMask, PM_pAOutput2FilterShift, true) : paramByte(PM_pAOutput1Filter, PM_pAOutput1FilterMask, PM_pAOutput1FilterShift, true);
     // get correct value to send
@@ -1714,9 +1720,9 @@ void PresenceChannel::onOutput(bool iOutputIndex, bool iOn)
     }
     if (lSend) 
     {
-        if (sTypeToDpt[lType] == VAL_DPT_17) lValue--;
+        if (sTypeToDpt[(uint8_t)lType] == DPT_SceneNumber) lValue--;
         GroupObject* lKo = getKo(iOutputIndex ? PM_KoKOpOutput2 : PM_KoKOpOutput);
-        lKo->value(lValue, getDPT(sTypeToDpt[lType]));
+        lKo->value(lValue, sTypeToDpt[(uint8_t)lType]);
         // seems to have side effects, currently disabled
         // // startup fix: the very fist Telegram should not be sent, because it turns light on or off after startup, which is not intended
         // if (lKo->initialized())
@@ -1736,7 +1742,7 @@ void PresenceChannel::loop()
     if (!knx.configured())
         return;
 
-    if (ParamPM_pChannelActive != PM_VAL_ActiveYes)
+    if (ParamPM_pChannelActive != PT_ChannelActive::Aktiv)
         return;
 
     // here we do the things after setup, but only once in the loop()
@@ -1831,7 +1837,7 @@ void PresenceChannel::prepareInternalKo()
 void PresenceChannel::setup()
 {
     // Skip setup if Channel is not active
-    if (ParamPM_pChannelActive != PM_VAL_ActiveYes)
+    if (ParamPM_pChannelActive != PT_ChannelActive::Aktiv)
         return;
 
     prepareInternalKo();

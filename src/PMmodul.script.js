@@ -91,7 +91,7 @@ function PM_processCalibrationData(device, online, progress, dataKind, parName) 
     // kind of data requested (1=cal raw, 2=cal std, 3=cal max, 4=curr raw, 5=curr std, 6=curr max, 7=hold, 8=trigger)
     data = data.concat(dataKind, 0); // ensure zero-terminated string
 
-    var resp = online.invokeFunctionProperty(160, 6, data);
+    var resp = BASE_invokeFunctionPropertyWrapper(160, 6, data, device, online, progress);
     // error handling
     if (resp[0] == 0) {
         // progress.setText("PM: " + PM_dataKindText[dataKind] + " gefunden");
@@ -142,7 +142,7 @@ function PM_setCalibrationData(device, online, progress, dataKind, parName, perc
     }
 
     progress.setProgress(percent + 20);
-    var resp = online.invokeFunctionProperty(160, 6, data);
+    var resp = BASE_invokeFunctionPropertyWrapper(160, 6, data, device, online, progress);
     progress.setProgress(percent + 30);
     if (resp[0] == 0) {
         progress.setText("PM: " + PM_dataKindText[dataKind] + " geschrieben");
@@ -172,7 +172,7 @@ function PM_setCalibrationDataSet(device, online, progress, context) {
         lPercent += (100.0-lPercent)/5.0;
         if (lPercent <= 100) progress.setProgress(lPercent);
         PM_sleep(1000);
-        resp = online.invokeFunctionProperty(160, 6, data);
+        resp = online.invokeFunctionProperty(160, 6, data); // short message (wait polling)
         lCancelled = progress.isCanceled();
     }
     online.disconnect();
@@ -241,7 +241,7 @@ function PM_startCalibration(device, online, progress, context) {
         var data = [2]; // command startCalibration
         data = data.concat(4, 0); // subcommand 1=cal, 4=calt; zero-terminated
         
-        var resp = online.invokeFunctionProperty(160, 6, data);
+        var resp = online.invokeFunctionProperty(160, 6, data); // short messsage (start calibration)
         
         var lPercent = 0;
         if (resp[0] == 0) {
@@ -252,7 +252,7 @@ function PM_startCalibration(device, online, progress, context) {
                 lPercent += (70.0-lPercent)/20.0;
                 if (lPercent <= 100) progress.setProgress(lPercent);
                 PM_sleep(1000);
-                resp = online.invokeFunctionProperty(160, 6, data);
+                resp = online.invokeFunctionProperty(160, 6, data); // short message (wait polling)
                 lCancelled = progress.isCanceled();
             }
             if (resp[0] == 0 && resp[1] == 1 && !lCancelled) {

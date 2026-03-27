@@ -1,5 +1,4 @@
 #include "Presence.h"
-#include "KnxHelper.h"
 #include "OpenKNX.h"
 #include "PresenceChannel.h"
 #include "Sensor.h"
@@ -192,7 +191,7 @@ void Presence::processInputKo(GroupObject &iKo)
     {
         case PM_KoPirSensitivity:
         {
-            mPirSensitivity = iKo.value(getDPT(VAL_DPT_5));
+            mPirSensitivity = iKo.value(DPT_DecimalFactor);
             break;
         }
         case PM_KoHfSensitivity:
@@ -202,7 +201,7 @@ void Presence::processInputKo(GroupObject &iKo)
             {
                 case VAL_PM_PS_Hf_MR24xxB1:
                     {
-                    int8_t lHfSensitivity = iKo.value(getDPT(VAL_DPT_5));
+                    int8_t lHfSensitivity = iKo.value(DPT_DecimalFactor);
                     if (mHfSensitivity != lHfSensitivity)
                         static_cast<SensorMR24xxB1 *>(mPresenceSensor)->sendCommand(RadarCmd_WriteSensitivity, lHfSensitivity);
                     }
@@ -220,7 +219,7 @@ void Presence::processInputKo(GroupObject &iKo)
         }
         case PM_KoScenario:
         {
-            int8_t lScenario = iKo.value(getDPT(VAL_DPT_5));
+            int8_t lScenario = iKo.value(DPT_DecimalFactor);
             if (mScenario != lScenario)
             {
 #ifdef HF_POWER_PIN
@@ -312,10 +311,10 @@ void Presence::startSensors()
 
     switch (ParamPM_PirPresence)
     {
-        case VAL_PM_PS_Pir_Digital:
+        case PT_PirSensor::digital:
             logDebugP("Using PIR sensor (digital)");
             break;
-        case VAL_PM_PS_Pir_Analog:
+        case PT_PirSensor::analog:
             logDebugP("Using PIR sensor (analog)");
             mPirSensitivity = ParamPM_PirSensitivity;
             break;
@@ -500,7 +499,7 @@ void Presence::processHardwarePresence()
                         {
                             mPresence = lPresence;
                             processLED(mPresence, CallerPresence);
-                            knx.getGroupObject(PM_KoPresenceOut).value(mPresence, getDPT(VAL_DPT_1));
+                            knx.getGroupObject(PM_KoPresenceOut).value(mPresence, DPT_Bool);
                             if (mPresence)
                                 PresenceTrigger = true;
                         }
@@ -508,7 +507,7 @@ void Presence::processHardwarePresence()
                         {
                             mMove = lMove;
                             processLED(mMove > 0, CallerMove);
-                            knx.getGroupObject(PM_KoMoveOut).value(mMove, getDPT(VAL_DPT_5));
+                            knx.getGroupObject(PM_KoMoveOut).value(mMove, DPT_Value_1_Ucount);
                             if (mMove)
                                 MoveTriggerHF = true;
                         }
@@ -517,8 +516,8 @@ void Presence::processHardwarePresence()
                 if (openknxSensorDevicesModule.measureValue(MeasureType::Speed, lValue))
                 {
                     GroupObject &lKo = knx.getGroupObject(PM_KoMoveSpeedOut);
-                    if ((uint8_t)lKo.value(getDPT(VAL_DPT_5001)) != (uint8_t)lValue)
-                        lKo.value(lValue, getDPT(VAL_DPT_5001));
+                    if ((uint8_t)lKo.value(DPT_Scaling) != (uint8_t)lValue)
+                        lKo.value(lValue, DPT_Scaling);
                 }
                 if (openknxSensorDevicesModule.measureValue(MeasureType::Scenario, lValue))
                 {
@@ -526,7 +525,7 @@ void Presence::processHardwarePresence()
                     {
                         mScenario = (int8_t)lValue;
                         GroupObject &lKo = knx.getGroupObject(PM_KoScenario);
-                        lKo.value(mScenario, getDPT(VAL_DPT_5));
+                        lKo.value(mScenario, DPT_Value_1_Ucount);
                     }
                 }
                 if (openknxSensorDevicesModule.measureValue(MeasureType::Sensitivity, lValue))
@@ -535,7 +534,7 @@ void Presence::processHardwarePresence()
                     {
                         mHfSensitivity = (int8_t)lValue;
                         GroupObject &lKo = knx.getGroupObject(PM_KoHfSensitivity);
-                        lKo.value(mHfSensitivity, getDPT(VAL_DPT_5));
+                        lKo.value(mHfSensitivity, DPT_Value_1_Ucount);
                     }
                 }
                 break;
@@ -548,7 +547,7 @@ void Presence::processHardwarePresence()
                     {
                         mPresence = lPresence;
                         processLED(mPresence, CallerPresence);
-                        knx.getGroupObject(PM_KoPresenceOut).value(mPresence, getDPT(VAL_DPT_1));
+                        knx.getGroupObject(PM_KoPresenceOut).value(mPresence, DPT_Bool);
                         if (mPresence)
                             PresenceTrigger = true;
                     }
@@ -570,15 +569,15 @@ void Presence::processHardwarePresence()
                         mDistance = lValue;
                         lMove = (mDistance > 0.0);
                         GroupObject &lKo = knx.getGroupObject(PM_KoMoveSpeedOut);
-                        lKo.value(mDistance, getDPT(VAL_DPT_14));
+                        lKo.value(mDistance, DPT_Value_Activity);
                     }
                     if (delayCheck(mPresenceDelay, 500) && lMove != mMove) {
                         mMove = lMove;
                         mPresenceDelay = millis();
                         processLED(mMove > 0, CallerMove);
-                        bool lLastValue = knx.getGroupObject(PM_KoMoveOut).value(getDPT(VAL_DPT_1));
+                        bool lLastValue = knx.getGroupObject(PM_KoMoveOut).value(DPT_Bool);
                         if (lLastValue != mMove)
-                            knx.getGroupObject(PM_KoMoveOut).value(mMove, getDPT(VAL_DPT_1));
+                            knx.getGroupObject(PM_KoMoveOut).value(mMove, DPT_Bool);
                         if (mMove > 0) 
                             MoveTriggerHF = true;
                     }
@@ -593,10 +592,10 @@ void Presence::processHardwarePresence()
     bool pirTriggered = false;
     switch (ParamPM_PirPresence)
     {
-        case VAL_PM_PS_Pir_Digital:
+        case PT_PirSensor::digital:
             pirTriggered = digitalRead(PIR_PIN) == PinStatus::HIGH;
             break;
-        case VAL_PM_PS_Pir_Analog:
+        case PT_PirSensor::analog:
             uint32_t threshold = VAL_PM_PIR_Analog_Trigger_Max - (VAL_PM_PIR_Analog_Trigger_Max - VAL_PM_PIR_Analog_Trigger_Min) * (mPirSensitivity / 10.0);
             pirTriggered = analogRead(PIR_PIN) > threshold;
             break;
@@ -626,9 +625,9 @@ void Presence::processHardwarePresence()
     {
         mPresenceChanged = false;
         processLED(mMove > 0, CallerMove);
-        bool lLastValue = knx.getGroupObject(PM_KoMoveOut).value(getDPT(VAL_DPT_1));
+        bool lLastValue = knx.getGroupObject(PM_KoMoveOut).value(DPT_Bool);
         if (lLastValue != mMove)
-            knx.getGroupObject(PM_KoMoveOut).value(mMove, getDPT(VAL_DPT_1));
+            knx.getGroupObject(PM_KoMoveOut).value(mMove, DPT_Bool);
     }
     // add Trigger for any channel which registered for Hardware-PIR
 #endif
@@ -646,7 +645,7 @@ void Presence::processHardwareLux()
             mBrightnessProcess = delayTimerInit();
             bool lSend = false;
             mLux = lValue;
-            KoPM_LuxOut.valueNoSend(getHardwareBrightness(), getDPT(VAL_DPT_9));
+            KoPM_LuxOut.valueNoSend(getHardwareBrightness(), DPT_Value_Lux);
             uint32_t lTimeDelta = ParamPM_LuxSendCycleDelayTimeMS;
             bool lDeltaAbsRel = ParamPM_LuxSendDeltaAbsRel;
             lSend = lTimeDelta > 0 && delayCheck(mBrightnessDelay, lTimeDelta);
@@ -767,7 +766,7 @@ void Presence::setup()
         pinMode(PIR_PIN, INPUT_PULLDOWN);
         mPresenceStartupDelay = delayTimerInit();
 
-        if (ParamPM_PirPresence != VAL_PM_PS_None)
+        if (ParamPM_PirPresence != PT_PirSensor::kein_Sensor)
             digitalWrite(HF_POWER_PIN, HIGH);
 #endif
 
@@ -782,7 +781,7 @@ void Presence::setup()
             mChannel[lIndex] = new PresenceChannel(lIndex);
             mChannel[lIndex]->setup();
         }
-        mDoPresenceHardwareCycle = (ParamPM_HfPresence > 0) || (ParamPM_HWLux > 0) || (ParamPM_PirPresence > 0);
+        mDoPresenceHardwareCycle = (ParamPM_HfPresence > 0) || (ParamPM_HWLux > 0) || (ParamPM_PirPresence > PT_PirSensor::kein_Sensor);
         if (ParamPM_HfPresence > 0)
             startPowercycleHfSensor();
         startSensors();

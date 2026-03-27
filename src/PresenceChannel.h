@@ -42,9 +42,9 @@
 #define PM_VAL_OUTPUT_FORCE_SHIFT 4
 
 
-#define PM_VAL_ActiveNo 0
-#define PM_VAL_ActiveYes 1
-#define PM_VAL_ActiveDisabled 2
+// #define PM_VAL_ActiveNo 0
+// #define PM_VAL_ActiveYes 1
+// #define PM_VAL_ActiveDisabled 2
 
 // and we also define all enum values for PM
 #define VAL_PM_LedOff 0
@@ -88,11 +88,11 @@
 #define VAL_PM_LockTypePriority 1
 #define VAL_PM_LockTypeLock 2
 
-// lock output
-#define VAL_PM_LockOutputNone 0
-#define VAL_PM_LockOutputOff 1
-#define VAL_PM_LockOutputOn 2
-#define VAL_PM_LockOutputCurrent 3
+// // lock output
+// #define VAL_PM_LockOutputNone 0
+// #define VAL_PM_LockOutputOff 1
+// #define VAL_PM_LockOutputOn 2
+// #define VAL_PM_LockOutputCurrent 3
 
 // day phases
 #define VAL_PM_DAY 0
@@ -100,40 +100,40 @@
 #define VAL_PM_MORNING 2
 #define VAL_PM_EVENING 3
 
-// scene actions
-#define VAL_PM_SA_None 0
-#define VAL_PM_SA_ChangeBrightness 1
-#define VAL_PM_SA_AutoOff 2
-#define VAL_PM_SA_AutoOn 3
-#define VAL_PM_SA_ManualOff 4
-#define VAL_PM_SA_ManualOn 5
-#define VAL_PM_SA_LockOff 6
-#define VAL_PM_SA_LockOn 7
-#define VAL_PM_SA_Lock 8
-#define VAL_PM_SA_UnlockWithState 9
-#define VAL_PM_SA_Unlock 10
-#define VAL_PM_SA_Reserve1 11
-#define VAL_PM_SA_Reserve2 12
-#define VAL_PM_SA_Reserve3 13
-#define VAL_PM_SA_LeaveRoom 14
-#define VAL_PM_SA_Reset 15
-#define VAL_PM_SA_Phase1 16
-#define VAL_PM_SA_Phase2 17
-#define VAL_PM_SA_Phase3 18
-#define VAL_PM_SA_Phase4 19
-#define VAL_PM_SA_ForcePhase1 20
-#define VAL_PM_SA_ForcePhase2 21
-#define VAL_PM_SA_ForcePhase3 22
-#define VAL_PM_SA_ForcePhase4 23
-#define VAL_PM_SA_ManualActive 24
-#define VAL_PM_SA_ManualInactive 25
+// // scene actions
+// #define VAL_PM_SA_None 0
+// #define VAL_PM_SA_ChangeBrightness 1
+// #define VAL_PM_SA_AutoOff 2
+// #define VAL_PM_SA_AutoOn 3
+// #define VAL_PM_SA_ManualOff 4
+// #define VAL_PM_SA_ManualOn 5
+// #define VAL_PM_SA_LockOff 6
+// #define VAL_PM_SA_LockOn 7
+// #define VAL_PM_SA_Lock 8
+// #define VAL_PM_SA_UnlockWithState 9
+// #define VAL_PM_SA_Unlock 10
+// #define VAL_PM_SA_Reserve1 11
+// #define VAL_PM_SA_Reserve2 12
+// #define VAL_PM_SA_Reserve3 13
+// #define VAL_PM_SA_LeaveRoom 14
+// #define VAL_PM_SA_Reset 15
+// #define VAL_PM_SA_Phase1 16
+// #define VAL_PM_SA_Phase2 17
+// #define VAL_PM_SA_Phase3 18
+// #define VAL_PM_SA_Phase4 19
+// #define VAL_PM_SA_ForcePhase1 20
+// #define VAL_PM_SA_ForcePhase2 21
+// #define VAL_PM_SA_ForcePhase3 22
+// #define VAL_PM_SA_ForcePhase4 23
+// #define VAL_PM_SA_ManualActive 24
+// #define VAL_PM_SA_ManualInactive 25
 
-// leave room modes
-#define VAL_PM_LRM_None 0
-#define VAL_PM_LRM_Downtime 1
-#define VAL_PM_LRM_DowntimeReset 2
-#define VAL_PM_LRM_MoveDowntime 3
-#define VAL_PM_LRM_MoveDowntimeReset 4
+// // leave room modes
+// #define VAL_PM_LRM_None 0
+// #define VAL_PM_LRM_Downtime 1
+// #define VAL_PM_LRM_DowntimeReset 2
+// #define VAL_PM_LRM_MoveDowntime 3
+// #define VAL_PM_LRM_MoveDowntimeReset 4
 
 // available presence inputs
 #define VAL_PM_PI_None 0
@@ -150,10 +150,10 @@
 // #define VAL_PM_PS_Hf_HLKLD2420_Pir_Digital 4
 // #define VAL_PM_PS_Hf_HLKLD2420_Pir_Analog 5
 
-// PIR Sensor
-#define VAL_PM_PS_None 0
-#define VAL_PM_PS_Pir_Digital 1
-#define VAL_PM_PS_Pir_Analog 2
+// // PIR Sensor
+// #define VAL_PM_PS_None 0
+// #define VAL_PM_PS_Pir_Digital 1
+// #define VAL_PM_PS_Pir_Analog 2
 
 // PIR Hardware
 #define VAL_PM_PIR_Analog_Trigger_Min 390
@@ -250,7 +250,7 @@ class PresenceChannel : public OpenKNX::Channel
     void startLock();
     void processLockPrepare();
     void processLock();
-    void onLock(bool iLockOn, uint8_t iLockOnSend, uint8_t iLockOffSend);
+    void onLock(bool iLockOn, PT_PMLock iLockOnSend, PT_PMLock iLockOffSend);
     void startReset();
     void processReset();
     void onReset();
@@ -306,7 +306,7 @@ class PresenceChannel : public OpenKNX::Channel
     uint32_t pDowntimeDelayTime = 0;      // Totzeit
     uint32_t pAdaptiveDelayTime = 0;      // adaptive brightness calculation delay
     uint32_t pBrightnessOffDelayTime = 0; // brightness off delay
-    uint8_t pLeaveRoomMode = 0;           // used for leave room SM
+    PT_LeaveRoomMode pLeaveRoomMode = PT_LeaveRoomMode::Raum_verlassen_inaktiv;           // used for leave room SM
     uint8_t pLastLockState = 255;         // ensures sending just changed Lock states
 
   public:

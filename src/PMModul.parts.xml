@@ -60,22 +60,22 @@
               <Union SizeInBit="32">
                 <!-- OutputValue (per day phase) -->
                 <Memory CodeSegment="%AID%_RS-04-00000" Offset="%ParamOffset+16%" BitOffset="0" />
-                <Parameter Id="%AID%_UP-%TT%%CC%%PPP+17%" Name="p%Pl%%C%Output1On" ParameterType="%AID%_PT-ValueDpt1" Offset="0" BitOffset="0" Text="Wert für EIN" Value="1" />
-                <Parameter Id="%AID%_UP-%TT%%CC%%PPP+18%" Name="p%Pl%%C%Output1OnValue" ParameterType="%AID%_PT-ValueDpt5" Offset="0" BitOffset="0" Text="Wert für EIN" Value="1" />
-                <Parameter Id="%AID%_UP-%TT%%CC%%PPP+19%" Name="p%Pl%%C%Output1OnScene" ParameterType="%AID%_PT-ValueSceneOut" Offset="0" BitOffset="0" Text="Wert für EIN" Value="2" />
-                <Parameter Id="%AID%_UP-%TT%%CC%%PPP+20%" Name="p%Pl%%C%Output1OnDim" ParameterType="%AID%_PT-ValueDpt5001" Offset="0" BitOffset="0" Text="Wert für EIN" Value="100" SuffixText="%" />
-                <Parameter Id="%AID%_UP-%TT%%CC%%PPP+21%" Name="p%Pl%%C%Output1Off" ParameterType="%AID%_PT-ValueDpt1" Offset="1" BitOffset="0" Text="Wert für AUS" Value="0" />
-                <Parameter Id="%AID%_UP-%TT%%CC%%PPP+22%" Name="p%Pl%%C%Output1OffValue" ParameterType="%AID%_PT-ValueDpt5" Offset="1" BitOffset="0" Text="Wert für AUS" Value="0" />
-                <Parameter Id="%AID%_UP-%TT%%CC%%PPP+23%" Name="p%Pl%%C%Output1OffScene" ParameterType="%AID%_PT-ValueSceneOut" Offset="1" BitOffset="0" Text="Wert für AUS" Value="1" />
-                <Parameter Id="%AID%_UP-%TT%%CC%%PPP+24%" Name="p%Pl%%C%Output1OffDim" ParameterType="%AID%_PT-ValueDpt5001" Offset="1" BitOffset="0" Text="Wert für AUS" Value="0" SuffixText="%" />
-                <Parameter Id="%AID%_UP-%TT%%CC%%PPP+25%" Name="p%Pl%%C%Output2On" ParameterType="%AID%_PT-ValueDpt1" Offset="2" BitOffset="0" Text="Wert für EIN" Value="1" />
-                <Parameter Id="%AID%_UP-%TT%%CC%%PPP+26%" Name="p%Pl%%C%Output2OnValue" ParameterType="%AID%_PT-ValueDpt5" Offset="2" BitOffset="0" Text="Wert für EIN" Value="1" />
-                <Parameter Id="%AID%_UP-%TT%%CC%%PPP+27%" Name="p%Pl%%C%Output2OnScene" ParameterType="%AID%_PT-ValueSceneOut" Offset="2" BitOffset="0" Text="Wert für EIN" Value="2" />
-                <Parameter Id="%AID%_UP-%TT%%CC%%PPP+28%" Name="p%Pl%%C%Output2OnDim" ParameterType="%AID%_PT-ValueDpt5001" Offset="2" BitOffset="0" Text="Wert für EIN" Value="100" SuffixText="%" />
-                <Parameter Id="%AID%_UP-%TT%%CC%%PPP+29%" Name="p%Pl%%C%Output2Off" ParameterType="%AID%_PT-ValueDpt1" Offset="3" BitOffset="0" Text="Wert für AUS" Value="0" />
-                <Parameter Id="%AID%_UP-%TT%%CC%%PPP+30%" Name="p%Pl%%C%Output2OffValue" ParameterType="%AID%_PT-ValueDpt5" Offset="3" BitOffset="0" Text="Wert für AUS" Value="0" />
-                <Parameter Id="%AID%_UP-%TT%%CC%%PPP+31%" Name="p%Pl%%C%Output2OffScene" ParameterType="%AID%_PT-ValueSceneOut" Offset="3" BitOffset="0" Text="Wert für AUS" Value="1" />
-                <Parameter Id="%AID%_UP-%TT%%CC%%PPP+32%" Name="p%Pl%%C%Output2OffDim" ParameterType="%AID%_PT-ValueDpt5001" Offset="3" BitOffset="0" Text="Wert für AUS" Value="0" SuffixText="%" />
+                <Parameter Id="%AID%_UP-%TT%%CC%%PPP+17%" Name="p%Pl%%C%Output1On" ParameterType="%AID%_PT-ValueDpt1" Offset="0" BitOffset="0" Text="Wert für EIN" Value="1" op:nowarn="true" />
+                <Parameter Id="%AID%_UP-%TT%%CC%%PPP+18%" Name="p%Pl%%C%Output1OnValue" ParameterType="%AID%_PT-ValueDpt5" Offset="0" BitOffset="0" Text="Wert für EIN" Value="1" op:nowarn="true" />
+                <Parameter Id="%AID%_UP-%TT%%CC%%PPP+19%" Name="p%Pl%%C%Output1OnScene" ParameterType="%AID%_PT-ValueSceneOut" Offset="0" BitOffset="0" Text="Wert für EIN" Value="2" op:nowarn="true" />
+                <Parameter Id="%AID%_UP-%TT%%CC%%PPP+20%" Name="p%Pl%%C%Output1OnDim" ParameterType="%AID%_PT-ValueDpt5001" Offset="0" BitOffset="0" Text="Wert für EIN" Value="100" SuffixText="%" op:nowarn="true" />
+                <Parameter Id="%AID%_UP-%TT%%CC%%PPP+21%" Name="p%Pl%%C%Output1Off" ParameterType="%AID%_PT-ValueDpt1" Offset="1" BitOffset="0" Text="Wert für AUS" Value="0" op:nowarn="true" />
+                <Parameter Id="%AID%_UP-%TT%%CC%%PPP+22%" Name="p%Pl%%C%Output1OffValue" ParameterType="%AID%_PT-ValueDpt5" Offset="1" BitOffset="0" Text="Wert für AUS" Value="0" op:nowarn="true" />
+                <Parameter Id="%AID%_UP-%TT%%CC%%PPP+23%" Name="p%Pl%%C%Output1OffScene" ParameterType="%AID%_PT-ValueSceneOut" Offset="1" BitOffset="0" Text="Wert für AUS" Value="1" op:nowarn="true" />
+                <Parameter Id="%AID%_UP-%TT%%CC%%PPP+24%" Name="p%Pl%%C%Output1OffDim" ParameterType="%AID%_PT-ValueDpt5001" Offset="1" BitOffset="0" Text="Wert für AUS" Value="0" SuffixText="%" op:nowarn="true" />
+                <Parameter Id="%AID%_UP-%TT%%CC%%PPP+25%" Name="p%Pl%%C%Output2On" ParameterType="%AID%_PT-ValueDpt1" Offset="2" BitOffset="0" Text="Wert für EIN" Value="1" op:nowarn="true" />
+                <Parameter Id="%AID%_UP-%TT%%CC%%PPP+26%" Name="p%Pl%%C%Output2OnValue" ParameterType="%AID%_PT-ValueDpt5" Offset="2" BitOffset="0" Text="Wert für EIN" Value="1" op:nowarn="true" />
+                <Parameter Id="%AID%_UP-%TT%%CC%%PPP+27%" Name="p%Pl%%C%Output2OnScene" ParameterType="%AID%_PT-ValueSceneOut" Offset="2" BitOffset="0" Text="Wert für EIN" Value="2" op:nowarn="true" />
+                <Parameter Id="%AID%_UP-%TT%%CC%%PPP+28%" Name="p%Pl%%C%Output2OnDim" ParameterType="%AID%_PT-ValueDpt5001" Offset="2" BitOffset="0" Text="Wert für EIN" Value="100" SuffixText="%" op:nowarn="true" />
+                <Parameter Id="%AID%_UP-%TT%%CC%%PPP+29%" Name="p%Pl%%C%Output2Off" ParameterType="%AID%_PT-ValueDpt1" Offset="3" BitOffset="0" Text="Wert für AUS" Value="0" op:nowarn="true" />
+                <Parameter Id="%AID%_UP-%TT%%CC%%PPP+30%" Name="p%Pl%%C%Output2OffValue" ParameterType="%AID%_PT-ValueDpt5" Offset="3" BitOffset="0" Text="Wert für AUS" Value="0" op:nowarn="true" />
+                <Parameter Id="%AID%_UP-%TT%%CC%%PPP+31%" Name="p%Pl%%C%Output2OffScene" ParameterType="%AID%_PT-ValueSceneOut" Offset="3" BitOffset="0" Text="Wert für AUS" Value="1" op:nowarn="true" />
+                <Parameter Id="%AID%_UP-%TT%%CC%%PPP+32%" Name="p%Pl%%C%Output2OffDim" ParameterType="%AID%_PT-ValueDpt5001" Offset="3" BitOffset="0" Text="Wert für AUS" Value="0" SuffixText="%" op:nowarn="true" />
               </Union>
             </Parameters>
             <ParameterRefs>
