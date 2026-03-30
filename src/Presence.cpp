@@ -650,16 +650,21 @@ void Presence::processHardwareLux()
             bool lDeltaAbsRel = ParamPM_LuxSendDeltaAbsRel;
             lSend = lTimeDelta > 0 && delayCheck(mBrightnessDelay, lTimeDelta);
             uint16_t lDelta = ParamPM_LuxSendDelta;
-            if (lDelta > 0)
+            if (lDelta > 0 && !lSend)
             {
                 if (lDeltaAbsRel)
                 {
                     // Rel
                     if (abs(mLux - mLuxLast) > 0.1)
-                        lSend = lSend || (mLuxLast == 0) ? true : (abs((mLux - mLuxLast) / mLuxLast) * 100 >= lDelta); // Rel
+                        lSend = (mLuxLast == 0) ? true : (abs((mLux - mLuxLast) / mLuxLast) * 100 >= lDelta); // Rel
+                    else
+                    {
+                        mLux = 0;
+                        lSend = (mLuxLast != 0);
+                    }
                 }
                 else
-                    lSend = lSend || abs(mLux - mLuxLast) >= lDelta; // Abs
+                    lSend = abs(mLux - mLuxLast) >= lDelta; // Abs
             }
             if (lSend)
             {
