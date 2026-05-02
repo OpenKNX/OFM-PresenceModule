@@ -786,7 +786,7 @@ void Presence::setup()
             mChannel[lIndex] = new PresenceChannel(lIndex);
             mChannel[lIndex]->setup();
         }
-        mDoPresenceHardwareCycle = (ParamPM_HfPresence > 0) || (ParamPM_HWLux > 0) || (ParamPM_PirPresence > PT_PirSensor::kein_Sensor);
+        mDoPresenceHardwareCycle = (ParamPM_HfPresence > 0) || (ParamPM_HWLux > 0) || (ParamPM_PirPresence > PT_PirSensor::None);
         if (ParamPM_HfPresence > 0)
             startPowercycleHfSensor();
         startSensors();
