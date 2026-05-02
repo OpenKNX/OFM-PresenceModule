@@ -173,9 +173,9 @@
               </ParameterType>
               <ParameterType Id="%AID%_PT-PirSensor" Name="PirSensor" op:headerExport="enum">
                 <TypeRestriction Base="Value" SizeInBit="2">
-                  <Enumeration Text="kein Sensor" Value="0" Id="%ENID%" />
-                  <Enumeration Text="digital" Value="1" Id="%ENID%" />
-                  <Enumeration Text="analog" Value="2" Id="%ENID%" />
+                  <Enumeration Text="kein Sensor" Value="0" Id="%ENID%" op:headerName="None" />
+                  <Enumeration Text="digital" Value="1" Id="%ENID%" op:headerName="Digital" />
+                  <Enumeration Text="analog" Value="2" Id="%ENID%" op:headerName="Analog" />
                 </TypeRestriction>
               </ParameterType>
               <ParameterType Id="%AID%_PT-LuxSensor" Name="LuxSensor">
