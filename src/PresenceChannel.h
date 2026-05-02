@@ -28,6 +28,7 @@
 #define STATE_KO_DAY_PHASE 0x02000000
 #define STATE_KO_SCENE 0x04000000
 #define STATE_KO_CHANGE_STATE 0x08000000
+#define STATE_LOCK_PREPARE 0x10000000
 
 // Value marker (BITFIELD)
 #define PM_BIT_OUTPUT_SET 1                // output value to send

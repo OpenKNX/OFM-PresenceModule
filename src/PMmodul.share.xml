@@ -68,548 +68,548 @@
           </op:part>
           <Static>
             <ParameterTypes>
-              <ParameterType Id="%AID%_PT-SLEDFunc" Name="SLEDFunc">
+              <ParameterType Name="SLEDFunc">
                 <TypeRestriction Base="Value" SizeInBit="16" UIHint="DropDown">
-                  <Enumeration Text="PM Präsenz" Value="100" Id="%ENID%" />
-                  <Enumeration Text="PM Bewegung" Value="101" Id="%ENID%" />
-                  <Enumeration Text="PM Bewegung+Präsenz" Value="102" Id="%ENID%" />
+                  <Enumeration Text="PM Präsenz" Value="100" />
+                  <Enumeration Text="PM Bewegung" Value="101" />
+                  <Enumeration Text="PM Bewegung+Präsenz" Value="102" />
                 </TypeRestriction>
               </ParameterType>
               <!-- Number of channels (module specific) -->
-              <ParameterType Id="%AID%_PT-PMNumChannels" Name="PMNumChannels">
+              <ParameterType Name="PMNumChannels">
                 <TypeNumber SizeInBit="8" Type="unsignedInt" minInclusive="1" maxInclusive="%N%" />
               </ParameterType>
-              <ParameterType Id="%AID%_PT-OffsetLuxPM" Name="OffsetLuxPM">
+              <ParameterType Name="OffsetLuxPM">
                 <TypeNumber SizeInBit="8" Type="signedInt" minInclusive="-120" maxInclusive="120" />
               </ParameterType>
-              <ParameterType Id="%AID%_PT-AbsLux" Name="AbsLux">
+              <ParameterType Name="AbsLux">
                 <TypeNumber SizeInBit="15" Type="unsignedInt" minInclusive="0" maxInclusive="30000" />
               </ParameterType>
-              <ParameterType Id="%AID%_PT-HfDelayTime" Name="HfDelayTime">
+              <ParameterType Name="HfDelayTime">
                 <TypeNumber SizeInBit="16" Type="unsignedInt" minInclusive="0" maxInclusive="65535" />
               </ParameterType>
-              <ParameterType Id="%AID%_PT-Text15" Name="Text15">
+              <ParameterType Name="Text15">
                 <TypeText SizeInBit="120" />
               </ParameterType>
-              <ParameterType Id="%AID%_PT-dBValue" Name="dBValue">
+              <ParameterType Name="dBValue">
                 <TypeNumber SizeInBit="16" Type="unsignedInt" minInclusive="100" maxInclusive="9332" />
               </ParameterType>
-              <ParameterType Id="%AID%_PT-dBValueDelta" Name="dBValueDelta">
+              <ParameterType Name="dBValueDelta">
                 <TypeNumber SizeInBit="16" Type="signedInt" minInclusive="-9332" maxInclusive="9332" />
               </ParameterType>
-              <ParameterType Id="%AID%_PT-ActiveInaktive" Name="ActiveInaktive">
+              <ParameterType Name="ActiveInaktive">
                 <TypeRestriction Base="Value" SizeInBit="1">
-                  <Enumeration Text="nicht aktiv" Value="0" Id="%ENID%" />
-                  <Enumeration Text="aktiv" Value="1" Id="%ENID%" />
+                  <Enumeration Text="nicht aktiv" Value="0" />
+                  <Enumeration Text="aktiv" Value="1" />
                 </TypeRestriction>
               </ParameterType>
-              <ParameterType Id="%AID%_PT-HfSensor" Name="HfSensor">
+              <ParameterType Name="HfSensor">
                 <TypeRestriction Base="Value" SizeInBit="3">
-                  <Enumeration Text="kein Sensor" Value="0" Id="%ENID%" />
-                  <!-- <Enumeration Text="PIR-Sensor (digital)" Value="1" Id="%ENID%" /> -->
-                  <Enumeration Text="MR24xxB1" Value="2" Id="%ENID%" />
-                  <Enumeration Text="HLK-LD2420" Value="3" Id="%ENID%" />
-                  <!-- <Enumeration Text="HLK-LD2420 + PIR (digital)" Value="4" Id="%ENID%" /> -->
-                  <!-- <Enumeration Text="HLK-LD2420 + PIR (analog)" Value="5" Id="%ENID%" /> -->
+                  <Enumeration Text="kein Sensor" Value="0" op:headerName="None"/>
+                  <!-- <Enumeration Text="PIR-Sensor (digital)" Value="1" /> -->
+                  <Enumeration Text="MR24xxB1" Value="2" />
+                  <Enumeration Text="HLK-LD2420" Value="3" op:headerName="HLK2420" />
+                  <!-- <Enumeration Text="HLK-LD2420 + PIR (digital)" Value="4" /> -->
+                  <!-- <Enumeration Text="HLK-LD2420 + PIR (analog)" Value="5" /> -->
                 </TypeRestriction>
               </ParameterType>
-              <ParameterType Id="%AID%_PT-HfRangeGateMin" Name="HfRangeGateMin">
+              <ParameterType Name="HfRangeGateMin">
                 <TypeRestriction Base="Value" SizeInBit="4">
-                  <Enumeration Text="0.0 m" Value="0" Id="%ENID%" />
-                  <Enumeration Text="0.35 m" Value="1" Id="%ENID%" />
-                  <Enumeration Text="1.05 m" Value="2" Id="%ENID%" />
-                  <Enumeration Text="1.75 m" Value="3" Id="%ENID%" />
-                  <Enumeration Text="2.45 m" Value="4" Id="%ENID%" />
-                  <Enumeration Text="3.15 m" Value="5" Id="%ENID%" />
-                  <Enumeration Text="3.85 m" Value="6" Id="%ENID%" />
-                  <Enumeration Text="4.55 m" Value="7" Id="%ENID%" />
-                  <Enumeration Text="5.25 m" Value="8" Id="%ENID%" />
-                  <Enumeration Text="5.95 m" Value="9" Id="%ENID%" />
-                  <Enumeration Text="6.65 m" Value="10" Id="%ENID%" />
-                  <Enumeration Text="7.35 m" Value="11" Id="%ENID%" />
-                  <Enumeration Text="8.05 m" Value="12" Id="%ENID%" />
-                  <Enumeration Text="8.75 m" Value="13" Id="%ENID%" />
-                  <Enumeration Text="9.45 m" Value="14" Id="%ENID%" />
+                  <Enumeration Text="0.0 m" Value="0" />
+                  <Enumeration Text="0.35 m" Value="1" />
+                  <Enumeration Text="1.05 m" Value="2" />
+                  <Enumeration Text="1.75 m" Value="3" />
+                  <Enumeration Text="2.45 m" Value="4" />
+                  <Enumeration Text="3.15 m" Value="5" />
+                  <Enumeration Text="3.85 m" Value="6" />
+                  <Enumeration Text="4.55 m" Value="7" />
+                  <Enumeration Text="5.25 m" Value="8" />
+                  <Enumeration Text="5.95 m" Value="9" />
+                  <Enumeration Text="6.65 m" Value="10" />
+                  <Enumeration Text="7.35 m" Value="11" />
+                  <Enumeration Text="8.05 m" Value="12" />
+                  <Enumeration Text="8.75 m" Value="13" />
+                  <Enumeration Text="9.45 m" Value="14" />
                 </TypeRestriction>
               </ParameterType>
-              <ParameterType Id="%AID%_PT-HfRangeGateMax" Name="HfRangeGateMax">
+              <ParameterType Name="HfRangeGateMax">
                 <TypeRestriction Base="Value" SizeInBit="4">
-                  <Enumeration Text="1.05 m" Value="1" Id="%ENID%" />
-                  <Enumeration Text="1.75 m" Value="2" Id="%ENID%" />
-                  <Enumeration Text="2.45 m" Value="3" Id="%ENID%" />
-                  <Enumeration Text="3.15 m" Value="4" Id="%ENID%" />
-                  <Enumeration Text="3.85 m" Value="5" Id="%ENID%" />
-                  <Enumeration Text="4.55 m" Value="6" Id="%ENID%" />
-                  <Enumeration Text="5.25 m" Value="7" Id="%ENID%" />
-                  <Enumeration Text="5.95 m" Value="8" Id="%ENID%" />
-                  <Enumeration Text="6.65 m" Value="9" Id="%ENID%" />
-                  <Enumeration Text="7.35 m" Value="10" Id="%ENID%" />
-                  <Enumeration Text="8.05 m" Value="11" Id="%ENID%" />
-                  <Enumeration Text="8.75 m" Value="12" Id="%ENID%" />
-                  <Enumeration Text="9.45 m" Value="13" Id="%ENID%" />
-                  <Enumeration Text="10.15 m" Value="14" Id="%ENID%" />
-                  <Enumeration Text="10.85 m" Value="15" Id="%ENID%" />
+                  <Enumeration Text="1.05 m" Value="1" />
+                  <Enumeration Text="1.75 m" Value="2" />
+                  <Enumeration Text="2.45 m" Value="3" />
+                  <Enumeration Text="3.15 m" Value="4" />
+                  <Enumeration Text="3.85 m" Value="5" />
+                  <Enumeration Text="4.55 m" Value="6" />
+                  <Enumeration Text="5.25 m" Value="7" />
+                  <Enumeration Text="5.95 m" Value="8" />
+                  <Enumeration Text="6.65 m" Value="9" />
+                  <Enumeration Text="7.35 m" Value="10" />
+                  <Enumeration Text="8.05 m" Value="11" />
+                  <Enumeration Text="8.75 m" Value="12" />
+                  <Enumeration Text="9.45 m" Value="13" />
+                  <Enumeration Text="10.15 m" Value="14" />
+                  <Enumeration Text="10.85 m" Value="15" />
                 </TypeRestriction>
               </ParameterType>
-              <ParameterType Id="%AID%_PT-HfMeasures" Name="HfMeasures">
+              <ParameterType Name="HfMeasures">
                 <TypeRestriction Base="Value" SizeInBit="4">
-                  <Enumeration Text="Trigger" Value="0" Id="%ENID%" />
-                  <Enumeration Text="Halten" Value="1" Id="%ENID%" />
-                  <Enumeration Text="Stichprobe 1: Maximum" Value="2" Id="%ENID%" />
-                  <Enumeration Text="Stichprobe 1: Standardabweichung" Value="3" Id="%ENID%" />
-                  <Enumeration Text="Stichprobe 1: Durchschnitt" Value="4" Id="%ENID%" />
-                  <Enumeration Text="Stichprobe 2: Maximum" Value="5" Id="%ENID%" />
-                  <Enumeration Text="Stichprobe 2: Standardabweichung" Value="6" Id="%ENID%" />
-                  <Enumeration Text="Stichprobe 2: Durchschnitt" Value="7" Id="%ENID%" />
+                  <Enumeration Text="Trigger" Value="0" />
+                  <Enumeration Text="Halten" Value="1" />
+                  <Enumeration Text="Stichprobe 1: Maximum" Value="2" />
+                  <Enumeration Text="Stichprobe 1: Standardabweichung" Value="3" />
+                  <Enumeration Text="Stichprobe 1: Durchschnitt" Value="4" />
+                  <Enumeration Text="Stichprobe 2: Maximum" Value="5" />
+                  <Enumeration Text="Stichprobe 2: Standardabweichung" Value="6" />
+                  <Enumeration Text="Stichprobe 2: Durchschnitt" Value="7" />
                 </TypeRestriction>
               </ParameterType>
-              <ParameterType Id="%AID%_PT-HfView" Name="HfView" op:headerExport="none">
+              <ParameterType Name="HfView" op:headerExport="none">
                 <TypeRestriction Base="Value" SizeInBit="2">
-                  <Enumeration Text="Kompakt" Value="0" Id="%ENID%" />
-                  <Enumeration Text="Mit Hilfsfunktionen" Value="1" Id="%ENID%" />
-                  <Enumeration Text="Mit Speicher" Value="2" Id="%ENID%" />
-                  <Enumeration Text="Alles" Value="3" Id="%ENID%" />
+                  <Enumeration Text="Kompakt" Value="0" op:headerName="Compact" />
+                  <Enumeration Text="Mit Hilfsfunktionen" Value="1" op:headerName="WithHelpers" />
+                  <Enumeration Text="Mit Speicher" Value="2" op:headerName="WithMemory" />
+                  <Enumeration Text="Alles" Value="3" op:headerName="All" />
                 </TypeRestriction>
               </ParameterType>
-              <ParameterType Id="%AID%_PT-PirSensor" Name="PirSensor" op:headerExport="enum">
+              <ParameterType Name="PirSensor" op:headerExport="enum">
                 <TypeRestriction Base="Value" SizeInBit="2">
-                  <Enumeration Text="kein Sensor" Value="0" Id="%ENID%" />
-                  <Enumeration Text="digital" Value="1" Id="%ENID%" />
-                  <Enumeration Text="analog" Value="2" Id="%ENID%" />
+                  <Enumeration Text="kein Sensor" Value="0" op:headerName="None" />
+                  <Enumeration Text="digital" Value="1" op:headerName="Digital" />
+                  <Enumeration Text="analog" Value="2" op:headerName="Analog" />
                 </TypeRestriction>
               </ParameterType>
-              <ParameterType Id="%AID%_PT-LuxSensor" Name="LuxSensor">
+              <ParameterType Name="LuxSensor">
                 <TypeRestriction Base="Value" SizeInBit="2">
-                  <Enumeration Text="kein Sensor" Value="0" Id="%ENID%" />
-                  <Enumeration Text="VEML7700" Value="1" Id="%ENID%" />
-                  <Enumeration Text="OPT3001" Value="2" Id="%ENID%" />
+                  <Enumeration Text="kein Sensor" Value="0" op:headerName="None" />
+                  <Enumeration Text="VEML7700" Value="1" />
+                  <Enumeration Text="OPT3001" Value="2" />
                 </TypeRestriction>
               </ParameterType>
-              <ParameterType Id="%AID%_PT-OutputType" Name="OutputType" op:headerExport="enum">
+              <ParameterType Name="OutputType" op:headerExport="enum">
                 <TypeRestriction Base="Value" SizeInBit="3">
-                  <Enumeration Text="nicht aktiv" Value="0" Id="%ENID%" op:headerName="Inaktiv" />
-                  <Enumeration Text="Schalten (DPT 1.x)" Value="1" Id="%ENID%" op:headerName="Schalten" />
-                  <Enumeration Text="Wert (DPT 5.x)" Value="2" Id="%ENID%" op:headerName="Wert" />
-                  <Enumeration Text="Szene (DPT 17.001)" Value="3" Id="%ENID%" op:headerName="Szene" />
-                  <Enumeration Text="Dimmen absolut (DPT 5.001)" Value="4" Id="%ENID%" op:headerName="Dimmen" />
+                  <Enumeration Text="nicht aktiv" Value="0" op:headerName="Inaktiv" />
+                  <Enumeration Text="Schalten (DPT 1.x)" Value="1" op:headerName="Schalten" />
+                  <Enumeration Text="Wert (DPT 5.x)" Value="2" op:headerName="Wert" />
+                  <Enumeration Text="Szene (DPT 17.001)" Value="3" op:headerName="Szene" />
+                  <Enumeration Text="Dimmen absolut (DPT 5.001)" Value="4" op:headerName="Dimmen" />
                 </TypeRestriction>
               </ParameterType>
-              <ParameterType Id="%AID%_PT-OutputSendAdditional" Name="OutputSendAdditional">
+              <ParameterType Name="OutputSendAdditional">
                 <TypeRestriction Base="Value" SizeInBit="2" UIHint="DropDown">
-                  <Enumeration Text="nichts" Value="0" Id="%ENID%" />
-                  <Enumeration Text="bei Tagesphasenänderung" Value="1" Id="%ENID%" />
-                  <Enumeration Text="bei externer Änderung" Value="2" Id="%ENID%" />
-                  <Enumeration Text="bei Tagesphasen- oder externer Änderung" Value="3" Id="%ENID%" />
+                  <Enumeration Text="nichts" Value="0" op:headerName="None" />
+                  <Enumeration Text="bei Tagesphasenänderung" Value="1" op:headerName="DayPhase" />
+                  <Enumeration Text="bei externer Änderung" Value="2" op:headerName="External" />
+                  <Enumeration Text="bei Tagesphasen- oder externer Änderung" Value="3" op:headerName="DayPhaseOrExternal" />
                 </TypeRestriction>
               </ParameterType>
-              <ParameterType Id="%AID%_PT-ActorState" Name="ActorState">
+              <ParameterType Name="ActorState">
                 <TypeRestriction Base="Value" SizeInBit="2">
-                  <Enumeration Text="Erneut Einschalten" Value="0" Id="%ENID%" />
-                  <Enumeration Text="Automatik übersteuern AUS" Value="1" Id="%ENID%" />
-                  <Enumeration Text="Raum verlassen" Value="2" Id="%ENID%" />
+                  <Enumeration Text="Erneut Einschalten" Value="0" />
+                  <Enumeration Text="Automatik übersteuern AUS" Value="1" />
+                  <Enumeration Text="Raum verlassen" Value="2" />
                 </TypeRestriction>
               </ParameterType>
-              <ParameterType Id="%AID%_PT-OutputFilterPM" Name="OutputFilterPM" op:headerExport="enum">
+              <ParameterType Name="OutputFilterPM" op:headerExport="enum">
                 <TypeRestriction Base="Value" SizeInBit="2">
-                  <Enumeration Text="nichts" Value="0" Id="%ENID%" />
-                  <Enumeration Text="nur EIN" Value="1" Id="%ENID%" />
-                  <Enumeration Text="nur AUS" Value="2" Id="%ENID%" />
-                  <Enumeration Text="EIN und AUS" Value="3" Id="%ENID%" />
+                  <Enumeration Text="nichts" Value="0" />
+                  <Enumeration Text="nur EIN" Value="1" />
+                  <Enumeration Text="nur AUS" Value="2" />
+                  <Enumeration Text="EIN und AUS" Value="3" />
                 </TypeRestriction>
               </ParameterType>
-              <ParameterType Id="%AID%_PT-ChannelActive" Name="ChannelActive" op:headerExport="enum">
+              <ParameterType Name="ChannelActive" op:headerExport="enum">
                 <TypeRestriction Base="Value" SizeInBit="2">
-                  <Enumeration Text="Inaktiv" Value="0" Id="%ENID%" />
-                  <Enumeration Text="Aktiv" Value="1" Id="%ENID%" />
-                  <Enumeration Text="Funktionslos" Value="2" Id="%ENID%" />
+                  <Enumeration Text="Inaktiv" Value="0" />
+                  <Enumeration Text="Aktiv" Value="1" />
+                  <Enumeration Text="Funktionslos" Value="2" />
                 </TypeRestriction>
               </ParameterType>
-              <!-- <ParameterType Id="%AID%_PT-StatusLED" Name="StatusLED">
+              <!-- <ParameterType Name="StatusLED">
                 <TypeRestriction Base="Value" SizeInBit="2">
-                  <Enumeration Text="nicht aktiv" Value="0" Id="%ENID%" />
-                  <Enumeration Text="aktiv bei Bewegung" Value="1" Id="%ENID%" />
-                  <Enumeration Text="aktiv bei Präsenz" Value="2" Id="%ENID%" />
-                  <Enumeration Text="aktiv über externes Objekt" Value="3" Id="%ENID%" />
+                  <Enumeration Text="nicht aktiv" Value="0" />
+                  <Enumeration Text="aktiv bei Bewegung" Value="1" />
+                  <Enumeration Text="aktiv bei Präsenz" Value="2" />
+                  <Enumeration Text="aktiv über externes Objekt" Value="3" />
                 </TypeRestriction>
               </ParameterType> -->
-              <!-- <ParameterType Id="%AID%_PT-StatusLEDPIR" Name="StatusLEDPIR">
+              <!-- <ParameterType Name="StatusLEDPIR">
                 <TypeRestriction Base="Value" SizeInBit="2">
-                  <Enumeration Text="nicht aktiv" Value="0" Id="%ENID%" />
-                  <Enumeration Text="aktiv bei Bewegung" Value="1" Id="%ENID%" />
-                  <Enumeration Text="aktiv über externes Objekt" Value="3" Id="%ENID%" />
+                  <Enumeration Text="nicht aktiv" Value="0" />
+                  <Enumeration Text="aktiv bei Bewegung" Value="1" />
+                  <Enumeration Text="aktiv über externes Objekt" Value="3" />
                 </TypeRestriction>
               </ParameterType> -->
-              <ParameterType Id="%AID%_PT-PresenceInputs" Name="PresenceInputs">
+              <ParameterType Name="PresenceInputs">
                 <TypeRestriction Base="Value" SizeInBit="3">
-                  <Enumeration Text="nicht aktiv" Value="0" Id="%ENID%" />
-                  <Enumeration Text="Präsenz" Value="1" Id="%ENID%" />
-                  <Enumeration Text="Bewegung" Value="2" Id="%ENID%" />
-                  <Enumeration Text="Präsenz und Bewegung" Value="3" Id="%ENID%" />
-                  <Enumeration Text="Präsenz und weitere Präsenz" Value="4" Id="%ENID%" />
+                  <Enumeration Text="nicht aktiv" Value="0" />
+                  <Enumeration Text="Präsenz" Value="1" />
+                  <Enumeration Text="Bewegung" Value="2" />
+                  <Enumeration Text="Präsenz und Bewegung" Value="3" />
+                  <Enumeration Text="Präsenz und weitere Präsenz" Value="4" />
                 </TypeRestriction>
               </ParameterType>
-              <ParameterType Id="%AID%_PT-PresenceType" Name="PresenceType">
+              <ParameterType Name="PresenceType">
                 <TypeRestriction Base="Value" SizeInBit="1" UIHint="DropDown">
-                  <Enumeration Text="schaltend (EIN und AUS wird ausgewertet)" Value="0" Id="%ENID%" />
-                  <Enumeration Text="triggernd (nur EIN wird ausgewertet)" Value="1" Id="%ENID%" />
+                  <Enumeration Text="schaltend (EIN und AUS wird ausgewertet)" Value="0" />
+                  <Enumeration Text="triggernd (nur EIN wird ausgewertet)" Value="1" />
                 </TypeRestriction>
               </ParameterType>
-              <ParameterType Id="%AID%_PT-PresenceUsage" Name="PresenceUsage">
+              <ParameterType Name="PresenceUsage">
                 <TypeRestriction Base="Value" SizeInBit="2" UIHint="DropDown">
-                  <Enumeration Text="nicht Verwenden" Value="0" Id="%ENID%" />
-                  <Enumeration Text="Bewegung" Value="1" Id="%ENID%" />
-                  <Enumeration Text="Präsenz und Bewegung" Value="2" Id="%ENID%" />
+                  <Enumeration Text="nicht Verwenden" Value="0" />
+                  <Enumeration Text="Bewegung" Value="1" />
+                  <Enumeration Text="Präsenz und Bewegung" Value="2" />
                 </TypeRestriction>
               </ParameterType>
-              <ParameterType Id="%AID%_PT-PresenceUsagePIR" Name="PresenceUsagePIR">
+              <ParameterType Name="PresenceUsagePIR">
                 <TypeRestriction Base="Value" SizeInBit="2" UIHint="DropDown">
-                  <Enumeration Text="nicht Verwenden" Value="0" Id="%ENID%" />
-                  <Enumeration Text="Bewegung" Value="1" Id="%ENID%" />
+                  <Enumeration Text="nicht Verwenden" Value="0" />
+                  <Enumeration Text="Bewegung" Value="1" />
                 </TypeRestriction>
               </ParameterType>
-              <ParameterType Id="%AID%_PT-MoveUsage" Name="MoveUsage">
+              <ParameterType Name="MoveUsage">
                 <TypeRestriction Base="Value" SizeInBit="2" UIHint="DropDown">
-                  <Enumeration Text="vom HF-Sensor und PIR" Value="0" Id="%ENID%" />
-                  <Enumeration Text="nur vom HF-Sensor" Value="1" Id="%ENID%" />
-                  <Enumeration Text="nur vom PIR" Value="2" Id="%ENID%" />
+                  <Enumeration Text="vom HF-Sensor und PIR" Value="0" />
+                  <Enumeration Text="nur vom HF-Sensor" Value="1" />
+                  <Enumeration Text="nur vom PIR" Value="2" />
                 </TypeRestriction>
               </ParameterType>
-              <ParameterType Id="%AID%_PT-PresenceShortCalculation" Name="PresenceShortCalculation">
+              <ParameterType Name="PresenceShortCalculation">
                 <TypeRestriction Base="Value" SizeInBit="1" UIHint="DropDown">
-                  <Enumeration Text="Bewegungssignal" Value="0" Id="%ENID%" />
-                  <Enumeration Text="Präsenz- und Bewegungssignal" Value="1" Id="%ENID%" />
+                  <Enumeration Text="Bewegungssignal" Value="0" />
+                  <Enumeration Text="Präsenz- und Bewegungssignal" Value="1" />
                 </TypeRestriction>
               </ParameterType>
-              <ParameterType Id="%AID%_PT-BrightnessAuto" Name="BrightnessAuto">
+              <ParameterType Name="BrightnessAuto">
                 <TypeRestriction Base="Value" SizeInBit="2">
-                  <Enumeration Text="nicht aktiv" Value="0" Id="%ENID%" />
-                  <Enumeration Text="absolute Schwelle" Value="1" Id="%ENID%" />
-                  <Enumeration Text="adaptive Schwelle" Value="2" Id="%ENID%" />
+                  <Enumeration Text="nicht aktiv" Value="0" />
+                  <Enumeration Text="absolute Schwelle" Value="1" />
+                  <Enumeration Text="adaptive Schwelle" Value="2" />
                 </TypeRestriction>
               </ParameterType>
-              <ParameterType Id="%AID%_PT-PhaseCount" Name="PhaseCount">
+              <ParameterType Name="PhaseCount">
                 <TypeRestriction Base="Value" SizeInBit="2">
-                  <Enumeration Text="1" Value="0" Id="%ENID%" />
-                  <Enumeration Text="2" Value="1" Id="%ENID%" />
-                  <Enumeration Text="3" Value="2" Id="%ENID%" />
-                  <Enumeration Text="4" Value="3" Id="%ENID%" />
+                  <Enumeration Text="1" Value="0" />
+                  <Enumeration Text="2" Value="1" />
+                  <Enumeration Text="3" Value="2" />
+                  <Enumeration Text="4" Value="3" />
                 </TypeRestriction>
               </ParameterType>
-              <ParameterType Id="%AID%_PT-PhaseChange" Name="PhaseChange">
+              <ParameterType Name="PhaseChange">
                 <TypeRestriction Base="Value" SizeInBit="1">
-                  <Enumeration Text="Sobald der Ausgang AUS ist" Value="0" Id="%ENID%" />
-                  <Enumeration Text="Sofort beim Wechsel der Tagesphase" Value="1" Id="%ENID%" />
+                  <Enumeration Text="Sobald der Ausgang AUS ist" Value="0" />
+                  <Enumeration Text="Sofort beim Wechsel der Tagesphase" Value="1" />
                 </TypeRestriction>
               </ParameterType>
-              <ParameterType Id="%AID%_PT-LockType" Name="LockType">
+              <ParameterType Name="LockType">
                 <TypeRestriction Base="Value" SizeInBit="2">
-                  <Enumeration Text="nicht aktiv" Value="0" Id="%ENID%" />
-                  <Enumeration Text="Zwangsführung" Value="1" Id="%ENID%" />
-                  <Enumeration Text="Sperre" Value="2" Id="%ENID%" />
+                  <Enumeration Text="nicht aktiv" Value="0" />
+                  <Enumeration Text="Zwangsführung" Value="1" />
+                  <Enumeration Text="Sperre" Value="2" />
                 </TypeRestriction>
               </ParameterType>
-              <ParameterType Id="%AID%_PT-LockActive" Name="LockActive">
+              <ParameterType Name="LockActive">
                 <TypeRestriction Base="Value" SizeInBit="1">
-                  <Enumeration Text="gesperrt (1) / nicht gesperrt (0)" Value="0" Id="%ENID%" />
-                  <Enumeration Text="gesperrt (0) / nicht gesperrt (1)" Value="1" Id="%ENID%" />
+                  <Enumeration Text="gesperrt (1) / nicht gesperrt (0)" Value="0" />
+                  <Enumeration Text="gesperrt (0) / nicht gesperrt (1)" Value="1" />
                 </TypeRestriction>
               </ParameterType>
-              <ParameterType Id="%AID%_PT-LockOn" Name="LockOn" op:headerExport="base" op:headerName="PMLock">
+              <ParameterType Name="LockOn" op:headerExport="base" op:headerName="PMLock">
                 <TypeRestriction Base="Value" SizeInBit="2">
-                  <Enumeration Text="nichts gesendet" Value="0" Id="%ENID%" />
-                  <Enumeration Text="AUS gesendet" Value="1" Id="%ENID%" />
-                  <Enumeration Text="EIN gesendet" Value="2" Id="%ENID%" />
-                  <!-- <Enumeration Text="Aktueller Zustand eingefroren (nichts gesendet)" Value="3" Id="%ENID%" /> -->
+                  <Enumeration Text="nichts gesendet" Value="0" />
+                  <Enumeration Text="AUS gesendet" Value="1" />
+                  <Enumeration Text="EIN gesendet" Value="2" />
+                  <!-- <Enumeration Text="Aktueller Zustand eingefroren (nichts gesendet)" Value="3" /> -->
                 </TypeRestriction>
               </ParameterType>
-              <ParameterType Id="%AID%_PT-LockOff" Name="LockOff" op:headerExport="enum" op:headerName="PMLock">
+              <ParameterType Name="LockOff" op:headerExport="enum" op:headerName="PMLock">
                 <TypeRestriction Base="Value" SizeInBit="2">
-                  <Enumeration Text="nichts gesendet" Value="0" Id="%ENID%" />
-                  <Enumeration Text="AUS gesendet" Value="1" Id="%ENID%" />
-                  <Enumeration Text="EIN gesendet" Value="2" Id="%ENID%" />
-                  <Enumeration Text="Aktueller Zustand gesendet" Value="3" Id="%ENID%" />
+                  <Enumeration Text="nichts gesendet" Value="0" />
+                  <Enumeration Text="AUS gesendet" Value="1" />
+                  <Enumeration Text="EIN gesendet" Value="2" />
+                  <Enumeration Text="Aktueller Zustand gesendet" Value="3" />
                 </TypeRestriction>
               </ParameterType>
-              <ParameterType Id="%AID%_PT-SceneAction" Name="SceneAction" op:headerExport="enum">
+              <ParameterType Name="SceneAction" op:headerExport="enum">
                 <TypeRestriction Base="Value" SizeInBit="8">
-                  <Enumeration Text="keine Aktion" Value="0" Id="%ENID%" />
-                  <Enumeration Text="ändert Helligkeit im Raum" Value="1" Id="%ENID%" />
-                  <Enumeration Text="Automatik übersteuern mit AUS" Value="2" Id="%ENID%" />
-                  <Enumeration Text="Automatik übersteuern mit EIN" Value="3" Id="%ENID%" />
-                  <Enumeration Text="Manuell übersteuern mit AUS" Value="4" Id="%ENID%" />
-                  <Enumeration Text="Manuell übersteuern mit EIN" Value="5" Id="%ENID%" />
-                  <Enumeration Text="Manuell aktivieren" Value="24" Id="%ENID%" />
-                  <Enumeration Text="Manuell deaktivieren" Value="25" Id="%ENID%" />
-                  <Enumeration Text="Sperren und AUS senden" Value="6" Id="%ENID%" />
-                  <Enumeration Text="Sperren und EIN senden" Value="7" Id="%ENID%" />
-                  <Enumeration Text="Sperren und nichts senden" Value="8" Id="%ENID%" />
-                  <Enumeration Text="Sperre aufheben und nichts senden" Value="10" Id="%ENID%" />
-                  <Enumeration Text="Sperre aufheben und EIN senden" Value="11" Id="%ENID%" />
-                  <Enumeration Text="Sperre aufheben und AUS senden" Value="12" Id="%ENID%" />
-                  <Enumeration Text="Sperre aufheben und Zustand senden" Value="9" Id="%ENID%" />
-                  <!-- <Enumeration Text="" Value="13" Id="%ENID%" /> -->
-                  <Enumeration Text="Raum verlassen" Value="14" Id="%ENID%" />
-                  <Enumeration Text="Reset auslösen" Value="15" Id="%ENID%" />
-                  <Enumeration Text="Zur Tagesphase 1 wechseln" Value="16" Id="%ENID%" />
-                  <Enumeration Text="Zur Tagesphase 2 wechseln" Value="17" Id="%ENID%" />
-                  <Enumeration Text="Zur Tagesphase 3 wechseln" Value="18" Id="%ENID%" />
-                  <Enumeration Text="Zur Tagesphase 4 wechseln" Value="19" Id="%ENID%" />
-                  <Enumeration Text="Zur Tagesphase 1 sofort wechseln" Value="20" Id="%ENID%" />
-                  <Enumeration Text="Zur Tagesphase 2 sofort wechseln" Value="21" Id="%ENID%" />
-                  <Enumeration Text="Zur Tagesphase 3 sofort wechseln" Value="22" Id="%ENID%" />
-                  <Enumeration Text="Zur Tagesphase 4 sofort wechseln" Value="23" Id="%ENID%" />
+                  <Enumeration Text="keine Aktion" Value="0" />
+                  <Enumeration Text="ändert Helligkeit im Raum" Value="1" />
+                  <Enumeration Text="Automatik übersteuern mit AUS" Value="2" />
+                  <Enumeration Text="Automatik übersteuern mit EIN" Value="3" />
+                  <Enumeration Text="Manuell übersteuern mit AUS" Value="4" />
+                  <Enumeration Text="Manuell übersteuern mit EIN" Value="5" />
+                  <Enumeration Text="Manuell aktivieren" Value="24" />
+                  <Enumeration Text="Manuell deaktivieren" Value="25" />
+                  <Enumeration Text="Sperren und AUS senden" Value="6" />
+                  <Enumeration Text="Sperren und EIN senden" Value="7" />
+                  <Enumeration Text="Sperren und nichts senden" Value="8" />
+                  <Enumeration Text="Sperre aufheben und nichts senden" Value="10" />
+                  <Enumeration Text="Sperre aufheben und EIN senden" Value="11" />
+                  <Enumeration Text="Sperre aufheben und AUS senden" Value="12" />
+                  <Enumeration Text="Sperre aufheben und Zustand senden" Value="9" />
+                  <!-- <Enumeration Text="" Value="13" /> -->
+                  <Enumeration Text="Raum verlassen" Value="14" />
+                  <Enumeration Text="Reset auslösen" Value="15" />
+                  <Enumeration Text="Zur Tagesphase 1 wechseln" Value="16" />
+                  <Enumeration Text="Zur Tagesphase 2 wechseln" Value="17" />
+                  <Enumeration Text="Zur Tagesphase 3 wechseln" Value="18" />
+                  <Enumeration Text="Zur Tagesphase 4 wechseln" Value="19" />
+                  <Enumeration Text="Zur Tagesphase 1 sofort wechseln" Value="20" />
+                  <Enumeration Text="Zur Tagesphase 2 sofort wechseln" Value="21" />
+                  <Enumeration Text="Zur Tagesphase 3 sofort wechseln" Value="22" />
+                  <Enumeration Text="Zur Tagesphase 4 sofort wechseln" Value="23" />
                 </TypeRestriction>
               </ParameterType>
-              <ParameterType Id="%AID%_PT-KeyCount" Name="KeyCount" op:headerExport="enum">
+              <ParameterType Name="KeyCount" op:headerExport="enum">
                 <TypeRestriction Base="Value" SizeInBit="1">
-                  <Enumeration Text="Eintastenbedienung" Value="0" Id="%ENID%" />
-                  <Enumeration Text="Zweitastenbedienung" Value="1" Id="%ENID%" />
+                  <Enumeration Text="Eintastenbedienung" Value="0" />
+                  <Enumeration Text="Zweitastenbedienung" Value="1" />
                 </TypeRestriction>
               </ParameterType>
-              <ParameterType Id="%AID%_PT-LeaveRoomModeAll" Name="LeaveRoomModeAll" op:headerExport="enum" op:headerName="LeaveRoomMode">
+              <ParameterType Name="LeaveRoomModeAll" op:headerExport="enum" op:headerName="LeaveRoomMode">
                 <TypeRestriction Base="Value" SizeInBit="3">
-                  <Enumeration Text="Raum verlassen inaktiv" Value="0" Id="%ENID%" />
-                  <Enumeration Text="Totzeit" Value="1" Id="%ENID%" />
-                  <Enumeration Text="Totzeit + Reset" Value="2" Id="%ENID%" />
-                  <Enumeration Text="Bewegung + Totzeit" Value="3" Id="%ENID%" />
-                  <Enumeration Text="Bewegung + Totzeit + Reset" Value="4" Id="%ENID%" />
+                  <Enumeration Text="Raum verlassen inaktiv" Value="0" />
+                  <Enumeration Text="Totzeit" Value="1" />
+                  <Enumeration Text="Totzeit + Reset" Value="2" />
+                  <Enumeration Text="Bewegung + Totzeit" Value="3" />
+                  <Enumeration Text="Bewegung + Totzeit + Reset" Value="4" />
                 </TypeRestriction>
               </ParameterType>
-              <ParameterType Id="%AID%_PT-LeaveRoomModeMove" Name="LeaveRoomModeMove" op:headerExport="base" op:headerName="LeaveRoomMode">
+              <ParameterType Name="LeaveRoomModeMove" op:headerExport="base" op:headerName="LeaveRoomMode">
                 <TypeRestriction Base="Value" SizeInBit="3">
-                  <Enumeration Text="Raum verlassen inaktiv" Value="0" Id="%ENID%" />
-                  <Enumeration Text="Totzeit" Value="1" Id="%ENID%" />
-                  <Enumeration Text="Bewegung + Totzeit" Value="3" Id="%ENID%" />
+                  <Enumeration Text="Raum verlassen inaktiv" Value="0" />
+                  <Enumeration Text="Totzeit" Value="1" />
+                  <Enumeration Text="Bewegung + Totzeit" Value="3" />
                 </TypeRestriction>
               </ParameterType>
-              <ParameterType Id="%AID%_PT-LeaveRoomModeReset" Name="LeaveRoomModeReset" op:headerExport="base" op:headerName="LeaveRoomMode">
+              <ParameterType Name="LeaveRoomModeReset" op:headerExport="base" op:headerName="LeaveRoomMode">
                 <TypeRestriction Base="Value" SizeInBit="3">
-                  <Enumeration Text="Raum verlassen inaktiv" Value="0" Id="%ENID%" />
-                  <Enumeration Text="Totzeit + Reset" Value="2" Id="%ENID%" />
+                  <Enumeration Text="Raum verlassen inaktiv" Value="0" />
+                  <Enumeration Text="Totzeit + Reset" Value="2" />
                 </TypeRestriction>
               </ParameterType>
-              <ParameterType Id="%AID%_PT-SupportsReset" Name="SupportsReset">
+              <ParameterType Name="SupportsReset">
                 <TypeRestriction Base="Value" SizeInBit="2">
-                  <Enumeration Text="Nein" Value="0" Id="%ENID%" />
-                  <Enumeration Text="Mit einem EIN-Signal" Value="1" Id="%ENID%" />
-                  <Enumeration Text="Mit einem AUS-Signal" Value="2" Id="%ENID%" />
+                  <Enumeration Text="Nein" Value="0" />
+                  <Enumeration Text="Mit einem EIN-Signal" Value="1" />
+                  <Enumeration Text="Mit einem AUS-Signal" Value="2" />
                 </TypeRestriction>
               </ParameterType>
-              <ParameterType Id="%AID%_PT-LuxAbsRel" Name="LuxAbsRel">
+              <ParameterType Name="LuxAbsRel">
                 <TypeRestriction Base="Value" SizeInBit="1">
-                  <Enumeration Text="in Lux (absolut)" Value="0" Id="%ENID%" />
-                  <Enumeration Text="in % (relativ)" Value="1" Id="%ENID%" />
+                  <Enumeration Text="in Lux (absolut)" Value="0" op:headerName="Abs" />
+                  <Enumeration Text="in % (relativ)" Value="1" op:headerName="Rel" />
                 </TypeRestriction>
               </ParameterType>
-              <ParameterType Id="%AID%_PT-HfScenario" Name="HfScenario">
+              <ParameterType Name="HfScenario">
                 <TypeRestriction Base="Value" SizeInBit="3">
-                  <Enumeration Text="Letzter gesetzter Wert" Value="0" Id="%ENID%" />
-                  <Enumeration Text="0 - Standard (96 m²)" Value="1" Id="%ENID%" />
-                  <Enumeration Text="1 - Bereich (Wandmontage, 20 m²)" Value="2" Id="%ENID%" />
-                  <Enumeration Text="2 - Badezimmer (Deckenmontage, 4,5 m²)" Value="3" Id="%ENID%" />
-                  <Enumeration Text="3 - Schlafzimmer (Wandmontage, 24 m²)" Value="4" Id="%ENID%" />
-                  <Enumeration Text="4 - Wohnzimmer (Deckenmontage, 32 m²)" Value="5" Id="%ENID%" />
-                  <Enumeration Text="5 - Büro (Wandmontage, 77 m²)" Value="6" Id="%ENID%" />
-                  <Enumeration Text="6 - Hotelzimmer (Wandmontage, 66 m²)" Value="7" Id="%ENID%" />
+                  <Enumeration Text="Letzter gesetzter Wert" Value="0" />
+                  <Enumeration Text="0 - Standard (96 m²)" Value="1" />
+                  <Enumeration Text="1 - Bereich (Wandmontage, 20 m²)" Value="2" />
+                  <Enumeration Text="2 - Badezimmer (Deckenmontage, 4,5 m²)" Value="3" />
+                  <Enumeration Text="3 - Schlafzimmer (Wandmontage, 24 m²)" Value="4" />
+                  <Enumeration Text="4 - Wohnzimmer (Deckenmontage, 32 m²)" Value="5" />
+                  <Enumeration Text="5 - Büro (Wandmontage, 77 m²)" Value="6" />
+                  <Enumeration Text="6 - Hotelzimmer (Wandmontage, 66 m²)" Value="7" />
                 </TypeRestriction>
               </ParameterType>
-              <ParameterType Id="%AID%_PT-HlkSettings" Name="HlkSettings">
+              <ParameterType Name="HlkSettings">
                 <TypeRestriction Base="Value" SizeInBit="1" UIHint="DropDown">
-                  <Enumeration Text="Automatisch - über Empfindlichkeit" Value="0" Id="%ENID%" />
-                  <Enumeration Text="Manuell - über manuelle Konfiguration" Value="1" Id="%ENID%" />
+                  <Enumeration Text="Automatisch - über Empfindlichkeit" Value="0" />
+                  <Enumeration Text="Manuell - über manuelle Konfiguration" Value="1" />
                 </TypeRestriction>
               </ParameterType>
-              <ParameterType Id="%AID%_PT-HlkFormula" Name="HlkFormula">
+              <ParameterType Name="HlkFormula">
                 <TypeRestriction Base="Value" SizeInBit="4" UIHint="DropDown">
-                  <Enumeration Text="Herstellerwerte" Value="1" Id="%ENID%" />
-                  <Enumeration Text="konstanten Wert" Value="2" Id="%ENID%" />
-                  <Enumeration Text="frühere Kalibrierung mit Empfindlichkeit" Value="3" Id="%ENID%" />
-                  <Enumeration Text="Stichprobe 1: Maximalwert + Offset" Value="8" Id="%ENID%" />
-                  <Enumeration Text="Stichprobe 1: Standardabweichung + Offset" Value="9" Id="%ENID%" />
-                  <Enumeration Text="Stichprobe 1: Durchschnitt + Offset" Value="10" Id="%ENID%" />
-                  <Enumeration Text="Stichprobe 2: Maximalwert + Offset" Value="11" Id="%ENID%" />
-                  <Enumeration Text="Stichprobe 2: Standardabweichung + Offset" Value="12" Id="%ENID%" />
-                  <Enumeration Text="Stichprobe 2: Durchschnitt + Offset" Value="13" Id="%ENID%" />
-                  <Enumeration Text="Differenz + Offset" Value="14" Id="%ENID%" />
+                  <Enumeration Text="Herstellerwerte" Value="1" op:headerName="Manufacturer" />
+                  <Enumeration Text="konstanten Wert" Value="2" op:headerName="Constant" />
+                  <Enumeration Text="frühere Kalibrierung mit Empfindlichkeit" Value="3" op:headerName="PreviousCalibration" />
+                  <Enumeration Text="Stichprobe 1: Maximalwert + Offset" Value="8" op:headerName="Sample1Max" />
+                  <Enumeration Text="Stichprobe 1: Standardabweichung + Offset" Value="9" op:headerName="Sample1StdDev" />
+                  <Enumeration Text="Stichprobe 1: Durchschnitt + Offset" Value="10" op:headerName="Sample1Average" />
+                  <Enumeration Text="Stichprobe 2: Maximalwert + Offset" Value="11" op:headerName="Sample2Max" />
+                  <Enumeration Text="Stichprobe 2: Standardabweichung + Offset" Value="12" op:headerName="Sample2StdDev" />
+                  <Enumeration Text="Stichprobe 2: Durchschnitt + Offset" Value="13" op:headerName="Sample2Average" />
+                  <Enumeration Text="Differenz + Offset" Value="14" op:headerName="Difference" />
                 </TypeRestriction>
               </ParameterType>
-              <ParameterType Id="%AID%_PT-HlkFormulaTarget" Name="HlkFormulaTarget">
+              <ParameterType Name="HlkFormulaTarget">
                 <TypeRestriction Base="Value" SizeInBit="2" UIHint="DropDown">
-                  <Enumeration Text="nach Trigger" Value="0" Id="%ENID%" />
-                  <Enumeration Text="nach Halten" Value="1" Id="%ENID%" />
-                  <Enumeration Text="nach Trigger und Halten" Value="2" Id="%ENID%" />
+                  <Enumeration Text="nach Trigger" Value="0" op:headerName="Trigger" />
+                  <Enumeration Text="nach Halten" Value="1" op:headerName="Hold" />
+                  <Enumeration Text="nach Trigger und Halten" Value="2" op:headerName="TriggerAndHold" />
                 </TypeRestriction>
               </ParameterType>
-              <ParameterType Id="%AID%_PT-HlkFormulaOffset" Name="HlkFormulaOffset">
+              <ParameterType Name="HlkFormulaOffset">
                 <TypeNumber SizeInBit="16" Type="signedInt" minInclusive="-9600" maxInclusive="9600" />
               </ParameterType>
-              <ParameterType Id="%AID%_PT-Sensitivity2" Name="Sensitivity2">
+              <ParameterType Name="Sensitivity2">
                 <TypeNumber SizeInBit="8" Type="unsignedInt" minInclusive="10" maxInclusive="100" Increment="10" />
               </ParameterType>
-              <ParameterType Id="%AID%_PT-Sensitivity" Name="Sensitivity">
+              <ParameterType Name="Sensitivity">
                 <TypeRestriction Base="Value" SizeInBit="4">
-                  <Enumeration Text="Letzter gesetzter Wert" Value="0" Id="%ENID%" />
-                  <Enumeration Text="10% Empfindlichkeit" Value="1" Id="%ENID%" />
-                  <Enumeration Text="20% Empfindlichkeit" Value="2" Id="%ENID%" />
-                  <Enumeration Text="30% Empfindlichkeit" Value="3" Id="%ENID%" />
-                  <Enumeration Text="40% Empfindlichkeit" Value="4" Id="%ENID%" />
-                  <Enumeration Text="50% Empfindlichkeit" Value="5" Id="%ENID%" />
-                  <Enumeration Text="60% Empfindlichkeit" Value="6" Id="%ENID%" />
-                  <Enumeration Text="70% Empfindlichkeit" Value="7" Id="%ENID%" />
-                  <Enumeration Text="80% Empfindlichkeit" Value="8" Id="%ENID%" />
-                  <Enumeration Text="90% Empfindlichkeit" Value="9" Id="%ENID%" />
-                  <Enumeration Text="100% Empfindlichkeit" Value="10" Id="%ENID%" />
+                  <Enumeration Text="Letzter gesetzter Wert" Value="0" />
+                  <Enumeration Text="10% Empfindlichkeit" Value="1" />
+                  <Enumeration Text="20% Empfindlichkeit" Value="2" />
+                  <Enumeration Text="30% Empfindlichkeit" Value="3" />
+                  <Enumeration Text="40% Empfindlichkeit" Value="4" />
+                  <Enumeration Text="50% Empfindlichkeit" Value="5" />
+                  <Enumeration Text="60% Empfindlichkeit" Value="6" />
+                  <Enumeration Text="70% Empfindlichkeit" Value="7" />
+                  <Enumeration Text="80% Empfindlichkeit" Value="8" />
+                  <Enumeration Text="90% Empfindlichkeit" Value="9" />
+                  <Enumeration Text="100% Empfindlichkeit" Value="10" />
                 </TypeRestriction>
               </ParameterType>
-              <ParameterType Id="%AID%_PT-DayPhaseFunction" Name="DayPhaseFunction">
+              <ParameterType Name="DayPhaseFunction">
                 <TypeRestriction Base="Value" SizeInBit="2">
-                  <Enumeration Text="Automatisch Ein- und Ausschalten" Value="0" Id="%ENID%" />
-                  <Enumeration Text="Manuell Ein-, automatisch Ausschalten" Value="1" Id="%ENID%" />
-                  <Enumeration Text="Automatisch Ein-, manuell Ausschalten" Value="2" Id="%ENID%" />
+                  <Enumeration Text="Automatisch Ein- und Ausschalten" Value="0" />
+                  <Enumeration Text="Manuell Ein-, automatisch Ausschalten" Value="1" />
+                  <Enumeration Text="Automatisch Ein-, manuell Ausschalten" Value="2" />
                 </TypeRestriction>
               </ParameterType>
             </ParameterTypes>
             <Parameters>
               <!-- Logic share parameters go from 0 to 29? We leave some space -->
               <!-- Here we start with non-multiplied parameters -->
-              <!-- <Parameter Id="%AID%_P-%TT%00001" Name="PMChannels" ParameterType="%AID%_PT-PMChannels" Text="PM-Kanäle" Value="%N%" Access="Read"> -->
+              <!-- <Parameter Id="%AID%_P-%TT%00001" Name="PMChannels" ParameterType="PMChannels" Text="PM-Kanäle" Value="%N%" Access="Read"> -->
               <!-- <Memory CodeSegment="%AID%_RS-04-00000" Offset="0" BitOffset="0" /> -->
               <!-- </Parameter> -->
               <Union SizeInBit="56">
                 <Memory CodeSegment="%AID%_RS-04-00000" Offset="0" BitOffset="0" />
-                <Parameter Id="%AID%_UP-%TT%00020" Name="VisibleChannels" ParameterType="%AID%_PT-PMNumChannels" Offset="0" BitOffset="0" Text="Verfügbare Kanäle" Value="%PM_NumChannelsDefault%" SuffixText=" von %N%" />
-                <Parameter Id="%AID%_UP-%TT%00021" Name="PirSensitivity" ParameterType="%AID%_PT-Sensitivity" Offset="1" BitOffset="4" Text="PIR-Empfindlichkeit" Value="0" />
-                <Parameter Id="%AID%_UP-%TT%00006" Name="HfPresence" Offset="2" BitOffset="0" ParameterType="%AID%_PT-HfSensor" Text="HF-Sensor" Value="0" />
-                <Parameter Id="%AID%_UP-%TT%00015" Name="HfScenario" ParameterType="%AID%_PT-HfScenario" Offset="2" BitOffset="3" Text="Detektions-Szenario" Value="0" op:nowarn="true" />
-                <Parameter Id="%AID%_UP-%TT%00025" Name="HlkSettings" ParameterType="%AID%_PT-HlkSettings" Offset="2" BitOffset="3" Text="HF-Einstellungen" Value="1" Access="None" op:nowarn="true" />
-                <Parameter Id="%AID%_UP-%TT%00007" Name="HWLux" Offset="2" BitOffset="6" ParameterType="%AID%_PT-LuxSensor" Text="Helligkeits-Sensor" Value="0" />
-                <Parameter Id="%AID%_UP-%TT%00016" Name="HfSensitivity" ParameterType="%AID%_PT-Sensitivity" Offset="3" BitOffset="0" Text="HF-Empfindlichkeit" Value="0" />
-                <Parameter Id="%AID%_UP-%TT%00003" Name="SendRAW" Offset="3" BitOffset="4" ParameterType="%AID%_PT-OnOffYesNo" Text="Präsenz-Rohdaten auf den Bus senden?" Value="0" />
-                <Parameter Id="%AID%_UP-%TT%00022" Name="PirPresence" Offset="3" BitOffset="6" ParameterType="%AID%_PT-PirSensor" Text="PIR-Sensor" Value="0" />
+                <Parameter Id="%AID%_UP-%TT%00020" Name="VisibleChannels" ParameterType="PMNumChannels" Offset="0" BitOffset="0" Text="Verfügbare Kanäle" Value="%PM_NumChannelsDefault%" SuffixText=" von %N%" />
+                <Parameter Id="%AID%_UP-%TT%00021" Name="PirSensitivity" ParameterType="Sensitivity" Offset="1" BitOffset="4" Text="PIR-Empfindlichkeit" Value="0" />
+                <Parameter Id="%AID%_UP-%TT%00006" Name="HfPresence" Offset="2" BitOffset="0" ParameterType="HfSensor" Text="HF-Sensor" Value="0" />
+                <Parameter Id="%AID%_UP-%TT%00015" Name="HfScenario" ParameterType="HfScenario" Offset="2" BitOffset="3" Text="Detektions-Szenario" Value="0" op:nowarn="true" />
+                <Parameter Id="%AID%_UP-%TT%00025" Name="HlkSettings" ParameterType="HlkSettings" Offset="2" BitOffset="3" Text="HF-Einstellungen" Value="1" Access="None" op:nowarn="true" />
+                <Parameter Id="%AID%_UP-%TT%00007" Name="HWLux" Offset="2" BitOffset="6" ParameterType="LuxSensor" Text="Helligkeits-Sensor" Value="0" />
+                <Parameter Id="%AID%_UP-%TT%00016" Name="HfSensitivity" ParameterType="Sensitivity" Offset="3" BitOffset="0" Text="HF-Empfindlichkeit" Value="0" />
+                <Parameter Id="%AID%_UP-%TT%00003" Name="SendRAW" Offset="3" BitOffset="4" ParameterType="OnOffYesNo" Text="Präsenz-Rohdaten auf den Bus senden?" Value="0" />
+                <Parameter Id="%AID%_UP-%TT%00022" Name="PirPresence" Offset="3" BitOffset="6" ParameterType="PirSensor" Text="PIR-Sensor" Value="0" />
                 <!-- Hardware HF-Sensor settings -->
-                <Parameter Id="%AID%_UP-%TT%00017" Name="HfDelayTime" ParameterType="%AID%_PT-HfDelayTime" Offset="4" BitOffset="0" Text="Haltedauer" Value="30" />
-                <Parameter Id="%AID%_UP-%TT%00018" Name="HfRangeGateMin" ParameterType="%AID%_PT-HfRangeGateMin" Offset="6" BitOffset="0" Text="Minimale Entfernung" Value="1" />
-                <Parameter Id="%AID%_UP-%TT%00019" Name="HfRangeGateMax" ParameterType="%AID%_PT-HfRangeGateMax" Offset="6" BitOffset="4" Text="Maximale Entfernung" Value="8" />
+                <Parameter Id="%AID%_UP-%TT%00017" Name="HfDelayTime" ParameterType="HfDelayTime" Offset="4" BitOffset="0" Text="Haltedauer" Value="30" />
+                <Parameter Id="%AID%_UP-%TT%00018" Name="HfRangeGateMin" ParameterType="HfRangeGateMin" Offset="6" BitOffset="0" Text="Minimale Entfernung" Value="1" />
+                <Parameter Id="%AID%_UP-%TT%00019" Name="HfRangeGateMax" ParameterType="HfRangeGateMax" Offset="6" BitOffset="4" Text="Maximale Entfernung" Value="8" />
               </Union>
               <!-- internal (ets only) parameters, invisible but necessary -->
-              <Parameter Id="%AID%_P-%TT%00023" Name="HfRangeMinMeter" ParameterType="%AID%_PT-Text15" Text="Minimale Entfernung in m" Value="* 0.7m =  0.0m" Access="Read" />
-              <Parameter Id="%AID%_P-%TT%00024" Name="HfRangeMaxMeter" ParameterType="%AID%_PT-Text15" Text="Maximale Entfernung in m" Value="* 0.7m = 10.5m" Access="Read" />
+              <Parameter Id="%AID%_P-%TT%00023" Name="HfRangeMinMeter" ParameterType="Text15" Text="Minimale Entfernung in m" Value="* 0.7m =  0.0m" Access="Read" />
+              <Parameter Id="%AID%_P-%TT%00024" Name="HfRangeMaxMeter" ParameterType="Text15" Text="Maximale Entfernung in m" Value="* 0.7m = 10.5m" Access="Read" />
               <!-- Brightness related settings (local hardware) -->
               <Union SizeInBit="24">
                 <Memory CodeSegment="%AID%_RS-04-00000" Offset="7" BitOffset="0" />
-                <Parameter Id="%AID%_UP-%TT%00010" Name="LuxOffsetPM" Offset="0" BitOffset="0" ParameterType="%AID%_PT-OffsetLuxPM" Text="Korrektur Luxwert" SuffixText="Lux" Value="0" />
-                <Parameter Id="%AID%_UP-%TT%00014" Name="LuxSendDeltaAbsRel" Offset="1" BitOffset="0" ParameterType="%AID%_PT-LuxAbsRel" Text="Helligkeitsänderung wird angegeben in" Value="0" />
-                <Parameter Id="%AID%_UP-%TT%00011" Name="LuxSendDelta" Offset="1" BitOffset="1" ParameterType="%AID%_PT-AbsLux" Text="Senden der Helligkeit bei Änderung um" Value="0" />
+                <Parameter Id="%AID%_UP-%TT%00010" Name="LuxOffsetPM" Offset="0" BitOffset="0" ParameterType="OffsetLuxPM" Text="Korrektur Luxwert" SuffixText="Lux" Value="0" />
+                <Parameter Id="%AID%_UP-%TT%00014" Name="LuxSendDeltaAbsRel" Offset="1" BitOffset="0" ParameterType="LuxAbsRel" Text="Helligkeitsänderung wird angegeben in" Value="0" />
+                <Parameter Id="%AID%_UP-%TT%00011" Name="LuxSendDelta" Offset="1" BitOffset="1" ParameterType="AbsLux" Text="Senden der Helligkeit bei Änderung um" Value="0" />
               </Union>
               <!-- send cyclic brightness (delay pattern) -->
               <Union SizeInBit="16">
                 <Memory CodeSegment="%AID%_RS-04-00000" Offset="10" BitOffset="0" />
-                <Parameter Id="%AID%_UP-%TT%00012" Name="LuxSendCycleDelayBase" ParameterType="%AID%_PT-DelayBase" Offset="0" BitOffset="0" Text="Zeitbasis" Value="0" />
-                <Parameter Id="%AID%_UP-%TT%00013" Name="LuxSendCycleDelayTime" ParameterType="%AID%_PT-DelayTime" Offset="0" BitOffset="2" Text="Zeit" Value="0" />
+                <Parameter Id="%AID%_UP-%TT%00012" Name="LuxSendCycleDelayBase" ParameterType="DelayBase" Offset="0" BitOffset="0" Text="Zeitbasis" Value="0" />
+                <Parameter Id="%AID%_UP-%TT%00013" Name="LuxSendCycleDelayTime" ParameterType="DelayTime" Offset="0" BitOffset="2" Text="Zeit" Value="0" />
               </Union>
               <!-- HLK-HF-Sensor management is using %AID%_UP-%TT%99000 and up -->
               <op:usePart name="HLK-ROW-DEVICE" xpath="//Static/Parameters/*" />
               <op:usePart name="HLK-ROW-ABS" xpath="//Static/Parameters/*" />
               <op:usePart name="HLK-ROW-REL" xpath="//Static/Parameters/*" />
               <op:usePart name="HLK-MEMORY" xpath="//Static/Parameters/*" />
-              <Parameter Id="%AID%_P-%TT%99900" Name="M1Name" ParameterType="%AID%_PT-Text40Byte" Text="Name von Zwischenspeicher M1" Value="M1" />
-              <Parameter Id="%AID%_P-%TT%99901" Name="M1Trigger" ParameterType="%AID%_PT-CheckBox" Text="M1 enthält Trigger-Daten" Value="0" Access="Read" />
-              <Parameter Id="%AID%_P-%TT%99902" Name="M1Hold" ParameterType="%AID%_PT-CheckBox" Text="M1 enthält Halten-Daten" Value="0" Access="Read" />
-              <Parameter Id="%AID%_P-%TT%99905" Name="M2Name" ParameterType="%AID%_PT-Text40Byte" Text="Name von Zwischenspeicher M2" Value="M2" />
-              <Parameter Id="%AID%_P-%TT%99906" Name="M2Trigger" ParameterType="%AID%_PT-CheckBox" Text="M2 enthält Trigger-Daten" Value="0" Access="Read" />
-              <Parameter Id="%AID%_P-%TT%99907" Name="M2Hold" ParameterType="%AID%_PT-CheckBox" Text="M2 enthält Halten-Daten" Value="0" Access="Read" />
-              <Parameter Id="%AID%_P-%TT%99920" Name="HlkFormula" ParameterType="%AID%_PT-HlkFormula" Text="Formel" Value="1" />
-              <Parameter Id="%AID%_P-%TT%99921" Name="HlkFormulaTarget" ParameterType="%AID%_PT-HlkFormulaTarget" Text="Ziel" Value="2" />
-              <Parameter Id="%AID%_P-%TT%99922" Name="HlkFormulaSensitivity" ParameterType="%AID%_PT-Sensitivity2" Text="Empfindlichkeit" Value="90" SuffixText="%" />
-              <Parameter Id="%AID%_P-%TT%99923" Name="HlkFormulaOffset" ParameterType="%AID%_PT-HlkFormulaOffset" Text="Offset" Value="100" />
-              <Parameter Id="%AID%_P-%TT%99924" Name="HlkMeasure1" ParameterType="%AID%_PT-HfMeasures" Text="Sub1" Value="0" />
-              <Parameter Id="%AID%_P-%TT%99925" Name="HlkMeasure2" ParameterType="%AID%_PT-HfMeasures" Text="Sub2" Value="2" />
-              <Parameter Id="%AID%_P-%TT%99926" Name="HlkView" ParameterType="%AID%_PT-HfView" Text="Anzeige" Value="0" />
-              <Parameter Id="%AID%_P-%TT%99927" Name="HlkSuppressWarning" ParameterType="%AID%_PT-CheckBox" Text="Obige Information nicht mehr anzeigen" Value="0" Access="None" />
+              <Parameter Id="%AID%_P-%TT%99900" Name="M1Name" ParameterType="Text40Byte" Text="Name von Zwischenspeicher M1" Value="M1" />
+              <Parameter Id="%AID%_P-%TT%99901" Name="M1Trigger" ParameterType="CheckBox" Text="M1 enthält Trigger-Daten" Value="0" Access="Read" />
+              <Parameter Id="%AID%_P-%TT%99902" Name="M1Hold" ParameterType="CheckBox" Text="M1 enthält Halten-Daten" Value="0" Access="Read" />
+              <Parameter Id="%AID%_P-%TT%99905" Name="M2Name" ParameterType="Text40Byte" Text="Name von Zwischenspeicher M2" Value="M2" />
+              <Parameter Id="%AID%_P-%TT%99906" Name="M2Trigger" ParameterType="CheckBox" Text="M2 enthält Trigger-Daten" Value="0" Access="Read" />
+              <Parameter Id="%AID%_P-%TT%99907" Name="M2Hold" ParameterType="CheckBox" Text="M2 enthält Halten-Daten" Value="0" Access="Read" />
+              <Parameter Id="%AID%_P-%TT%99920" Name="HlkFormula" ParameterType="HlkFormula" Text="Formel" Value="1" />
+              <Parameter Id="%AID%_P-%TT%99921" Name="HlkFormulaTarget" ParameterType="HlkFormulaTarget" Text="Ziel" Value="2" />
+              <Parameter Id="%AID%_P-%TT%99922" Name="HlkFormulaSensitivity" ParameterType="Sensitivity2" Text="Empfindlichkeit" Value="90" SuffixText="%" />
+              <Parameter Id="%AID%_P-%TT%99923" Name="HlkFormulaOffset" ParameterType="HlkFormulaOffset" Text="Offset" Value="100" />
+              <Parameter Id="%AID%_P-%TT%99924" Name="HlkMeasure1" ParameterType="HfMeasures" Text="Sub1" Value="0" />
+              <Parameter Id="%AID%_P-%TT%99925" Name="HlkMeasure2" ParameterType="HfMeasures" Text="Sub2" Value="2" />
+              <Parameter Id="%AID%_P-%TT%99926" Name="HlkView" ParameterType="HfView" Text="Anzeige" Value="0" />
+              <Parameter Id="%AID%_P-%TT%99927" Name="HlkSuppressWarning" ParameterType="CheckBox" Text="Obige Information nicht mehr anzeigen" Value="0" Access="None" />
               <!-- HLK-HF-Sensor management (active columns) -->
-              <Parameter Id="%AID%_P-%TT%99930" Name="HlkActiveCol00" ParameterType="%AID%_PT-CheckBox" Text="ActCol00" Value="1" />
-              <Parameter Id="%AID%_P-%TT%99931" Name="HlkActiveCol01" ParameterType="%AID%_PT-CheckBox" Text="ActCol01" Value="1" />
-              <Parameter Id="%AID%_P-%TT%99932" Name="HlkActiveCol02" ParameterType="%AID%_PT-CheckBox" Text="ActCol02" Value="1" />
-              <Parameter Id="%AID%_P-%TT%99933" Name="HlkActiveCol03" ParameterType="%AID%_PT-CheckBox" Text="ActCol03" Value="1" />
-              <Parameter Id="%AID%_P-%TT%99934" Name="HlkActiveCol04" ParameterType="%AID%_PT-CheckBox" Text="ActCol04" Value="1" />
-              <Parameter Id="%AID%_P-%TT%99935" Name="HlkActiveCol05" ParameterType="%AID%_PT-CheckBox" Text="ActCol05" Value="1" />
-              <Parameter Id="%AID%_P-%TT%99936" Name="HlkActiveCol06" ParameterType="%AID%_PT-CheckBox" Text="ActCol06" Value="1" />
-              <Parameter Id="%AID%_P-%TT%99937" Name="HlkActiveCol07" ParameterType="%AID%_PT-CheckBox" Text="ActCol07" Value="1" />
-              <Parameter Id="%AID%_P-%TT%99938" Name="HlkActiveCol08" ParameterType="%AID%_PT-CheckBox" Text="ActCol08" Value="1" />
-              <Parameter Id="%AID%_P-%TT%99939" Name="HlkActiveCol09" ParameterType="%AID%_PT-CheckBox" Text="ActCol09" Value="1" />
-              <Parameter Id="%AID%_P-%TT%99940" Name="HlkActiveCol10" ParameterType="%AID%_PT-CheckBox" Text="ActCol10" Value="1" />
-              <Parameter Id="%AID%_P-%TT%99941" Name="HlkActiveCol11" ParameterType="%AID%_PT-CheckBox" Text="ActCol11" Value="1" />
-              <Parameter Id="%AID%_P-%TT%99942" Name="HlkActiveCol12" ParameterType="%AID%_PT-CheckBox" Text="ActCol12" Value="1" />
-              <Parameter Id="%AID%_P-%TT%99943" Name="HlkActiveCol13" ParameterType="%AID%_PT-CheckBox" Text="ActCol13" Value="1" />
-              <Parameter Id="%AID%_P-%TT%99944" Name="HlkActiveCol14" ParameterType="%AID%_PT-CheckBox" Text="ActCol14" Value="1" />
-              <Parameter Id="%AID%_P-%TT%99945" Name="HlkActiveCol15" ParameterType="%AID%_PT-CheckBox" Text="ActCol15" Value="1" />
+              <Parameter Id="%AID%_P-%TT%99930" Name="HlkActiveCol00" ParameterType="CheckBox" Text="ActCol00" Value="1" />
+              <Parameter Id="%AID%_P-%TT%99931" Name="HlkActiveCol01" ParameterType="CheckBox" Text="ActCol01" Value="1" />
+              <Parameter Id="%AID%_P-%TT%99932" Name="HlkActiveCol02" ParameterType="CheckBox" Text="ActCol02" Value="1" />
+              <Parameter Id="%AID%_P-%TT%99933" Name="HlkActiveCol03" ParameterType="CheckBox" Text="ActCol03" Value="1" />
+              <Parameter Id="%AID%_P-%TT%99934" Name="HlkActiveCol04" ParameterType="CheckBox" Text="ActCol04" Value="1" />
+              <Parameter Id="%AID%_P-%TT%99935" Name="HlkActiveCol05" ParameterType="CheckBox" Text="ActCol05" Value="1" />
+              <Parameter Id="%AID%_P-%TT%99936" Name="HlkActiveCol06" ParameterType="CheckBox" Text="ActCol06" Value="1" />
+              <Parameter Id="%AID%_P-%TT%99937" Name="HlkActiveCol07" ParameterType="CheckBox" Text="ActCol07" Value="1" />
+              <Parameter Id="%AID%_P-%TT%99938" Name="HlkActiveCol08" ParameterType="CheckBox" Text="ActCol08" Value="1" />
+              <Parameter Id="%AID%_P-%TT%99939" Name="HlkActiveCol09" ParameterType="CheckBox" Text="ActCol09" Value="1" />
+              <Parameter Id="%AID%_P-%TT%99940" Name="HlkActiveCol10" ParameterType="CheckBox" Text="ActCol10" Value="1" />
+              <Parameter Id="%AID%_P-%TT%99941" Name="HlkActiveCol11" ParameterType="CheckBox" Text="ActCol11" Value="1" />
+              <Parameter Id="%AID%_P-%TT%99942" Name="HlkActiveCol12" ParameterType="CheckBox" Text="ActCol12" Value="1" />
+              <Parameter Id="%AID%_P-%TT%99943" Name="HlkActiveCol13" ParameterType="CheckBox" Text="ActCol13" Value="1" />
+              <Parameter Id="%AID%_P-%TT%99944" Name="HlkActiveCol14" ParameterType="CheckBox" Text="ActCol14" Value="1" />
+              <Parameter Id="%AID%_P-%TT%99945" Name="HlkActiveCol15" ParameterType="CheckBox" Text="ActCol15" Value="1" />
             </Parameters>
             <ParameterRefs>
               <!-- <ParameterRef Id="%AID%_P-%TT%00001_R-%TT%%AID%_UP-%TT%000210000101" RefId="%AID%_P-%TT%00001" /> -->
               <!-- <ParameterRef Id="%AID%_UP-%TT%00002_R-%TT%0000201" RefId="%AID%_UP-%TT%00002" /> -->
-              <ParameterRef Id="%AID%_UP-%TT%00003_R-%TT%0000301" RefId="%AID%_UP-%TT%00003" />
+              <ParameterRef op:Name="SendRAW" />
               <!-- <ParameterRef Id="%AID%_UP-%TT%00004_R-%TT%0000401" RefId="%AID%_UP-%TT%00004" /> -->
               <!-- <ParameterRef Id="%AID%_UP-%TT%00005_R-%TT%0000501" RefId="%AID%_UP-%TT%00005" /> -->
-              <ParameterRef Id="%AID%_UP-%TT%00006_R-%TT%0000601" RefId="%AID%_UP-%TT%00006" />
-              <ParameterRef Id="%AID%_UP-%TT%00007_R-%TT%0000701" RefId="%AID%_UP-%TT%00007" />
+              <ParameterRef op:Name="HfPresence" />
+              <ParameterRef op:Name="HWLux" />
               <!-- <ParameterRef Id="%AID%_UP-%TT%00008_R-%TT%0000801" RefId="%AID%_UP-%TT%00008" /> -->
               <!-- <ParameterRef Id="%AID%_P-%TT%00009_R-%TT%0000901" RefId="%AID%_P-%TT%00009" /> -->
-              <ParameterRef Id="%AID%_UP-%TT%00010_R-%TT%0001001" RefId="%AID%_UP-%TT%00010" />
-              <ParameterRef Id="%AID%_UP-%TT%00011_R-%TT%0001101" RefId="%AID%_UP-%TT%00011" SuffixText="Lux" />
-              <ParameterRef Id="%AID%_UP-%TT%00011_R-%TT%0001102" RefId="%AID%_UP-%TT%00011" SuffixText="%" />
-              <ParameterRef Id="%AID%_UP-%TT%00012_R-%TT%0001201" RefId="%AID%_UP-%TT%00012" />
-              <ParameterRef Id="%AID%_UP-%TT%00013_R-%TT%0001301" RefId="%AID%_UP-%TT%00013" />
-              <ParameterRef Id="%AID%_UP-%TT%00014_R-%TT%0001401" RefId="%AID%_UP-%TT%00014" />
-              <ParameterRef Id="%AID%_UP-%TT%00015_R-%TT%0001501" RefId="%AID%_UP-%TT%00015" />
-              <ParameterRef Id="%AID%_UP-%TT%00016_R-%TT%0001601" RefId="%AID%_UP-%TT%00016" />
-              <ParameterRef Id="%AID%_UP-%TT%00017_R-%TT%0001701" RefId="%AID%_UP-%TT%00017" SuffixText="Sekunden" />
-              <ParameterRef Id="%AID%_UP-%TT%00018_R-%TT%0001801" RefId="%AID%_UP-%TT%00018" />
-              <ParameterRef Id="%AID%_UP-%TT%00019_R-%TT%0001901" RefId="%AID%_UP-%TT%00019" />
-              <ParameterRef Id="%AID%_UP-%TT%00020_R-%TT%0002001" RefId="%AID%_UP-%TT%00020" />
-              <ParameterRef Id="%AID%_UP-%TT%00021_R-%TT%0002101" RefId="%AID%_UP-%TT%00021" />
-              <ParameterRef Id="%AID%_UP-%TT%00022_R-%TT%0002201" RefId="%AID%_UP-%TT%00022" />
+              <ParameterRef op:Name="LuxOffsetPM" />
+              <ParameterRef op:Name="LuxSendDelta" Name="LuxSendDeltaLux" SuffixText="Lux" />
+              <ParameterRef op:Name="LuxSendDelta" op:Ref="2" Name="LuxSendDeltaPercent" SuffixText="%" />
+              <ParameterRef op:Name="LuxSendCycleDelayBase" />
+              <ParameterRef op:Name="LuxSendCycleDelayTime" />
+              <ParameterRef op:Name="LuxSendDeltaAbsRel" />
+              <ParameterRef op:Name="HfScenario" />
+              <ParameterRef op:Name="HfSensitivity" />
+              <ParameterRef op:Name="HfDelayTime" SuffixText="Sekunden" />
+              <ParameterRef op:Name="HfRangeGateMin" />
+              <ParameterRef op:Name="HfRangeGateMax" />
+              <ParameterRef op:Name="VisibleChannels" />
+              <ParameterRef op:Name="PirSensitivity" />
+              <ParameterRef op:Name="PirPresence" />
               <ParameterRef Id="%AID%_UP-%TT%00025_R-%TT%0002501" RefId="%AID%_UP-%TT%00025" />
               <!-- HLK-HF-Sensor management is using %AID%_UP-%TT%99000 and up -->
               <op:usePart name="HLK-ROW-DEVICE" xpath="//Static/ParameterRefs/*" />
               <op:usePart name="HLK-ROW-ABS" xpath="//Static/ParameterRefs/*" />
               <op:usePart name="HLK-ROW-REL" xpath="//Static/ParameterRefs/*" />
               <op:usePart name="HLK-MEMORY" xpath="//Static/ParameterRefs/*" />
-              <ParameterRef Id="%AID%_P-%TT%99900_R-%TT%9990001" RefId="%AID%_P-%TT%99900" />
-              <ParameterRef Id="%AID%_P-%TT%99901_R-%TT%9990101" RefId="%AID%_P-%TT%99901" />
-              <ParameterRef Id="%AID%_P-%TT%99902_R-%TT%9990201" RefId="%AID%_P-%TT%99902" />
-              <ParameterRef Id="%AID%_P-%TT%99905_R-%TT%9990501" RefId="%AID%_P-%TT%99905" />
-              <ParameterRef Id="%AID%_P-%TT%99906_R-%TT%9990601" RefId="%AID%_P-%TT%99906" />
-              <ParameterRef Id="%AID%_P-%TT%99907_R-%TT%9990701" RefId="%AID%_P-%TT%99907" />
-              <ParameterRef Id="%AID%_P-%TT%99920_R-%TT%9992001" RefId="%AID%_P-%TT%99920" />
-              <ParameterRef Id="%AID%_P-%TT%99921_R-%TT%9992101" RefId="%AID%_P-%TT%99921" />
-              <ParameterRef Id="%AID%_P-%TT%99922_R-%TT%9992201" RefId="%AID%_P-%TT%99922" />
-              <ParameterRef Id="%AID%_P-%TT%99923_R-%TT%9992301" RefId="%AID%_P-%TT%99923" />
-              <ParameterRef Id="%AID%_P-%TT%99924_R-%TT%9992401" RefId="%AID%_P-%TT%99924" />
-              <ParameterRef Id="%AID%_P-%TT%99925_R-%TT%9992501" RefId="%AID%_P-%TT%99925" />
-              <ParameterRef Id="%AID%_P-%TT%99926_R-%TT%9992601" RefId="%AID%_P-%TT%99926" />
-              <ParameterRef Id="%AID%_P-%TT%99927_R-%TT%9992701" RefId="%AID%_P-%TT%99927" />
-              <ParameterRef Id="%AID%_P-%TT%99930_R-%TT%9993001" RefId="%AID%_P-%TT%99930" />
-              <ParameterRef Id="%AID%_P-%TT%99931_R-%TT%9993101" RefId="%AID%_P-%TT%99931" />
-              <ParameterRef Id="%AID%_P-%TT%99932_R-%TT%9993201" RefId="%AID%_P-%TT%99932" />
-              <ParameterRef Id="%AID%_P-%TT%99933_R-%TT%9993301" RefId="%AID%_P-%TT%99933" />
-              <ParameterRef Id="%AID%_P-%TT%99934_R-%TT%9993401" RefId="%AID%_P-%TT%99934" />
-              <ParameterRef Id="%AID%_P-%TT%99935_R-%TT%9993501" RefId="%AID%_P-%TT%99935" />
-              <ParameterRef Id="%AID%_P-%TT%99936_R-%TT%9993601" RefId="%AID%_P-%TT%99936" />
-              <ParameterRef Id="%AID%_P-%TT%99937_R-%TT%9993701" RefId="%AID%_P-%TT%99937" />
-              <ParameterRef Id="%AID%_P-%TT%99938_R-%TT%9993801" RefId="%AID%_P-%TT%99938" />
-              <ParameterRef Id="%AID%_P-%TT%99939_R-%TT%9993901" RefId="%AID%_P-%TT%99939" />
-              <ParameterRef Id="%AID%_P-%TT%99940_R-%TT%9994001" RefId="%AID%_P-%TT%99940" />
-              <ParameterRef Id="%AID%_P-%TT%99941_R-%TT%9994101" RefId="%AID%_P-%TT%99941" />
-              <ParameterRef Id="%AID%_P-%TT%99942_R-%TT%9994201" RefId="%AID%_P-%TT%99942" />
-              <ParameterRef Id="%AID%_P-%TT%99943_R-%TT%9994301" RefId="%AID%_P-%TT%99943" />
-              <ParameterRef Id="%AID%_P-%TT%99944_R-%TT%9994401" RefId="%AID%_P-%TT%99944" />
-              <ParameterRef Id="%AID%_P-%TT%99945_R-%TT%9994501" RefId="%AID%_P-%TT%99945" />
+              <ParameterRef op:Name="M1Name" />
+              <ParameterRef op:Name="M1Trigger" />
+              <ParameterRef op:Name="M1Hold" />
+              <ParameterRef op:Name="M2Name" />
+              <ParameterRef op:Name="M2Trigger" />
+              <ParameterRef op:Name="M2Hold" />
+              <ParameterRef op:Name="HlkFormula" />
+              <ParameterRef op:Name="HlkFormulaTarget" />
+              <ParameterRef op:Name="HlkFormulaSensitivity" />
+              <ParameterRef op:Name="HlkFormulaOffset" />
+              <ParameterRef op:Name="HlkMeasure1" />
+              <ParameterRef op:Name="HlkMeasure2" />
+              <ParameterRef op:Name="HlkView" />
+              <ParameterRef op:Name="HlkSuppressWarning" />
+              <ParameterRef op:Name="HlkActiveCol00" />
+              <ParameterRef op:Name="HlkActiveCol01" />
+              <ParameterRef op:Name="HlkActiveCol02" />
+              <ParameterRef op:Name="HlkActiveCol03" />
+              <ParameterRef op:Name="HlkActiveCol04" />
+              <ParameterRef op:Name="HlkActiveCol05" />
+              <ParameterRef op:Name="HlkActiveCol06" />
+              <ParameterRef op:Name="HlkActiveCol07" />
+              <ParameterRef op:Name="HlkActiveCol08" />
+              <ParameterRef op:Name="HlkActiveCol09" />
+              <ParameterRef op:Name="HlkActiveCol10" />
+              <ParameterRef op:Name="HlkActiveCol11" />
+              <ParameterRef op:Name="HlkActiveCol12" />
+              <ParameterRef op:Name="HlkActiveCol13" />
+              <ParameterRef op:Name="HlkActiveCol14" />
+              <ParameterRef op:Name="HlkActiveCol15" />
             </ParameterRefs>
             <ParameterValidations>
               <ParameterValidation Id="%AID%_PV-%TT%00001" Name="MinLessMax" ValidationFunc="PM_distanceCheck">
                 <Parameters>
-                  <ParameterRefRef RefId="%AID%_UP-%TT%00018_R-%TT%0001801" AliasName="RangeMin" />
-                  <ParameterRefRef RefId="%AID%_UP-%TT%00019_R-%TT%0001901" AliasName="RangeMax" />
+                  <ParameterRefRef op:Name="HfRangeGateMin" AliasName="RangeMin" />
+                  <ParameterRefRef op:Name="HfRangeGateMax" AliasName="RangeMax" />
                 </Parameters>
               </ParameterValidation>
             </ParameterValidations>
@@ -655,46 +655,46 @@
                 <ParameterSeparator Id="%AID%_PS-nnn" Text="Version: %ModuleVersion%" />
                 <ParameterSeparator Id="%AID%_PS-nnn" Text="" UIHint="HorizontalRuler" />
                 <ParameterSeparator Id="%AID%_PS-nnn" Text="Kanalauswahl" UIHint="Headline" />
-                <ParameterRefRef RefId="%AID%_UP-%TT%00020_R-%TT%0002001" HelpContext="BASE-Verfuegbare-Kanaele" IndentLevel="1" />
+                <ParameterRefRef op:Name="VisibleChannels" HelpContext="BASE-Verfuegbare-Kanaele" IndentLevel="1" />
                 <ParameterSeparator Id="%AID%_PS-nnn" Text="" UIHint="HorizontalRuler" />
 
                 <ParameterSeparator Id="%AID%_PS-nnn" Text="Präsenz-Hardware" UIHint="Headline" />
                 <!-- HF-Sensor -->
-                <ParameterRefRef RefId="%AID%_UP-%TT%00006_R-%TT%0000601" IndentLevel="1" HelpContext="%DOC%" />
-                <choose ParamRefId="%AID%_UP-%TT%00006_R-%TT%0000601">
-                  <when test="2">
+                <ParameterRefRef op:Name="HfPresence" IndentLevel="1" HelpContext="%DOC%" />
+                <choose op:Name="HfPresence">
+                  <when op:test="MR24xxB1">
                     <!-- Masifi-Sensor -->
-                    <ParameterRefRef RefId="%AID%_UP-%TT%00015_R-%TT%0001501" IndentLevel="2" HelpContext="%DOC%" />
-                    <ParameterRefRef RefId="%AID%_UP-%TT%00016_R-%TT%0001601" IndentLevel="2" />
+                    <ParameterRefRef op:Name="HfScenario" IndentLevel="2" HelpContext="%DOC%" />
+                    <ParameterRefRef op:Name="HfSensitivity" IndentLevel="2" />
                   </when>
-                  <when test="3">
+                  <when op:test="HLK2420">
                     <!-- HLK-LD2420 -->
                     <ParameterSeparator Id="%AID%_PS-nnn" Text="Einstellungen bitte auf der Seite HF-Sensor vornehmen" Cell="1,2" />
                   </when>
                 </choose>
                 <ParameterSeparator Id="%AID%_PS-nnn" Text="" UIHint="HorizontalRuler" />
                 <!-- PIR-Sensor -->
-                <ParameterRefRef RefId="%AID%_UP-%TT%00022_R-%TT%0002201" IndentLevel="1" HelpContext="%DOC%" />
-                <choose ParamRefId="%AID%_UP-%TT%00022_R-%TT%0002201">
-                  <when test="2">
-                    <ParameterRefRef RefId="%AID%_UP-%TT%00021_R-%TT%0002101" IndentLevel="2" />
+                <ParameterRefRef op:Name="PirPresence" IndentLevel="1" HelpContext="%DOC%" />
+                <choose op:Name="PirPresence" >
+                  <when op:test="Analog">
+                    <ParameterRefRef op:Name="PirSensitivity" IndentLevel="2" />
                   </when>
                 </choose>
                 <!-- Rohdatenabfrage -->
-                <choose ParamRefId="%AID%_UP-%TT%00006_R-%TT%0000601">
-                  <when test="0">
-                    <choose ParamRefId="%AID%_UP-%TT%00022_R-%TT%0002201">
-                      <when test="!=0">
+                <choose op:Name="HfPresence">
+                  <when op:test="None">
+                    <choose op:Name="PirPresence" >
+                      <when op:test="!=None">
                         <ParameterSeparator Id="%AID%_PS-nnn" Text="" UIHint="HorizontalRuler" />
-                        <ParameterRefRef RefId="%AID%_UP-%TT%00003_R-%TT%0000301" IndentLevel="1" HelpContext="%DOC%" />
+                        <ParameterRefRef op:Name="SendRAW" IndentLevel="1" HelpContext="%DOC%" />
                         <ParameterSeparator Id="%AID%_PS-nnn" Text="Auch wenn die Rohdaten nicht auf den Bus gesendet werden, können sie intern für PM-Kanäle genutzt werden." />
                         <ParameterSeparator Id="%AID%_PS-nnn" Text="In der gesamten Applikation wird vom Präsenzmelder gesprochen. Ob sich die Applikation als Präsenz- oder als Bewegungsmelder verhält, wird von der verwendeten Hardware (Präsenz-Sensor) bestimmt." />
                       </when>
                     </choose>
                   </when>
-                  <when test="!=0">
+                  <when op:test="!=None">
                     <ParameterSeparator Id="%AID%_PS-nnn" Text="" UIHint="HorizontalRuler" />
-                    <ParameterRefRef RefId="%AID%_UP-%TT%00003_R-%TT%0000301" IndentLevel="1" HelpContext="%DOC%" />
+                    <ParameterRefRef op:Name="SendRAW" IndentLevel="1" HelpContext="%DOC%" />
                     <ParameterSeparator Id="%AID%_PS-nnn" Text="Auch wenn die Rohdaten nicht auf den Bus gesendet werden, können sie intern für PM-Kanäle genutzt werden." />
                     <ParameterSeparator Id="%AID%_PS-nnn" Text="In der gesamten Applikation wird vom Präsenzmelder gesprochen. Ob sich die Applikation als Präsenz- oder als Bewegungsmelder verhält, wird von der verwendeten Hardware (Präsenz-Sensor) bestimmt." />
                   </when>
@@ -702,17 +702,17 @@
                 <ParameterSeparator Id="%AID%_PS-nnn" Text="" UIHint="HorizontalRuler" />
                 <ParameterSeparator Id="%AID%_PS-nnn" Text="Helligkeit" UIHint="Headline" />
                 <!-- Lux-Sensor -->
-                <ParameterRefRef RefId="%AID%_UP-%TT%00007_R-%TT%0000701" IndentLevel="1" HelpContext="%DOC%" />
-                <choose ParamRefId="%AID%_UP-%TT%00007_R-%TT%0000701">
-                  <when test="!=0">
-                    <ParameterRefRef RefId="%AID%_UP-%TT%00010_R-%TT%0001001" IndentLevel="2" HelpContext="%DOC%" />
-                    <ParameterRefRef RefId="%AID%_UP-%TT%00014_R-%TT%0001401" IndentLevel="2" HelpContext="%DOC%" />
-                    <choose ParamRefId="%AID%_UP-%TT%00014_R-%TT%0001401">
-                      <when test="0">
-                        <ParameterRefRef RefId="%AID%_UP-%TT%00011_R-%TT%0001101" IndentLevel="2" HelpContext="%DOC%" />
+                <ParameterRefRef op:Name="HWLux" IndentLevel="1" HelpContext="%DOC%" />
+                <choose op:Name="HWLux">
+                  <when op:test="!=None">
+                    <ParameterRefRef op:Name="LuxOffsetPM" IndentLevel="2" HelpContext="%DOC%" />
+                    <ParameterRefRef op:Name="LuxSendDeltaAbsRel" IndentLevel="2" HelpContext="%DOC%" />
+                    <choose op:Name="LuxSendDeltaAbsRel">
+                      <when op:test="Abs">
+                        <ParameterRefRef op:Name="LuxSendDeltaLux" IndentLevel="2" HelpContext="%DOC%" />
                       </when>
-                      <when test="1">
-                        <ParameterRefRef RefId="%AID%_UP-%TT%00011_R-%TT%0001102" IndentLevel="2" HelpContext="%DOC%" />
+                      <when op:test="Rel">
+                        <ParameterRefRef op:Name="LuxSendDeltaPercent" IndentLevel="2" HelpContext="%DOC%" />
                       </when>
                     </choose>
                     <!-- Lux send cycle -->
@@ -728,16 +728,16 @@
                         <Column Id="%AID%_PB-nnn_C-4" Name="Col4" Width="20%" />
                       </Columns>
                       <ParameterSeparator Id="%AID%_PS-nnn" Text="Helligkeitswert zyklisch senden alle" Cell="1,2" />
-                      <ParameterRefRef RefId="%AID%_UP-%TT%00013_R-%TT%0001301" Cell="1,3" HelpContext="PM-Helligkeitswert-zyklisch-senden" />
-                      <ParameterRefRef RefId="%AID%_UP-%TT%00012_R-%TT%0001201" Cell="1,4" HelpContext="PM-Helligkeitswert-zyklisch-senden" />
+                      <ParameterRefRef op:Name="LuxSendCycleDelayTime" Cell="1,3" HelpContext="PM-Helligkeitswert-zyklisch-senden" />
+                      <ParameterRefRef op:Name="LuxSendCycleDelayBase" Cell="1,4" HelpContext="PM-Helligkeitswert-zyklisch-senden" />
                     </ParameterBlock>
                     <!-- KO für Helligkeit einschalten -->
-                    <choose ParamRefId="%AID%_UP-%TT%00011_R-%TT%0001101">
+                    <choose op:Name="LuxSendDeltaLux">
                       <when test="!=0">
                         <ComObjectRefRef RefId="%AID%_O-%TT%00001_R-%TT%0000101" />
                       </when>
                     </choose>
-                    <choose ParamRefId="%AID%_UP-%TT%00013_R-%TT%0001301">
+                    <choose op:Name="LuxSendCycleDelayTime">
                       <when test="!=0">
                         <ComObjectRefRef RefId="%AID%_O-%TT%00001_R-%TT%0000101" />
                       </when>
@@ -751,30 +751,30 @@
                 <ParameterSeparator Id="%AID%_PS-nnn" Text="Die Einstellungen für die Präsenz- und Bewegungs-LED können jetzt im StatusLED-Modul vorgenommen werden." />
 
                 <!-- Rohdaten senden -->
-                <choose ParamRefId="%AID%_UP-%TT%00003_R-%TT%0000301">
+                <choose op:Name="SendRAW">
                   <when test="!=0">
-                    <choose ParamRefId="%AID%_UP-%TT%00006_R-%TT%0000601">
-                      <when test="2 3">
+                    <choose op:Name="HfPresence">
+                      <when op:test="MR24xxB1 HLK2420">
                         <ComObjectRefRef RefId="%AID%_O-%TT%00005_R-%TT%0000501" />
                         <ComObjectRefRef RefId="%AID%_O-%TT%00009_R-%TT%0000901" />
                       </when>
-                      <when test="2">
+                      <when op:test="MR24xxB1">
                         <ComObjectRefRef RefId="%AID%_O-%TT%00002_R-%TT%0000201" />
                         <ComObjectRefRef RefId="%AID%_O-%TT%00006_R-%TT%0000601" />
                         <ComObjectRefRef RefId="%AID%_O-%TT%00007_R-%TT%0000701" />
                         <ComObjectRefRef RefId="%AID%_O-%TT%00008_R-%TT%0000801" />
                       </when>
-                      <when test="3">
+                      <when op:test="HLK2420">
                         <ComObjectRefRef RefId="%AID%_O-%TT%00002_R-%TT%0000202" />
                         <ComObjectRefRef RefId="%AID%_O-%TT%00006_R-%TT%0000602" />
                         <ComObjectRefRef RefId="%AID%_O-%TT%00008_R-%TT%0000802" />
                       </when>
                     </choose>
-                    <choose ParamRefId="%AID%_UP-%TT%00022_R-%TT%0002201">
-                      <when test="1 2">
+                    <choose op:Name="PirPresence">
+                      <when op:test="Digital Analog">
                         <ComObjectRefRef RefId="%AID%_O-%TT%00002_R-%TT%0000202" />
                       </when>
-                      <when test="2">
+                      <when op:test="Analog">
                         <ComObjectRefRef RefId="%AID%_O-%TT%00011_R-%TT%0001101" />
                       </when>
                     </choose>
@@ -786,8 +786,8 @@
               <!-- * HLK Settings                                       -->
               <!-- *                                                    -->
               <!-- **************************************************** -->
-              <choose ParamRefId="%AID%_UP-%TT%00006_R-%TT%0000601">
-                <when test="3">
+              <choose op:Name="HfPresence">
+                <when op:test="HLK2420">
                   <ParameterBlock Id="%AID%_PB-nnn" Name="ExtendedParameters" Text="HF-Sensor" Icon="radar" HelpContext="PM-Informationen-zum-Sensor">
                     <!-- Current view setting -->
                     <ParameterBlock Id="%AID%_PB-nnn" Inline="true" Layout="Grid">
@@ -801,14 +801,14 @@
                       </Columns>
                       <ParameterSeparator Id="%AID%_PS-nnn" Text="HF-Sensor Konfiguration" Cell="1,1" UIHint="Headline" />
                       <ParameterSeparator Id="%AID%_PS-nnn" Text="Anzeige" Cell="1,2" />
-                      <ParameterRefRef RefId="%AID%_P-%TT%99926_R-%TT%9992601" Cell="1,3" HelpContext="%DOC%" />
+                      <ParameterRefRef op:Name="HlkView" Cell="1,3" HelpContext="%DOC%" />
                     </ParameterBlock>
 
                     <ParameterSeparator Id="%AID%_PS-nnn" Text="In diesem Bereich können detaillierte Einstellungen für den HF-Sensor vorgenommen und direkt ausprobiert werden. Um aber die Eingaben dauerhaft im Sensor zu speichern, muss der Sensor über die ETS programmiert werden." />
 
                     <!-- Download app warning -->
-                    <ParameterRefRef RefId="%AID%_P-%TT%99927_R-%TT%9992701" />
-                    <choose ParamRefId="%AID%_P-%TT%99927_R-%TT%9992701">
+                    <ParameterRefRef op:Name="HlkSuppressWarning" />
+                    <choose op:Name="HlkSuppressWarning">
                       <when test="0">
                         <ParameterSeparator Id="%AID%_PS-nnn" Text="" UIHint="HorizontalRuler" />
                         <ParameterSeparator Id="%AID%_PS-nnn" Text="Falls diese Applikation noch nicht mit der ETS auf das Gerät programmiert wurde, kann die Seite nicht funktionieren. Bitte zuerst das Gerät mit der ETS programmieren, danach eine andere Seite wählen und anschließend zu dieser Seite zurückkehren!" UIHint="Information" />
@@ -851,11 +851,11 @@
                         <Column Id="%AID%_PB-nnn_C-4" Width="22%" />
                       </Columns>
                       <ParameterSeparator Id="%AID%_PS-nnn" Text="Haltedauer" Cell="1,1" />
-                      <ParameterRefRef RefId="%AID%_UP-%TT%00017_R-%TT%0001701" Cell="1,2" HelpContext="%DOC%" />
+                      <ParameterRefRef op:Name="HfDelayTime" Cell="1,2" HelpContext="%DOC%" />
                       <ParameterSeparator Id="%AID%_PS-nnn" Text="Entfernung" Cell="2,1" />
-                      <ParameterRefRef RefId="%AID%_UP-%TT%00018_R-%TT%0001801" Cell="2,2" HelpContext="PM-Entfernung" />
+                      <ParameterRefRef op:Name="HfRangeGateMin" Cell="2,2" HelpContext="PM-Entfernung" />
                       <ParameterSeparator Id="%AID%_PS-nnn" Text="  bis" Cell="2,3" />
-                      <ParameterRefRef RefId="%AID%_UP-%TT%00019_R-%TT%0001901" Cell="2,4" HelpContext="PM-Entfernung" />
+                      <ParameterRefRef op:Name="HfRangeGateMax" Cell="2,4" HelpContext="PM-Entfernung" />
                     </ParameterBlock>
 
                     <!-- Editor section -->
@@ -901,136 +901,136 @@
                         <Column Id="%AID%_PB-nnn_C-34" Width="%PM_ColWidthHlkHeaderCellLast%" />
                       </Columns>
                       <ParameterSeparator Id="%AID%_PS-nnn" Text="Schwellwerte (m)" Cell="1,1" UIHint="Headline" />
-                      <choose ParamRefId="%AID%_UP-%TT%00018_R-%TT%0001801">
+                      <choose op:Name="HfRangeGateMin">
                         <when test="0">
                           <!-- Range 0 -->
                           <ParameterSeparator Id="%AID%_PS-nnn" Text="0" Cell="1,2" UIHint="Headline" />
-                          <ParameterRefRef RefId="%AID%_P-%TT%99930_R-%TT%9993001" Cell="1,3" HelpContext="PM-Spalte-aktiv" />
+                          <ParameterRefRef op:Name="HlkActiveCol00" Cell="1,3" HelpContext="PM-Spalte-aktiv" />
                           <ParameterSeparator Id="%AID%_PS-nnn" Text="0.35" Cell="1,4" UIHint="Headline" />
                         </when>
                         <when test="&lt;=1">
                           <ParameterSeparator Id="%AID%_PS-nnn" Text="0.35" Cell="1,4" UIHint="Headline" />
-                          <ParameterRefRef RefId="%AID%_P-%TT%99931_R-%TT%9993101" Cell="1,5" HelpContext="PM-Spalte-aktiv" />
+                          <ParameterRefRef op:Name="HlkActiveCol01" Cell="1,5" HelpContext="PM-Spalte-aktiv" />
                           <ParameterSeparator Id="%AID%_PS-nnn" Text="1.05" Cell="1,6" UIHint="Headline" />
                         </when>
                         <when test="&lt;=2">
-                          <choose ParamRefId="%AID%_UP-%TT%00019_R-%TT%0001901">
+                          <choose op:Name="HfRangeGateMax">
                             <when test="&gt;1">
                               <ParameterSeparator Id="%AID%_PS-nnn" Text="1.05" Cell="1,6" UIHint="Headline" />
-                              <ParameterRefRef RefId="%AID%_P-%TT%99932_R-%TT%9993201" Cell="1,7" HelpContext="PM-Spalte-aktiv" />
+                              <ParameterRefRef op:Name="HlkActiveCol02" Cell="1,7" HelpContext="PM-Spalte-aktiv" />
                               <ParameterSeparator Id="%AID%_PS-nnn" Text="1.75" Cell="1,8" UIHint="Headline" />
                             </when>
                           </choose>
                         </when>
                         <when test="&lt;=3">
-                          <choose ParamRefId="%AID%_UP-%TT%00019_R-%TT%0001901">
+                          <choose op:Name="HfRangeGateMax">
                             <when test="&gt;2">
                               <ParameterSeparator Id="%AID%_PS-nnn" Text="1.75" Cell="1,8" UIHint="Headline" />
-                              <ParameterRefRef RefId="%AID%_P-%TT%99933_R-%TT%9993301" Cell="1,9" HelpContext="PM-Spalte-aktiv" />
+                              <ParameterRefRef op:Name="HlkActiveCol03" Cell="1,9" HelpContext="PM-Spalte-aktiv" />
                               <ParameterSeparator Id="%AID%_PS-nnn" Text="2.45" Cell="1,10" UIHint="Headline" />
                             </when>
                           </choose>
                         </when>
                         <when test="&lt;=4">
-                          <choose ParamRefId="%AID%_UP-%TT%00019_R-%TT%0001901">
+                          <choose op:Name="HfRangeGateMax">
                             <when test="&gt;3">
                               <ParameterSeparator Id="%AID%_PS-nnn" Text="2.45" Cell="1,10" UIHint="Headline" />
-                              <ParameterRefRef RefId="%AID%_P-%TT%99934_R-%TT%9993401" Cell="1,11" HelpContext="PM-Spalte-aktiv" />
+                              <ParameterRefRef op:Name="HlkActiveCol04" Cell="1,11" HelpContext="PM-Spalte-aktiv" />
                               <ParameterSeparator Id="%AID%_PS-nnn" Text="3.15" Cell="1,12" UIHint="Headline" />
                             </when>
                           </choose>
                         </when>
                         <when test="&lt;=5">
-                          <choose ParamRefId="%AID%_UP-%TT%00019_R-%TT%0001901">
+                          <choose op:Name="HfRangeGateMax">
                             <when test="&gt;4">
                               <ParameterSeparator Id="%AID%_PS-nnn" Text="3.15" Cell="1,12" UIHint="Headline" />
-                              <ParameterRefRef RefId="%AID%_P-%TT%99935_R-%TT%9993501" Cell="1,13" HelpContext="PM-Spalte-aktiv" />
+                              <ParameterRefRef op:Name="HlkActiveCol05" Cell="1,13" HelpContext="PM-Spalte-aktiv" />
                               <ParameterSeparator Id="%AID%_PS-nnn" Text="3.85" Cell="1,14" UIHint="Headline" />
                             </when>
                           </choose>
                         </when>
                         <when test="&lt;=6">
-                          <choose ParamRefId="%AID%_UP-%TT%00019_R-%TT%0001901">
+                          <choose op:Name="HfRangeGateMax">
                             <when test="&gt;5">
                               <ParameterSeparator Id="%AID%_PS-nnn" Text="3.85" Cell="1,14" UIHint="Headline" />
-                              <ParameterRefRef RefId="%AID%_P-%TT%99936_R-%TT%9993601" Cell="1,15" HelpContext="PM-Spalte-aktiv" />
+                              <ParameterRefRef op:Name="HlkActiveCol06" Cell="1,15" HelpContext="PM-Spalte-aktiv" />
                               <ParameterSeparator Id="%AID%_PS-nnn" Text="4.55" Cell="1,16" UIHint="Headline" />
                             </when>
                           </choose>
                         </when>
                         <when test="&lt;=7">
-                          <choose ParamRefId="%AID%_UP-%TT%00019_R-%TT%0001901">
+                          <choose op:Name="HfRangeGateMax">
                             <when test="&gt;6">
                               <ParameterSeparator Id="%AID%_PS-nnn" Text="4.55" Cell="1,16" UIHint="Headline" />
-                              <ParameterRefRef RefId="%AID%_P-%TT%99937_R-%TT%9993701" Cell="1,17" HelpContext="PM-Spalte-aktiv" />
+                              <ParameterRefRef op:Name="HlkActiveCol07" Cell="1,17" HelpContext="PM-Spalte-aktiv" />
                               <ParameterSeparator Id="%AID%_PS-nnn" Text="5.25" Cell="1,18" UIHint="Headline" />
                             </when>
                           </choose>
                         </when>
                         <when test="&lt;=8">
-                          <choose ParamRefId="%AID%_UP-%TT%00019_R-%TT%0001901">
+                          <choose op:Name="HfRangeGateMax">
                             <when test="&gt;7">
                               <ParameterSeparator Id="%AID%_PS-nnn" Text="5.25" Cell="1,18" UIHint="Headline" />
-                              <ParameterRefRef RefId="%AID%_P-%TT%99938_R-%TT%9993801" Cell="1,19" HelpContext="PM-Spalte-aktiv" />
+                              <ParameterRefRef op:Name="HlkActiveCol08" Cell="1,19" HelpContext="PM-Spalte-aktiv" />
                               <ParameterSeparator Id="%AID%_PS-nnn" Text="5.95" Cell="1,20" UIHint="Headline" />
                             </when>
                           </choose>
                         </when>
                         <when test="&lt;=9">
-                          <choose ParamRefId="%AID%_UP-%TT%00019_R-%TT%0001901">
+                          <choose op:Name="HfRangeGateMax">
                             <when test="&gt;8">
                               <ParameterSeparator Id="%AID%_PS-nnn" Text="5.95" Cell="1,20" UIHint="Headline" />
-                              <ParameterRefRef RefId="%AID%_P-%TT%99939_R-%TT%9993901" Cell="1,21" HelpContext="PM-Spalte-aktiv" />
+                              <ParameterRefRef op:Name="HlkActiveCol09" Cell="1,21" HelpContext="PM-Spalte-aktiv" />
                               <ParameterSeparator Id="%AID%_PS-nnn" Text="6.65" Cell="1,22" UIHint="Headline" />
                             </when>
                           </choose>
                         </when>
                         <when test="&lt;=10">
-                          <choose ParamRefId="%AID%_UP-%TT%00019_R-%TT%0001901">
+                          <choose op:Name="HfRangeGateMax">
                             <when test="&gt;9">
                               <ParameterSeparator Id="%AID%_PS-nnn" Text="6.65" Cell="1,22" UIHint="Headline" />
-                              <ParameterRefRef RefId="%AID%_P-%TT%99940_R-%TT%9994001" Cell="1,23" HelpContext="PM-Spalte-aktiv" />
+                              <ParameterRefRef op:Name="HlkActiveCol10" Cell="1,23" HelpContext="PM-Spalte-aktiv" />
                               <ParameterSeparator Id="%AID%_PS-nnn" Text="7.35" Cell="1,24" UIHint="Headline" />
                             </when>
                           </choose>
                         </when>
                         <when test="&lt;=11">
-                          <choose ParamRefId="%AID%_UP-%TT%00019_R-%TT%0001901">
+                          <choose op:Name="HfRangeGateMax">
                             <when test="&gt;10">
                               <ParameterSeparator Id="%AID%_PS-nnn" Text="7.35" Cell="1,24" UIHint="Headline" />
-                              <ParameterRefRef RefId="%AID%_P-%TT%99941_R-%TT%9994101" Cell="1,25" HelpContext="PM-Spalte-aktiv" />
+                              <ParameterRefRef op:Name="HlkActiveCol11" Cell="1,25" HelpContext="PM-Spalte-aktiv" />
                               <ParameterSeparator Id="%AID%_PS-nnn" Text="8.05" Cell="1,26" UIHint="Headline" />
                             </when>
                           </choose>
                         </when>
                         <when test="&lt;=12">
-                          <choose ParamRefId="%AID%_UP-%TT%00019_R-%TT%0001901">
+                          <choose op:Name="HfRangeGateMax">
                             <when test="&gt;11">
                               <ParameterSeparator Id="%AID%_PS-nnn" Text="8.05" Cell="1,26" UIHint="Headline" />
-                              <ParameterRefRef RefId="%AID%_P-%TT%99942_R-%TT%9994201" Cell="1,27" HelpContext="PM-Spalte-aktiv" />
+                              <ParameterRefRef op:Name="HlkActiveCol12" Cell="1,27" HelpContext="PM-Spalte-aktiv" />
                               <ParameterSeparator Id="%AID%_PS-nnn" Text="8.75" Cell="1,28" UIHint="Headline" />
                             </when>
                           </choose>
                         </when>
                         <when test="&lt;=13">
-                          <choose ParamRefId="%AID%_UP-%TT%00019_R-%TT%0001901">
+                          <choose op:Name="HfRangeGateMax">
                             <when test="&gt;12">
                               <ParameterSeparator Id="%AID%_PS-nnn" Text="8.75" Cell="1,28" UIHint="Headline" />
-                              <ParameterRefRef RefId="%AID%_P-%TT%99943_R-%TT%9994301" Cell="1,29" HelpContext="PM-Spalte-aktiv" />
+                              <ParameterRefRef op:Name="HlkActiveCol13" Cell="1,29" HelpContext="PM-Spalte-aktiv" />
                               <ParameterSeparator Id="%AID%_PS-nnn" Text="9.45" Cell="1,30" UIHint="Headline" />
                             </when>
                           </choose>
                         </when>
                       </choose>
-                      <choose ParamRefId="%AID%_UP-%TT%00019_R-%TT%0001901">
+                      <choose op:Name="HfRangeGateMax">
                         <when test="&gt;13">
                           <ParameterSeparator Id="%AID%_PS-nnn" Text="9.45" Cell="1,30" UIHint="Headline" />
-                          <ParameterRefRef RefId="%AID%_P-%TT%99944_R-%TT%9994401" Cell="1,31" HelpContext="PM-Spalte-aktiv" />
+                          <ParameterRefRef op:Name="HlkActiveCol14" Cell="1,31" HelpContext="PM-Spalte-aktiv" />
                           <ParameterSeparator Id="%AID%_PS-nnn" Text="10.15" Cell="1,32" UIHint="Headline" />
                         </when>
                         <when test="&gt;14">
                           <ParameterSeparator Id="%AID%_PS-nnn" Text="10.15" Cell="1,32" UIHint="Headline" />
-                          <ParameterRefRef RefId="%AID%_P-%TT%99945_R-%TT%9994501" Cell="1,33" HelpContext="PM-Spalte-aktiv" />
+                          <ParameterRefRef op:Name="HlkActiveCol15" Cell="1,33" HelpContext="PM-Spalte-aktiv" />
                           <ParameterSeparator Id="%AID%_PS-nnn" Text="10.85" Cell="1,34" UIHint="Headline" />
                         </when>
                       </choose>
@@ -1039,8 +1039,8 @@
                     <op:usePart name="HLK-ROW-DEVICE" xpath="//Dynamic/ChannelIndependentBlock/*" />
 
                     <!-- Formula section and Diff section -->
-                    <choose ParamRefId="%AID%_P-%TT%99926_R-%TT%9992601">
-                      <when test="1 3">
+                    <choose op:Name="HlkView" >
+                      <when op:test="WithHelpers All">
                         <!-- Wide horizontal ruler -->
                         <ParameterBlock Id="%AID%_PB-nnn" Inline="true" Layout="Grid">
                           <Rows>
@@ -1069,21 +1069,21 @@
                             <Column Id="%AID%_PB-nnn_C-5" Width="14%" />
                           </Columns>
                           <ParameterSeparator Id="%AID%_PS-nnn" Cell="1,1" Text="Kopiere" />
-                          <ParameterRefRef RefId="%AID%_P-%TT%99920_R-%TT%9992001" Cell="1,2" HelpContext="PM-Kopierquelle" />
-                          <choose ParamRefId="%AID%_P-%TT%99920_R-%TT%9992001">
-                            <when test="3">
-                              <ParameterRefRef RefId="%AID%_P-%TT%99922_R-%TT%9992201" Cell="1,3" HelpContext="%DOC%" />
+                          <ParameterRefRef op:Name="HlkFormula" Cell="1,2" HelpContext="PM-Kopierquelle" />
+                          <choose op:Name="HlkFormula">
+                            <when op:test="PreviousCalibration">
+                              <ParameterRefRef op:Name="HlkFormulaSensitivity" Cell="1,3" HelpContext="%DOC%" />
                             </when>
-                            <when test="2 8 9 10 11 12 13 14">
-                              <ParameterRefRef RefId="%AID%_P-%TT%99923_R-%TT%9992301" Cell="1,3" HelpContext="%DOC%" />
+                            <when op:test="Constant Sample1Max Sample1StdDev Sample1Average Sample2Max Sample2StdDev Sample2Average Difference">
+                              <ParameterRefRef op:Name="HlkFormulaOffset" Cell="1,3" HelpContext="%DOC%" />
                             </when>
                           </choose>
-                          <ParameterRefRef RefId="%AID%_P-%TT%99921_R-%TT%9992101" Cell="1,4" HelpContext="PM-Kopierziel" />
+                          <ParameterRefRef op:Name="HlkFormulaTarget" Cell="1,4" HelpContext="PM-Kopierziel" />
                           <Button Id="%AID%_B-%TT%00004" Text="" Icon="content-copy" Cell="1,5" EventHandler="PM_executeFunction" EventHandlerParameters="{ &quot;dataKind&quot;:8, &quot;parName&quot;:&quot;TriggerDelta&quot; }" />
                           <ParameterSeparator Id="%AID%_PS-nnn" Text="Berechne" Cell="2,1" />
-                          <ParameterRefRef RefId="%AID%_P-%TT%99924_R-%TT%9992401" Cell="2,2" HelpContext="PM-Berechne" />
+                          <ParameterRefRef op:Name="HlkMeasure1" Cell="2,2" HelpContext="PM-Berechne" />
                           <ParameterSeparator Id="%AID%_PS-nnn" Text="    minus" Cell="2,3" />
-                          <ParameterRefRef RefId="%AID%_P-%TT%99925_R-%TT%9992501" Cell="2,4" HelpContext="PM-Berechne" />
+                          <ParameterRefRef op:Name="HlkMeasure2" Cell="2,4" HelpContext="PM-Berechne" />
                           <Button Id="%AID%_B-%TT%00007" Text="" Icon="calculator-variant-outline" Cell="2,5" EventHandler="PM_diffValues" />
                         </ParameterBlock>
                         <op:usePart name="HLK-ROW-REL" xpath="//Dynamic/ChannelIndependentBlock/*" />
@@ -1156,8 +1156,8 @@
                     <op:usePart name="HLK-ROW-ABS" xpath="//Dynamic/ChannelIndependentBlock/*" instanceFrom="4" instanceTo="6" />
 
                     <!-- Memory section -->
-                    <choose ParamRefId="%AID%_P-%TT%99926_R-%TT%9992601">
-                      <when test="2 3">
+                    <choose op:Name="HlkView" >
+                      <when op:test="WithMemory All">
                         <!-- Wide horizontal ruler -->
                         <ParameterBlock Id="%AID%_PB-nnn" Inline="true" Layout="Grid">
                           <Rows>
@@ -1195,15 +1195,15 @@
                           <!-- <ParameterSeparator Id="%AID%_PS-nnn" Text="Löschen" Cell="1,5" UIHint="Headline" /> -->
                           <ParameterSeparator Id="%AID%_PS-nnn" Text="Speicher 1" Cell="2,1" />
                           <ParameterSeparator Id="%AID%_PS-nnn" Text="Speicher 2" Cell="3,1" />
-                          <ParameterRefRef RefId="%AID%_P-%TT%99900_R-%TT%9990001" Cell="2,2" HelpContext="PM-Name" />
-                          <ParameterRefRef RefId="%AID%_P-%TT%99901_R-%TT%9990101" Cell="2,3" />
-                          <ParameterRefRef RefId="%AID%_P-%TT%99902_R-%TT%9990201" Cell="2,4" />
-                          <ParameterRefRef RefId="%AID%_P-%TT%99905_R-%TT%9990501" Cell="3,2" HelpContext="PM-Name"/>
-                          <ParameterRefRef RefId="%AID%_P-%TT%99906_R-%TT%9990601" Cell="3,3" />
-                          <ParameterRefRef RefId="%AID%_P-%TT%99907_R-%TT%9990701" Cell="3,4" />
+                          <ParameterRefRef op:Name="M1Name" Cell="2,2" HelpContext="PM-Name" />
+                          <ParameterRefRef op:Name="M1Trigger" Cell="2,3" />
+                          <ParameterRefRef op:Name="M1Hold" Cell="2,4" />
+                          <ParameterRefRef op:Name="M2Name" Cell="3,2" HelpContext="PM-Name"/>
+                          <ParameterRefRef op:Name="M2Trigger" Cell="3,3" />
+                          <ParameterRefRef op:Name="M2Hold" Cell="3,4" />
                           <!-- M1 Trigger -->
                           <Button Id="%AID%_B-%TT%00028" Text="" Cell="2,3" Icon="content-save-outline" EventHandler="PM_setMemoryData" EventHandlerParameters="{ &quot;dataSource&quot;:&quot;Trigger&quot;, &quot;dataTarget&quot;:&quot;M1Trigger&quot; }" />
-                          <choose ParamRefId="%AID%_P-%TT%99901_R-%TT%9990101">
+                          <choose op:Name="M1Trigger">
                             <when test="0">
                               <ParameterSeparator Id="%AID%_PS-nnn" Text="       leer" Cell="2,4" />
                             </when>
@@ -1214,7 +1214,7 @@
                           </choose>
                           <!-- M1 Halten -->
                           <Button Id="%AID%_B-%TT%00029" Text="" Cell="2,5" Icon="content-save-outline" EventHandler="PM_setMemoryData" EventHandlerParameters="{ &quot;dataSource&quot;:&quot;Hold&quot;, &quot;dataTarget&quot;:&quot;M1Hold&quot; }" />
-                          <choose ParamRefId="%AID%_P-%TT%99902_R-%TT%9990201">
+                          <choose op:Name="M1Hold">
                             <when test="0">
                               <ParameterSeparator Id="%AID%_PS-nnn" Text="       leer" Cell="2,6" />
                             </when>
@@ -1225,7 +1225,7 @@
                           </choose>
                           <!-- M2 Trigger -->
                           <Button Id="%AID%_B-%TT%00026" Text="" Cell="3,3" Icon="content-save-outline" EventHandler="PM_setMemoryData" EventHandlerParameters="{ &quot;dataSource&quot;:&quot;Trigger&quot;, &quot;dataTarget&quot;:&quot;M2Trigger&quot; }" />
-                          <choose ParamRefId="%AID%_P-%TT%99906_R-%TT%9990601">
+                          <choose op:Name="M2Trigger" >
                             <when test="0">
                               <ParameterSeparator Id="%AID%_PS-nnn" Text="       leer" Cell="3,4" />
                             </when>
@@ -1236,7 +1236,7 @@
                           </choose>
                           <!-- M2 Hold -->
                           <Button Id="%AID%_B-%TT%00027" Text="" Cell="3,5" Icon="content-save-outline" EventHandler="PM_setMemoryData" EventHandlerParameters="{ &quot;dataSource&quot;:&quot;Hold&quot;, &quot;dataTarget&quot;:&quot;M2Hold&quot; }" />
-                          <choose ParamRefId="%AID%_P-%TT%99907_R-%TT%9990701">
+                          <choose op:Name="M2Hold" >
                             <when test="0">
                               <ParameterSeparator Id="%AID%_PS-nnn" Text="       leer" Cell="3,6" />
                             </when>
@@ -1254,11 +1254,11 @@
               </choose>
 
               <op:include href="PMmodul.templ.xml" xpath="//Dynamic/ChannelIndependentBlock/*" type="template" prefix="PM" IsInner="true" />
-              <choose ParamRefId="%AID%_UP-%TT%00020_R-%TT%0002001">
+              <choose op:Name="VisibleChannels">
                 <when test="&lt;%N%">
                   <ParameterBlock Id="%AID%_PB-nnn" Name="AdditionalChannels" Text="(mehr)" Icon="dots-horizontal" HelpContext="Empty">
                     <ParameterSeparator Id="%AID%_PS-nnn" Text="Kanalauswahl" UIHint="Headline" />
-                    <ParameterRefRef RefId="%AID%_UP-%TT%00020_R-%TT%0002001" HelpContext="BASE-Verfuegbare-Kanaele" IndentLevel="1" />
+                    <ParameterRefRef op:Name="VisibleChannels" HelpContext="BASE-Verfuegbare-Kanaele" IndentLevel="1" />
                   </ParameterBlock>
                 </when>
               </choose>

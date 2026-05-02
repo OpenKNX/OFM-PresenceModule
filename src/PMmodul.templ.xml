@@ -51,8 +51,8 @@
                 <Parameter Id="%AID%_UP-%TT%%CC%902" Name="p%C%MoveType" Offset="0" BitOffset="4" ParameterType="%AID%_PT-PresenceType" Text="Eingang Bewegung" Value="0" />
                 <Parameter Id="%AID%_UP-%TT%%CC%004" Name="p%C%PhaseBool" Offset="0" BitOffset="5" ParameterType="%AID%_PT-OnOffYesNo" Text="Tagesphasen über Tag-/Nacht-Objekt verfügbar machen?" Value="0" />
                 <Parameter Id="%AID%_UP-%TT%%CC%005" Name="p%C%PhaseCount" Offset="0" BitOffset="6" ParameterType="%AID%_PT-PhaseCount" Text="Anzahl Tagesphasen" Value="0" />
-                <Parameter Id="%AID%_UP-%TT%%CC%006" Name="p%C%Output1Type" Offset="1" BitOffset="0" ParameterType="%AID%_PT-OutputType" Text="Ausgang 1 ist vom Typ" Value="1" />
-                <Parameter Id="%AID%_UP-%TT%%CC%007" Name="p%C%Output2Type" Offset="1" BitOffset="3" ParameterType="%AID%_PT-OutputType" Text="Ausgang 2 ist vom Typ" Value="0" />
+                <Parameter Id="%AID%_UP-%TT%%CC%006" Name="p%C%Output1Type" Offset="1" BitOffset="0" ParameterType="OutputType" Text="Ausgang 1 ist vom Typ" Value="1" />
+                <Parameter Id="%AID%_UP-%TT%%CC%007" Name="p%C%Output2Type" Offset="1" BitOffset="3" ParameterType="OutputType" Text="Ausgang 2 ist vom Typ" Value="0" />
                 <Parameter Id="%AID%_UP-%TT%%CC%008" Name="p%C%ChannelActive" Offset="1" BitOffset="6" ParameterType="%AID%_PT-ChannelActive" Text="Kanalaktivität" Value="0" />
                 <Parameter Id="%AID%_UP-%TT%%CC%009" Name="p%C%BrightnessIndependent" Offset="2" BitOffset="0" ParameterType="%AID%_PT-OnOffYesNoInverted" Text="Kanal ist Helligkeitsabhängig" Value="0" />
                 <Parameter Id="%AID%_UP-%TT%%CC%034" Name="p%C%BrightnessIntern" Offset="2" BitOffset="1" ParameterType="%AID%_PT-OnOffYesNo" Text="Eingebauten Helligkeitssensor verwenden?" Value="0" />
@@ -83,8 +83,8 @@
                 <Parameter Id="%AID%_UP-%TT%%CC%903" Name="p%C%PresenceKeepAlive" Offset="5" BitOffset="5" ParameterType="%AID%_PT-CheckBox" Text="    Eingang kann nicht einschalten,&#10;    aber bestehende Präsenz verlängern" Value="0" />
                 <Parameter Id="%AID%_UP-%TT%%CC%904" Name="p%C%MoveKeepAlive" Offset="5" BitOffset="6" ParameterType="%AID%_PT-CheckBox" Text="    Eingang kann nicht einschalten,&#10;    aber bestehende Präsenz verlängern" Value="0" />
                 <!-- 1 Bit free -->
-                <Parameter Id="%AID%_UP-%TT%%CC%905" Name="p%C%Output1SendAdditional" Offset="6" BitOffset="0" ParameterType="%AID%_PT-OutputSendAdditional" Text="Ausgang sendet zusätzlich" Value="3" />
-                <Parameter Id="%AID%_UP-%TT%%CC%906" Name="p%C%Output2SendAdditional" Offset="6" BitOffset="2" ParameterType="%AID%_PT-OutputSendAdditional" Text="Ausgang sendet zusätzlich" Value="3" />
+                <Parameter Id="%AID%_UP-%TT%%CC%905" Name="p%C%Output1SendAdditional" Offset="6" BitOffset="0" ParameterType="OutputSendAdditional" Text="Ausgang sendet zusätzlich" Value="3" />
+                <Parameter Id="%AID%_UP-%TT%%CC%906" Name="p%C%Output2SendAdditional" Offset="6" BitOffset="2" ParameterType="OutputSendAdditional" Text="Ausgang sendet zusätzlich" Value="3" />
                 <Parameter Id="%AID%_UP-%TT%%CC%907" Name="p%C%ActorState" Offset="6" BitOffset="4" ParameterType="%AID%_PT-ActorState" Text="Aktorstatus AUS bedeutet" Value="0" />
                 <Parameter Id="%AID%_UP-%TT%%CC%908" Name="p%C%MoveUsage" Offset="6" BitOffset="6" ParameterType="%AID%_PT-MoveUsage" Text="Bewegungssignal auswerten" Value="0" />
               </Union>
@@ -150,7 +150,7 @@
               <Union SizeInBit="160">
                 <Memory CodeSegment="%AID%_RS-04-00000" Offset="39" BitOffset="0" />
                 <Parameter Id="%AID%_UP-%TT%%CC%064" Name="p%C%IntLux" ParameterType="%AID%_PT-KOInput" Offset="0" BitOffset="0" Text="Neues oder internes KO" Value="0" />
-                <Parameter Id="%AID%_UP-%TT%%CC%065" Name="p%C%NumLux" ParameterType="%AID%_PT-KONumber" Offset="0" BitOffset="1" Text="Nummer vom internen KO" Value="%K0%" />
+                <Parameter Id="%AID%_UP-%TT%%CC%065" Name="p%C%NumLux" ParameterType="KONumber" Offset="0" BitOffset="1" Text="Nummer vom internen KO" Value="%K0%" />
                 <Parameter Id="%AID%_UP-%TT%%CC%066" Name="p%C%IntPresence1" ParameterType="%AID%_PT-KOInput" Offset="2" BitOffset="0" Text="Neues oder internes KO" Value="0" />
                 <Parameter Id="%AID%_UP-%TT%%CC%067" Name="p%C%NumPresence1" ParameterType="%AID%_PT-KONumber" Offset="2" BitOffset="1" Text="Nummer vom internen KO" Value="%K1%" />
                 <Parameter Id="%AID%_UP-%TT%%CC%068" Name="p%C%IntPresence2" ParameterType="%AID%_PT-KOInput" Offset="4" BitOffset="0" Text="Neues oder internes KO" Value="0" />
@@ -199,8 +199,8 @@
               <ParameterRef Id="%AID%_P-%TT%%CC%003_R-%TT%%CC%00301" RefId="%AID%_P-%TT%%CC%003" Access="None" />
               <ParameterRef Id="%AID%_UP-%TT%%CC%004_R-%TT%%CC%00401" RefId="%AID%_UP-%TT%%CC%004" />
               <ParameterRef Id="%AID%_UP-%TT%%CC%005_R-%TT%%CC%00501" RefId="%AID%_UP-%TT%%CC%005" />
-              <ParameterRef Id="%AID%_UP-%TT%%CC%006_R-%TT%%CC%00601" RefId="%AID%_UP-%TT%%CC%006" />
-              <ParameterRef Id="%AID%_UP-%TT%%CC%007_R-%TT%%CC%00701" RefId="%AID%_UP-%TT%%CC%007" />
+              <ParameterRef op:Name="p%C%Output1Type" />
+              <ParameterRef op:Name="p%C%Output2Type" />
               <ParameterRef Id="%AID%_UP-%TT%%CC%008_R-%TT%%CC%00801" RefId="%AID%_UP-%TT%%CC%008" />
               <ParameterRef Id="%AID%_UP-%TT%%CC%009_R-%TT%%CC%00901" RefId="%AID%_UP-%TT%%CC%009" />
               <ParameterRef Id="%AID%_P-%TT%%CC%010_R-%TT%%CC%01001" RefId="%AID%_P-%TT%%CC%010" Access="None" />
@@ -259,7 +259,7 @@
               <ParameterRef Id="%AID%_UP-%TT%%CC%063_R-%TT%%CC%06301" RefId="%AID%_UP-%TT%%CC%063" />
               <ParameterRef Id="%AID%_UP-%TT%%CC%064_R-%TT%%CC%06401" RefId="%AID%_UP-%TT%%CC%064" />
               <!-- <ParameterRef Id="%AID%_UP-%TT%%CC%065_R-%TT%%CC%06501" RefId="%AID%_UP-%TT%%CC%065" Access="Read" /> -->
-              <ParameterRef Id="%AID%_UP-%TT%%CC%065_R-%TT%%CC%06502" RefId="%AID%_UP-%TT%%CC%065" Value="1" />
+              <ParameterRef op:Name="p%C%NumLux" op:Ref="2" Value="1" />
               <ParameterRef Id="%AID%_UP-%TT%%CC%066_R-%TT%%CC%06601" RefId="%AID%_UP-%TT%%CC%066" />
               <!-- <ParameterRef Id="%AID%_UP-%TT%%CC%067_R-%TT%%CC%06701" RefId="%AID%_UP-%TT%%CC%067" Access="Read" /> -->
               <ParameterRef Id="%AID%_UP-%TT%%CC%067_R-%TT%%CC%06702" RefId="%AID%_UP-%TT%%CC%067" Value="1" />
@@ -309,8 +309,8 @@
               <ParameterRef Id="%AID%_UP-%TT%%CC%902_R-%TT%%CC%90202" RefId="%AID%_UP-%TT%%CC%902" Text="Eingang weitere Präsenz" />
               <ParameterRef Id="%AID%_UP-%TT%%CC%903_R-%TT%%CC%90301" RefId="%AID%_UP-%TT%%CC%903" />
               <ParameterRef Id="%AID%_UP-%TT%%CC%904_R-%TT%%CC%90401" RefId="%AID%_UP-%TT%%CC%904" />
-              <ParameterRef Id="%AID%_UP-%TT%%CC%905_R-%TT%%CC%90501" RefId="%AID%_UP-%TT%%CC%905" />
-              <ParameterRef Id="%AID%_UP-%TT%%CC%906_R-%TT%%CC%90601" RefId="%AID%_UP-%TT%%CC%906" />
+              <ParameterRef op:Name="p%C%Output1SendAdditional" />
+              <ParameterRef op:Name="p%C%Output2SendAdditional" />
               <ParameterRef Id="%AID%_UP-%TT%%CC%907_R-%TT%%CC%90701" RefId="%AID%_UP-%TT%%CC%907" />
               <ParameterRef Id="%AID%_UP-%TT%%CC%908_R-%TT%%CC%90801" RefId="%AID%_UP-%TT%%CC%908" />
               <!-- Phase 1 -->
@@ -364,14 +364,14 @@
               <ComObjectRef Id="%AID%_O-%TT%%CC%010_R-%TT%%CC%01001" RefId="%AID%_O-%TT%%CC%010" Text="{{0:PM %C%}}: Einschalt-Helligkeitsschwelle" TextParameterRefId="%AID%_P-%TT%%CC%000_R-%TT%%CC%00001" />
               <ComObjectRef Id="%AID%_O-%TT%%CC%011_R-%TT%%CC%01101" RefId="%AID%_O-%TT%%CC%011" Text="{{0:PM %C%}}: Nachlaufzeit" TextParameterRefId="%AID%_P-%TT%%CC%000_R-%TT%%CC%00001" />
               <ComObjectRef Id="%AID%_O-%TT%%CC%012_R-%TT%%CC%01201" RefId="%AID%_O-%TT%%CC%012" Text="{{0:PM %C%}}: PM über Szene steuern" TextParameterRefId="%AID%_P-%TT%%CC%000_R-%TT%%CC%00001" />
-              <ComObjectRef Id="%AID%_O-%TT%%CC%013_R-%TT%%CC%01301" RefId="%AID%_O-%TT%%CC%013" Text="{{0:PM %C%}}: Schalten 1" ObjectSize="1 Bit" TextParameterRefId="%AID%_P-%TT%%CC%000_R-%TT%%CC%00001" DatapointType="DPST-1-1" />
-              <ComObjectRef Id="%AID%_O-%TT%%CC%013_R-%TT%%CC%01302" RefId="%AID%_O-%TT%%CC%013" Text="{{0:PM %C%}}: Wert 1" ObjectSize="1 Byte" TextParameterRefId="%AID%_P-%TT%%CC%000_R-%TT%%CC%00001" DatapointType="DPST-5-5" />
-              <ComObjectRef Id="%AID%_O-%TT%%CC%013_R-%TT%%CC%01303" RefId="%AID%_O-%TT%%CC%013" Text="{{0:PM %C%}}: Szene 1" ObjectSize="1 Byte" TextParameterRefId="%AID%_P-%TT%%CC%000_R-%TT%%CC%00001" DatapointType="DPST-17-1" />
-              <ComObjectRef Id="%AID%_O-%TT%%CC%013_R-%TT%%CC%01304" RefId="%AID%_O-%TT%%CC%013" Text="{{0:PM %C%}}: Dimmen 1" ObjectSize="1 Byte" TextParameterRefId="%AID%_P-%TT%%CC%000_R-%TT%%CC%00001" DatapointType="DPST-5-1" />
-              <ComObjectRef Id="%AID%_O-%TT%%CC%014_R-%TT%%CC%01401" RefId="%AID%_O-%TT%%CC%014" Text="{{0:PM %C%}}: Schalten 2" ObjectSize="1 Bit" TextParameterRefId="%AID%_P-%TT%%CC%000_R-%TT%%CC%00001" DatapointType="DPST-1-1" />
-              <ComObjectRef Id="%AID%_O-%TT%%CC%014_R-%TT%%CC%01402" RefId="%AID%_O-%TT%%CC%014" Text="{{0:PM %C%}}: Wert 2" ObjectSize="1 Byte" TextParameterRefId="%AID%_P-%TT%%CC%000_R-%TT%%CC%00001" DatapointType="DPST-5-5" />
-              <ComObjectRef Id="%AID%_O-%TT%%CC%014_R-%TT%%CC%01403" RefId="%AID%_O-%TT%%CC%014" Text="{{0:PM %C%}}: Szene 2" ObjectSize="1 Byte" TextParameterRefId="%AID%_P-%TT%%CC%000_R-%TT%%CC%00001" DatapointType="DPST-17-1" />
-              <ComObjectRef Id="%AID%_O-%TT%%CC%014_R-%TT%%CC%01404" RefId="%AID%_O-%TT%%CC%014" Text="{{0:PM %C%}}: Dimmen 2" ObjectSize="1 Byte" TextParameterRefId="%AID%_P-%TT%%CC%000_R-%TT%%CC%00001" DatapointType="DPST-5-1" />
+              <ComObjectRef op:Name="KOp%C%Output" op:Ref="1" Name="KOp%C%OutputSwitch" Text="{{0:PM %C%}}: Schalten 1" ObjectSize="1 Bit" TextParameterRefId="%AID%_P-%TT%%CC%000_R-%TT%%CC%00001" DatapointType="DPST-1-1" />
+              <ComObjectRef op:Name="KOp%C%Output" op:Ref="2" Name="KOp%C%OutputValue" Text="{{0:PM %C%}}: Wert 1" ObjectSize="1 Byte" TextParameterRefId="%AID%_P-%TT%%CC%000_R-%TT%%CC%00001" DatapointType="DPST-5-5" />
+              <ComObjectRef op:Name="KOp%C%Output" op:Ref="3" Name="KOp%C%OutputScene" Text="{{0:PM %C%}}: Szene 1" ObjectSize="1 Byte" TextParameterRefId="%AID%_P-%TT%%CC%000_R-%TT%%CC%00001" DatapointType="DPST-17-1" />
+              <ComObjectRef op:Name="KOp%C%Output" op:Ref="4" Name="KOp%C%OutputDim" Text="{{0:PM %C%}}: Dimmen 1" ObjectSize="1 Byte" TextParameterRefId="%AID%_P-%TT%%CC%000_R-%TT%%CC%00001" DatapointType="DPST-5-1" />
+              <ComObjectRef op:Name="KOp%C%Output2" Name="KOp%C%Output2Switch" Text="{{0:PM %C%}}: Schalten 2" ObjectSize="1 Bit" TextParameterRefId="%AID%_P-%TT%%CC%000_R-%TT%%CC%00001" DatapointType="DPST-1-1" />
+              <ComObjectRef op:Name="KOp%C%Output2" op:Ref="2" Name="KOp%C%Output2Value" Text="{{0:PM %C%}}: Wert 2" ObjectSize="1 Byte" TextParameterRefId="%AID%_P-%TT%%CC%000_R-%TT%%CC%00001" DatapointType="DPST-5-5" />
+              <ComObjectRef op:Name="KOp%C%Output2" op:Ref="3" Name="KOp%C%Output2Scene" Text="{{0:PM %C%}}: Szene 2" ObjectSize="1 Byte" TextParameterRefId="%AID%_P-%TT%%CC%000_R-%TT%%CC%00001" DatapointType="DPST-17-1" />
+              <ComObjectRef op:Name="KOp%C%Output2" op:Ref="4" Name="KOp%C%Output2Dim" Text="{{0:PM %C%}}: Dimmen 2" ObjectSize="1 Byte" TextParameterRefId="%AID%_P-%TT%%CC%000_R-%TT%%CC%00001" DatapointType="DPST-5-1" />
               <ComObjectRef Id="%AID%_O-%TT%%CC%015_R-%TT%%CC%01501" RefId="%AID%_O-%TT%%CC%015" Text="{{0:PM %C%}}: Status Manuell(1)/Automatik(0)" TextParameterRefId="%AID%_P-%TT%%CC%000_R-%TT%%CC%00001" />
               <ComObjectRef Id="%AID%_O-%TT%%CC%016_R-%TT%%CC%01601" RefId="%AID%_O-%TT%%CC%016" Text="{{0:PM %C%}}: Änderung relativ dimmen" TextParameterRefId="%AID%_P-%TT%%CC%000_R-%TT%%CC%00001" />
               <ComObjectRef Id="%AID%_O-%TT%%CC%017_R-%TT%%CC%01701" RefId="%AID%_O-%TT%%CC%017" Text="{{0:PM %C%}}: Änderung absolut dimmen" TextParameterRefId="%AID%_P-%TT%%CC%000_R-%TT%%CC%00001" />
@@ -836,40 +836,40 @@
                         <!-- General output settings -->
                         <ParameterSeparator Id="%AID%_PS-nnn" Text="Ausgänge" UIHint="Headline" />
                         <ParameterSeparator Id="%AID%_PS-nnn" Text="Hier erfolgen die allgemeinen Einstellungen zu den Ausgängen. In den Tagesphasen wird eingestellt, welche konkreten Werte gesendet werden. " />
-                        <ParameterRefRef RefId="%AID%_UP-%TT%%CC%006_R-%TT%%CC%00601" HelpContext="PM-Ausgang-ist-vom-Typ" IndentLevel="1" />
-                        <choose ParamRefId="%AID%_UP-%TT%%CC%006_R-%TT%%CC%00601">
-                          <when test="!=0">
-                            <ParameterRefRef RefId="%AID%_UP-%TT%%CC%905_R-%TT%%CC%90501" HelpContext="%DOC%" IndentLevel="2" />
+                        <ParameterRefRef op:Name="p%C%Output1Type" HelpContext="PM-Ausgang-ist-vom-Typ" IndentLevel="1" />
+                        <choose op:Name="p%C%Output1Type">
+                          <when op:test="!=Inaktiv">
+                            <ParameterRefRef op:Name="p%C%Output1SendAdditional" HelpContext="%DOC%" IndentLevel="2" />
                           </when>
-                          <when test="1">
-                            <ComObjectRefRef RefId="%AID%_O-%TT%%CC%013_R-%TT%%CC%01301" />
+                          <when op:test="Schalten">
+                            <ComObjectRefRef op:Name="KOp%C%OutputSwitch" />
                           </when>
-                          <when test="2">
-                            <ComObjectRefRef RefId="%AID%_O-%TT%%CC%013_R-%TT%%CC%01302" />
+                          <when op:test="Wert">
+                            <ComObjectRefRef op:Name="KOp%C%OutputValue" />
                           </when>
-                          <when test="3">
-                            <ComObjectRefRef RefId="%AID%_O-%TT%%CC%013_R-%TT%%CC%01303" />
+                          <when op:test="Szene">
+                            <ComObjectRefRef op:Name="KOp%C%OutputScene" />
                           </when>
-                          <when test="4">
-                            <ComObjectRefRef RefId="%AID%_O-%TT%%CC%013_R-%TT%%CC%01304" />
+                          <when op:test="Dimmen">
+                            <ComObjectRefRef op:Name="KOp%C%OutputDim" />
                           </when>
                         </choose>
-                        <ParameterRefRef RefId="%AID%_UP-%TT%%CC%007_R-%TT%%CC%00701" HelpContext="PM-Ausgang-ist-vom-Typ" IndentLevel="1" />
-                        <choose ParamRefId="%AID%_UP-%TT%%CC%007_R-%TT%%CC%00701">
-                          <when test="!=0">
-                            <ParameterRefRef RefId="%AID%_UP-%TT%%CC%906_R-%TT%%CC%90601" HelpContext="%DOC%" IndentLevel="2" />
+                        <ParameterRefRef op:Name="p%C%Output2Type" HelpContext="PM-Ausgang-ist-vom-Typ" IndentLevel="1" />
+                        <choose op:Name="p%C%Output2Type">
+                          <when op:test="!=Inaktiv">
+                            <ParameterRefRef op:Name="p%C%Output2SendAdditional" HelpContext="%DOC%" IndentLevel="2" />
                           </when>
-                          <when test="1">
-                            <ComObjectRefRef RefId="%AID%_O-%TT%%CC%014_R-%TT%%CC%01401" />
+                          <when op:test="Schalten">
+                            <ComObjectRefRef op:Name="KOp%C%Output2Switch" />
                           </when>
-                          <when test="2">
-                            <ComObjectRefRef RefId="%AID%_O-%TT%%CC%014_R-%TT%%CC%01402" />
+                          <when op:test="Wert">
+                            <ComObjectRefRef op:Name="KOp%C%Output2Value" />
                           </when>
-                          <when test="3">
-                            <ComObjectRefRef RefId="%AID%_O-%TT%%CC%014_R-%TT%%CC%01403" />
+                          <when op:test="Szene">
+                            <ComObjectRefRef op:Name="KOp%C%Output2Scene" />
                           </when>
-                          <when test="4">
-                            <ComObjectRefRef RefId="%AID%_O-%TT%%CC%014_R-%TT%%CC%01404" />
+                          <when op:test="Dimmen">
+                            <ComObjectRefRef op:Name="KOp%C%Output2Dim" />
                           </when>
                         </choose>
                         <ParameterSeparator Id="%AID%_PS-nnn" Text="" UIHint="HorizontalRuler" />
@@ -1424,7 +1424,7 @@
                         <!-- Scenes -->
                         <ParameterBlock Id="%AID%_PB-nnn" Name="PM%C%Scenes" Text="Szenensteuerung" Icon="movie-open-outline" HelpContext="PM-Szenensteuerung">
                           <ParameterSeparator Id="%AID%_PS-nnn" Text="Szenensteuerung" UIHint="Headline" />
-                          <ParameterSeparator Id="%AID%_PS-nnn" Text="Viele Funktionen, für die ein Kommunikaitonsobjekt zur Verfügung steht, können auch über Szenen gesteuert werden." />
+                          <ParameterSeparator Id="%AID%_PS-nnn" Text="Viele Funktionen, für die ein Kommunikationsobjekt zur Verfügung steht, können auch über Szenen gesteuert werden." />
                           <ParameterSeparator Id="%AID%_PS-nnn" Text="Im folgenden können diese Funktionen mit entsprechenden Szenen verknüpft werden." />
                           <ParameterBlock Id="%AID%_PB-%C%13" Name="Table%C%Scenes" Text="#" Inline="true" Layout="Table"  HelpContext="PM-Szenensteuerung" >
                             <Rows>

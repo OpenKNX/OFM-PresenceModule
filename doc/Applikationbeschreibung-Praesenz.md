@@ -89,6 +89,7 @@ Im folgenden werden Änderungen an dem Dokument erfasst, damit man nicht immer d
 
 - FIX: Kalibrierungsdaten, die vom HF-Sensor gelesen werden, liefern jetzt als Minimum den Wert 100. Der frühere Wert 0 (wenn der Sensor noch keine Stichprobe geliefert hatte) konnte zu Problemen führen, wenn man diese Werte einfach so übernommen hat.
 - FIX: Das Senden von aktueller Helligkeit über das eigene Helligkeits-KO wurde an das Sendeverhalten vom Sensormodul angepasst.
+* NEU: Die direkte Kommunikation von der ETS zum Gerät (z.B. holden der Stichprobe beim HF-Sensor) wird jetzt passend zur APDU des Kommunikationskanals vorgenommen. Linienkoppler oder Router zwischen ETS und dem Gerät können die Kommunikation jetzt nicht mehr stören.
 
 13.02.2026: Firmware 3.10, Applikation 3.10:
 
@@ -2164,16 +2165,6 @@ Erscheint nur, wenn der HF-Sensor als Hardware-Sensor ausgewählt wurde.
 Dieser Ausgang liefert die relative Geschwindigkeit der gemessenen Bewegung in %, wobei 0% Stillstand und 100% quasi "unendlich schnell auf den Melder zu-  oder -wegrennen" bedeutet. Radialbewegungen werden durch diesen wert nicht repräsentiert.  
 
 > Wichtig: Dieses Signal ist für Analysezwecke gedacht. Es ist nicht dazu geeignet, irgendwelche Schaltvorgänge zu machen. Um etwas zu schalten, sollte man zwingend die vorhandenen Kanäle des Melders nutzen.
-
-#### **Eingang LED-Präsenz (KO 24) / Eingang LED-Bewegung (KO 25)**
-
-Erscheint nur, wenn der HF-Sensor als Hardware-Sensor ausgewählt wurde und die LED über ein externes Objekt geschaltet werden sollen.
-
-Die Hardware für den Real Presence Präsenzmelder enthält auch 2 LED, die leuchten können, wenn der Melder Präsenz bzw. Bewegung erkennt.
-
-Mit den beiden Eingängen können die LED auch über den Bus geschaltet werden. Ein EIN-Signal schaltet eine LED ein, ein AUS-Signal die entsprechende LED wieder aus.
-
-Ist irgendeine Tagesphase aktiv, die die Hardware-LED abschaltet, bleiben die LED unabhängig von Signalen an den KO immer ausgeschaltet, werden aber wieder entsprechend der Werte an den KO eingeschaltet, sobald die Tagesphase wieder inaktiv wird.
 
 #### **Eingang Szenario (KO 26)**
 
