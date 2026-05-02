@@ -1675,7 +1675,7 @@ void PresenceChannel::processOutput()
             if (lValue > 0 && lValue < (PM_BIT_OUTPUT_SET | PM_BIT_OUTPUT_WRITTEN))
                 lOutput = 3;
         }
-        if (pCurrentState & STATE_LOCK_PREPARE) 
+        if (pCurrentState & STATE_LOCK_PREPARE)
         {
             pCurrentState &= ~STATE_LOCK_PREPARE;
             pCurrentState |= STATE_LOCK;

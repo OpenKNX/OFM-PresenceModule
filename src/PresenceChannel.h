@@ -16,6 +16,7 @@
 #define STATE_ADAPTIVE_READ 0x00000400    // adaptive brightness calculation
 #define STATE_LEAVE_ROOM 0x00000800       // During leave room we ignore any presence signal
 #define STATE_READ_REQUESTS 0x00001000    // After startup delay, we first have to process all read requests
+#define STATE_LOCK_PREPARE 0x00002000     // prepare lock state
 #define STATE_KO_LUX_ON 0x00010000
 #define STATE_KO_LUX 0x00020000
 #define STATE_KO_PRESENCE1 0x00040000
