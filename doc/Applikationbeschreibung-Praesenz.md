@@ -85,6 +85,11 @@ Alle Logikkanäle sind in der [Applikation Logik](https://github.com/OpenKNX/OAM
 
 Im folgenden werden Änderungen an dem Dokument erfasst, damit man nicht immer das Gesamtdokument lesen muss, um Neuerungen zu erfahren.
 
+31.03.2026: Firmware 3.10.1, Applikation 3.10:
+
+- FIX: Kalibrierungsdaten, die vom HF-Sensor gelesen werden, liefern jetzt als Minimum den Wert 100. Der frühere Wert 0 (wenn der Sensor noch keine Stichprobe geliefert hatte) konnte zu Problemen führen, wenn man diese Werte einfach so übernommen hat.
+- FIX: Das Senden von aktueller Helligkeit über das eigene Helligkeits-KO wurde an das Sendeverhalten vom Sensormodul angepasst.
+
 13.02.2026: Firmware 3.10, Applikation 3.10:
 
 - NEU: Die LEDs für Präsenz und Bewegung werden jetzt vom StatusLED-Modul gesteuert. Die KO für LED-Präsenz und LED-Bewegung wurden entfernt. Vor einem Update müssen eventuelle GA von diesen beiden KO entfernt werden!
