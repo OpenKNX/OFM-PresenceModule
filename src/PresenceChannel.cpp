@@ -1312,8 +1312,10 @@ void PresenceChannel::onLock(bool iLockOn, PT_PMLock iLockOnSend, PT_PMLock iLoc
         {
             startOutput(iLockOnSend == PT_PMLock::EIN_gesendet);
             forceOutput(true);
-        }
-        pCurrentState |= STATE_LOCK;
+            pCurrentState |= STATE_LOCK_PREPARE;
+        } 
+        else
+            pCurrentState |= STATE_LOCK;
         pLockDelayTime = delayTimerInit();
     }
     else if (pCurrentState & STATE_LOCK)
@@ -1672,6 +1674,11 @@ void PresenceChannel::processOutput()
             uint8_t lValue = pCurrentValue & (PM_BIT_OUTPUT_SET | PM_BIT_OUTPUT_WRITTEN);
             if (lValue > 0 && lValue < (PM_BIT_OUTPUT_SET | PM_BIT_OUTPUT_WRITTEN))
                 lOutput = 3;
+        }
+        if (pCurrentState & STATE_LOCK_PREPARE)
+        {
+            pCurrentState &= ~STATE_LOCK_PREPARE;
+            pCurrentState |= STATE_LOCK;
         }
     }
     if (lOutput)
