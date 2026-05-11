@@ -224,21 +224,6 @@
                   <Enumeration Text="Funktionslos" Value="2" />
                 </TypeRestriction>
               </ParameterType>
-              <!-- <ParameterType Name="StatusLED">
-                <TypeRestriction Base="Value" SizeInBit="2">
-                  <Enumeration Text="nicht aktiv" Value="0" />
-                  <Enumeration Text="aktiv bei Bewegung" Value="1" />
-                  <Enumeration Text="aktiv bei Präsenz" Value="2" />
-                  <Enumeration Text="aktiv über externes Objekt" Value="3" />
-                </TypeRestriction>
-              </ParameterType> -->
-              <!-- <ParameterType Name="StatusLEDPIR">
-                <TypeRestriction Base="Value" SizeInBit="2">
-                  <Enumeration Text="nicht aktiv" Value="0" />
-                  <Enumeration Text="aktiv bei Bewegung" Value="1" />
-                  <Enumeration Text="aktiv über externes Objekt" Value="3" />
-                </TypeRestriction>
-              </ParameterType> -->
               <ParameterType Name="PresenceInputs">
                 <TypeRestriction Base="Value" SizeInBit="3">
                   <Enumeration Text="nicht aktiv" Value="0" />
@@ -627,20 +612,20 @@
               <ComObject Id="%AID%_O-%TT%00011" Name="PirSensitivity" Text="PIR-Empfindlichkeit" Number="29" FunctionText="PM: Wert/Status" ObjectSize="1 Byte" ReadFlag="Enabled" WriteFlag="Enabled" CommunicationFlag="Enabled" TransmitFlag="Disabled" UpdateFlag="Disabled" ReadOnInitFlag="Disabled" DatapointType="DPST-5-5" />
             </ComObjectTable>
             <ComObjectRefs>
-              <ComObjectRef Id="%AID%_O-%TT%00001_R-%TT%0000101" RefId="%AID%_O-%TT%00001" />
-              <ComObjectRef Id="%AID%_O-%TT%00002_R-%TT%0000201" RefId="%AID%_O-%TT%00002" />
-              <ComObjectRef Id="%AID%_O-%TT%00002_R-%TT%0000202" RefId="%AID%_O-%TT%00002" Text="Ausgang Bewegung" ObjectSize="1 Bit" DatapointType="DPST-1-1" />
+              <ComObjectRef op:Name="LuxOut" />
+              <ComObjectRef op:Name="MoveOut" op:Ref="1" Name="MoveOutMR24" />
+              <ComObjectRef op:Name="MoveOut" op:Ref="2" Name="MoveOutHLK" Text="Ausgang Bewegung" ObjectSize="1 Bit" DatapointType="DPST-1-1" />
               <!-- <ComObjectRef Id="%AID%_O-%TT%00003_R-%TT%0000301" RefId="%AID%_O-%TT%00003" />
               <ComObjectRef Id="%AID%_O-%TT%00004_R-%TT%0000401" RefId="%AID%_O-%TT%00004" /> -->
-              <ComObjectRef Id="%AID%_O-%TT%00005_R-%TT%0000501" RefId="%AID%_O-%TT%00005" />
-              <ComObjectRef Id="%AID%_O-%TT%00006_R-%TT%0000601" RefId="%AID%_O-%TT%00006" Text="Ausgang Bewegungsmoment" FunctionText="PM: Status" ObjectSize="1 Byte" DatapointType="DPST-5-1" />
-              <ComObjectRef Id="%AID%_O-%TT%00006_R-%TT%0000602" RefId="%AID%_O-%TT%00006" Text="Ausgang Entfernung" FunctionText="PM: Status" ObjectSize="4 Bytes" DatapointType="DPST-14-39" />
-              <ComObjectRef Id="%AID%_O-%TT%00007_R-%TT%0000701" RefId="%AID%_O-%TT%00007" />
-              <ComObjectRef Id="%AID%_O-%TT%00008_R-%TT%0000801" RefId="%AID%_O-%TT%00008" />
-              <ComObjectRef Id="%AID%_O-%TT%00008_R-%TT%0000802" RefId="%AID%_O-%TT%00008" Text="HF-Stichprobe nehmen" FunctionText="PM: Trigger" ObjectSize="1 Bit" ReadFlag="Disabled" WriteFlag="Enabled" CommunicationFlag="Enabled" TransmitFlag="Disabled" UpdateFlag="Disabled" ReadOnInitFlag="Disabled" DatapointType="DPST-1-1" />
-              <ComObjectRef Id="%AID%_O-%TT%00009_R-%TT%0000901" RefId="%AID%_O-%TT%00009" />
+              <ComObjectRef op:Name="PresenceOut" />
+              <ComObjectRef op:Name="MoveSpeedOut" Text="Ausgang Bewegungsmoment" FunctionText="PM: Status" ObjectSize="1 Byte" DatapointType="DPST-5-1" />
+              <ComObjectRef op:Name="MoveSpeedOut" op:Ref="2" Name="MoveDistance" Text="Ausgang Entfernung" FunctionText="PM: Status" ObjectSize="4 Bytes" DatapointType="DPST-14-39" />
+              <ComObjectRef op:Name="Scenario" />
+              <ComObjectRef op:Name="HfSensitivity" />
+              <ComObjectRef op:Name="HfSensitivity" op:Ref="2" Name="HfSample" Text="HF-Stichprobe nehmen" FunctionText="PM: Trigger" ObjectSize="1 Bit" ReadFlag="Disabled" WriteFlag="Enabled" CommunicationFlag="Enabled" TransmitFlag="Disabled" UpdateFlag="Disabled" ReadOnInitFlag="Disabled" DatapointType="DPST-1-1" />
+              <ComObjectRef op:Name="HfReset" />
               <!-- <ComObjectRef Id="%AID%_O-%TT%00010_R-%TT%0001001" RefId="%AID%_O-%TT%00010" /> -->
-              <ComObjectRef Id="%AID%_O-%TT%00011_R-%TT%0001101" RefId="%AID%_O-%TT%00011" />
+              <ComObjectRef op:Name="PirSensitivity" />
             </ComObjectRefs>
             <Script>
               <op:include href="PMmodul.script.js" type="script" />
@@ -650,15 +635,15 @@
             <Channel Id="%AID%_CH-%PREFIX%" Number="%PREFIX%" Name="Main" Text="Präsenzmelder" Icon="panorama-sphere-outline" HelpContext="PM-Dokumentation">
               <!-- <choose ParamRefId="%AID%_UP-%TT%00002_R-%TT%0000201"> -->
               <!-- <when test="1"> -->
-              <ParameterBlock Id="%AID%_PB-nnn" Name="Settings" Text="Allgemein" Icon="cog-outline" ShowInComObjectTree="true" HelpContext="PM-Dokumentation">
-                <ParameterSeparator Id="%AID%_PS-nnn" Text="Präsenzmelder" UIHint="Headline" />
-                <ParameterSeparator Id="%AID%_PS-nnn" Text="Version: %ModuleVersion%" />
-                <ParameterSeparator Id="%AID%_PS-nnn" Text="" UIHint="HorizontalRuler" />
-                <ParameterSeparator Id="%AID%_PS-nnn" Text="Kanalauswahl" UIHint="Headline" />
+              <ParameterBlock Text="Allgemein" Icon="cog-outline" ShowInComObjectTree="true" HelpContext="PM-Dokumentation">
+                <ParameterSeparator Text="Präsenzmelder" UIHint="Headline" />
+                <ParameterSeparator Text="Version: %ModuleVersion%" />
+                <ParameterSeparator Text="" UIHint="HorizontalRuler" />
+                <ParameterSeparator Text="Kanalauswahl" UIHint="Headline" />
                 <ParameterRefRef op:Name="VisibleChannels" HelpContext="BASE-Verfuegbare-Kanaele" IndentLevel="1" />
-                <ParameterSeparator Id="%AID%_PS-nnn" Text="" UIHint="HorizontalRuler" />
+                <ParameterSeparator Text="" UIHint="HorizontalRuler" />
 
-                <ParameterSeparator Id="%AID%_PS-nnn" Text="Präsenz-Hardware" UIHint="Headline" />
+                <ParameterSeparator Text="Präsenz-Hardware" UIHint="Headline" />
                 <!-- HF-Sensor -->
                 <ParameterRefRef op:Name="HfPresence" IndentLevel="1" HelpContext="%DOC%" />
                 <choose op:Name="HfPresence">
@@ -669,10 +654,10 @@
                   </when>
                   <when op:test="HLK2420">
                     <!-- HLK-LD2420 -->
-                    <ParameterSeparator Id="%AID%_PS-nnn" Text="Einstellungen bitte auf der Seite HF-Sensor vornehmen" Cell="1,2" />
+                    <ParameterSeparator Text="Einstellungen bitte auf der Seite HF-Sensor vornehmen" Cell="1,2" />
                   </when>
                 </choose>
-                <ParameterSeparator Id="%AID%_PS-nnn" Text="" UIHint="HorizontalRuler" />
+                <ParameterSeparator Text="" UIHint="HorizontalRuler" />
                 <!-- PIR-Sensor -->
                 <ParameterRefRef op:Name="PirPresence" IndentLevel="1" HelpContext="%DOC%" />
                 <choose op:Name="PirPresence" >
@@ -685,22 +670,22 @@
                   <when op:test="None">
                     <choose op:Name="PirPresence" >
                       <when op:test="!=None">
-                        <ParameterSeparator Id="%AID%_PS-nnn" Text="" UIHint="HorizontalRuler" />
+                        <ParameterSeparator Text="" UIHint="HorizontalRuler" />
                         <ParameterRefRef op:Name="SendRAW" IndentLevel="1" HelpContext="%DOC%" />
-                        <ParameterSeparator Id="%AID%_PS-nnn" Text="Auch wenn die Rohdaten nicht auf den Bus gesendet werden, können sie intern für PM-Kanäle genutzt werden." />
-                        <ParameterSeparator Id="%AID%_PS-nnn" Text="In der gesamten Applikation wird vom Präsenzmelder gesprochen. Ob sich die Applikation als Präsenz- oder als Bewegungsmelder verhält, wird von der verwendeten Hardware (Präsenz-Sensor) bestimmt." />
+                        <ParameterSeparator Text="Auch wenn die Rohdaten nicht auf den Bus gesendet werden, können sie intern für PM-Kanäle genutzt werden." />
+                        <ParameterSeparator Text="In der gesamten Applikation wird vom Präsenzmelder gesprochen. Ob sich die Applikation als Präsenz- oder als Bewegungsmelder verhält, wird von der verwendeten Hardware (Präsenz-Sensor) bestimmt." />
                       </when>
                     </choose>
                   </when>
                   <when op:test="!=None">
-                    <ParameterSeparator Id="%AID%_PS-nnn" Text="" UIHint="HorizontalRuler" />
+                    <ParameterSeparator Text="" UIHint="HorizontalRuler" />
                     <ParameterRefRef op:Name="SendRAW" IndentLevel="1" HelpContext="%DOC%" />
-                    <ParameterSeparator Id="%AID%_PS-nnn" Text="Auch wenn die Rohdaten nicht auf den Bus gesendet werden, können sie intern für PM-Kanäle genutzt werden." />
-                    <ParameterSeparator Id="%AID%_PS-nnn" Text="In der gesamten Applikation wird vom Präsenzmelder gesprochen. Ob sich die Applikation als Präsenz- oder als Bewegungsmelder verhält, wird von der verwendeten Hardware (Präsenz-Sensor) bestimmt." />
+                    <ParameterSeparator Text="Auch wenn die Rohdaten nicht auf den Bus gesendet werden, können sie intern für PM-Kanäle genutzt werden." />
+                    <ParameterSeparator Text="In der gesamten Applikation wird vom Präsenzmelder gesprochen. Ob sich die Applikation als Präsenz- oder als Bewegungsmelder verhält, wird von der verwendeten Hardware (Präsenz-Sensor) bestimmt." />
                   </when>
                 </choose>
-                <ParameterSeparator Id="%AID%_PS-nnn" Text="" UIHint="HorizontalRuler" />
-                <ParameterSeparator Id="%AID%_PS-nnn" Text="Helligkeit" UIHint="Headline" />
+                <ParameterSeparator Text="" UIHint="HorizontalRuler" />
+                <ParameterSeparator Text="Helligkeit" UIHint="Headline" />
                 <!-- Lux-Sensor -->
                 <ParameterRefRef op:Name="HWLux" IndentLevel="1" HelpContext="%DOC%" />
                 <choose op:Name="HWLux">
@@ -717,17 +702,17 @@
                     </choose>
                     <!-- Lux send cycle -->
                     <!-- Delay pattern -->
-                    <ParameterBlock Id="%AID%_PB-nnn" Name="LuxSendCycle" Inline="true" Layout="Grid" HelpContext="PM-Helligkeitswert-zyklisch-senden">
+                    <ParameterBlock Inline="true" Layout="Grid" HelpContext="PM-Helligkeitswert-zyklisch-senden">
                       <Rows>
-                        <Row Id="%AID%_PB-nnn_R-1" Name="Row1" />
+                        <Row Name="Row1" />
                       </Rows>
                       <Columns>
-                        <Column Id="%AID%_PB-nnn_C-1" Name="Col1" Width="3%" />
-                        <Column Id="%AID%_PB-nnn_C-2" Name="Col2" Width="42%" />
-                        <Column Id="%AID%_PB-nnn_C-3" Name="Col3" Width="15%" />
-                        <Column Id="%AID%_PB-nnn_C-4" Name="Col4" Width="20%" />
+                        <Column Width="3%" />
+                        <Column Width="42%" />
+                        <Column Width="15%" />
+                        <Column Width="20%" />
                       </Columns>
-                      <ParameterSeparator Id="%AID%_PS-nnn" Text="Helligkeitswert zyklisch senden alle" Cell="1,2" />
+                      <ParameterSeparator Text="Helligkeitswert zyklisch senden alle" Cell="1,2" />
                       <ParameterRefRef op:Name="LuxSendCycleDelayTime" Cell="1,3" HelpContext="PM-Helligkeitswert-zyklisch-senden" />
                       <ParameterRefRef op:Name="LuxSendCycleDelayBase" Cell="1,4" HelpContext="PM-Helligkeitswert-zyklisch-senden" />
                     </ParameterBlock>
@@ -742,40 +727,41 @@
                         <ComObjectRefRef RefId="%AID%_O-%TT%00001_R-%TT%0000101" />
                       </when>
                     </choose>
-                    <ParameterSeparator Id="%AID%_PS-nnn" Text="Es wird keine Helligkeit auf den Bus gesendet, wenn beide Sendewerte oben auf 0 stehen." />
+                    <ParameterSeparator Text="Es wird keine Helligkeit auf den Bus gesendet, wenn beide Sendewerte oben auf 0 stehen." />
                   </when>
                 </choose>
-                <ParameterSeparator Id="%AID%_PS-nnn" Text="" UIHint="HorizontalRuler" />
+                <ParameterSeparator Text="" UIHint="HorizontalRuler" />
                 <!-- LED -->
-                <ParameterSeparator Id="%AID%_PS-nnn" Text="Präsenz-Indikator" UIHint="Headline" />
-                <ParameterSeparator Id="%AID%_PS-nnn" Text="Die Einstellungen für die Präsenz- und Bewegungs-LED können jetzt im StatusLED-Modul vorgenommen werden." />
+                <ParameterSeparator Text="Präsenz-Indikator" UIHint="Headline" />
+                <ParameterSeparator Text="Die Einstellungen für die Präsenz- und Bewegungs-LED können jetzt im StatusLED-Modul vorgenommen werden." />
 
                 <!-- Rohdaten senden -->
                 <choose op:Name="SendRAW">
                   <when test="!=0">
                     <choose op:Name="HfPresence">
                       <when op:test="MR24xxB1 HLK2420">
-                        <ComObjectRefRef RefId="%AID%_O-%TT%00005_R-%TT%0000501" />
-                        <ComObjectRefRef RefId="%AID%_O-%TT%00009_R-%TT%0000901" />
+                        <ComObjectRefRef op:Name="PresenceOut" />
+                        <ComObjectRefRef op:Name="HfReset" />
                       </when>
                       <when op:test="MR24xxB1">
-                        <ComObjectRefRef RefId="%AID%_O-%TT%00002_R-%TT%0000201" />
-                        <ComObjectRefRef RefId="%AID%_O-%TT%00006_R-%TT%0000601" />
-                        <ComObjectRefRef RefId="%AID%_O-%TT%00007_R-%TT%0000701" />
-                        <ComObjectRefRef RefId="%AID%_O-%TT%00008_R-%TT%0000801" />
+                        <ComObjectRefRef op:Name="MoveOutMR24" />
+                        <ComObjectRefRef op:Name="MoveSpeedOut" />
+                        <ComObjectRefRef op:Name="Scenario" />
+                        <ComObjectRefRef op:Name="HfSensitivity" />
+                        <ComObjectRefRef op:Name="HfSample" />
                       </when>
                       <when op:test="HLK2420">
-                        <ComObjectRefRef RefId="%AID%_O-%TT%00002_R-%TT%0000202" />
-                        <ComObjectRefRef RefId="%AID%_O-%TT%00006_R-%TT%0000602" />
-                        <ComObjectRefRef RefId="%AID%_O-%TT%00008_R-%TT%0000802" />
+                        <ComObjectRefRef op:Name="MoveOutHLK" />
+                        <ComObjectRefRef op:Name="MoveDistance" />
+                        <ComObjectRefRef op:Name="HfSample" />
                       </when>
                     </choose>
                     <choose op:Name="PirPresence">
                       <when op:test="Digital Analog">
-                        <ComObjectRefRef RefId="%AID%_O-%TT%00002_R-%TT%0000202" />
+                        <ComObjectRefRef op:Name="MoveOutHLK" />
                       </when>
                       <when op:test="Analog">
-                        <ComObjectRefRef RefId="%AID%_O-%TT%00011_R-%TT%0001101" />
+                        <ComObjectRefRef op:Name="PirSensitivity" />
                       </when>
                     </choose>
                   </when>
@@ -788,250 +774,250 @@
               <!-- **************************************************** -->
               <choose op:Name="HfPresence">
                 <when op:test="HLK2420">
-                  <ParameterBlock Id="%AID%_PB-nnn" Name="ExtendedParameters" Text="HF-Sensor" Icon="radar" HelpContext="PM-Informationen-zum-Sensor">
+                  <ParameterBlock Text="HF-Sensor" Icon="radar" HelpContext="PM-Informationen-zum-Sensor">
                     <!-- Current view setting -->
-                    <ParameterBlock Id="%AID%_PB-nnn" Inline="true" Layout="Grid">
+                    <ParameterBlock Inline="true" Layout="Grid">
                       <Rows>
-                        <Row Id="%AID%_PB-nnn_R-1" />
+                        <Row />
                       </Rows>
                       <Columns>
-                        <Column Id="%AID%_PB-nnn_C-1" Width="90%" />
-                        <Column Id="%AID%_PB-nnn_C-2" Width="13%" />
-                        <Column Id="%AID%_PB-nnn_C-3" Width="30%" />
+                        <Column Width="90%" />
+                        <Column Width="13%" />
+                        <Column Width="30%" />
                       </Columns>
-                      <ParameterSeparator Id="%AID%_PS-nnn" Text="HF-Sensor Konfiguration" Cell="1,1" UIHint="Headline" />
-                      <ParameterSeparator Id="%AID%_PS-nnn" Text="Anzeige" Cell="1,2" />
+                      <ParameterSeparator Text="HF-Sensor Konfiguration" Cell="1,1" UIHint="Headline" />
+                      <ParameterSeparator Text="Anzeige" Cell="1,2" />
                       <ParameterRefRef op:Name="HlkView" Cell="1,3" HelpContext="%DOC%" />
                     </ParameterBlock>
 
-                    <ParameterSeparator Id="%AID%_PS-nnn" Text="In diesem Bereich können detaillierte Einstellungen für den HF-Sensor vorgenommen und direkt ausprobiert werden. Um aber die Eingaben dauerhaft im Sensor zu speichern, muss der Sensor über die ETS programmiert werden." />
+                    <ParameterSeparator Text="In diesem Bereich können detaillierte Einstellungen für den HF-Sensor vorgenommen und direkt ausprobiert werden. Um aber die Eingaben dauerhaft im Sensor zu speichern, muss der Sensor über die ETS programmiert werden." />
 
                     <!-- Download app warning -->
                     <ParameterRefRef op:Name="HlkSuppressWarning" />
                     <choose op:Name="HlkSuppressWarning">
                       <when test="0">
-                        <ParameterSeparator Id="%AID%_PS-nnn" Text="" UIHint="HorizontalRuler" />
-                        <ParameterSeparator Id="%AID%_PS-nnn" Text="Falls diese Applikation noch nicht mit der ETS auf das Gerät programmiert wurde, kann die Seite nicht funktionieren. Bitte zuerst das Gerät mit der ETS programmieren, danach eine andere Seite wählen und anschließend zu dieser Seite zurückkehren!" UIHint="Information" />
-                        <ParameterBlock Id="%AID%_PB-nnn" Inline="true" Layout="Grid">
+                        <ParameterSeparator Text="" UIHint="HorizontalRuler" />
+                        <ParameterSeparator Text="Falls diese Applikation noch nicht mit der ETS auf das Gerät programmiert wurde, kann die Seite nicht funktionieren. Bitte zuerst das Gerät mit der ETS programmieren, danach eine andere Seite wählen und anschließend zu dieser Seite zurückkehren!" UIHint="Information" />
+                        <ParameterBlock Inline="true" Layout="Grid">
                           <Rows>
-                            <Row Id="%AID%_PB-nnn_R-1" />
+                            <Row />
                           </Rows>
                           <Columns>
-                            <Column Id="%AID%_PB-nnn_C-1" Width="55%" />
-                            <Column Id="%AID%_PB-nnn_C-2" Width="47%" />
+                            <Column Width="55%" />
+                            <Column Width="47%" />
                           </Columns>
-                          <Button Id="%AID%_B-%TT%00009" Text="Obige Information nicht mehr anzeigen" Cell="1,2" EventHandler="PM_hideWarning" />
+                          <Button Text="Obige Information nicht mehr anzeigen" Cell="1,2" EventHandler="PM_hideWarning" />
                         </ParameterBlock>
-                        <ParameterSeparator Id="%AID%_PS-nnn" Text="" UIHint="HorizontalRuler" />
+                        <ParameterSeparator Text="" UIHint="HorizontalRuler" />
                       </when>
                     </choose>
 
                     <!-- Delay, min and max Distance -->
-                    <ParameterBlock Id="%AID%_PB-nnn" Inline="true" Layout="Grid">
+                    <ParameterBlock Inline="true" Layout="Grid">
                       <Rows>
-                        <Row Id="%AID%_PB-nnn_R-1" />
+                        <Row />
                       </Rows>
                       <Columns>
-                        <Column Id="%AID%_PB-nnn_C-1" Width="%PM_ColWidthHlkButtonDescription%" />
-                        <Column Id="%AID%_PB-nnn_C-2" Width="51%" />
+                        <Column Width="%PM_ColWidthHlkButtonDescription%" />
+                        <Column Width="51%" />
                       </Columns>
-                      <ParameterSeparator Id="%AID%_PS-nnn" Text="Testen" Cell="1,1" />
-                      <Button Id="%AID%_B-%TT%00019" Text="Die folgenden Einstellungen ausprobieren" Cell="1,2" EventHandler="PM_setCalibrationDataSet" EventHandlerOnline="ConnectionOriented" />
+                      <ParameterSeparator Text="Testen" Cell="1,1" />
+                      <Button Text="Die folgenden Einstellungen ausprobieren" Cell="1,2" EventHandler="PM_setCalibrationDataSet" EventHandlerOnline="ConnectionOriented" />
                     </ParameterBlock>
 
-                    <ParameterBlock Id="%AID%_PB-nnn" Inline="true" Layout="Grid">
+                    <ParameterBlock Inline="true" Layout="Grid">
                       <Rows>
-                        <Row Id="%AID%_PB-nnn_R-1" />
-                        <Row Id="%AID%_PB-nnn_R-2" />
+                        <Row />
+                        <Row />
                       </Rows>
                       <Columns>
-                        <Column Id="%AID%_PB-nnn_C-1" Width="%PM_ColWidthHlkDescription%" />
-                        <Column Id="%AID%_PB-nnn_C-2" Width="22%" />
-                        <Column Id="%AID%_PB-nnn_C-3" Width="7%" />
-                        <Column Id="%AID%_PB-nnn_C-4" Width="22%" />
+                        <Column Width="%PM_ColWidthHlkDescription%" />
+                        <Column Width="22%" />
+                        <Column Width="7%" />
+                        <Column Width="22%" />
                       </Columns>
-                      <ParameterSeparator Id="%AID%_PS-nnn" Text="Haltedauer" Cell="1,1" />
+                      <ParameterSeparator Text="Haltedauer" Cell="1,1" />
                       <ParameterRefRef op:Name="HfDelayTime" Cell="1,2" HelpContext="%DOC%" />
-                      <ParameterSeparator Id="%AID%_PS-nnn" Text="Entfernung" Cell="2,1" />
+                      <ParameterSeparator Text="Entfernung" Cell="2,1" />
                       <ParameterRefRef op:Name="HfRangeGateMin" Cell="2,2" HelpContext="PM-Entfernung" />
-                      <ParameterSeparator Id="%AID%_PS-nnn" Text="  bis" Cell="2,3" />
+                      <ParameterSeparator Text="  bis" Cell="2,3" />
                       <ParameterRefRef op:Name="HfRangeGateMax" Cell="2,4" HelpContext="PM-Entfernung" />
                     </ParameterBlock>
 
                     <!-- Editor section -->
                     <!-- Headline -->
-                    <ParameterBlock Id="%AID%_PB-nnn" Inline="true" Layout="Grid">
+                    <ParameterBlock Inline="true" Layout="Grid">
                       <Rows>
-                        <Row Id="%AID%_PB-nnn_R-1" />
+                        <Row />
                       </Rows>
                       <Columns>
-                        <Column Id="%AID%_PB-nnn_C-1" Width="%PM_ColWidthHlkHeaderDescription%" />
-                        <Column Id="%AID%_PB-nnn_C-2" Width="%PM_ColWidthHlkHeaderCellFirst%" />
-                        <Column Id="%AID%_PB-nnn_C-3" Width="%PM_ColWidthHlkHeaderSpace%" />
-                        <Column Id="%AID%_PB-nnn_C-4" Width="%PM_ColWidthHlkHeaderCell%" />
-                        <Column Id="%AID%_PB-nnn_C-5" Width="%PM_ColWidthHlkHeaderSpace%" />
-                        <Column Id="%AID%_PB-nnn_C-6" Width="%PM_ColWidthHlkHeaderCell%" />
-                        <Column Id="%AID%_PB-nnn_C-7" Width="%PM_ColWidthHlkHeaderSpace%" />
-                        <Column Id="%AID%_PB-nnn_C-8" Width="%PM_ColWidthHlkHeaderCell%" />
-                        <Column Id="%AID%_PB-nnn_C-9" Width="%PM_ColWidthHlkHeaderSpace%" />
-                        <Column Id="%AID%_PB-nnn_C-10" Width="%PM_ColWidthHlkHeaderCell%" />
-                        <Column Id="%AID%_PB-nnn_C-11" Width="%PM_ColWidthHlkHeaderSpace%" />
-                        <Column Id="%AID%_PB-nnn_C-12" Width="%PM_ColWidthHlkHeaderCell%" />
-                        <Column Id="%AID%_PB-nnn_C-13" Width="%PM_ColWidthHlkHeaderSpace%" />
-                        <Column Id="%AID%_PB-nnn_C-14" Width="%PM_ColWidthHlkHeaderCell%" />
-                        <Column Id="%AID%_PB-nnn_C-15" Width="%PM_ColWidthHlkHeaderSpace%" />
-                        <Column Id="%AID%_PB-nnn_C-16" Width="%PM_ColWidthHlkHeaderCell%" />
-                        <Column Id="%AID%_PB-nnn_C-17" Width="%PM_ColWidthHlkHeaderSpace%" />
-                        <Column Id="%AID%_PB-nnn_C-18" Width="%PM_ColWidthHlkHeaderCell%" />
-                        <Column Id="%AID%_PB-nnn_C-19" Width="%PM_ColWidthHlkHeaderSpace%" />
-                        <Column Id="%AID%_PB-nnn_C-20" Width="%PM_ColWidthHlkHeaderCell%" />
-                        <Column Id="%AID%_PB-nnn_C-21" Width="%PM_ColWidthHlkHeaderSpace%" />
-                        <Column Id="%AID%_PB-nnn_C-22" Width="%PM_ColWidthHlkHeaderCell%" />
-                        <Column Id="%AID%_PB-nnn_C-23" Width="%PM_ColWidthHlkHeaderSpace%" />
-                        <Column Id="%AID%_PB-nnn_C-24" Width="%PM_ColWidthHlkHeaderCell%" />
-                        <Column Id="%AID%_PB-nnn_C-25" Width="%PM_ColWidthHlkHeaderSpace%" />
-                        <Column Id="%AID%_PB-nnn_C-26" Width="%PM_ColWidthHlkHeaderCell%" />
-                        <Column Id="%AID%_PB-nnn_C-27" Width="%PM_ColWidthHlkHeaderSpace%" />
-                        <Column Id="%AID%_PB-nnn_C-28" Width="%PM_ColWidthHlkHeaderCell%" />
-                        <Column Id="%AID%_PB-nnn_C-29" Width="%PM_ColWidthHlkHeaderSpace%" />
-                        <Column Id="%AID%_PB-nnn_C-30" Width="%PM_ColWidthHlkHeaderCell%" />
-                        <Column Id="%AID%_PB-nnn_C-31" Width="%PM_ColWidthHlkHeaderSpace%" />
-                        <Column Id="%AID%_PB-nnn_C-32" Width="%PM_ColWidthHlkHeaderCell%" />
-                        <Column Id="%AID%_PB-nnn_C-33" Width="%PM_ColWidthHlkHeaderSpace%" />
-                        <Column Id="%AID%_PB-nnn_C-34" Width="%PM_ColWidthHlkHeaderCellLast%" />
+                        <Column Width="%PM_ColWidthHlkHeaderDescription%" />
+                        <Column Width="%PM_ColWidthHlkHeaderCellFirst%" />
+                        <Column Width="%PM_ColWidthHlkHeaderSpace%" />
+                        <Column Width="%PM_ColWidthHlkHeaderCell%" />
+                        <Column Width="%PM_ColWidthHlkHeaderSpace%" />
+                        <Column Width="%PM_ColWidthHlkHeaderCell%" />
+                        <Column Width="%PM_ColWidthHlkHeaderSpace%" />
+                        <Column Width="%PM_ColWidthHlkHeaderCell%" />
+                        <Column Width="%PM_ColWidthHlkHeaderSpace%" />
+                        <Column Width="%PM_ColWidthHlkHeaderCell%" />
+                        <Column Width="%PM_ColWidthHlkHeaderSpace%" />
+                        <Column Width="%PM_ColWidthHlkHeaderCell%" />
+                        <Column Width="%PM_ColWidthHlkHeaderSpace%" />
+                        <Column Width="%PM_ColWidthHlkHeaderCell%" />
+                        <Column Width="%PM_ColWidthHlkHeaderSpace%" />
+                        <Column Width="%PM_ColWidthHlkHeaderCell%" />
+                        <Column Width="%PM_ColWidthHlkHeaderSpace%" />
+                        <Column Width="%PM_ColWidthHlkHeaderCell%" />
+                        <Column Width="%PM_ColWidthHlkHeaderSpace%" />
+                        <Column Width="%PM_ColWidthHlkHeaderCell%" />
+                        <Column Width="%PM_ColWidthHlkHeaderSpace%" />
+                        <Column Width="%PM_ColWidthHlkHeaderCell%" />
+                        <Column Width="%PM_ColWidthHlkHeaderSpace%" />
+                        <Column Width="%PM_ColWidthHlkHeaderCell%" />
+                        <Column Width="%PM_ColWidthHlkHeaderSpace%" />
+                        <Column Width="%PM_ColWidthHlkHeaderCell%" />
+                        <Column Width="%PM_ColWidthHlkHeaderSpace%" />
+                        <Column Width="%PM_ColWidthHlkHeaderCell%" />
+                        <Column Width="%PM_ColWidthHlkHeaderSpace%" />
+                        <Column Width="%PM_ColWidthHlkHeaderCell%" />
+                        <Column Width="%PM_ColWidthHlkHeaderSpace%" />
+                        <Column Width="%PM_ColWidthHlkHeaderCell%" />
+                        <Column Width="%PM_ColWidthHlkHeaderSpace%" />
+                        <Column Width="%PM_ColWidthHlkHeaderCellLast%" />
                       </Columns>
-                      <ParameterSeparator Id="%AID%_PS-nnn" Text="Schwellwerte (m)" Cell="1,1" UIHint="Headline" />
+                      <ParameterSeparator Text="Schwellwerte (m)" Cell="1,1" UIHint="Headline" />
                       <choose op:Name="HfRangeGateMin">
                         <when test="0">
                           <!-- Range 0 -->
-                          <ParameterSeparator Id="%AID%_PS-nnn" Text="0" Cell="1,2" UIHint="Headline" />
+                          <ParameterSeparator Text="0" Cell="1,2" UIHint="Headline" />
                           <ParameterRefRef op:Name="HlkActiveCol00" Cell="1,3" HelpContext="PM-Spalte-aktiv" />
-                          <ParameterSeparator Id="%AID%_PS-nnn" Text="0.35" Cell="1,4" UIHint="Headline" />
+                          <ParameterSeparator Text="0.35" Cell="1,4" UIHint="Headline" />
                         </when>
                         <when test="&lt;=1">
-                          <ParameterSeparator Id="%AID%_PS-nnn" Text="0.35" Cell="1,4" UIHint="Headline" />
+                          <ParameterSeparator Text="0.35" Cell="1,4" UIHint="Headline" />
                           <ParameterRefRef op:Name="HlkActiveCol01" Cell="1,5" HelpContext="PM-Spalte-aktiv" />
-                          <ParameterSeparator Id="%AID%_PS-nnn" Text="1.05" Cell="1,6" UIHint="Headline" />
+                          <ParameterSeparator Text="1.05" Cell="1,6" UIHint="Headline" />
                         </when>
                         <when test="&lt;=2">
                           <choose op:Name="HfRangeGateMax">
                             <when test="&gt;1">
-                              <ParameterSeparator Id="%AID%_PS-nnn" Text="1.05" Cell="1,6" UIHint="Headline" />
+                              <ParameterSeparator Text="1.05" Cell="1,6" UIHint="Headline" />
                               <ParameterRefRef op:Name="HlkActiveCol02" Cell="1,7" HelpContext="PM-Spalte-aktiv" />
-                              <ParameterSeparator Id="%AID%_PS-nnn" Text="1.75" Cell="1,8" UIHint="Headline" />
+                              <ParameterSeparator Text="1.75" Cell="1,8" UIHint="Headline" />
                             </when>
                           </choose>
                         </when>
                         <when test="&lt;=3">
                           <choose op:Name="HfRangeGateMax">
                             <when test="&gt;2">
-                              <ParameterSeparator Id="%AID%_PS-nnn" Text="1.75" Cell="1,8" UIHint="Headline" />
+                              <ParameterSeparator Text="1.75" Cell="1,8" UIHint="Headline" />
                               <ParameterRefRef op:Name="HlkActiveCol03" Cell="1,9" HelpContext="PM-Spalte-aktiv" />
-                              <ParameterSeparator Id="%AID%_PS-nnn" Text="2.45" Cell="1,10" UIHint="Headline" />
+                              <ParameterSeparator Text="2.45" Cell="1,10" UIHint="Headline" />
                             </when>
                           </choose>
                         </when>
                         <when test="&lt;=4">
                           <choose op:Name="HfRangeGateMax">
                             <when test="&gt;3">
-                              <ParameterSeparator Id="%AID%_PS-nnn" Text="2.45" Cell="1,10" UIHint="Headline" />
+                              <ParameterSeparator Text="2.45" Cell="1,10" UIHint="Headline" />
                               <ParameterRefRef op:Name="HlkActiveCol04" Cell="1,11" HelpContext="PM-Spalte-aktiv" />
-                              <ParameterSeparator Id="%AID%_PS-nnn" Text="3.15" Cell="1,12" UIHint="Headline" />
+                              <ParameterSeparator Text="3.15" Cell="1,12" UIHint="Headline" />
                             </when>
                           </choose>
                         </when>
                         <when test="&lt;=5">
                           <choose op:Name="HfRangeGateMax">
                             <when test="&gt;4">
-                              <ParameterSeparator Id="%AID%_PS-nnn" Text="3.15" Cell="1,12" UIHint="Headline" />
+                              <ParameterSeparator Text="3.15" Cell="1,12" UIHint="Headline" />
                               <ParameterRefRef op:Name="HlkActiveCol05" Cell="1,13" HelpContext="PM-Spalte-aktiv" />
-                              <ParameterSeparator Id="%AID%_PS-nnn" Text="3.85" Cell="1,14" UIHint="Headline" />
+                              <ParameterSeparator Text="3.85" Cell="1,14" UIHint="Headline" />
                             </when>
                           </choose>
                         </when>
                         <when test="&lt;=6">
                           <choose op:Name="HfRangeGateMax">
                             <when test="&gt;5">
-                              <ParameterSeparator Id="%AID%_PS-nnn" Text="3.85" Cell="1,14" UIHint="Headline" />
+                              <ParameterSeparator Text="3.85" Cell="1,14" UIHint="Headline" />
                               <ParameterRefRef op:Name="HlkActiveCol06" Cell="1,15" HelpContext="PM-Spalte-aktiv" />
-                              <ParameterSeparator Id="%AID%_PS-nnn" Text="4.55" Cell="1,16" UIHint="Headline" />
+                              <ParameterSeparator Text="4.55" Cell="1,16" UIHint="Headline" />
                             </when>
                           </choose>
                         </when>
                         <when test="&lt;=7">
                           <choose op:Name="HfRangeGateMax">
                             <when test="&gt;6">
-                              <ParameterSeparator Id="%AID%_PS-nnn" Text="4.55" Cell="1,16" UIHint="Headline" />
+                              <ParameterSeparator Text="4.55" Cell="1,16" UIHint="Headline" />
                               <ParameterRefRef op:Name="HlkActiveCol07" Cell="1,17" HelpContext="PM-Spalte-aktiv" />
-                              <ParameterSeparator Id="%AID%_PS-nnn" Text="5.25" Cell="1,18" UIHint="Headline" />
+                              <ParameterSeparator Text="5.25" Cell="1,18" UIHint="Headline" />
                             </when>
                           </choose>
                         </when>
                         <when test="&lt;=8">
                           <choose op:Name="HfRangeGateMax">
                             <when test="&gt;7">
-                              <ParameterSeparator Id="%AID%_PS-nnn" Text="5.25" Cell="1,18" UIHint="Headline" />
+                              <ParameterSeparator Text="5.25" Cell="1,18" UIHint="Headline" />
                               <ParameterRefRef op:Name="HlkActiveCol08" Cell="1,19" HelpContext="PM-Spalte-aktiv" />
-                              <ParameterSeparator Id="%AID%_PS-nnn" Text="5.95" Cell="1,20" UIHint="Headline" />
+                              <ParameterSeparator Text="5.95" Cell="1,20" UIHint="Headline" />
                             </when>
                           </choose>
                         </when>
                         <when test="&lt;=9">
                           <choose op:Name="HfRangeGateMax">
                             <when test="&gt;8">
-                              <ParameterSeparator Id="%AID%_PS-nnn" Text="5.95" Cell="1,20" UIHint="Headline" />
+                              <ParameterSeparator Text="5.95" Cell="1,20" UIHint="Headline" />
                               <ParameterRefRef op:Name="HlkActiveCol09" Cell="1,21" HelpContext="PM-Spalte-aktiv" />
-                              <ParameterSeparator Id="%AID%_PS-nnn" Text="6.65" Cell="1,22" UIHint="Headline" />
+                              <ParameterSeparator Text="6.65" Cell="1,22" UIHint="Headline" />
                             </when>
                           </choose>
                         </when>
                         <when test="&lt;=10">
                           <choose op:Name="HfRangeGateMax">
                             <when test="&gt;9">
-                              <ParameterSeparator Id="%AID%_PS-nnn" Text="6.65" Cell="1,22" UIHint="Headline" />
+                              <ParameterSeparator Text="6.65" Cell="1,22" UIHint="Headline" />
                               <ParameterRefRef op:Name="HlkActiveCol10" Cell="1,23" HelpContext="PM-Spalte-aktiv" />
-                              <ParameterSeparator Id="%AID%_PS-nnn" Text="7.35" Cell="1,24" UIHint="Headline" />
+                              <ParameterSeparator Text="7.35" Cell="1,24" UIHint="Headline" />
                             </when>
                           </choose>
                         </when>
                         <when test="&lt;=11">
                           <choose op:Name="HfRangeGateMax">
                             <when test="&gt;10">
-                              <ParameterSeparator Id="%AID%_PS-nnn" Text="7.35" Cell="1,24" UIHint="Headline" />
+                              <ParameterSeparator Text="7.35" Cell="1,24" UIHint="Headline" />
                               <ParameterRefRef op:Name="HlkActiveCol11" Cell="1,25" HelpContext="PM-Spalte-aktiv" />
-                              <ParameterSeparator Id="%AID%_PS-nnn" Text="8.05" Cell="1,26" UIHint="Headline" />
+                              <ParameterSeparator Text="8.05" Cell="1,26" UIHint="Headline" />
                             </when>
                           </choose>
                         </when>
                         <when test="&lt;=12">
                           <choose op:Name="HfRangeGateMax">
                             <when test="&gt;11">
-                              <ParameterSeparator Id="%AID%_PS-nnn" Text="8.05" Cell="1,26" UIHint="Headline" />
+                              <ParameterSeparator Text="8.05" Cell="1,26" UIHint="Headline" />
                               <ParameterRefRef op:Name="HlkActiveCol12" Cell="1,27" HelpContext="PM-Spalte-aktiv" />
-                              <ParameterSeparator Id="%AID%_PS-nnn" Text="8.75" Cell="1,28" UIHint="Headline" />
+                              <ParameterSeparator Text="8.75" Cell="1,28" UIHint="Headline" />
                             </when>
                           </choose>
                         </when>
                         <when test="&lt;=13">
                           <choose op:Name="HfRangeGateMax">
                             <when test="&gt;12">
-                              <ParameterSeparator Id="%AID%_PS-nnn" Text="8.75" Cell="1,28" UIHint="Headline" />
+                              <ParameterSeparator Text="8.75" Cell="1,28" UIHint="Headline" />
                               <ParameterRefRef op:Name="HlkActiveCol13" Cell="1,29" HelpContext="PM-Spalte-aktiv" />
-                              <ParameterSeparator Id="%AID%_PS-nnn" Text="9.45" Cell="1,30" UIHint="Headline" />
+                              <ParameterSeparator Text="9.45" Cell="1,30" UIHint="Headline" />
                             </when>
                           </choose>
                         </when>
                       </choose>
                       <choose op:Name="HfRangeGateMax">
                         <when test="&gt;13">
-                          <ParameterSeparator Id="%AID%_PS-nnn" Text="9.45" Cell="1,30" UIHint="Headline" />
+                          <ParameterSeparator Text="9.45" Cell="1,30" UIHint="Headline" />
                           <ParameterRefRef op:Name="HlkActiveCol14" Cell="1,31" HelpContext="PM-Spalte-aktiv" />
-                          <ParameterSeparator Id="%AID%_PS-nnn" Text="10.15" Cell="1,32" UIHint="Headline" />
+                          <ParameterSeparator Text="10.15" Cell="1,32" UIHint="Headline" />
                         </when>
                         <when test="&gt;14">
-                          <ParameterSeparator Id="%AID%_PS-nnn" Text="10.15" Cell="1,32" UIHint="Headline" />
+                          <ParameterSeparator Text="10.15" Cell="1,32" UIHint="Headline" />
                           <ParameterRefRef op:Name="HlkActiveCol15" Cell="1,33" HelpContext="PM-Spalte-aktiv" />
-                          <ParameterSeparator Id="%AID%_PS-nnn" Text="10.85" Cell="1,34" UIHint="Headline" />
+                          <ParameterSeparator Text="10.85" Cell="1,34" UIHint="Headline" />
                         </when>
                       </choose>
                     </ParameterBlock>
@@ -1042,33 +1028,33 @@
                     <choose op:Name="HlkView" >
                       <when op:test="WithHelpers All">
                         <!-- Wide horizontal ruler -->
-                        <ParameterBlock Id="%AID%_PB-nnn" Inline="true" Layout="Grid">
+                        <ParameterBlock Inline="true" Layout="Grid">
                           <Rows>
-                            <Row Id="%AID%_PB-nnn_R-1" />
+                            <Row />
                           </Rows>
                           <Columns>
-                            <Column Id="%AID%_PB-nnn_C-1" Width="%PM_ColWidthHlkDescription%" />
-                            <Column Id="%AID%_PB-nnn_C-2" Width="96%" />
-                            <Column Id="%AID%_PB-nnn_C-3" Width="96%" />
+                            <Column Width="%PM_ColWidthHlkDescription%" />
+                            <Column Width="96%" />
+                            <Column Width="96%" />
                           </Columns>
-                          <ParameterSeparator Id="%AID%_PS-nnn" Text="" UIHint="HorizontalRuler" Cell="1,1" />
-                          <ParameterSeparator Id="%AID%_PS-nnn" Text="" UIHint="HorizontalRuler" Cell="1,2" />
-                          <ParameterSeparator Id="%AID%_PS-nnn" Text="" UIHint="HorizontalRuler" Cell="1,3" />
+                          <ParameterSeparator Text="" UIHint="HorizontalRuler" Cell="1,1" />
+                          <ParameterSeparator Text="" UIHint="HorizontalRuler" Cell="1,2" />
+                          <ParameterSeparator Text="" UIHint="HorizontalRuler" Cell="1,3" />
                         </ParameterBlock>
-                        <ParameterSeparator Id="%AID%_PS-nnn" Text="Hilfsfunktionen" UIHint="Headline" />
-                        <ParameterBlock Id="%AID%_PB-nnn" Inline="true" Layout="Grid">
+                        <ParameterSeparator Text="Hilfsfunktionen" UIHint="Headline" />
+                        <ParameterBlock Inline="true" Layout="Grid">
                           <Rows>
-                            <Row Id="%AID%_PB-nnn_R-1" />
-                            <Row Id="%AID%_PB-nnn_R-2" />
+                            <Row />
+                            <Row />
                           </Rows>
                           <Columns>
-                            <Column Id="%AID%_PB-nnn_C-1" Width="%PM_ColWidthHlkDescription%" />
-                            <Column Id="%AID%_PB-nnn_C-2" Width="%PM_ColWidthHlkDiffCell%" />
-                            <Column Id="%AID%_PB-nnn_C-3" Width="%PM_ColWidthHlkDiffSpace%" />
-                            <Column Id="%AID%_PB-nnn_C-4" Width="%PM_ColWidthHlkDiffCell%" />
-                            <Column Id="%AID%_PB-nnn_C-5" Width="14%" />
+                            <Column Width="%PM_ColWidthHlkDescription%" />
+                            <Column Width="%PM_ColWidthHlkDiffCell%" />
+                            <Column Width="%PM_ColWidthHlkDiffSpace%" />
+                            <Column Width="%PM_ColWidthHlkDiffCell%" />
+                            <Column Width="14%" />
                           </Columns>
-                          <ParameterSeparator Id="%AID%_PS-nnn" Cell="1,1" Text="Kopiere" />
+                          <ParameterSeparator Cell="1,1" Text="Kopiere" />
                           <ParameterRefRef op:Name="HlkFormula" Cell="1,2" HelpContext="PM-Kopierquelle" />
                           <choose op:Name="HlkFormula">
                             <when op:test="PreviousCalibration">
@@ -1079,79 +1065,79 @@
                             </when>
                           </choose>
                           <ParameterRefRef op:Name="HlkFormulaTarget" Cell="1,4" HelpContext="PM-Kopierziel" />
-                          <Button Id="%AID%_B-%TT%00004" Text="" Icon="content-copy" Cell="1,5" EventHandler="PM_executeFunction" EventHandlerParameters="{ &quot;dataKind&quot;:8, &quot;parName&quot;:&quot;TriggerDelta&quot; }" />
-                          <ParameterSeparator Id="%AID%_PS-nnn" Text="Berechne" Cell="2,1" />
+                          <Button Text="" Icon="content-copy" Cell="1,5" EventHandler="PM_executeFunction" EventHandlerParameters="{ &quot;dataKind&quot;:8, &quot;parName&quot;:&quot;TriggerDelta&quot; }" />
+                          <ParameterSeparator Text="Berechne" Cell="2,1" />
                           <ParameterRefRef op:Name="HlkMeasure1" Cell="2,2" HelpContext="PM-Berechne" />
-                          <ParameterSeparator Id="%AID%_PS-nnn" Text="    minus" Cell="2,3" />
+                          <ParameterSeparator Text="    minus" Cell="2,3" />
                           <ParameterRefRef op:Name="HlkMeasure2" Cell="2,4" HelpContext="PM-Berechne" />
-                          <Button Id="%AID%_B-%TT%00007" Text="" Icon="calculator-variant-outline" Cell="2,5" EventHandler="PM_diffValues" />
+                          <Button Text="" Icon="calculator-variant-outline" Cell="2,5" EventHandler="PM_diffValues" />
                         </ParameterBlock>
                         <op:usePart name="HLK-ROW-REL" xpath="//Dynamic/ChannelIndependentBlock/*" />
                       </when>
                     </choose>
 
                     <!-- Wide horizontal ruler -->
-                    <ParameterBlock Id="%AID%_PB-nnn" Inline="true" Layout="Grid">
+                    <ParameterBlock Inline="true" Layout="Grid">
                       <Rows>
-                        <Row Id="%AID%_PB-nnn_R-1" />
+                        <Row />
                       </Rows>
                       <Columns>
-                        <Column Id="%AID%_PB-nnn_C-1" Width="%PM_ColWidthHlkDescription%" />
-                        <Column Id="%AID%_PB-nnn_C-2" Width="96%" />
-                        <Column Id="%AID%_PB-nnn_C-3" Width="96%" />
+                        <Column Width="%PM_ColWidthHlkDescription%" />
+                        <Column Width="96%" />
+                        <Column Width="96%" />
                       </Columns>
-                      <ParameterSeparator Id="%AID%_PS-nnn" Text="" UIHint="HorizontalRuler" Cell="1,1" />
-                      <ParameterSeparator Id="%AID%_PS-nnn" Text="" UIHint="HorizontalRuler" Cell="1,2" />
-                      <ParameterSeparator Id="%AID%_PS-nnn" Text="" UIHint="HorizontalRuler" Cell="1,3" />
+                      <ParameterSeparator Text="" UIHint="HorizontalRuler" Cell="1,1" />
+                      <ParameterSeparator Text="" UIHint="HorizontalRuler" Cell="1,2" />
+                      <ParameterSeparator Text="" UIHint="HorizontalRuler" Cell="1,3" />
                     </ParameterBlock>
                     <!-- Button line for Cur-1 values -->
-                    <ParameterBlock Id="%AID%_PB-nnn" Inline="true" Layout="Grid">
+                    <ParameterBlock Inline="true" Layout="Grid">
                       <Rows>
-                        <Row Id="%AID%_PB-nnn_R-1" />
+                        <Row />
                       </Rows>
                       <Columns>
-                        <Column Id="%AID%_PB-nnn_C-1" Width="%PM_ColWidthHlkButtonDescription%" />
-                        <Column Id="%AID%_PB-nnn_C-2" Width="%PM_ColWidthHlkButtonCell%" />
-                        <Column Id="%AID%_PB-nnn_C-3" Width="%PM_ColWidthHlkButtonCell%" />
-                        <Column Id="%AID%_PB-nnn_C-4" Width="%PM_ColWidthHlkButtonCell%" />
-                        <Column Id="%AID%_PB-nnn_C-5" Width="%PM_ColWidthHlkButtonCell%" />
+                        <Column Width="%PM_ColWidthHlkButtonDescription%" />
+                        <Column Width="%PM_ColWidthHlkButtonCell%" />
+                        <Column Width="%PM_ColWidthHlkButtonCell%" />
+                        <Column Width="%PM_ColWidthHlkButtonCell%" />
+                        <Column Width="%PM_ColWidthHlkButtonCell%" />
                       </Columns>
-                      <ParameterSeparator Id="%AID%_PS-nnn" Text="Stichprobe 1" Cell="1,1" UIHint="Headline" />
-                      <Button Id="%AID%_B-%TT%00025" Text="Bestehende lesen" Cell="1,2" EventHandler="PM_getCalibrationDataSet" EventHandlerParameters="{ &quot;dataKind&quot;:1, &quot;delay&quot;:0, &quot;parName&quot;:&quot;Cur1&quot; }" EventHandlerOnline="ConnectionOriented" />
-                      <Button Id="%AID%_B-%TT%00005" Text="Ermitteln (sofort)" Cell="1,3" EventHandler="PM_startCalibration" EventHandlerParameters="{ &quot;dataKind&quot;:1, &quot;delay&quot;:0, &quot;parName&quot;:&quot;Cur1&quot; }" EventHandlerOnline="ConnectionOriented" />
-                      <Button Id="%AID%_B-%TT%00015" Text="Ermitteln (in 30s)" Cell="1,4" EventHandler="PM_startCalibration" EventHandlerParameters="{ &quot;dataKind&quot;:1, &quot;delay&quot;:30, &quot;parName&quot;:&quot;Cur1&quot; }" EventHandlerOnline="ConnectionOriented" />
+                      <ParameterSeparator Text="Stichprobe 1" Cell="1,1" UIHint="Headline" />
+                      <Button Text="Bestehende lesen" Cell="1,2" EventHandler="PM_getCalibrationDataSet" EventHandlerParameters="{ &quot;dataKind&quot;:1, &quot;delay&quot;:0, &quot;parName&quot;:&quot;Cur1&quot; }" EventHandlerOnline="ConnectionOriented" />
+                      <Button Text="Ermitteln (sofort)" Cell="1,3" EventHandler="PM_startCalibration" EventHandlerParameters="{ &quot;dataKind&quot;:1, &quot;delay&quot;:0, &quot;parName&quot;:&quot;Cur1&quot; }" EventHandlerOnline="ConnectionOriented" />
+                      <Button Text="Ermitteln (in 30s)" Cell="1,4" EventHandler="PM_startCalibration" EventHandlerParameters="{ &quot;dataKind&quot;:1, &quot;delay&quot;:30, &quot;parName&quot;:&quot;Cur1&quot; }" EventHandlerOnline="ConnectionOriented" />
                     </ParameterBlock>
                     <op:usePart name="HLK-ROW-ABS" xpath="//Dynamic/ChannelIndependentBlock/*" instanceFrom="1" instanceTo="3" />
                     <!-- Wide horizontal ruler -->
-                    <ParameterBlock Id="%AID%_PB-nnn" Inline="true" Layout="Grid">
+                    <ParameterBlock Inline="true" Layout="Grid">
                       <Rows>
-                        <Row Id="%AID%_PB-nnn_R-1" />
+                        <Row />
                       </Rows>
                       <Columns>
-                        <Column Id="%AID%_PB-nnn_C-1" Width="%PM_ColWidthHlkDescription%" />
-                        <Column Id="%AID%_PB-nnn_C-2" Width="96%" />
-                        <Column Id="%AID%_PB-nnn_C-3" Width="96%" />
+                        <Column Width="%PM_ColWidthHlkDescription%" />
+                        <Column Width="96%" />
+                        <Column Width="96%" />
                       </Columns>
-                      <ParameterSeparator Id="%AID%_PS-nnn" Text="" UIHint="HorizontalRuler" Cell="1,1" />
-                      <ParameterSeparator Id="%AID%_PS-nnn" Text="" UIHint="HorizontalRuler" Cell="1,2" />
-                      <ParameterSeparator Id="%AID%_PS-nnn" Text="" UIHint="HorizontalRuler" Cell="1,3" />
+                      <ParameterSeparator Text="" UIHint="HorizontalRuler" Cell="1,1" />
+                      <ParameterSeparator Text="" UIHint="HorizontalRuler" Cell="1,2" />
+                      <ParameterSeparator Text="" UIHint="HorizontalRuler" Cell="1,3" />
                     </ParameterBlock>
                     <!-- Button line for Cur-2 values -->
-                    <ParameterBlock Id="%AID%_PB-nnn" Inline="true" Layout="Grid">
+                    <ParameterBlock Inline="true" Layout="Grid">
                       <Rows>
-                        <Row Id="%AID%_PB-nnn_R-1" />
+                        <Row />
                       </Rows>
                       <Columns>
-                        <Column Id="%AID%_PB-nnn_C-1" Width="%PM_ColWidthHlkButtonDescription%" />
-                        <Column Id="%AID%_PB-nnn_C-2" Width="%PM_ColWidthHlkButtonCell%" />
-                        <Column Id="%AID%_PB-nnn_C-3" Width="%PM_ColWidthHlkButtonCell%" />
-                        <Column Id="%AID%_PB-nnn_C-4" Width="%PM_ColWidthHlkButtonCell%" />
-                        <Column Id="%AID%_PB-nnn_C-5" Width="%PM_ColWidthHlkButtonCell%" />
+                        <Column Width="%PM_ColWidthHlkButtonDescription%" />
+                        <Column Width="%PM_ColWidthHlkButtonCell%" />
+                        <Column Width="%PM_ColWidthHlkButtonCell%" />
+                        <Column Width="%PM_ColWidthHlkButtonCell%" />
+                        <Column Width="%PM_ColWidthHlkButtonCell%" />
                       </Columns>
-                      <ParameterSeparator Id="%AID%_PS-nnn" Text="Stichprobe 2" Cell="1,1" UIHint="Headline" />
-                      <Button Id="%AID%_B-%TT%00021" Text="Bestehende lesen" Cell="1,2" EventHandler="PM_getCalibrationDataSet" EventHandlerParameters="{ &quot;dataKind&quot;:4, &quot;delay&quot;:0,  &quot;parName&quot;:&quot;Cur2&quot; }" EventHandlerOnline="ConnectionOriented" />
-                      <Button Id="%AID%_B-%TT%00001" Text="Ermitteln (sofort)" Cell="1,3" EventHandler="PM_startCalibration" EventHandlerParameters="{ &quot;dataKind&quot;:4, &quot;delay&quot;:0,  &quot;parName&quot;:&quot;Cur2&quot; }" EventHandlerOnline="ConnectionOriented" />
-                      <Button Id="%AID%_B-%TT%00002" Text="Ermitteln (in 30s)" Cell="1,4" EventHandler="PM_startCalibration" EventHandlerParameters="{ &quot;dataKind&quot;:4, &quot;delay&quot;:30, &quot;parName&quot;:&quot;Cur2&quot; }" EventHandlerOnline="ConnectionOriented" />
+                      <ParameterSeparator Text="Stichprobe 2" Cell="1,1" UIHint="Headline" />
+                      <Button Text="Bestehende lesen" Cell="1,2" EventHandler="PM_getCalibrationDataSet" EventHandlerParameters="{ &quot;dataKind&quot;:4, &quot;delay&quot;:0,  &quot;parName&quot;:&quot;Cur2&quot; }" EventHandlerOnline="ConnectionOriented" />
+                      <Button Text="Ermitteln (sofort)" Cell="1,3" EventHandler="PM_startCalibration" EventHandlerParameters="{ &quot;dataKind&quot;:4, &quot;delay&quot;:0,  &quot;parName&quot;:&quot;Cur2&quot; }" EventHandlerOnline="ConnectionOriented" />
+                      <Button Text="Ermitteln (in 30s)" Cell="1,4" EventHandler="PM_startCalibration" EventHandlerParameters="{ &quot;dataKind&quot;:4, &quot;delay&quot;:30, &quot;parName&quot;:&quot;Cur2&quot; }" EventHandlerOnline="ConnectionOriented" />
                     </ParameterBlock>
                     <op:usePart name="HLK-ROW-ABS" xpath="//Dynamic/ChannelIndependentBlock/*" instanceFrom="4" instanceTo="6" />
 
@@ -1159,42 +1145,42 @@
                     <choose op:Name="HlkView" >
                       <when op:test="WithMemory All">
                         <!-- Wide horizontal ruler -->
-                        <ParameterBlock Id="%AID%_PB-nnn" Inline="true" Layout="Grid">
+                        <ParameterBlock Inline="true" Layout="Grid">
                           <Rows>
-                            <Row Id="%AID%_PB-nnn_R-1" />
+                            <Row />
                           </Rows>
                           <Columns>
-                            <Column Id="%AID%_PB-nnn_C-1" Width="%PM_ColWidthHlkButtonDescription%" />
-                            <Column Id="%AID%_PB-nnn_C-2" Width="96%" />
-                            <Column Id="%AID%_PB-nnn_C-3" Width="96%" />
+                            <Column Width="%PM_ColWidthHlkButtonDescription%" />
+                            <Column Width="96%" />
+                            <Column Width="96%" />
                           </Columns>
-                          <ParameterSeparator Id="%AID%_PS-nnn" Text="" UIHint="HorizontalRuler" Cell="1,1" />
-                          <ParameterSeparator Id="%AID%_PS-nnn" Text="" UIHint="HorizontalRuler" Cell="1,2" />
-                          <ParameterSeparator Id="%AID%_PS-nnn" Text="" UIHint="HorizontalRuler" Cell="1,3" />
+                          <ParameterSeparator Text="" UIHint="HorizontalRuler" Cell="1,1" />
+                          <ParameterSeparator Text="" UIHint="HorizontalRuler" Cell="1,2" />
+                          <ParameterSeparator Text="" UIHint="HorizontalRuler" Cell="1,3" />
                         </ParameterBlock>
                         <op:usePart name="HLK-MEMORY" xpath="//Dynamic/ChannelIndependentBlock/ParameterBlock/*" />
-                        <ParameterBlock Id="%AID%_PB-nnn" Inline="true" Layout="Grid">
+                        <ParameterBlock Inline="true" Layout="Grid">
                           <Rows>
-                            <Row Id="%AID%_PB-nnn_R-1" />
-                            <Row Id="%AID%_PB-nnn_R-2" />
-                            <Row Id="%AID%_PB-nnn_R-3" />
+                            <Row />
+                            <Row />
+                            <Row />
                           </Rows>
                           <Columns>
-                            <Column Id="%AID%_PB-nnn_C-1" Width="%PM_ColWidthHlkDescription%" />
-                            <Column Id="%AID%_PB-nnn_C-2" Width="40%" />
-                            <Column Id="%AID%_PB-nnn_C-3" Width="14%" />
-                            <Column Id="%AID%_PB-nnn_C-4" Width="14%" />
-                            <Column Id="%AID%_PB-nnn_C-5" Width="14%" />
-                            <Column Id="%AID%_PB-nnn_C-6" Width="14%" />
-                            <Column Id="%AID%_PB-nnn_C-7" Width="14%" />
+                            <Column Width="%PM_ColWidthHlkDescription%" />
+                            <Column Width="40%" />
+                            <Column Width="14%" />
+                            <Column Width="14%" />
+                            <Column Width="14%" />
+                            <Column Width="14%" />
+                            <Column Width="14%" />
                           </Columns>
-                          <ParameterSeparator Id="%AID%_PS-nnn" Text="Speicher" Cell="1,1" UIHint="Headline" />
-                          <ParameterSeparator Id="%AID%_PS-nnn" Text="Name" Cell="1,2" />
-                          <ParameterSeparator Id="%AID%_PS-nnn" Text="Trigger" Cell="1,3" />
-                          <ParameterSeparator Id="%AID%_PS-nnn" Text="Halten" Cell="1,5" />
-                          <!-- <ParameterSeparator Id="%AID%_PS-nnn" Text="Löschen" Cell="1,5" UIHint="Headline" /> -->
-                          <ParameterSeparator Id="%AID%_PS-nnn" Text="Speicher 1" Cell="2,1" />
-                          <ParameterSeparator Id="%AID%_PS-nnn" Text="Speicher 2" Cell="3,1" />
+                          <ParameterSeparator Text="Speicher" Cell="1,1" UIHint="Headline" />
+                          <ParameterSeparator Text="Name" Cell="1,2" />
+                          <ParameterSeparator Text="Trigger" Cell="1,3" />
+                          <ParameterSeparator Text="Halten" Cell="1,5" />
+                          <!-- <ParameterSeparator Text="Löschen" Cell="1,5" UIHint="Headline" /> -->
+                          <ParameterSeparator Text="Speicher 1" Cell="2,1" />
+                          <ParameterSeparator Text="Speicher 2" Cell="3,1" />
                           <ParameterRefRef op:Name="M1Name" Cell="2,2" HelpContext="PM-Name" />
                           <ParameterRefRef op:Name="M1Trigger" Cell="2,3" />
                           <ParameterRefRef op:Name="M1Hold" Cell="2,4" />
@@ -1202,47 +1188,47 @@
                           <ParameterRefRef op:Name="M2Trigger" Cell="3,3" />
                           <ParameterRefRef op:Name="M2Hold" Cell="3,4" />
                           <!-- M1 Trigger -->
-                          <Button Id="%AID%_B-%TT%00028" Text="" Cell="2,3" Icon="content-save-outline" EventHandler="PM_setMemoryData" EventHandlerParameters="{ &quot;dataSource&quot;:&quot;Trigger&quot;, &quot;dataTarget&quot;:&quot;M1Trigger&quot; }" />
+                          <Button Text="" Cell="2,3" Icon="content-save-outline" EventHandler="PM_setMemoryData" EventHandlerParameters="{ &quot;dataSource&quot;:&quot;Trigger&quot;, &quot;dataTarget&quot;:&quot;M1Trigger&quot; }" />
                           <choose op:Name="M1Trigger">
                             <when test="0">
-                              <ParameterSeparator Id="%AID%_PS-nnn" Text="       leer" Cell="2,4" />
+                              <ParameterSeparator Text="       leer" Cell="2,4" />
                             </when>
                             <when test="1">
-                              <Button Id="%AID%_B-%TT%00039" Text="" Cell="2,4" Icon="folder-open-outline" EventHandler="PM_getMemoryData" EventHandlerParameters="{ &quot;dataSource&quot;:&quot;M1Trigger&quot;, &quot;dataTarget&quot;:&quot;Trigger&quot; }" />
-                              <Button Id="%AID%_B-%TT%00040" Text="" Cell="2,7" Icon="trash-can-outline" EventHandler="PM_clearMemory" EventHandlerParameters="{ &quot;dataSource&quot;:&quot;M1&quot; }" />
+                              <Button Text="" Cell="2,4" Icon="folder-open-outline" EventHandler="PM_getMemoryData" EventHandlerParameters="{ &quot;dataSource&quot;:&quot;M1Trigger&quot;, &quot;dataTarget&quot;:&quot;Trigger&quot; }" />
+                              <Button Text="" Cell="2,7" Icon="trash-can-outline" EventHandler="PM_clearMemory" EventHandlerParameters="{ &quot;dataSource&quot;:&quot;M1&quot; }" />
                             </when>
                           </choose>
                           <!-- M1 Halten -->
-                          <Button Id="%AID%_B-%TT%00029" Text="" Cell="2,5" Icon="content-save-outline" EventHandler="PM_setMemoryData" EventHandlerParameters="{ &quot;dataSource&quot;:&quot;Hold&quot;, &quot;dataTarget&quot;:&quot;M1Hold&quot; }" />
+                          <Button Text="" Cell="2,5" Icon="content-save-outline" EventHandler="PM_setMemoryData" EventHandlerParameters="{ &quot;dataSource&quot;:&quot;Hold&quot;, &quot;dataTarget&quot;:&quot;M1Hold&quot; }" />
                           <choose op:Name="M1Hold">
                             <when test="0">
-                              <ParameterSeparator Id="%AID%_PS-nnn" Text="       leer" Cell="2,6" />
+                              <ParameterSeparator Text="       leer" Cell="2,6" />
                             </when>
                             <when test="1">
-                              <Button Id="%AID%_B-%TT%00038" Text="" Cell="2,6" Icon="folder-open-outline" EventHandler="PM_getMemoryData" EventHandlerParameters="{ &quot;dataSource&quot;:&quot;M1Hold&quot;, &quot;dataTarget&quot;:&quot;Hold&quot; }" />
-                              <Button Id="%AID%_B-%TT%00041" Text="" Cell="2,7" Icon="trash-can-outline" EventHandler="PM_clearMemory" EventHandlerParameters="{ &quot;dataSource&quot;:&quot;M1&quot; }" />
+                              <Button Text="" Cell="2,6" Icon="folder-open-outline" EventHandler="PM_getMemoryData" EventHandlerParameters="{ &quot;dataSource&quot;:&quot;M1Hold&quot;, &quot;dataTarget&quot;:&quot;Hold&quot; }" />
+                              <Button Text="" Cell="2,7" Icon="trash-can-outline" EventHandler="PM_clearMemory" EventHandlerParameters="{ &quot;dataSource&quot;:&quot;M1&quot; }" />
                             </when>
                           </choose>
                           <!-- M2 Trigger -->
-                          <Button Id="%AID%_B-%TT%00026" Text="" Cell="3,3" Icon="content-save-outline" EventHandler="PM_setMemoryData" EventHandlerParameters="{ &quot;dataSource&quot;:&quot;Trigger&quot;, &quot;dataTarget&quot;:&quot;M2Trigger&quot; }" />
+                          <Button Text="" Cell="3,3" Icon="content-save-outline" EventHandler="PM_setMemoryData" EventHandlerParameters="{ &quot;dataSource&quot;:&quot;Trigger&quot;, &quot;dataTarget&quot;:&quot;M2Trigger&quot; }" />
                           <choose op:Name="M2Trigger" >
                             <when test="0">
-                              <ParameterSeparator Id="%AID%_PS-nnn" Text="       leer" Cell="3,4" />
+                              <ParameterSeparator Text="       leer" Cell="3,4" />
                             </when>
                             <when test="1">
-                              <Button Id="%AID%_B-%TT%00035" Text="" Cell="3,4" Icon="folder-open-outline" EventHandler="PM_getMemoryData" EventHandlerParameters="{ &quot;dataSource&quot;:&quot;M2Trigger&quot;, &quot;dataTarget&quot;:&quot;Trigger&quot; }" />
-                              <Button Id="%AID%_B-%TT%00042" Text="" Cell="3,7" Icon="trash-can-outline" EventHandler="PM_clearMemory" EventHandlerParameters="{ &quot;dataSource&quot;:&quot;M2&quot; }" />
+                              <Button Text="" Cell="3,4" Icon="folder-open-outline" EventHandler="PM_getMemoryData" EventHandlerParameters="{ &quot;dataSource&quot;:&quot;M2Trigger&quot;, &quot;dataTarget&quot;:&quot;Trigger&quot; }" />
+                              <Button Text="" Cell="3,7" Icon="trash-can-outline" EventHandler="PM_clearMemory" EventHandlerParameters="{ &quot;dataSource&quot;:&quot;M2&quot; }" />
                             </when>
                           </choose>
                           <!-- M2 Hold -->
-                          <Button Id="%AID%_B-%TT%00027" Text="" Cell="3,5" Icon="content-save-outline" EventHandler="PM_setMemoryData" EventHandlerParameters="{ &quot;dataSource&quot;:&quot;Hold&quot;, &quot;dataTarget&quot;:&quot;M2Hold&quot; }" />
+                          <Button Text="" Cell="3,5" Icon="content-save-outline" EventHandler="PM_setMemoryData" EventHandlerParameters="{ &quot;dataSource&quot;:&quot;Hold&quot;, &quot;dataTarget&quot;:&quot;M2Hold&quot; }" />
                           <choose op:Name="M2Hold" >
                             <when test="0">
-                              <ParameterSeparator Id="%AID%_PS-nnn" Text="       leer" Cell="3,6" />
+                              <ParameterSeparator Text="       leer" Cell="3,6" />
                             </when>
                             <when test="1">
-                              <Button Id="%AID%_B-%TT%00034" Text="" Cell="3,6" Icon="folder-open-outline" EventHandler="PM_getMemoryData" EventHandlerParameters="{ &quot;dataSource&quot;:&quot;M2Hold&quot;, &quot;dataTarget&quot;:&quot;Hold&quot; }" />
-                              <Button Id="%AID%_B-%TT%00043" Text="" Cell="3,7" Icon="trash-can-outline" EventHandler="PM_clearMemory" EventHandlerParameters="{ &quot;dataSource&quot;:&quot;M2&quot; }" />
+                              <Button Text="" Cell="3,6" Icon="folder-open-outline" EventHandler="PM_getMemoryData" EventHandlerParameters="{ &quot;dataSource&quot;:&quot;M2Hold&quot;, &quot;dataTarget&quot;:&quot;Hold&quot; }" />
+                              <Button Text="" Cell="3,7" Icon="trash-can-outline" EventHandler="PM_clearMemory" EventHandlerParameters="{ &quot;dataSource&quot;:&quot;M2&quot; }" />
                             </when>
                           </choose>
                         </ParameterBlock>
@@ -1256,8 +1242,8 @@
               <op:include href="PMmodul.templ.xml" xpath="//Dynamic/ChannelIndependentBlock/*" type="template" prefix="PM" IsInner="true" />
               <choose op:Name="VisibleChannels">
                 <when test="&lt;%N%">
-                  <ParameterBlock Id="%AID%_PB-nnn" Name="AdditionalChannels" Text="(mehr)" Icon="dots-horizontal" HelpContext="Empty">
-                    <ParameterSeparator Id="%AID%_PS-nnn" Text="Kanalauswahl" UIHint="Headline" />
+                  <ParameterBlock Text="(mehr)" Icon="dots-horizontal" HelpContext="Empty">
+                    <ParameterSeparator Text="Kanalauswahl" UIHint="Headline" />
                     <ParameterRefRef op:Name="VisibleChannels" HelpContext="BASE-Verfuegbare-Kanaele" IndentLevel="1" />
                   </ParameterBlock>
                 </when>
