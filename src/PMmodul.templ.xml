@@ -43,6 +43,7 @@
           <Static>
             <Parameters>
               <Parameter Id="%AID%_P-%TT%%CC%000" Name="p%C%Name" ParameterType="%AID%_PT-Text40Byte" Text="Beschreibung des PM" Value="" />
+              <Parameter Id="%AID%_P-%TT%%CC%999" Name="p%C%NameDisplay" ParameterType="%AID%_PT-Text45Byte" Text="Beschreibung des PM (Anzeige)" Value="" Access="Read" op:configTransfer="never" />
               <!-- Bitfield settings (once per channel) -->
               <Union SizeInBit="56">
                 <Memory CodeSegment="%AID%_RS-04-00000" Offset="0" BitOffset="0" />
@@ -194,6 +195,7 @@
             </Parameters>
             <ParameterRefs>
               <ParameterRef Id="%AID%_P-%TT%%CC%000_R-%TT%%CC%00001" RefId="%AID%_P-%TT%%CC%000" />
+              <ParameterRef Id="%AID%_P-%TT%%CC%999_R-%TT%%CC%99901" RefId="%AID%_P-%TT%%CC%999" />
               <ParameterRef Id="%AID%_P-%TT%%CC%001_R-%TT%%CC%00101" RefId="%AID%_P-%TT%%CC%001" Access="None" />
               <ParameterRef Id="%AID%_P-%TT%%CC%002_R-%TT%%CC%00201" RefId="%AID%_P-%TT%%CC%002" Access="None" />
               <ParameterRef Id="%AID%_P-%TT%%CC%003_R-%TT%%CC%00301" RefId="%AID%_P-%TT%%CC%003" Access="None" />
@@ -322,6 +324,17 @@
               <!-- Phase 4 -->
               <!-- <op:usePart name="PHASE" xpath="//ParameterRefs/*" /> -->
             </ParameterRefs>
+            <ParameterCalculations>
+              <ParameterCalculation Id="%AID%_PC-%TT%%CC%001" Language="JavaScript" Name="MarkInactive%CC%" RLTransformationFunc="BASE_MarkInactiveChannel" RLTransformationParameters="{&quot;InactiveValue&quot;:2}" LRTransformationFunc="BASE_Nop"> 
+                <LParameters>
+                    <ParameterRefRef RefId="%AID%_P-%TT%%CC%999_R-%TT%%CC%99901" AliasName="TextOutput" />
+                </LParameters>
+                <RParameters>
+                    <ParameterRefRef RefId="%AID%_P-%TT%%CC%000_R-%TT%%CC%00001" AliasName="TextInput" />
+                    <ParameterRefRef RefId="%AID%_UP-%TT%%CC%008_R-%TT%%CC%00801" AliasName="InactiveControl" />
+                </RParameters>
+              </ParameterCalculation>
+            </ParameterCalculations>
             <ComObjectTable>
               <ComObject Id="%AID%_O-%TT%%CC%000" Name="KOp%C%Lux" Number="%K0%" Text="Helligkeit extern" ObjectSize="2 Bytes" FunctionText="PM %C%: Eingang" ReadFlag="Disabled" WriteFlag="Enabled" CommunicationFlag="Enabled" TransmitFlag="Disabled" UpdateFlag="Enabled" ReadOnInitFlag="Disabled" DatapointType="DPST-9-4" />
               <ComObject Id="%AID%_O-%TT%%CC%001" Name="KOp%C%Presence1" Number="%K1%" Text="Präsenz" ObjectSize="1 Bit" FunctionText="PM %C%: Eingang" ReadFlag="Disabled" WriteFlag="Enabled" CommunicationFlag="Enabled" TransmitFlag="Disabled" UpdateFlag="Enabled" ReadOnInitFlag="Disabled" DatapointType="DPST-1-1" />
@@ -383,7 +396,7 @@
             <ChannelIndependentBlock> 
               <choose ParamRefId="%AID%_UP-%TT%00020_R-%TT%0002001">
                 <when test="&gt;=%C%">
-                  <ParameterBlock Id="%AID%_PB-%C%1" Name="PM%C%Page" Text="PM %C%: {{0: ...}}" TextParameterRefId="%AID%_P-%TT%%CC%000_R-%TT%%CC%00001" Icon="sphere" HelpContext="Empty" ShowInComObjectTree="true">
+                  <ParameterBlock Id="%AID%_PB-%C%1" Text="PM %C%: {{0: ...}}" TextParameterRefId="%AID%_P-%TT%%CC%999_R-%TT%%CC%99901" Icon="sphere" HelpContext="Empty" ShowInComObjectTree="true">
                     <!-- hidden, but necessary -->
                     <!-- Enable external brightness -->
                     <!-- checked <ParameterRefRef RefId="%AID%_P-%TT%%CC%084_R-%TT%%CC%08401" /> -->
