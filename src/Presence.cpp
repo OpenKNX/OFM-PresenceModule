@@ -311,10 +311,10 @@ void Presence::startSensors()
 
     switch (ParamPM_PirPresence)
     {
-        case PT_PirSensor::digital:
+        case PT_PirSensor::Digital:
             logDebugP("Using PIR sensor (digital)");
             break;
-        case PT_PirSensor::analog:
+        case PT_PirSensor::Analog:
             logDebugP("Using PIR sensor (analog)");
             mPirSensitivity = ParamPM_PirSensitivity;
             break;
@@ -592,10 +592,10 @@ void Presence::processHardwarePresence()
     bool pirTriggered = false;
     switch (ParamPM_PirPresence)
     {
-        case PT_PirSensor::digital:
+        case PT_PirSensor::Digital:
             pirTriggered = digitalRead(PIR_PIN) == PinStatus::HIGH;
             break;
-        case PT_PirSensor::analog:
+        case PT_PirSensor::Analog:
             uint32_t threshold = VAL_PM_PIR_Analog_Trigger_Max - (VAL_PM_PIR_Analog_Trigger_Max - VAL_PM_PIR_Analog_Trigger_Min) * (mPirSensitivity / 10.0);
             pirTriggered = analogRead(PIR_PIN) > threshold;
             break;
@@ -771,7 +771,7 @@ void Presence::setup()
         pinMode(PIR_PIN, INPUT_PULLDOWN);
         mPresenceStartupDelay = delayTimerInit();
 
-        if (ParamPM_PirPresence != PT_PirSensor::kein_Sensor)
+        if (ParamPM_PirPresence != PT_PirSensor::None)
             digitalWrite(HF_POWER_PIN, HIGH);
 #endif
 
