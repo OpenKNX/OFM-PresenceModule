@@ -221,7 +221,7 @@
                 <TypeRestriction Base="Value" SizeInBit="2">
                   <Enumeration Text="Inaktiv" Value="0" Id="%ENID%" />
                   <Enumeration Text="Aktiv" Value="1" Id="%ENID%" />
-                  <Enumeration Text="Funktionslos" Value="2" Id="%ENID%" />
+                  <Enumeration Text="Suspendiert" Value="2" Id="%ENID%" />
                 </TypeRestriction>
               </ParameterType>
               <!-- <ParameterType Id="%AID%_PT-StatusLED" Name="StatusLED">
