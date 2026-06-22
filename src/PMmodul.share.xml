@@ -219,7 +219,7 @@
               </ParameterType>
               <ParameterType Id="%AID%_PT-ChannelActive" Name="ChannelActive" op:headerExport="enum">
                 <TypeRestriction Base="Value" SizeInBit="2">
-                  <Enumeration Text="Inaktiv" Value="0" Id="%ENID%" />
+                  <Enumeration Text="Deaktiviert" Value="0" Id="%ENID%" />
                   <Enumeration Text="Aktiv" Value="1" Id="%ENID%" />
                   <Enumeration Text="Suspendiert" Value="2" Id="%ENID%" />
                 </TypeRestriction>

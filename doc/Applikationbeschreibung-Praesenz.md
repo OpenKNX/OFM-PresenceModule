@@ -1014,9 +1014,9 @@ Die Verzögerungszeit wird hier angegeben.
 
 Hier kann man einen PM-Kanal aktivieren.
 
-#### **Inaktiv**
+#### **Deaktiviert**
 
-Dieser Kanal ist inaktiv. Alle Einstellungen und alle Kommunikaitonsobjekte sind ausgeblendet.
+Dieser Kanal ist nicht definiert und nicht aktiv. Alle Einstellungen und alle Kommunikaitonsobjekte sind ausgeblendet.
 
 #### **Aktiv**
 
