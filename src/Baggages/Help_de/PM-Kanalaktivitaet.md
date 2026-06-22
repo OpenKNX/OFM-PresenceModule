@@ -4,7 +4,7 @@ Hier kann man einen PM-Kanal aktivieren.
 
 #### Inaktiv
 
-Dieser Kanal ist inaktiv. Alle Einstellungen und alle Kommunikaitonsobjekte sind ausgeblendet.
+Dieser Kanal ist inaktiv. Alle Einstellungen und alle Kommunikationsobjekte sind ausgeblendet.
 
 #### Aktiv
 
