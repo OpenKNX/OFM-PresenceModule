@@ -124,10 +124,16 @@ bool Presence::processCommand(const std::string iCmd, bool iDebugKo)
             // Command ch<nn>:
             // find channel and dispatch
             uint16_t lIndex = std::stoi(iCmd.substr(6, 2)) - 1;
-            if (lIndex < mNumChannels)
+            if (lIndex < mNumChannels && mChannel[lIndex])
             {
                 // this is a channel request
                 lResult = mChannel[lIndex]->processCommand(iCmd, iDebugKo);
+            }
+            else
+            {
+                logInfoP("PM channel %02d not active", lIndex);
+                if (iDebugKo)
+                    openknx.console.writeDiagnoseKo("ch%02d inactive");
             }
         }
         else if (iCmd.length() >= 5 && iCmd.substr(4, 1) == "h")
@@ -184,7 +190,7 @@ void Presence::processInputKo(GroupObject &iKo)
             // we are in the Range of presence KOs
             uint8_t lChannelIndex = lKoMap->channelIndex;
             PresenceChannel *lChannel = mChannel[lChannelIndex];
-            lChannel->processInputKo(iKo, lKoMap->koIndex);
+            if (lChannel) lChannel->processInputKo(iKo, lKoMap->koIndex);
         }
     }
     switch (lAsap)
@@ -264,7 +270,7 @@ void Presence::processInputKo(GroupObject &iKo)
                 // we are in the Range of presence KOs
                 uint8_t lChannelIndex = (lAsap - PM_KoOffset) / PM_KoBlockSize;
                 PresenceChannel *lChannel = mChannel[lChannelIndex];
-                lChannel->processInputKo(iKo);
+                if (lChannel) lChannel->processInputKo(iKo);
             }
             break;
     }
@@ -704,8 +710,11 @@ void Presence::loop()
     while (lChannelsProcessed < mChannelsToProcess && openknx.freeLoopTime())
     {
         PresenceChannel *lChannel = mChannel[mChannelIterator++];
-        lChannel->loop();
-        lChannelsProcessed++;
+        if (lChannel)
+        {
+            lChannel->loop();
+            lChannelsProcessed++;
+        }
         // the following operations are done only once after iteration of all channels
         if (mChannelIterator >= mNumChannels)
         {
@@ -777,15 +786,22 @@ void Presence::setup()
 
         // setup channels, not possible in constructor, because knx is not configured there
         // get number of channels from knxprod
-        mNumChannels = ParamPM_VisibleChannels; // knx.paramByte(PM_PMChannels);
-        mChannelsToProcess = MIN(mNumChannels, NUM_CHANNELS_TO_PROCESS);
+        mNumChannels = PM_ChannelCount; //ParamPM_VisibleChannels; 
         // calculate parameter block size for day phase parameters
+        uint8_t lNumActiveChannels = 0;
         PresenceChannel::setDayPhaseParameterSize(PM_pBBrightnessAuto - PM_pABrightnessAuto);
-        for (uint8_t lIndex = 0; lIndex < mNumChannels; lIndex++)
+        for (uint8_t _channelIndex = 0; _channelIndex < mNumChannels; _channelIndex++)
         {
-            mChannel[lIndex] = new PresenceChannel(lIndex);
-            mChannel[lIndex]->setup();
+            if (ParamPM_pChannelActive && !ParamPM_pChannelSuspended)
+            {
+                mChannel[_channelIndex] = new PresenceChannel(_channelIndex);
+                mChannel[_channelIndex]->setup();
+                lNumActiveChannels++;
+            }
+            else
+                mChannel[_channelIndex] = nullptr;
         }
+        mChannelsToProcess = MIN(lNumActiveChannels, NUM_CHANNELS_TO_PROCESS);
         mDoPresenceHardwareCycle = (ParamPM_HfPresence > 0) || (ParamPM_HWLux > 0) || (ParamPM_PirPresence > PT_PirSensor::None);
         if (ParamPM_HfPresence > 0)
             startPowercycleHfSensor();

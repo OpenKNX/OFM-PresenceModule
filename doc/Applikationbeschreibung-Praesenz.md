@@ -966,6 +966,24 @@ Wird der Melder in den Modus **Manuell AUS** versetzt, wird das Licht ausgeschal
 
 Da der Manuellmodus entgegen der üblichen Gewohnheiten arbeitet (Licht geht nicht automatisch aus bzw. Licht geht nicht automatisch an) und man als Mensch dazu neigt, die Fehler bei der Technik und nicht bei sich selbst zu suchen (obwohl man vergessen hat, den Melder vom Manuell- in den Auto-Modus zu versetzen), bietet der Manuellmodus noch eine Rückfallzeit, nach der dieser Modus trotzdem verlassen wird. Hat man also abends das Licht über Manuell EIN eingeschaltet (weil man lesen will und bereits weiß, dass das Licht sonst beim lesen ausgeht) und geht danach ins Bett, würde man nicht am nächsten Morgen in einen immer noch hell erleuchteten Raum kommen, da eine auf 4 Stunden eingestellte Rückfallzeit den Melder wieder in den Normalmodus versetzt hat.
 
+<!-- DOC -->
+## **Kanalauswahl**
+
+Auf dieser Seite werden alle zur Verfügung stehenden Kanäle in einer Tabelle angezeigt. Pro Zeile kann ein Kanal aktiviert oder deaktiviert werden und eine Beschreibung für den Kanal vergeben werden.
+
+<!-- DOC -->
+### **Kanalaktivität**
+
+Hier kann man einen PM-Kanal aktivieren oder deaktivieren.
+
+#### **Deaktiviert**
+
+Dieser Kanal ist nicht definiert und nicht aktiv. Alle Einstellungen und alle Kommunikaitonsobjekte sind ausgeblendet.
+
+#### **Aktiviert**
+
+Dieser Kanal ist aktiv und kann normal parametrisiert werden.
+
 <!-- DOC HelpContext="Praesenzkanal" -->
 ## **PM *x*: *...***
 
@@ -991,7 +1009,7 @@ Die Angaben hier gelten zur Identifizierung und für das Grundverhalten des Kana
 <kbd>![Kanaldefinition](pics/Kanaldefinition.png)</kbd>
 
 <!-- DOC -->
-### **Beschreibung des PM**
+### **Beschreibung**
 
 Der hier angegebene Name wird an verschiedenen Stellen verwendet, um diesen Kanal wiederzufinden.
 
@@ -1001,28 +1019,16 @@ Der hier angegebene Name wird an verschiedenen Stellen verwendet, um diesen Kana
 Eine aussagekräftige Benennung erlaubt eine einfachere Orientierung innerhalb der Applikation, vor allem wenn man viele Kanäle nutzt.
 
 <!-- DOC -->
-### **Startverzögerung für diesen Kanal**
+### **Startverzögerung**
 
-Neben "Allgemeine Parameter -> Zeit bis das Gerät nach einem Neustart aktiv wird" kann auch noch pro Kanal eine Startverzögerung sinnvoll sein.
+Neben "OpenKNX->Allgemein->Startverzögerung" kann auch noch pro Kanal eine Startverzögerung sinnvoll sein. Diese Zeit beginnt zu laufen, nachdem die Geräteweite Startverzögerung abgelaufen ist.
 
 Die Verzögerungszeit wird hier angegeben.
 
 **Anmerkung:** Auch wenn man hier technisch bis zu 16.000 Stunden Verzögerung angeben kann, sind nur Einstellungen im Sekundenbereich sinnvoll.
 
 <!-- DOC -->
-### **Kanalaktivität**
-
-Hier kann man einen PM-Kanal aktivieren.
-
-#### **Deaktiviert**
-
-Dieser Kanal ist nicht definiert und nicht aktiv. Alle Einstellungen und alle Kommunikaitonsobjekte sind ausgeblendet.
-
-#### **Aktiv**
-
-Dieser Kanal ist aktiv und kann normal parametrisiert werden.
-
-#### **Suspendiert**
+### **Suspendiert**
 
 Dieser Kanal ist ohne Funktion. Er kann vollständig definiert sein und keine Einstellung geht verloren, aber es wird kein Telegramm empfangen oder gesendet. Dies bietet die Möglichkeit, zu Testzwecken einen bereits parametrierten Kanal zu suspendieren, um zu schauen, ob er die Ursache für eventuelles Fehlverhalten im Haus ist. Kann zur Fehlersuche hilfreich sein.
 

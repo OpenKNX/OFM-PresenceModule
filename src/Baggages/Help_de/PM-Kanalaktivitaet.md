@@ -1,16 +1,12 @@
 ﻿### Kanalaktivität
 
-Hier kann man einen PM-Kanal aktivieren.
+Hier kann man einen PM-Kanal aktivieren oder deaktivieren.
 
-#### Inaktiv
+#### Deaktiviert
 
-Dieser Kanal ist inaktiv. Alle Einstellungen und alle Kommunikaitonsobjekte sind ausgeblendet.
+Dieser Kanal ist nicht definiert und nicht aktiv. Alle Einstellungen und alle Kommunikaitonsobjekte sind ausgeblendet.
 
-#### Aktiv
+#### Aktiviert
 
 Dieser Kanal ist aktiv und kann normal parametrisiert werden.
-
-#### Suspendiert
-
-Dieser Kanal ist ohne Funktion. Er kann vollständig definiert sein und keine Einstellung geht verloren, aber es wird kein Telegramm empfangen oder gesendet. Dies bietet die Möglichkeit, zu Testzwecken einen bereits parametrierten Kanal zu suspendieren, um zu schauen, ob er die Ursache für eventuelles Fehlverhalten im Haus ist. Kann zur Fehlersuche hilfreich sein.
 

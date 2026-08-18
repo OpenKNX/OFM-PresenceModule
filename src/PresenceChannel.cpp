@@ -445,7 +445,7 @@ void PresenceChannel::processStartupDelay()
         // we waited enough, remove State marker
         pCurrentState &= ~STATE_STARTUP;
         // set running state if the channel is active
-        if (ParamPM_pChannelActive == PT_ChannelActive::Aktiv)
+        if (ParamPM_pChannelActive)
             startReadRequests();
         pOnDelay = 0;
     }
@@ -1749,7 +1749,9 @@ void PresenceChannel::loop()
     if (!knx.configured())
         return;
 
-    if (ParamPM_pChannelActive != PT_ChannelActive::Aktiv)
+    if (!ParamPM_pChannelActive)
+        return;
+    if (ParamPM_pChannelSuspended)
         return;
 
     // here we do the things after setup, but only once in the loop()
@@ -1844,7 +1846,9 @@ void PresenceChannel::prepareInternalKo()
 void PresenceChannel::setup()
 {
     // Skip setup if Channel is not active
-    if (ParamPM_pChannelActive != PT_ChannelActive::Aktiv)
+    if (!ParamPM_pChannelActive)
+        return;
+    if (ParamPM_pChannelSuspended)
         return;
 
     prepareInternalKo();
