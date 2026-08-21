@@ -548,10 +548,12 @@ void PresenceChannel::startRunning()
         {
             case VAL_PM_LockTypePriority:
                 lKo->value((uint8_t)0, DPT_Switch_Control);
+                pLastLockState = 0;
                 break;
             case VAL_PM_LockTypeLock:
                 // "not locked" depends on the configured polarity
-                lKo->value((uint8_t)(ParamPM_pLockActive ? 1 : 0), DPT_Bool);
+                pLastLockState = ParamPM_pLockActive ? 1 : 0;
+                lKo->value(pLastLockState, DPT_Bool);
                 break;
             default:
                 // do nothing
