@@ -548,9 +548,12 @@ void PresenceChannel::startRunning()
         {
             case VAL_PM_LockTypePriority:
                 lKo->value((uint8_t)0, DPT_Switch_Control);
+                pLastLockState = 0;
                 break;
             case VAL_PM_LockTypeLock:
-                lKo->value((uint8_t)0, DPT_Bool);
+                // "not locked" depends on the configured polarity
+                pLastLockState = ParamPM_pLockActive ? 1 : 0;
+                lKo->value(pLastLockState, DPT_Bool);
                 break;
             default:
                 // do nothing
@@ -1363,7 +1366,8 @@ void PresenceChannel::onLock(bool iLockOn, PT_PMLock iLockOnSend, PT_PMLock iLoc
             lDpt = DPT_Value_1_Ucount;
             break;
         case VAL_PM_LockTypeLock:
-            lLockValue = iLockOn;
+            // the lock KO is also an input, so the status has to use the configured polarity
+            lLockValue = ParamPM_pLockActive ? !iLockOn : iLockOn;
             lDpt = DPT_Bool;
             break;
         default:
